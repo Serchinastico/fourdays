@@ -26,7 +26,7 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment(), KodeinAware {
     abstract val layoutId: Int
     abstract val activityModules: Kodein.Module
     abstract val viewModel: AndroidViewModel
-    protected lateinit var binding: T
+    private lateinit var binding: T
 
     override fun onCreateView(
         inflater: LayoutInflater,
