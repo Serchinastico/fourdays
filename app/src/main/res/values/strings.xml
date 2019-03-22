@@ -2,5 +2,5 @@
     <string name="app_name">Four Days</string>
 
     <string name="setup_description_title">Configuration</string>
-    <string name="setup_description_subtitle">Here you can configure all forbidden foods by your diet.</string>
+    <string name="setup_description_subtitle">Here you can configure all allowed foods from your diet.</string>
 </resources>
