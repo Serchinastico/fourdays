@@ -19,5 +19,6 @@ class SetupFragment : BaseFragment<FragmentSetupBinding>() {
     }
 
     override fun configureBinding(binding: FragmentSetupBinding) {
+
     }
 }
