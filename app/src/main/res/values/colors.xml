@@ -3,5 +3,6 @@
     <color name="dark_mint">#52bd76</color>
     <color name="dark_mint_50">#8052bd76</color>
     <color name="black">#383838</color>
+    <color name="white">#FFFFFF</color>
     <color name="brown_grey">#a1a1a1</color>
 </resources>

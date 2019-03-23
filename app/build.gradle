@@ -5,6 +5,10 @@ apply plugin: "kotlin-kapt"
 apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: "shot"
 
+androidExtensions {
+  experimental = true
+}
+
 android {
   compileSdkVersion 28
   defaultConfig {
