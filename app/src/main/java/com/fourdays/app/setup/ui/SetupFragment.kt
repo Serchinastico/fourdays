@@ -2,6 +2,7 @@ package com.fourdays.app.setup.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import com.afollestad.recyclical.ViewHolder
 import com.afollestad.recyclical.datasource.dataSourceOf
 import com.afollestad.recyclical.setup
@@ -27,9 +28,22 @@ class SetupFragment : BaseFragment<FragmentSetupBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView.setup {
-            withDataSource(dataSourceOf(Description))
+            withDataSource(
+                dataSourceOf(
+                    Description,
+                    FoodGroup(getString(R.string.setup_food_group_name, "1")),
+                    FoodGroup(getString(R.string.setup_food_group_name, "2")),
+                    FoodGroup(getString(R.string.setup_food_group_name, "3")),
+                    FoodGroup(getString(R.string.setup_food_group_name, "4"))
+                )
+            )
             withItem<Description>(R.layout.recycler_view_setup_description_item) {
                 onBind(::DescriptionViewHolder) { _, _ -> }
+            }
+            withItem<FoodGroup>(R.layout.recycler_view_setup_food_group_item) {
+                onBind(::FoodGroupViewHolder) { _, item ->
+                    groupName.text = item.name
+                }
             }
         }
     }
@@ -38,4 +52,8 @@ class SetupFragment : BaseFragment<FragmentSetupBinding>() {
 }
 
 object Description
+data class FoodGroup(val name: String)
 class DescriptionViewHolder(itemView: View) : ViewHolder(itemView)
+class FoodGroupViewHolder(itemView: View) : ViewHolder(itemView) {
+    val groupName: TextView = itemView.findViewById(R.id.groupNameTextView)
+}

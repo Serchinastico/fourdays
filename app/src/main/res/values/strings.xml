@@ -3,4 +3,5 @@
 
     <string name="setup_description_title">Configuration</string>
     <string name="setup_description_subtitle">Here you can configure all allowed foods from your diet.</string>
+    <string name="setup_food_group_name">Group %s</string>
 </resources>
