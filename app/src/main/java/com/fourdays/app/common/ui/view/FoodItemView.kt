@@ -14,14 +14,22 @@ class FoodItemView @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr),
-    LayoutContainer {
+    LayoutContainer, Visibility {
     override val containerView: View? = LayoutInflater.from(context)
         .inflate(R.layout.view_food_item, this, true)
+        .apply { clipToPadding = false }
 
     var name: String?
         get() = foodItemNameTextView.text.toString()
         set(value) {
             foodItemNameTextView.text = value
+        }
+
+    var isFoodSelected: Boolean
+        get() = disabledBackgroundView.visibility != View.VISIBLE
+        set(value) {
+            disabledBackgroundView.visibility = value.toInvisibility()
+            backgroundView.elevation = if (value) 12f else 2f
         }
 
 }

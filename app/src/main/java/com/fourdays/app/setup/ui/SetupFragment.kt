@@ -46,7 +46,7 @@ class SetupFragment : BaseFragment<FragmentSetupBinding>() {
         dataSource += FoodItem(
             name = "Lechuga",
             imageResourceName = "",
-            isSelected = true
+            isSelected = false
         )
         dataSource += FoodItem(
             name = "Guisantes",
@@ -56,7 +56,7 @@ class SetupFragment : BaseFragment<FragmentSetupBinding>() {
         dataSource += FoodItem(
             name = "Batata",
             imageResourceName = "",
-            isSelected = true
+            isSelected = false
         )
         dataSource += FoodItem(
             name = "Lechuga",
@@ -66,7 +66,7 @@ class SetupFragment : BaseFragment<FragmentSetupBinding>() {
         dataSource += FoodItem(
             name = "Guisantes",
             imageResourceName = "",
-            isSelected = true
+            isSelected = false
         )
         dataSource += FoodGroupHeader(
             name = getString(R.string.setup_food_group_name, "2"),
@@ -98,6 +98,7 @@ class SetupFragment : BaseFragment<FragmentSetupBinding>() {
             withItem<FoodItem>(R.layout.recycler_view_setup_food_item) {
                 onBind(::FoodItemViewHolder) { _, item ->
                     foodView.name = item.name
+                    foodView.isFoodSelected = item.isSelected
                 }
             }
         }
