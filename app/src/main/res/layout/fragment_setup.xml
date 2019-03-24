@@ -12,8 +12,7 @@
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/margin2x"
-                android:layout_marginEnd="@dimen/margin2x"
+                android:clipToPadding="false"
                 android:paddingTop="82dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

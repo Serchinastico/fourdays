@@ -29,7 +29,6 @@ class FoodItemView @JvmOverloads constructor(
         get() = disabledBackgroundView.visibility != View.VISIBLE
         set(value) {
             disabledBackgroundView.visibility = value.toInvisibility()
-            backgroundView.elevation = if (value) 12f else 2f
+            backgroundView.elevation = if (value) 8.px.toFloat() else 1.px.toFloat()
         }
-
 }

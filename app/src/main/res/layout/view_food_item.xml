@@ -2,15 +2,18 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="104dp"
-        android:layout_height="136dp">
+        android:layout_width="136dp"
+        android:layout_height="152dp">
 
     <View
             android:id="@+id/backgroundView"
             android:layout_width="match_parent"
             android:layout_height="104dp"
+            android:layout_marginStart="@dimen/margin2x"
+            android:layout_marginTop="@dimen/margin2x"
+            android:layout_marginEnd="@dimen/margin2x"
             android:background="@drawable/background_food_item_image"
-            android:elevation="12dp"
+            android:elevation="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

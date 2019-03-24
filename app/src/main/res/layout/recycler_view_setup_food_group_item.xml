@@ -4,7 +4,9 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin2x">
+        android:layout_marginTop="@dimen/margin2x"
+        android:paddingStart="@dimen/margin2x"
+        android:paddingEnd="@dimen/margin2x">
 
     <TextView
             android:id="@+id/groupNameTextView"
