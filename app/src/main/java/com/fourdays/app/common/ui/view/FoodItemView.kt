@@ -18,7 +18,7 @@ class FoodItemView @JvmOverloads constructor(
     override val containerView: View? = LayoutInflater.from(context)
         .inflate(R.layout.view_food_item, this, true)
 
-    var foodName: String?
+    var name: String?
         get() = foodItemNameTextView.text.toString()
         set(value) {
             foodItemNameTextView.text = value
