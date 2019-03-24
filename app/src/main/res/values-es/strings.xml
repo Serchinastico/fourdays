@@ -4,4 +4,5 @@
     <string name="setup_description_title">Configuración</string>
     <string name="setup_description_subtitle">Aquí puedes configurar los alimentos permitidos en tu dieta.</string>
     <string name="setup_food_group_name">Grupo %s</string>
+    <string name="search_food_hint">Buscar alimento</string>
 </resources>

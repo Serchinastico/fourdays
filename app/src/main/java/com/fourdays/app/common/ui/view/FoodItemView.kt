@@ -17,7 +17,6 @@ class FoodItemView @JvmOverloads constructor(
     LayoutContainer, Visibility {
     override val containerView: View? = LayoutInflater.from(context)
         .inflate(R.layout.view_food_item, this, true)
-        .apply { clipToPadding = false }
 
     var name: String?
         get() = foodItemNameTextView.text.toString()
