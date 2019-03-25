@@ -1,3 +1,6 @@
 {
-	"appName": "Four Days"
+	"app.name": "Four Days",
+	"search": {
+		"placeholder": "Buscar alimento"
+	}
 }

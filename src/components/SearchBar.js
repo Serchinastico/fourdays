@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image, TextInput, StyleSheet, View } from 'react-native';
+import I18n from '../translations/i18n';
 
 const styles = StyleSheet.create({
 	container: {
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
 const SearchBar = () => (
 	<View style={styles.container}>
 		<Image style={styles.icon} source={require('../images/icon/Search.png')} />
-		<TextInput style={styles.textInput} placeholder="Buscar un alimento" />
+		<TextInput style={styles.textInput} placeholder={I18n.t('search.placeholder')} />
 	</View>
 );
 

@@ -2629,6 +2629,11 @@ eventemitter3@^3.0.0:
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-3.1.0.tgz#090b4d6cdbd645ed10bf750d4b5407942d7ba163"
   integrity sha512-ivIvhpq/Y0uSjcHDcOIccjmYjGLcP09MFGE7ysAwkAvkXfpZlC985pH2/ui64DKazbTW/4kN3yqozUxlXzI6cA==
 
+ex-react-native-i18n@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/ex-react-native-i18n/-/ex-react-native-i18n-0.0.5.tgz#af8cb2e85b2075292627794ff8ca1657d1151f9c"
+  integrity sha512-vjlFkZboGHCtplFWkOnQgkSzRYYwyiciJHaTdpB283qcuascIIKCobiFsTzohDg6v2cecodFpxDEMx6itLlUGQ==
+
 exec-sh@^0.2.0:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/exec-sh/-/exec-sh-0.2.2.tgz#2a5e7ffcbd7d0ba2755bdecb16e5a427dfbdec36"
