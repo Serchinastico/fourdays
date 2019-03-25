@@ -1,18 +1,17 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import SearchBar from './components/SearchBar';
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#fa6',
-		alignItems: 'center',
-		justifyContent: 'center',
+		backgroundColor: '#FFF',
 	},
 });
 
 const App = () => (
 	<View style={styles.container}>
-		<Text>Open up App.js to start working on your app! </Text>
+		<SearchBar />
 	</View>
 );
 
