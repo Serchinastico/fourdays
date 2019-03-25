@@ -1,21 +1,20 @@
 import React from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import I18n from '../../translations/i18n';
+import style from '../style/style';
 
 const styles = StyleSheet.create({
 	container: {
 		margin: 16,
 		marginTop: 20,
-		elevation: 1,
 	},
 	title: {
-		fontSize: 16,
+		...style.largeMediumNeutral,
 		color: '#383838',
 	},
 	subtitle: {
+		...style.largeRegularNeutral,
 		marginTop: 8,
-		fontSize: 16,
-		color: '#A1A1A1',
 	},
 });
 
