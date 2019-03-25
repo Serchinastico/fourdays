@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 const SearchBar = () => (
 	<View style={styles.container}>
 		<Image style={styles.icon} source={require('../images/icon/Search.png')} />
-		<TextInput style={styles.textInput} placeholder={I18n.t('search.placeholder')} />
+		<TextInput style={styles.textInput} placeholder={I18n.t('common.search.placeholder')} />
 	</View>
 );
 

@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import SearchBar from './components/SearchBar';
+import SetupDescription from './components/setup/SetupDescription';
 
 const styles = StyleSheet.create({
 	container: {
@@ -12,6 +13,9 @@ const styles = StyleSheet.create({
 const App = () => (
 	<View style={styles.container}>
 		<SearchBar />
+		<ScrollView>
+			<SetupDescription />
+		</ScrollView>
 	</View>
 );
 

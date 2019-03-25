@@ -1,6 +1,14 @@
 {
-	"app.name": "Four Days",
-	"search": {
-		"placeholder": "Buscar alimento"
+	"appName": "Four Days",
+	"common": {
+		"search": {
+			"placeholder": "Buscar alimento"
+		}
+	},
+	"screen": {
+		"setup": {
+			"descriptionTitle": "Configuration",
+			"descriptionSubtitle": "Here you can configure all allowed foods from your diet."
+		}
 	}
 }
