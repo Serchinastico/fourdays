@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#fff',
+		backgroundColor: '#fa6',
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
 
 const App = () => (
 	<View style={styles.container}>
-		<Text> Open up App.js to start working on your app! </Text>{' '}
+		<Text>Open up App.js to start working on your app! </Text>
 	</View>
 );
 
