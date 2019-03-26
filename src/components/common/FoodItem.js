@@ -5,7 +5,7 @@ import style from '../style/style';
 
 const styles = StyleSheet.create({
 	container: {
-		width: 104,
+		width: '30%',
 	},
 	thumbnailContainer: {
 		borderRadius: 8,
@@ -19,6 +19,8 @@ const styles = StyleSheet.create({
 	thumbnail: {
 		width: 104,
 		height: 104,
+		borderRadius: 8,
+		resizeMode: 'contain',
 	},
 	name: {
 		...style.midRegularPrimary,
@@ -27,11 +29,11 @@ const styles = StyleSheet.create({
 	},
 });
 
-const FoodItem = ({ name }) => {
+const FoodItem = ({ name, thumbnailUrl }) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.thumbnailContainer}>
-				<Image style={styles.thumbnail} />
+				<Image style={styles.thumbnail} source={thumbnailUrl} />
 			</View>
 			<Text style={styles.name}>{name}</Text>
 		</View>
@@ -40,6 +42,8 @@ const FoodItem = ({ name }) => {
 
 FoodItem.propTypes = {
 	name: PropTypes.string.isRequired,
+	// eslint-disable-next-line react/forbid-prop-types
+	thumbnailUrl: PropTypes.any.isRequired,
 };
 
 export default FoodItem;
