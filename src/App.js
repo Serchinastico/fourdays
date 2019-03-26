@@ -9,18 +9,20 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: '#FFF',
 	},
-	scrollView: {
-		margin: 0,
-	},
 });
 
 const App = () => (
 	<View style={styles.container}>
-		<SearchBar />
-		<ScrollView contentContainerStyle={styles.scrollView}>
+		<ScrollView>
+			<View style={{ height: 80 }} />
 			<SetupDescription />
 			<SetupFoodGroup name="Grupo 1" />
+			<SetupFoodGroup name="Grupo 2" />
+			<SetupFoodGroup name="Grupo 3" />
+			<SetupFoodGroup name="Grupo 4" />
+			<View style={{ height: 20 }} />
 		</ScrollView>
+		<SearchBar />
 	</View>
 );
 

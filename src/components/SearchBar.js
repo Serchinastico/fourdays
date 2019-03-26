@@ -4,16 +4,28 @@ import I18n from '../translations/i18n';
 
 const styles = StyleSheet.create({
 	container: {
+		marginTop: 20,
+		padding: 16,
+		position: 'absolute',
+		top: 0,
+		left: 0,
+		elevation: 2,
+		flex: 1,
+		width: '100%',
+		flexDirection: 'column',
+		backgroundColor: 'transparent',
+	},
+	shadowContainer: {
 		flexDirection: 'row',
 		alignItems: 'center',
-		justifyContent: 'flex-start',
-		top: 26,
+		borderRadius: 8,
 		borderColor: '#EBEBEB',
 		borderWidth: 1,
-		borderRadius: 8,
+		shadowRadius: 2,
+		shadowColor: '#000',
+		shadowOpacity: 0.1,
+		shadowOffset: { width: 0, height: 1 },
 		backgroundColor: '#FFF',
-		elevation: 2,
-		margin: 16,
 		height: 48,
 	},
 	icon: {
@@ -28,8 +40,10 @@ const styles = StyleSheet.create({
 
 const SearchBar = () => (
 	<View style={styles.container}>
-		<Image style={styles.icon} source={require('../images/icon/Search.png')} />
-		<TextInput style={styles.textInput} placeholder={I18n.t('common.search.placeholder')} />
+		<View style={styles.shadowContainer}>
+			<Image style={styles.icon} source={require('../images/icon/Search.png')} />
+			<TextInput style={styles.textInput} placeholder={I18n.t('common.search.placeholder')} />
+		</View>
 	</View>
 );
 
