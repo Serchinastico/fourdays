@@ -5,6 +5,27 @@
 			"placeholder": "Buscar alimento"
 		}
 	},
+	"food": {
+		"group": {
+			"first": "Grupo 1",
+			"second": "Grupo 2",
+			"third": "Grupo 3",
+			"fourth": "Grupo 4"
+		},
+		"chard": "Acelgas",
+		"avocado": "Aguacate",
+		"garlic": "Ajo",
+		"artichoke": "Alcachofa",
+		"alfalfa": "Alfalfa",
+		"clams": "Almejas",
+		"celery": "Apio",
+		"blueberries": "Arándanos",
+		"rice": "Arroz",
+		"tuna": "Atún",
+		"oat": "Avena",
+		"cod": "Bacalao",
+		"sweetPotato": "Batata"
+	},
 	"screen": {
 		"setup": {
 			"descriptionTitle": "Configuration",

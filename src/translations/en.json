@@ -5,6 +5,27 @@
 			"placeholder": "Search food"
 		}
 	},
+	"food": {
+		"group": {
+			"first": "Group 1",
+			"second": "Group 2",
+			"third": "Group 3",
+			"fourth": "Group 4"
+		},
+		"chard": "Chard",
+		"avocado": "Avocado",
+		"garlic": "Garlic",
+		"artichoke": "Artichoke",
+		"alfalfa": "Alfalfa",
+		"clams": "Clams",
+		"celery": "Celery",
+		"blueberries": "Blueberries",
+		"rice": "Rice",
+		"tuna": "Tuna",
+		"oat": "Oat",
+		"cod": "Cod",
+		"sweetPotato": "Sweet Potato"
+	},
 	"screen": {
 		"setup": {
 			"descriptionTitle": "Configuration",
