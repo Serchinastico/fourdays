@@ -3,8 +3,8 @@ import { FlatList, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import { chain } from 'lodash';
 import SearchBar from '../components/SearchBar';
-import SetupDescription from './SetupDescription';
-import SetupFoodGroup from './SetupFoodGroup';
+import SetupDescription from './components/SetupDescription';
+import SetupFoodGroup from './components/SetupFoodGroup';
 import { selectGroup, selectFood } from './actions';
 import I18n from '../translations/i18n';
 
@@ -34,7 +34,7 @@ class SetupScreen extends React.Component {
 		selectFood(id);
 	}
 
-	renderFoodGroup(item) {
+	renderFoodGroup({ item }) {
 		if (item.type === 'header') {
 			return <SetupDescription />;
 		}
@@ -63,11 +63,14 @@ class SetupScreen extends React.Component {
 		const { groups } = this.props;
 
 		return (
-			<FlatList>
-				data={[{ type: 'header' }, ...groups]}
-				renderItem={this.renderFoodGroup}
-				keyExtractor={({ item }) => item.id}
-			</FlatList>
+			<View style={{ flex: 1 }}>
+				<FlatList
+					style={{ flex: 1 }}
+					data={groups}
+					renderItem={this.renderFoodGroup}
+					keyExtractor={item => item.id}
+				/>
+			</View>
 		);
 	}
 

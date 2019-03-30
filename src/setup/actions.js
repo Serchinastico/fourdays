@@ -6,6 +6,7 @@ export const selectFood = id => {
 		payload: id,
 	};
 };
+
 export const selectGroup = id => {
 	return {
 		type: SETUP_SELECT_GROUP,

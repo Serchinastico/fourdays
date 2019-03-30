@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Image, Text, StyleSheet, View } from 'react-native';
-import style from '../components/style/style';
+import style from '../../components/style/style';
 
 const styles = StyleSheet.create({
 	container: {
@@ -21,9 +21,9 @@ const styles = StyleSheet.create({
 class SetupFoodGroupHeader extends React.Component {
 	getOpenCloseImage(isOpen) {
 		if (isOpen) {
-			return <Image style={styles.icon} source={require('../images/icon/ChevronUp.png')} />;
+			return <Image style={styles.icon} source={require('../../images/icon/ChevronUp.png')} />;
 		} else {
-			return <Image style={styles.icon} source={require('../images/icon/ChevronDown.png')} />;
+			return <Image style={styles.icon} source={require('../../images/icon/ChevronDown.png')} />;
 		}
 	}
 
