@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
-import { chain } from 'lodash';
+import * as R from 'ramda';
 import SearchBar from '../components/SearchBar';
 import SetupDescription from './components/SetupDescription';
 import SetupFoodGroup from './components/SetupFoodGroup';
@@ -36,17 +36,18 @@ class SetupScreen extends React.Component {
 
 	renderFoodGroup({ item }) {
 		if (item.type === 'header') {
-			return <SetupDescription />;
+			return (
+				<View style={{ marginTop: 80 }}>
+					<SetupDescription />
+				</View>
+			);
 		}
 
 		const { foods, selectedFoodIds, openGroupIds } = this.props;
 
-		const groupFoods = chain(foods)
-			.filter(item => item.groupId === item.id)
-			.map(item => {
-				return { ...item, isSelected: selectedFoodIds.includes(item.id) };
-			})
-			.value();
+		const groupFoods = R.filter(food => food.groupId === item.id, foods).map(food => {
+			return { ...food, isSelected: selectedFoodIds.includes(food.id) };
+		});
 
 		return (
 			<SetupFoodGroup
@@ -63,14 +64,11 @@ class SetupScreen extends React.Component {
 		const { groups } = this.props;
 
 		return (
-			<View style={{ flex: 1 }}>
-				<FlatList
-					style={{ flex: 1 }}
-					data={groups}
-					renderItem={this.renderFoodGroup}
-					keyExtractor={item => item.id}
-				/>
-			</View>
+			<FlatList
+				data={[{ type: 'header', id: 'header' }, ...groups]}
+				renderItem={this.renderFoodGroup}
+				keyExtractor={item => item.id}
+			/>
 		);
 	}
 
@@ -84,14 +82,14 @@ class SetupScreen extends React.Component {
 	}
 }
 
-const mapStateToProps = state => {
+function mapStateToProps(state) {
 	return {
 		groups: state.setup.groups,
 		foods: state.setup.foods,
 		selectedFoodIds: state.setup.selectedFoodIds,
 		openGroupIds: state.setup.selectedGroupIds,
 	};
-};
+}
 
 export default connect(
 	mapStateToProps,

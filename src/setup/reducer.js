@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { concat, without } from 'lodash';
 import { SETUP_SELECT_FOOD, SETUP_SELECT_GROUP } from './types';
 
@@ -24,73 +25,75 @@ const initialSetupState = {
 		{
 			id: 'chard',
 			nameTranslationKey: 'food.chard',
-			imageResourceName: 'food/chard.jpg',
+			thumbnailProvider: _ => require('../images/food/chard.jpg'),
 			groupId: 'Group 1',
 		},
 		{
 			id: 'avocado',
 			nameTranslationKey: 'food.avocado',
-			imageResourceName: 'food/avocado.jpg',
+			thumbnailProvider: _ => require('../images/food/avocado.jpg'),
 			groupId: 'Group 4',
 		},
 		{
 			id: 'garlic',
 			nameTranslationKey: 'food.garlic',
-			imageResourceName: 'food/garlic.png',
+			thumbnailProvider: _ => require('../images/food/garlic.png'),
 			groupId: 'Group 1',
 		},
 		{
 			id: 'artichoke',
 			nameTranslationKey: 'food.artichoke',
-			imageResourceName: 'food/artichoke.jpg',
+			thumbnailProvider: _ => require('../images/food/artichoke.jpg'),
 			groupId: 'Group 1',
 		},
 		{
 			id: 'alfalfa',
 			nameTranslationKey: 'food.alfalfa',
-			imageResourceName: 'food/alfalfa.png',
+			thumbnailProvider: _ => require('../images/food/alfalfa.png'),
 			groupId: 'Group 1',
 		},
 		{
 			id: 'clams',
 			nameTranslationKey: 'food.clams',
-			imageResourceName: 'food/clams.jpg',
+			thumbnailProvider: _ => require('../images/food/clams.jpg'),
 			groupId: 'Group 3',
 		},
 		{
 			id: 'blueberries',
 			nameTranslationKey: 'food.blueberries',
+			thumbnailProvider: _ => require('../images/food/blueberries.jpg'),
 			imageResourceName: 'food/blueberries.jpg',
 			groupId: 'Group 4',
 		},
 		{
 			id: 'rice',
 			nameTranslationKey: 'food.rice',
+			thumbnailProvider: _ => require('../images/food/rice.jpg'),
 			imageResourceName: 'food/rice.jpg',
 			groupId: 'Group 2',
 		},
 		{
 			id: 'tuna',
 			nameTranslationKey: 'food.tuna',
-			imageResourceName: 'food/tuna.jpg',
+			thumbnailProvider: _ => require('../images/food/tuna.jpg'),
 			groupId: 'Group 3',
 		},
 		{
 			id: 'oat',
 			nameTranslationKey: 'food.oat',
-			imageResourceName: 'food/oat.jpg',
+			thumbnailProvider: _ => require('../images/food/oat.jpg'),
 			groupId: 'Group 2',
 		},
 		{
 			id: 'cod',
 			nameTranslationKey: 'food.cod',
-			imageResourceName: 'food/cod.png',
+			thumbnailProvider: _ => require('../images/food/cod.png'),
 			groupId: 'Group 2',
 		},
 		{
 			id: 'sweet potato',
 			nameTranslationKey: 'food.sweetPotato',
-			imageResourceName: 'food/sweetPotato.jpg',
+			thumbnailProvider: _ => require('../images/food/sweetPotato.jpg'),
 			groupId: 'Group 2',
 		},
 	],

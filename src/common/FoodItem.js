@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Image, Text, StyleSheet, View } from 'react-native';
 import style from '../components/style/style';
 
@@ -38,12 +37,6 @@ const FoodItem = ({ name, thumbnailUrl }) => {
 			<Text style={styles.name}>{name}</Text>
 		</View>
 	);
-};
-
-FoodItem.propTypes = {
-	name: PropTypes.string.isRequired,
-	// eslint-disable-next-line react/forbid-prop-types
-	thumbnailUrl: PropTypes.any.isRequired,
 };
 
 export default FoodItem;

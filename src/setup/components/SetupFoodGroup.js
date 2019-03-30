@@ -1,8 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { StyleSheet, View } from 'react-native';
+import * as R from 'ramda';
 import SetupFoodGroupHeader from './SetupFoodGroupHeader';
 import FoodItem from '../../common/FoodItem';
+import I18n from '../../translations/i18n';
 
 const styles = StyleSheet.create({
 	container: {
@@ -13,31 +14,55 @@ const styles = StyleSheet.create({
 	},
 	itemsContainer: {
 		flexDirection: 'row',
-		alignContent: 'space-between',
 		justifyContent: 'space-between',
 	},
 });
 
-const SetupFoodGroup = ({ name }) => (
-	<View style={styles.container}>
-		<View style={styles.headerContainer}>
-			<SetupFoodGroupHeader isOpen name={name} />
-		</View>
-		<View style={styles.itemsContainer}>
-			<FoodItem name="Cebolla" thumbnailUrl={require('../../images/food/cebolla.jpg')} />
-			<FoodItem name="Lechuga" thumbnailUrl={require('../../images/food/Lechuga.png')} />
-			<FoodItem name="Guisantes" thumbnailUrl={require('../../images/food/guisantes.jpg')} />
-		</View>
-		<View style={styles.itemsContainer}>
-			<FoodItem name="Batata" thumbnailUrl={require('../../images/food/sweetPotato.jpg')} />
-			<FoodItem name="Cerezas" thumbnailUrl={require('../../images/food/cerezas.jpg')} />
-			<FoodItem name="Garbanzos" thumbnailUrl={require('../../images/food/garbanzos.jpg')} />
-		</View>
-	</View>
-);
+class SetupFoodGroup extends React.Component {
+	renderRow(foodRow) {
+		const foodItems = R.map(
+			food => (
+				<FoodItem
+					key={food.id}
+					name={I18n.t(food.nameTranslationKey)}
+					thumbnailUrl={food.thumbnailProvider()}
+				/>
+			),
+			foodRow
+		);
 
-SetupFoodGroup.propTypes = {
-	name: PropTypes.string.isRequired,
-};
+		while (foodItems.length < 3) {
+			foodItems.push(<View style={{ width: 104 }} key={foodItems.length} />);
+		}
+
+		return (
+			<View key={foodRow[0].id} style={styles.itemsContainer}>
+				{foodItems}
+			</View>
+		);
+	}
+
+	renderFoodIfOpen() {
+		const { foods, isOpen } = this.props;
+		if (!isOpen) {
+			const foodRows = R.splitEvery(3, foods);
+			const allRows = R.map(this.renderRow, foodRows);
+
+			return <View>{allRows}</View>;
+		}
+	}
+
+	render() {
+		const { name, isOpen } = this.props;
+		return (
+			<View style={styles.container}>
+				<View style={styles.headerContainer}>
+					<SetupFoodGroupHeader isOpen={isOpen} name={name} />
+				</View>
+				{this.renderFoodIfOpen()}
+			</View>
+		);
+	}
+}
 
 export default SetupFoodGroup;
