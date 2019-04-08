@@ -66,7 +66,6 @@ class SetupScreen extends React.Component {
 		const { openGroupIds } = this.props;
 		return (
 			<SetupFoodGroupHeader
-				style={{ margin: 16 }}
 				key={item.payload.id}
 				isOpen={openGroupIds.includes(item.payload.id)}
 				name={I18n.t(item.payload.nameTranslationKey)}
