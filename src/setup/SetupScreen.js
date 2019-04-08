@@ -26,11 +26,11 @@ class SetupScreen extends React.Component {
 		super(props);
 		this.renderFoodGroup = this.renderFoodGroup.bind(this);
 		this.renderFoodGroups = this.renderFoodGroups.bind(this);
-		this.onGroupPressed = this.onGroupPressed.bind(this);
+		this.onGroupSelected = this.onGroupSelected.bind(this);
 		this.onFoodSelected = this.onFoodSelected.bind(this);
 	}
 
-	onGroupPressed(id) {
+	onGroupSelected(id) {
 		const { selectGroup } = this.props;
 		selectGroup(id);
 	}
@@ -73,18 +73,23 @@ class SetupScreen extends React.Component {
 		const { openGroupIds } = this.props;
 		return (
 			<SetupFoodGroupHeader
+				id={item.payload.id}
 				key={item.payload.id}
 				isOpen={openGroupIds.includes(item.payload.id)}
 				name={I18n.t(item.payload.nameTranslationKey)}
+				onGroupSelected={this.onGroupSelected}
 			/>
 		);
 	}
 
 	renderFoodGroups() {
-		const { groups, foods } = this.props;
+		const { groups, foods, openGroupIds } = this.props;
 
 		const content = R.map(group => {
-			const groupFoods = R.filter(food => food.groupId === group.id, foods);
+			var groupFoods = [];
+			if (openGroupIds.includes(group.id)) {
+				groupFoods = R.filter(food => food.groupId === group.id, foods);
+			}
 			const rows = R.splitEvery(3, groupFoods).map(row => {
 				return { type: 'row', key: row[0].id, payload: row };
 			});

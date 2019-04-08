@@ -581,7 +581,7 @@ const initialSetupState = {
 		},
 	],
 	selectedFoodIds: [],
-	selectedGroupIds: ['Group 1'],
+	selectedGroupIds: [],
 };
 
 const onSelectFood = (state, action) => {

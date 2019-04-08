@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Image, Text, StyleSheet, View } from 'react-native';
+import { Image, Text, StyleSheet, TouchableNativeFeedback, View } from 'react-native';
 import style from '../../components/style/style';
 
 const styles = StyleSheet.create({
@@ -9,7 +8,8 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'flex-start',
 		height: 48,
-		margin: 16,
+		paddingHorizontal: 16,
+		marginVertical: 16,
 	},
 	text: {
 		...style.largeMediumNeutral,
@@ -29,20 +29,17 @@ class SetupFoodGroupHeader extends React.Component {
 	}
 
 	render() {
-		const { name, isOpen } = this.props;
+		const { id, name, isOpen, onGroupSelected } = this.props;
 
 		return (
-			<View style={styles.container}>
-				<Text style={styles.text}>{name}</Text>
-				{this.getOpenCloseImage(isOpen)}
-			</View>
+			<TouchableNativeFeedback onPress={() => onGroupSelected(id)}>
+				<View style={styles.container}>
+					<Text style={styles.text}>{name}</Text>
+					{this.getOpenCloseImage(isOpen)}
+				</View>
+			</TouchableNativeFeedback>
 		);
 	}
 }
-
-SetupFoodGroupHeader.propTypes = {
-	name: PropTypes.string.isRequired,
-	isOpen: PropTypes.bool.isRequired,
-};
 
 export default SetupFoodGroupHeader;
