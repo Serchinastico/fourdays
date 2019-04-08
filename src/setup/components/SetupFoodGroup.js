@@ -44,7 +44,7 @@ class SetupFoodGroup extends React.Component {
 
 	renderFoodIfOpen() {
 		const { foods, isOpen } = this.props;
-		if (!isOpen) {
+		if (isOpen) {
 			const foodRows = R.splitEvery(3, foods);
 			const allRows = R.map(this.renderRow, foodRows);
 

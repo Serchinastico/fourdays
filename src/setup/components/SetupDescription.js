@@ -5,7 +5,8 @@ import style from '../../components/style/style';
 
 const styles = StyleSheet.create({
 	container: {
-		margin: 16,
+		marginLeft: 16,
+		marginRight: 16,
 		marginTop: 20,
 	},
 	title: {

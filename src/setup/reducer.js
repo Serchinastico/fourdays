@@ -37,7 +37,7 @@ const initialSetupState = {
 		{
 			id: 'garlic',
 			nameTranslationKey: 'food.garlic',
-			thumbnailProvider: _ => require('../images/food/garlic.png'),
+			thumbnailProvider: _ => require('../images/food/garlic.jpg'),
 			groupId: 'Group 1',
 		},
 		{
@@ -49,7 +49,7 @@ const initialSetupState = {
 		{
 			id: 'alfalfa',
 			nameTranslationKey: 'food.alfalfa',
-			thumbnailProvider: _ => require('../images/food/alfalfa.png'),
+			thumbnailProvider: _ => require('../images/food/alfalfa.jpg'),
 			groupId: 'Group 1',
 		},
 		{
@@ -87,7 +87,7 @@ const initialSetupState = {
 		{
 			id: 'cod',
 			nameTranslationKey: 'food.cod',
-			thumbnailProvider: _ => require('../images/food/cod.png'),
+			thumbnailProvider: _ => require('../images/food/cod.jpg'),
 			groupId: 'Group 2',
 		},
 		{
@@ -165,7 +165,7 @@ const initialSetupState = {
 		{
 			id: 'spring onion',
 			nameTranslationKey: 'food.springOnion',
-			thumbnailProvider: _ => require('../images/food/springOnion.png'),
+			thumbnailProvider: _ => require('../images/food/springOnion.jpg'),
 			groupId: 'Group 1',
 		},
 		{
@@ -177,7 +177,7 @@ const initialSetupState = {
 		{
 			id: 'pork',
 			nameTranslationKey: 'food.pork',
-			thumbnailProvider: _ => require('../images/food/pork.jpeg'),
+			thumbnailProvider: _ => require('../images/food/pork.jpg'),
 			groupId: 'Group 3',
 		},
 		{
@@ -209,7 +209,7 @@ const initialSetupState = {
 		{
 			id: 'cabbage',
 			nameTranslationKey: 'food.cabbage',
-			thumbnailProvider: _ => require('../images/food/cabbage.png'),
+			thumbnailProvider: _ => require('../images/food/cabbage.jpg'),
 			groupId: 'Group 1',
 		},
 		{
@@ -293,7 +293,7 @@ const initialSetupState = {
 		{
 			id: 'lettuce',
 			nameTranslationKey: 'food.lettuce',
-			thumbnailProvider: _ => require('../images/food/lettuce.png'),
+			thumbnailProvider: _ => require('../images/food/lettuce.jpg'),
 			groupId: 'Group 1',
 		},
 		{
@@ -353,7 +353,7 @@ const initialSetupState = {
 		{
 			id: 'salmon',
 			nameTranslationKey: 'food.salmon',
-			thumbnailProvider: _ => require('../images/food/salmon.png'),
+			thumbnailProvider: _ => require('../images/food/salmon.jpg'),
 			groupId: 'Group 3',
 		},
 		{
@@ -396,7 +396,7 @@ const initialSetupState = {
 		{
 			id: 'pepper',
 			nameTranslationKey: 'food.pepper',
-			thumbnailProvider: _ => require('../images/food/pepper.png'),
+			thumbnailProvider: _ => require('../images/food/pepper.jpg'),
 			groupId: 'Group 1',
 		},
 		{
@@ -520,6 +520,24 @@ const initialSetupState = {
 			groupId: 'Group 2',
 		},
 		{
+			id: 'whiteBeans',
+			nameTranslationKey: 'food.whiteBeans',
+			thumbnailProvider: _ => require('../images/food/whiteBeans.jpg'),
+			groupId: 'Group 2',
+		},
+		{
+			id: 'yellowBeans',
+			nameTranslationKey: 'food.yellowBeans',
+			thumbnailProvider: _ => require('../images/food/yellowBeans.jpg'),
+			groupId: 'Group 2',
+		},
+		{
+			id: 'cranberryBeans',
+			nameTranslationKey: 'food.cranberryBeans',
+			thumbnailProvider: _ => require('../images/food/cranberryBeans.jpg'),
+			groupId: 'Group 2',
+		},
+		{
 			id: 'lemon',
 			nameTranslationKey: 'food.lemon',
 			thumbnailProvider: _ => require('../images/food/lemon.jpg'),
@@ -563,7 +581,7 @@ const initialSetupState = {
 		},
 	],
 	selectedFoodIds: [],
-	selectedGroupIds: [],
+	selectedGroupIds: ['Group 1'],
 };
 
 const onSelectFood = (state, action) => {

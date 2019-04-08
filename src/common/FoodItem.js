@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Text, StyleSheet, View } from 'react-native';
+import { Dimensions, Image, Text, StyleSheet, View } from 'react-native';
 import style from '../components/style/style';
 
 const styles = StyleSheet.create({
@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
 		elevation: 8,
 	},
 	thumbnail: {
-		width: 104,
-		height: 104,
+		width: '100%',
+		height: (Dimensions.get('window').width - 64) / 3,
 		borderRadius: 8,
 		resizeMode: 'contain',
 	},

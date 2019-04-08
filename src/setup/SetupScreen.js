@@ -4,14 +4,20 @@ import { connect } from 'react-redux';
 import * as R from 'ramda';
 import SearchBar from '../components/SearchBar';
 import SetupDescription from './components/SetupDescription';
-import SetupFoodGroup from './components/SetupFoodGroup';
 import { selectGroup, selectFood } from './actions';
 import I18n from '../translations/i18n';
+import SetupFoodGroupHeader from './components/SetupFoodGroupHeader';
+import SetupFoodRow from './components/SetupFoodRow';
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: '#FFF',
+	},
+	itemsContainer: {
+		padding: 16,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
 	},
 });
 
@@ -34,40 +40,55 @@ class SetupScreen extends React.Component {
 		selectFood(id);
 	}
 
+	renderFoodRow(foodRow) {
+		return <SetupFoodRow items={foodRow} />;
+	}
+
 	renderFoodGroup({ item }) {
 		if (item.type === 'header') {
-			return (
-				<View style={{ marginTop: 80 }}>
-					<SetupDescription />
-				</View>
-			);
+			return this.renderDescription();
+		} else if (item.type === 'group') {
+			return this.renderGroupHeader(item);
+		} else {
+			return this.renderFoodRow(item.payload);
 		}
+	}
 
-		const { foods, selectedFoodIds, openGroupIds } = this.props;
-
-		const groupFoods = R.filter(food => food.groupId === item.id, foods).map(food => {
-			return { ...food, isSelected: selectedFoodIds.includes(food.id) };
-		});
-
+	renderDescription() {
 		return (
-			<SetupFoodGroup
-				onGroupSelected={this.onGroupSelected}
-				onFoodSelected={this.onFoodSelected}
-				name={I18n.t(item.nameTranslationKey)}
-				foods={groupFoods}
-				isOpen={openGroupIds.includes(item.id)}
+			<View style={{ marginTop: 80 }}>
+				<SetupDescription />
+			</View>
+		);
+	}
+
+	renderGroupHeader(item) {
+		const { openGroupIds } = this.props;
+		return (
+			<SetupFoodGroupHeader
+				style={{ margin: 16 }}
+				key={item.payload.id}
+				isOpen={openGroupIds.includes(item.payload.id)}
+				name={I18n.t(item.payload.nameTranslationKey)}
 			/>
 		);
 	}
 
 	renderFoodGroups() {
-		const { groups } = this.props;
+		const { groups, foods } = this.props;
+
+		const content = R.map(group => {
+			const groupFoods = R.filter(food => food.groupId === group.id, foods);
+			const rows = R.splitEvery(3, groupFoods).map(row => {
+				return { type: 'row', key: row[0].id, payload: row };
+			});
+			return [{ type: 'group', key: group.id, payload: group }, ...rows];
+		}, groups);
 
 		return (
 			<FlatList
-				data={[{ type: 'header', id: 'header' }, ...groups]}
+				data={[{ type: 'header', key: 'header' }, ...R.flatten(content)]}
 				renderItem={this.renderFoodGroup}
-				keyExtractor={item => item.id}
 			/>
 		);
 	}

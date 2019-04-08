@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'flex-start',
 		height: 48,
+		margin: 16,
 	},
 	text: {
 		...style.largeMediumNeutral,
