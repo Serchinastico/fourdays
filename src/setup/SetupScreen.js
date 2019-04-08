@@ -41,7 +41,14 @@ class SetupScreen extends React.Component {
 	}
 
 	renderFoodRow(foodRow) {
-		return <SetupFoodRow items={foodRow} />;
+		const { selectedFoodIds } = this.props;
+		return (
+			<SetupFoodRow
+				onFoodSelected={this.onFoodSelected}
+				items={foodRow}
+				selectedFoodIds={selectedFoodIds}
+			/>
+		);
 	}
 
 	renderFoodGroup({ item }) {

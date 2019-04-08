@@ -588,12 +588,12 @@ const onSelectFood = (state, action) => {
 	if (state.selectedFoodIds.includes(action.payload)) {
 		return {
 			...state,
-			selectedFoodIndices: without(state.selectedFoodIds, action.payload),
+			selectedFoodIds: without(state.selectedFoodIds, action.payload),
 		};
 	} else {
 		return {
 			...state,
-			selectedFoodIndices: concat(state.selectedFoodIds, action.payload),
+			selectedFoodIds: concat(state.selectedFoodIds, action.payload),
 		};
 	}
 };
@@ -602,12 +602,12 @@ const onSelectGroup = (state, action) => {
 	if (state.selectedGroupIds.includes(action.payload)) {
 		return {
 			...state,
-			selectedGroupIndices: without(state.selectedGroupIds, action.payload),
+			selectedGroupIds: without(state.selectedGroupIds, action.payload),
 		};
 	} else {
 		return {
 			...state,
-			selectedGroupIndices: concat(state.selectedGroupIds, action.payload),
+			selectedGroupIds: concat(state.selectedGroupIds, action.payload),
 		};
 	}
 };

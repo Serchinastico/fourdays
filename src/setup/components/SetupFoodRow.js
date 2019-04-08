@@ -30,11 +30,18 @@ class SetupFoodRow extends React.Component {
 	}
 
 	renderFood(food) {
+		const { selectedFoodIds, onFoodSelected } = this.props;
+
+		const isSelected = R.contains(food.id, selectedFoodIds);
+
 		return (
 			<FoodItem
+				id={food.id}
 				key={food.id}
 				name={I18n.t(food.nameTranslationKey)}
 				thumbnailUrl={food.thumbnailProvider()}
+				onFoodSelected={onFoodSelected}
+				isSelected={isSelected}
 			/>
 		);
 	}

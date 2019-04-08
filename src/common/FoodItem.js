@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, Image, Text, StyleSheet, View } from 'react-native';
+import { Dimensions, Image, Text, StyleSheet, TouchableNativeFeedback, View } from 'react-native';
 import style from '../components/style/style';
 
 const styles = StyleSheet.create({
@@ -69,13 +69,14 @@ class FoodItem extends React.Component {
 	}
 
 	render() {
-		const { name, isSelected, thumbnailUrl } = this.props;
-
+		const { id, name, isSelected, thumbnailUrl, onFoodSelected } = this.props;
 		return (
-			<View style={styles.container}>
-				{this.renderThumbnail(thumbnailUrl, isSelected)}
-				{this.renderName(name, isSelected)}
-			</View>
+			<TouchableNativeFeedback onPress={() => onFoodSelected(id)}>
+				<View style={styles.container}>
+					{this.renderThumbnail(thumbnailUrl, isSelected)}
+					{this.renderName(name, isSelected)}
+				</View>
+			</TouchableNativeFeedback>
 		);
 	}
 }
