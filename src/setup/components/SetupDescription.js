@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import I18n from '../../translations/i18n';
-import style from '../../components/style/style';
+import { style, color } from '../../components/style/style';
 
 const styles = StyleSheet.create({
 	container: {
@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		...style.largeMediumNeutral,
-		color: '#383838',
+		color: color.brownGray,
 	},
 	subtitle: {
 		...style.largeRegularNeutral,

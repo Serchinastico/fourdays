@@ -2,7 +2,11 @@
 	"appName": "Four Days",
 	"common": {
 		"search": {
-			"placeholder": "Search food"
+			"placeholder": "Search food",
+			"emptyCase": {
+				"title": "We are sorry!",
+				"description": "We couldn't find any food with that name"
+			}
 		}
 	},
 	"food": {

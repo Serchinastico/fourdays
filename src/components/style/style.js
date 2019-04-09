@@ -3,28 +3,29 @@ import { StyleSheet } from 'react-native';
 const textSizeM = 12;
 const textSizeL = 16;
 
-const Colors = {
+export const color = {
+	white: '#FFFFFF',
 	black: '#383838',
 	brownGray: '#A1A1A1',
 	darkMint: '#52BD76',
 	darkMint50: '#52BD7680',
 };
 
-export default StyleSheet.create({
+export const style = StyleSheet.create({
 	midRegularPrimary: {
 		fontSize: textSizeM,
-		color: Colors.darkMint,
+		color: color.darkMint,
 	},
 	midRegularDisabled: {
 		fontSize: textSizeM,
-		color: Colors.darkMint50,
+		color: color.darkMint50,
 	},
 	largeMediumNeutral: {
 		fontSize: textSizeL,
-		color: Colors.black,
+		color: color.black,
 	},
 	largeRegularNeutral: {
 		fontSize: textSizeL,
-		color: Colors.brownGray,
+		color: color.brownGray,
 	},
 });

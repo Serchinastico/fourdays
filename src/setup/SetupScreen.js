@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, Image, Text, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import * as R from 'ramda';
 import Fuse from 'fuse.js';
@@ -9,11 +9,27 @@ import { selectGroup, selectFood } from './actions';
 import I18n from '../translations/i18n';
 import SetupFoodGroupHeader from './components/SetupFoodGroupHeader';
 import SetupFoodRow from './components/SetupFoodRow';
+import { style, color } from '../components/style/style';
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#FFF',
+		backgroundColor: color.white,
+	},
+	emptyCaseContainer: {
+		flex: 1,
+		flexDirection: 'column',
+		justifyContent: 'center',
+		alignItems: 'center',
+		paddingBottom: 200,
+	},
+	emptyCaseText: {
+		...style.largeMediumNeutral,
+		textAlign: 'center',
+		color: color.brownGray,
+		marginTop: 8,
+		marginLeft: 48,
+		marginRight: 48,
 	},
 	itemsContainer: {
 		padding: 16,
@@ -91,6 +107,16 @@ class SetupScreen extends React.Component {
 		);
 	}
 
+	renderEmptySearch() {
+		return (
+			<View style={styles.emptyCaseContainer}>
+				<Image source={require('../images/icon/Empty.png')} />
+				<Text style={styles.emptyCaseText}>{I18n.t('common.search.emptyCase.title')}</Text>
+				<Text style={styles.emptyCaseText}>{I18n.t('common.search.emptyCase.description')}</Text>
+			</View>
+		);
+	}
+
 	renderSearch(currentSearch) {
 		const { foods } = this.props;
 		const foodWithNames = R.map(foodItem => {
@@ -104,6 +130,10 @@ class SetupScreen extends React.Component {
 		};
 		const fuse = new Fuse(foodWithNames, options);
 		const matchingFoodItems = fuse.search(currentSearch);
+
+		if (matchingFoodItems.length === 0) {
+			return this.renderEmptySearch();
+		}
 
 		const items = R.splitEvery(3, matchingFoodItems).map(row => {
 			return { type: 'row', key: row[0].id, payload: row };
