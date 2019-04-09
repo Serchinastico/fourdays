@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
 	},
 	textInput: {
 		marginLeft: 16,
+		flex: 1,
 	},
 });
 

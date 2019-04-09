@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, Image, Text, StyleSheet, TouchableNativeFeedback, View } from 'react-native';
+import { Dimensions, Image, Text, StyleSheet, TouchableHighlight, View } from 'react-native';
 import { style } from '../components/style/style';
 
 const styles = StyleSheet.create({
@@ -71,12 +71,16 @@ class FoodItem extends React.PureComponent {
 	render() {
 		const { id, name, isSelected, thumbnailUrl, onFoodSelected } = this.props;
 		return (
-			<TouchableNativeFeedback onPress={() => onFoodSelected(id)}>
-				<View style={styles.container}>
+			<TouchableHighlight
+				underlayColor="#FAFAFA"
+				style={styles.container}
+				onPress={() => onFoodSelected(id)}
+			>
+				<View>
 					{this.renderThumbnail(thumbnailUrl, isSelected)}
 					{this.renderName(name, isSelected)}
 				</View>
-			</TouchableNativeFeedback>
+			</TouchableHighlight>
 		);
 	}
 }

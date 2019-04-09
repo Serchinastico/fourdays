@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Text, StyleSheet, TouchableNativeFeedback, View } from 'react-native';
+import { Image, Text, StyleSheet, TouchableHighlight, View } from 'react-native';
 import { style } from '../../components/style/style';
 
 const styles = StyleSheet.create({
@@ -32,12 +32,12 @@ class SetupFoodGroupHeader extends React.PureComponent {
 		const { id, name, isOpen, onGroupSelected } = this.props;
 
 		return (
-			<TouchableNativeFeedback onPress={() => onGroupSelected(id)}>
+			<TouchableHighlight underlayColor="#FAFAFA" onPress={() => onGroupSelected(id)}>
 				<View style={styles.container}>
 					<Text style={styles.text}>{name}</Text>
 					{this.getOpenCloseImage(isOpen)}
 				</View>
-			</TouchableNativeFeedback>
+			</TouchableHighlight>
 		);
 	}
 }
