@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
 	},
 });
 
-class FoodItem extends React.Component {
+class FoodItem extends React.PureComponent {
 	renderThumbnail(thumbnailUrl, isSelected) {
 		if (isSelected) {
 			return (

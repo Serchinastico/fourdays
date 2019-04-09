@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
 	},
 });
 
-class SetupFoodGroupHeader extends React.Component {
+class SetupFoodGroupHeader extends React.PureComponent {
 	getOpenCloseImage(isOpen) {
 		if (isOpen) {
 			return <Image style={styles.icon} source={require('../../images/icon/ChevronUp.png')} />;

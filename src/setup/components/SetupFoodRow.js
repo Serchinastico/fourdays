@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 	},
 });
 
-class SetupFoodRow extends React.Component {
+class SetupFoodRow extends React.PureComponent {
 	constructor(props) {
 		super(props);
 		this.renderFood = this.renderFood.bind(this);
