@@ -2,6 +2,7 @@ import React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import * as R from 'ramda';
+import Fuse from 'fuse.js';
 import SearchBar from '../components/SearchBar';
 import SetupDescription from './components/SetupDescription';
 import { selectGroup, selectFood } from './actions';
@@ -28,6 +29,12 @@ class SetupScreen extends React.Component {
 		this.renderFoodGroups = this.renderFoodGroups.bind(this);
 		this.onGroupSelected = this.onGroupSelected.bind(this);
 		this.onFoodSelected = this.onFoodSelected.bind(this);
+		this.onSearchChange = this.onSearchChange.bind(this);
+		this.state = { currentSearch: '' };
+	}
+
+	onSearchChange(text) {
+		this.setState({ currentSearch: text });
 	}
 
 	onGroupSelected(id) {
@@ -56,8 +63,10 @@ class SetupScreen extends React.Component {
 			return this.renderDescription();
 		} else if (item.type === 'group') {
 			return this.renderGroupHeader(item);
-		} else {
+		} else if (item.type === 'row') {
 			return this.renderFoodRow(item.payload);
+		} else if (item.type === 'padding') {
+			return <View style={{ height: item.payload.height }} />;
 		}
 	}
 
@@ -82,8 +91,39 @@ class SetupScreen extends React.Component {
 		);
 	}
 
+	renderSearch(currentSearch) {
+		const { foods } = this.props;
+		const foodWithNames = R.map(foodItem => {
+			return { ...foodItem, name: I18n.t(foodItem.nameTranslationKey) };
+		}, foods);
+
+		var options = {
+			keys: ['name'],
+			threshold: 0.3,
+			distance: 100,
+		};
+		const fuse = new Fuse(foodWithNames, options);
+		const matchingFoodItems = fuse.search(currentSearch);
+
+		const items = R.splitEvery(3, matchingFoodItems).map(row => {
+			return { type: 'row', key: row[0].id, payload: row };
+		});
+
+		return (
+			<FlatList
+				data={[{ type: 'padding', key: 'padding', payload: { height: 98 } }, ...items]}
+				renderItem={this.renderFoodGroup}
+			/>
+		);
+	}
+
 	renderFoodGroups() {
 		const { groups, foods, openGroupIds } = this.props;
+		const { currentSearch } = this.state;
+
+		if (currentSearch != '') {
+			return this.renderSearch(currentSearch);
+		}
 
 		const content = R.map(group => {
 			var groupFoods = [];
@@ -108,7 +148,7 @@ class SetupScreen extends React.Component {
 		return (
 			<View style={styles.container}>
 				{this.renderFoodGroups()}
-				<SearchBar />
+				<SearchBar onChangeText={this.onSearchChange} />
 			</View>
 		);
 	}

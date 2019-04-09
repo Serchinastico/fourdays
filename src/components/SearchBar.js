@@ -38,13 +38,21 @@ const styles = StyleSheet.create({
 	},
 });
 
-const SearchBar = () => (
-	<View style={styles.container}>
-		<View style={styles.shadowContainer}>
-			<Image style={styles.icon} source={require('../images/icon/Search.png')} />
-			<TextInput style={styles.textInput} placeholder={I18n.t('common.search.placeholder')} />
-		</View>
-	</View>
-);
-
+class SearchBar extends React.PureComponent {
+	render() {
+		const { onChangeText } = this.props;
+		return (
+			<View style={styles.container}>
+				<View style={styles.shadowContainer}>
+					<Image style={styles.icon} source={require('../images/icon/Search.png')} />
+					<TextInput
+						style={styles.textInput}
+						placeholder={I18n.t('common.search.placeholder')}
+						onChangeText={text => onChangeText(text)}
+					/>
+				</View>
+			</View>
+		);
+	}
+}
 export default SearchBar;
