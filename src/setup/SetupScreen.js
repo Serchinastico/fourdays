@@ -6,7 +6,7 @@ import Fuse from 'fuse.js';
 import SearchBar from '../components/SearchBar';
 import AcceptButton from '../components/AcceptButton';
 import SetupDescription from './components/SetupDescription';
-import { selectGroup, selectFood } from './actions';
+import { storeForbiddenFood } from './actions';
 import I18n from '../translations/i18n';
 import SetupFoodGroupHeader from './components/SetupFoodGroupHeader';
 import SetupFoodRow from './components/SetupFoodRow';
@@ -51,7 +51,12 @@ class SetupScreen extends React.Component {
 		this.state = { currentSearch: '', selectedFoodIds: [], openGroupIds: [] };
 	}
 
-	onAcceptPress() {}
+	onAcceptPress() {
+		const { storeForbiddenFood, navigation } = this.props;
+		const { selectedFoodIds } = this.state;
+		storeForbiddenFood(selectedFoodIds);
+		navigation.navigate('DailyTracker');
+	}
 
 	onSearchChange(text) {
 		this.setState({ currentSearch: text });
@@ -208,5 +213,5 @@ function mapStateToProps(state) {
 
 export default connect(
 	mapStateToProps,
-	{ selectGroup, selectFood }
+	{ storeForbiddenFood }
 )(SetupScreen);

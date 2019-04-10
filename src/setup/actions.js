@@ -1,15 +1,9 @@
-import { SETUP_SELECT_FOOD, SETUP_SELECT_GROUP } from './types';
+import { STORE_FORBIDDEN_FOOD } from './types';
 
-export const selectFood = id => {
+// eslint-disable-next-line import/prefer-default-export
+export const storeForbiddenFood = ids => {
 	return {
-		type: SETUP_SELECT_FOOD,
-		payload: id,
-	};
-};
-
-export const selectGroup = id => {
-	return {
-		type: SETUP_SELECT_GROUP,
-		payload: id,
+		type: STORE_FORBIDDEN_FOOD,
+		payload: ids,
 	};
 };
