@@ -9,6 +9,7 @@ export const color = {
 	brownGray: '#A1A1A1',
 	darkMint: '#52BD76',
 	darkMint50: '#52BD7680',
+	seafoamGreen: '#87e0a5',
 };
 
 export const style = StyleSheet.create({

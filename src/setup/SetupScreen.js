@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as R from 'ramda';
 import Fuse from 'fuse.js';
 import SearchBar from '../components/SearchBar';
+import AcceptButton from '../components/AcceptButton';
 import SetupDescription from './components/SetupDescription';
 import { selectGroup, selectFood } from './actions';
 import I18n from '../translations/i18n';
@@ -46,25 +47,38 @@ class SetupScreen extends React.Component {
 		this.onGroupSelected = this.onGroupSelected.bind(this);
 		this.onFoodSelected = this.onFoodSelected.bind(this);
 		this.onSearchChange = this.onSearchChange.bind(this);
-		this.state = { currentSearch: '' };
+		this.onAcceptPress = this.onAcceptPress.bind(this);
+		this.state = { currentSearch: '', selectedFoodIds: [], openGroupIds: [] };
 	}
+
+	onAcceptPress() {}
 
 	onSearchChange(text) {
 		this.setState({ currentSearch: text });
 	}
 
 	onGroupSelected(id) {
-		const { selectGroup } = this.props;
-		selectGroup(id);
+		const { openGroupIds } = this.state;
+
+		if (openGroupIds.includes(id)) {
+			this.setState({ openGroupIds: R.without([id], openGroupIds) });
+		} else {
+			this.setState({ openGroupIds: R.append(id, openGroupIds) });
+		}
 	}
 
 	onFoodSelected(id) {
-		const { selectFood } = this.props;
-		selectFood(id);
+		const { selectedFoodIds } = this.state;
+
+		if (selectedFoodIds.includes(id)) {
+			this.setState({ selectedFoodIds: R.without([id], selectedFoodIds) });
+		} else {
+			this.setState({ selectedFoodIds: R.append(id, selectedFoodIds) });
+		}
 	}
 
 	renderFoodRow(foodRow) {
-		const { selectedFoodIds } = this.props;
+		const { selectedFoodIds } = this.state;
 		return (
 			<SetupFoodRow
 				onFoodSelected={this.onFoodSelected}
@@ -95,7 +109,7 @@ class SetupScreen extends React.Component {
 	}
 
 	renderGroupHeader(item) {
-		const { openGroupIds } = this.props;
+		const { openGroupIds } = this.state;
 		return (
 			<SetupFoodGroupHeader
 				id={item.payload.id}
@@ -148,8 +162,8 @@ class SetupScreen extends React.Component {
 	}
 
 	renderFoodGroups() {
-		const { groups, foods, openGroupIds } = this.props;
-		const { currentSearch } = this.state;
+		const { groups, foods } = this.props;
+		const { currentSearch, openGroupIds } = this.state;
 
 		if (currentSearch != '') {
 			return this.renderSearch(currentSearch);
@@ -179,6 +193,7 @@ class SetupScreen extends React.Component {
 			<View style={styles.container}>
 				{this.renderFoodGroups()}
 				<SearchBar onChangeText={this.onSearchChange} />
+				<AcceptButton onPress={this.onAcceptPress} />
 			</View>
 		);
 	}
@@ -188,8 +203,6 @@ function mapStateToProps(state) {
 	return {
 		groups: state.setup.groups,
 		foods: state.setup.foods,
-		selectedFoodIds: state.setup.selectedFoodIds,
-		openGroupIds: state.setup.selectedGroupIds,
 	};
 }
 

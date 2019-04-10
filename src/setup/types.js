@@ -1,2 +1,2 @@
-export const SETUP_SELECT_FOOD = 'Select food';
-export const SETUP_SELECT_GROUP = 'Select group';
+// eslint-disable-next-line import/prefer-default-export
+export const STORE_FORBIDDEN_FOOD = 'Store forbidden food';

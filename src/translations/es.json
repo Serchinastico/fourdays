@@ -7,6 +7,9 @@
 				"title": "¡Lo sentimos!",
 				"description": "No hemos podido encontrar ningún alimento con ese nombre"
 			}
+		},
+		"accept": {
+			"text": "Aceptar"
 		}
 	},
 	"food": {

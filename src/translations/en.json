@@ -7,6 +7,9 @@
 				"title": "We are sorry!",
 				"description": "We couldn't find any food with that name"
 			}
+		},
+		"accept": {
+			"text": "Accept"
 		}
 	},
 	"food": {

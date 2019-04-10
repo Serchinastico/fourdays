@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { concat, without } from 'lodash';
-import { SETUP_SELECT_FOOD, SETUP_SELECT_GROUP } from './types';
+import { STORE_FORBIDDEN_FOOD } from './types';
 
 const initialSetupState = {
 	groups: [
@@ -580,44 +580,17 @@ const initialSetupState = {
 			groupId: 'Group 1',
 		},
 	],
-	selectedFoodIds: [],
-	selectedGroupIds: [],
+	forbiddenFoodIds: [],
 };
 
-const onSelectFood = (state, action) => {
-	if (state.selectedFoodIds.includes(action.payload)) {
-		return {
-			...state,
-			selectedFoodIds: without(state.selectedFoodIds, action.payload),
-		};
-	} else {
-		return {
-			...state,
-			selectedFoodIds: concat(state.selectedFoodIds, action.payload),
-		};
-	}
-};
-
-const onSelectGroup = (state, action) => {
-	if (state.selectedGroupIds.includes(action.payload)) {
-		return {
-			...state,
-			selectedGroupIds: without(state.selectedGroupIds, action.payload),
-		};
-	} else {
-		return {
-			...state,
-			selectedGroupIds: concat(state.selectedGroupIds, action.payload),
-		};
-	}
+const onStoreForbiddenFood = (state, action) => {
+	return { ...state, forbiddenFoodIds: action.payload };
 };
 
 const setupReducer = (state = initialSetupState, action) => {
 	switch (action.type) {
-		case SETUP_SELECT_FOOD:
-			return onSelectFood(state, action);
-		case SETUP_SELECT_GROUP:
-			return onSelectGroup(state, action);
+		case STORE_FORBIDDEN_FOOD:
+			return onStoreForbiddenFood(state, action);
 		default:
 			return state;
 	}
