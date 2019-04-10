@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { concat, without } from 'lodash';
-import { STORE_FORBIDDEN_FOOD } from './types';
+import { STORE_FORBIDDEN_FOOD_FINISHED } from './types';
 
 const initialSetupState = {
 	groups: [
@@ -583,14 +582,14 @@ const initialSetupState = {
 	forbiddenFoodIds: [],
 };
 
-const onStoreForbiddenFood = (state, action) => {
+const onStoreForbiddenFoodFinished = (state, action) => {
 	return { ...state, forbiddenFoodIds: action.payload };
 };
 
 const setupReducer = (state = initialSetupState, action) => {
 	switch (action.type) {
-		case STORE_FORBIDDEN_FOOD:
-			return onStoreForbiddenFood(state, action);
+		case STORE_FORBIDDEN_FOOD_FINISHED:
+			return onStoreForbiddenFoodFinished(state, action);
 		default:
 			return state;
 	}

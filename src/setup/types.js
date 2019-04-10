@@ -1,2 +1,3 @@
-// eslint-disable-next-line import/prefer-default-export
-export const STORE_FORBIDDEN_FOOD = 'Store forbidden food';
+export const STORE_FORBIDDEN_FOOD_START = 'Store forbidden food start';
+export const STORE_FORBIDDEN_FOOD_FINISHED = 'Store forbidden food finished';
+export const STORE_FORBIDDEN_FOOD_ERROR = 'Store forbidden food error';
