@@ -1,4 +1,4 @@
-import I18n from 'ex-react-native-i18n';
+import I18n from 'react-native-i18n';
 
 import en from './en.json';
 import es from './es.json';
