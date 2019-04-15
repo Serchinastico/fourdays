@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
 	container: {
 		height: 48,
 		flexDirection: "row",
-		top: 120,
 		backgroundColor: color.white,
 		alignItems: "stretch"
 	},
@@ -98,8 +97,9 @@ class DaySelector extends React.PureComponent {
 	}
 
 	render() {
+		const { style } = this.props;
 		return (
-			<View style={styles.container}>
+			<View style={[styles.container, style]}>
 				<TouchableHighlight
 					underlayColor={color.black05}
 					style={styles.previousNextIconContainer}

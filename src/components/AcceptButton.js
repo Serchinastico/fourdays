@@ -10,12 +10,7 @@ const styles = StyleSheet.create({
 		backgroundColor: color.darkMint,
 		justifyContent: "center",
 		marginHorizontal: 32,
-		elevation: 2,
-		position: "absolute",
-		bottom: 0,
-		left: 0,
-		right: 0,
-		marginBottom: 16
+		elevation: 2
 	},
 	text: {
 		...style.largeMediumNeutral,
@@ -27,11 +22,11 @@ const styles = StyleSheet.create({
 
 class AcceptButton extends React.PureComponent {
 	render() {
-		const { onPress } = this.props;
+		const { onPress, style } = this.props;
 		return (
 			<TouchableHighlight
 				underlayColor={color.seafoamGreen}
-				style={styles.container}
+				style={[styles.container, style]}
 				onPress={() => onPress()}
 			>
 				<Text style={styles.text}>{I18n.t("common.accept.text")}</Text>

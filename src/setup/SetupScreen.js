@@ -17,12 +17,25 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: color.white
 	},
+	header: {
+		position: "absolute",
+		top: 0,
+		left: 0,
+		right: 0,
+		padding: 16
+	},
+	footer: {
+		position: "absolute",
+		bottom: 16,
+		left: 0,
+		right: 0
+	},
 	emptyCaseContainer: {
+		height: "100%",
 		flex: 1,
 		flexDirection: "column",
 		justifyContent: "center",
-		alignItems: "center",
-		paddingBottom: 200
+		alignItems: "center"
 	},
 	emptyCaseText: {
 		...style.largeMediumNeutral,
@@ -204,8 +217,12 @@ class SetupScreen extends React.Component {
 		return (
 			<View style={styles.container}>
 				{this.renderFoodGroups()}
-				<SearchBar onChangeText={this.onSearchChange} />
-				<AcceptButton onPress={this.onAcceptPress} />
+				<View style={styles.header}>
+					<SearchBar onChangeText={this.onSearchChange} />
+				</View>
+				<View style={styles.footer}>
+					<AcceptButton onPress={this.onAcceptPress} />
+				</View>
 			</View>
 		);
 	}
