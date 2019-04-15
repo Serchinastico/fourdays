@@ -1,11 +1,26 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
+import SearchBar from '../components/SearchBar';
+import DaySelector from './components/DaySelector';
+import { color } from '../components/style/style';
 
-// eslint-disable-next-line react/prefer-stateless-function
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		backgroundColor: color.white,
+		flexDirection: 'column',
+	},
+	daySelector: {},
+});
 class DailyTrackerScreen extends React.Component {
 	render() {
-		return <View style={{ flex: 1, backgroundColor: '#0F2' }} />;
+		return (
+			<View style={styles.container}>
+				<SearchBar />
+				<DaySelector style={styles.daySelector} />
+			</View>
+		);
 	}
 }
 
