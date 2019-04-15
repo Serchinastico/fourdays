@@ -15,10 +15,15 @@ const styles = StyleSheet.create({
 });
 class DailyTrackerScreen extends React.Component {
 	render() {
+		const { navigation } = this.props;
 		return (
 			<View style={styles.container}>
 				<SearchBar />
-				<DaySelector style={styles.daySelector} />
+				<DaySelector
+					style={styles.daySelector}
+					onDayChanged={() => {}}
+					navigation={navigation}
+				/>
 			</View>
 		);
 	}
