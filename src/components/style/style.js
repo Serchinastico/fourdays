@@ -4,10 +4,11 @@ const textSizeM = 12;
 const textSizeL = 16;
 
 export const color = {
+	transparent: "transparent",
 	white: "#FFFFFF",
 	black: "#383838",
-	black05: "#0C383838",
-	black70: "#B3000000",
+	black05: "#3838380C",
+	black70: "#000000B3",
 	brownGray: "#A1A1A1",
 	darkMint: "#52BD76",
 	darkMint50: "#52BD7680",

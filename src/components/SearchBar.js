@@ -1,21 +1,11 @@
 import React from "react";
 import { Image, TextInput, StyleSheet, View } from "react-native";
 import I18n from "../translations/i18n";
+import { color } from "./style/style";
 
 const styles = StyleSheet.create({
-	container: {
-		marginTop: 20,
-		padding: 16,
-		position: "absolute",
-		top: 0,
-		left: 0,
-		elevation: 2,
-		flex: 1,
-		width: "100%",
-		flexDirection: "column",
-		backgroundColor: "transparent"
-	},
 	shadowContainer: {
+		elevation: 2,
 		flexDirection: "row",
 		alignItems: "center",
 		borderRadius: 8,
@@ -25,7 +15,7 @@ const styles = StyleSheet.create({
 		shadowColor: "#000",
 		shadowOpacity: 0.1,
 		shadowOffset: { width: 0, height: 1 },
-		backgroundColor: "#FFF",
+		backgroundColor: color.white,
 		height: 48
 	},
 	icon: {
@@ -41,9 +31,9 @@ const styles = StyleSheet.create({
 
 class SearchBar extends React.PureComponent {
 	render() {
-		const { onChangeText } = this.props;
+		const { onChangeText, style } = this.props;
 		return (
-			<View style={styles.container}>
+			<View style={style}>
 				<View style={styles.shadowContainer}>
 					<Image
 						style={styles.icon}
