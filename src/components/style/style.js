@@ -6,6 +6,7 @@ const textSizeL = 16;
 export const color = {
 	white: '#FFFFFF',
 	black: '#383838',
+	black05: '#0C383838',
 	brownGray: '#A1A1A1',
 	darkMint: '#52BD76',
 	darkMint50: '#52BD7680',
