@@ -1,41 +1,47 @@
-import moment from 'moment';
-import React from 'react';
-import { Text, Image, StyleSheet, View, TouchableHighlight } from 'react-native';
-import { color, style } from '../../components/style/style';
+import moment from "moment";
+import React from "react";
+import {
+	Text,
+	Image,
+	StyleSheet,
+	View,
+	TouchableHighlight
+} from "react-native";
+import { color, style } from "../../components/style/style";
 
 const styles = StyleSheet.create({
 	container: {
 		height: 48,
-		flexDirection: 'row',
+		flexDirection: "row",
 		top: 120,
 		backgroundColor: color.white,
-		alignItems: 'stretch',
+		alignItems: "stretch"
 	},
 	previousNextIconContainer: {
 		width: 48,
-		justifyContent: 'center',
-		alignItems: 'center',
+		justifyContent: "center",
+		alignItems: "center"
 	},
 	previousNextIcon: {},
 	currentDayContainer: {
 		flex: 2,
-		flexDirection: 'row',
-		justifyContent: 'center',
-		alignItems: 'center',
+		flexDirection: "row",
+		justifyContent: "center",
+		alignItems: "center"
 	},
 	currentDayIcon: {
-		marginTop: 1,
+		marginTop: 1
 	},
 	currentDayText: {
 		...style.largeRegularNeutral,
 		color: color.black,
 		marginLeft: 8,
-		textAlign: 'center',
-	},
+		textAlign: "center"
+	}
 });
 
-const dayFormatForDisplayInThisYear = 'ddd D MMM';
-const dayFormatForDisplayInOtherYear = 'ddd D MMM YYYY';
+const dayFormatForDisplayInThisYear = "ddd D MMM";
+const dayFormatForDisplayInOtherYear = "ddd D MMM YYYY";
 
 class DaySelector extends React.PureComponent {
 	constructor(props) {
@@ -47,13 +53,13 @@ class DaySelector extends React.PureComponent {
 
 	onPreviousDayPressed() {
 		const { selectedDay } = this.state;
-		const previousDay = moment(selectedDay).subtract(1, 'day');
+		const previousDay = moment(selectedDay).subtract(1, "day");
 		this.setState({ selectedDay: previousDay });
 	}
 
 	onNextDayPressed() {
 		const { selectedDay } = this.state;
-		const previousDay = moment(selectedDay).add(1, 'day');
+		const previousDay = moment(selectedDay).add(1, "day");
 		this.setState({ selectedDay: previousDay });
 	}
 
@@ -86,11 +92,14 @@ class DaySelector extends React.PureComponent {
 				>
 					<Image
 						style={styles.previousNextIcon}
-						source={require('../../images/icon/ChevronLeft.png')}
+						source={require("../../images/icon/ChevronLeft.png")}
 					/>
 				</TouchableHighlight>
 				<View style={styles.currentDayContainer}>
-					<Image style={styles.currentDayIcon} source={require('../../images/icon/Calendar.png')} />
+					<Image
+						style={styles.currentDayIcon}
+						source={require("../../images/icon/Calendar.png")}
+					/>
 					{this.renderSelectedDay()}
 				</View>
 				<TouchableHighlight
@@ -100,7 +109,7 @@ class DaySelector extends React.PureComponent {
 				>
 					<Image
 						style={styles.previousNextIcon}
-						source={require('../../images/icon/ChevronRight.png')}
+						source={require("../../images/icon/ChevronRight.png")}
 					/>
 				</TouchableHighlight>
 			</View>

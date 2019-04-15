@@ -1,16 +1,16 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import * as R from 'ramda';
-import FoodItem from '../../common/FoodItem';
-import I18n from '../../translations/i18n';
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import * as R from "ramda";
+import FoodItem from "../../common/FoodItem";
+import I18n from "../../translations/i18n";
 
 const styles = StyleSheet.create({
 	itemsContainer: {
-		flexDirection: 'row',
-		justifyContent: 'space-between',
+		flexDirection: "row",
+		justifyContent: "space-between",
 		marginLeft: 16,
-		marginRight: 16,
-	},
+		marginRight: 16
+	}
 });
 
 class SetupFoodRow extends React.PureComponent {
@@ -23,7 +23,7 @@ class SetupFoodRow extends React.PureComponent {
 		const numberOfItemsToAdd = R.max(0, 3 - foodItems.length);
 
 		const padding = R.range(0, numberOfItemsToAdd).map(i => (
-			<View style={{ width: '30%' }} key={`${foodItems}-${i}`} />
+			<View style={{ width: "30%" }} key={`${foodItems}-${i}`} />
 		));
 
 		return R.concat(foodItems, padding);
@@ -50,7 +50,9 @@ class SetupFoodRow extends React.PureComponent {
 		const { items } = this.props;
 
 		const foodItems = R.map(this.renderFood, items);
-		const foodItemsPadded = this.fillWithEmptyViewsToRenderWithEqualSpacing(foodItems);
+		const foodItemsPadded = this.fillWithEmptyViewsToRenderWithEqualSpacing(
+			foodItems
+		);
 		const rowKey = items[0].id;
 
 		return (

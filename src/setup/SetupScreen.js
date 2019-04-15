@@ -1,42 +1,42 @@
-import React from 'react';
-import { FlatList, Image, Text, StyleSheet, View } from 'react-native';
-import { connect } from 'react-redux';
-import * as R from 'ramda';
-import Fuse from 'fuse.js';
-import SearchBar from '../components/SearchBar';
-import AcceptButton from '../components/AcceptButton';
-import SetupDescription from './components/SetupDescription';
-import { storeForbiddenFood } from './actions';
-import I18n from '../translations/i18n';
-import SetupFoodGroupHeader from './components/SetupFoodGroupHeader';
-import SetupFoodRow from './components/SetupFoodRow';
-import { style, color } from '../components/style/style';
+import React from "react";
+import { FlatList, Image, Text, StyleSheet, View } from "react-native";
+import { connect } from "react-redux";
+import * as R from "ramda";
+import Fuse from "fuse.js";
+import SearchBar from "../components/SearchBar";
+import AcceptButton from "../components/AcceptButton";
+import SetupDescription from "./components/SetupDescription";
+import storeForbiddenFood from "./actions";
+import I18n from "../translations/i18n";
+import SetupFoodGroupHeader from "./components/SetupFoodGroupHeader";
+import SetupFoodRow from "./components/SetupFoodRow";
+import { style, color } from "../components/style/style";
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: color.white,
+		backgroundColor: color.white
 	},
 	emptyCaseContainer: {
 		flex: 1,
-		flexDirection: 'column',
-		justifyContent: 'center',
-		alignItems: 'center',
-		paddingBottom: 200,
+		flexDirection: "column",
+		justifyContent: "center",
+		alignItems: "center",
+		paddingBottom: 200
 	},
 	emptyCaseText: {
 		...style.largeMediumNeutral,
-		textAlign: 'center',
+		textAlign: "center",
 		color: color.brownGray,
 		marginTop: 8,
 		marginLeft: 48,
-		marginRight: 48,
+		marginRight: 48
 	},
 	itemsContainer: {
 		padding: 16,
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-	},
+		flexDirection: "row",
+		justifyContent: "space-between"
+	}
 });
 
 class SetupScreen extends React.Component {
@@ -48,14 +48,14 @@ class SetupScreen extends React.Component {
 		this.onFoodSelected = this.onFoodSelected.bind(this);
 		this.onSearchChange = this.onSearchChange.bind(this);
 		this.onAcceptPress = this.onAcceptPress.bind(this);
-		this.state = { currentSearch: '', selectedFoodIds: [], openGroupIds: [] };
+		this.state = { currentSearch: "", selectedFoodIds: [], openGroupIds: [] };
 	}
 
 	onAcceptPress() {
 		const { storeForbiddenFood, navigation } = this.props;
 		const { selectedFoodIds } = this.state;
 		storeForbiddenFood(selectedFoodIds);
-		navigation.navigate('DailyTracker');
+		navigation.navigate("DailyTracker");
 	}
 
 	onSearchChange(text) {
@@ -94,13 +94,13 @@ class SetupScreen extends React.Component {
 	}
 
 	renderFoodGroup({ item }) {
-		if (item.type === 'header') {
+		if (item.type === "header") {
 			return this.renderDescription();
-		} else if (item.type === 'group') {
+		} else if (item.type === "group") {
 			return this.renderGroupHeader(item);
-		} else if (item.type === 'row') {
+		} else if (item.type === "row") {
 			return this.renderFoodRow(item.payload);
-		} else if (item.type === 'padding') {
+		} else if (item.type === "padding") {
 			return <View style={{ height: item.payload.height }} />;
 		}
 	}
@@ -129,9 +129,13 @@ class SetupScreen extends React.Component {
 	renderEmptySearch() {
 		return (
 			<View style={styles.emptyCaseContainer}>
-				<Image source={require('../images/icon/Empty.png')} />
-				<Text style={styles.emptyCaseText}>{I18n.t('common.search.emptyCase.title')}</Text>
-				<Text style={styles.emptyCaseText}>{I18n.t('common.search.emptyCase.description')}</Text>
+				<Image source={require("../images/icon/Empty.png")} />
+				<Text style={styles.emptyCaseText}>
+					{I18n.t("common.search.emptyCase.title")}
+				</Text>
+				<Text style={styles.emptyCaseText}>
+					{I18n.t("common.search.emptyCase.description")}
+				</Text>
 			</View>
 		);
 	}
@@ -143,9 +147,9 @@ class SetupScreen extends React.Component {
 		}, foods);
 
 		var options = {
-			keys: ['name'],
+			keys: ["name"],
 			threshold: 0.3,
-			distance: 100,
+			distance: 100
 		};
 		const fuse = new Fuse(foodWithNames, options);
 		const matchingFoodItems = fuse.search(currentSearch);
@@ -155,12 +159,15 @@ class SetupScreen extends React.Component {
 		}
 
 		const items = R.splitEvery(3, matchingFoodItems).map(row => {
-			return { type: 'row', key: row[0].id, payload: row };
+			return { type: "row", key: row[0].id, payload: row };
 		});
 
 		return (
 			<FlatList
-				data={[{ type: 'padding', key: 'padding', payload: { height: 98 } }, ...items]}
+				data={[
+					{ type: "padding", key: "padding", payload: { height: 98 } },
+					...items
+				]}
 				renderItem={this.renderFoodGroup}
 			/>
 		);
@@ -170,7 +177,7 @@ class SetupScreen extends React.Component {
 		const { groups, foods } = this.props;
 		const { currentSearch, openGroupIds } = this.state;
 
-		if (currentSearch != '') {
+		if (currentSearch != "") {
 			return this.renderSearch(currentSearch);
 		}
 
@@ -180,14 +187,14 @@ class SetupScreen extends React.Component {
 				groupFoods = R.filter(food => food.groupId === group.id, foods);
 			}
 			const rows = R.splitEvery(3, groupFoods).map(row => {
-				return { type: 'row', key: row[0].id, payload: row };
+				return { type: "row", key: row[0].id, payload: row };
 			});
-			return [{ type: 'group', key: group.id, payload: group }, ...rows];
+			return [{ type: "group", key: group.id, payload: group }, ...rows];
 		}, groups);
 
 		return (
 			<FlatList
-				data={[{ type: 'header', key: 'header' }, ...R.flatten(content)]}
+				data={[{ type: "header", key: "header" }, ...R.flatten(content)]}
 				renderItem={this.renderFoodGroup}
 			/>
 		);
@@ -207,7 +214,7 @@ class SetupScreen extends React.Component {
 function mapStateToProps(state) {
 	return {
 		groups: state.setup.groups,
-		foods: state.setup.foods,
+		foods: state.setup.foods
 	};
 }
 
