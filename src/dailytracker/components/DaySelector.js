@@ -24,10 +24,9 @@ const styles = StyleSheet.create({
 	},
 	previousNextIcon: {},
 	currentDayContainer: {
-		flex: 2,
 		flexDirection: "row",
-		justifyContent: "center",
-		alignItems: "center"
+		alignItems: "center",
+		justifyContent: "center"
 	},
 	currentDayIcon: {
 		marginTop: 1
@@ -48,6 +47,7 @@ class DaySelector extends React.PureComponent {
 		super(props);
 		this.onPreviousDayPressed = this.onPreviousDayPressed.bind(this);
 		this.onNextDayPressed = this.onNextDayPressed.bind(this);
+		this.onCurrentDayPressed = this.onCurrentDayPressed.bind(this);
 		this.state = { selectedDay: moment() };
 	}
 
@@ -61,6 +61,11 @@ class DaySelector extends React.PureComponent {
 		this.updateSelectedDay(selectedDay => {
 			return selectedDay.add(1, "day");
 		});
+	}
+
+	onCurrentDayPressed() {
+		const { navigation } = this.props;
+		navigation.navigate("Calendar");
 	}
 
 	updateSelectedDay(updateBlock) {
@@ -105,13 +110,19 @@ class DaySelector extends React.PureComponent {
 						source={require("../../images/icon/ChevronLeft.png")}
 					/>
 				</TouchableHighlight>
-				<View style={styles.currentDayContainer}>
-					<Image
-						style={styles.currentDayIcon}
-						source={require("../../images/icon/Calendar.png")}
-					/>
-					{this.renderSelectedDay()}
-				</View>
+				<TouchableHighlight
+					style={{ flex: 2, alignItems: "center", justifyContent: "center" }}
+					underlayColor={color.black05}
+					onPress={() => this.onCurrentDayPressed()}
+				>
+					<View style={styles.currentDayContainer}>
+						<Image
+							style={styles.currentDayIcon}
+							source={require("../../images/icon/Calendar.png")}
+						/>
+						{this.renderSelectedDay()}
+					</View>
+				</TouchableHighlight>
 				<TouchableHighlight
 					underlayColor={color.black05}
 					style={styles.previousNextIconContainer}
