@@ -1,8 +1,8 @@
-import { SELECT_DAY_IN_CALENDAR } from "./types";
+import { SELECT_DAY } from "./types";
 
-export default function selectDayInCalendar(day) {
+export default function selectDay(day) {
 	return {
-		type: SELECT_DAY_IN_CALENDAR,
+		type: SELECT_DAY,
 		payload: day
 	};
 }

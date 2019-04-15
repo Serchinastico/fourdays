@@ -4,7 +4,7 @@ import { TouchableHighlight, Text, View, StyleSheet } from "react-native";
 import { Calendar } from "react-native-calendars";
 import { connect } from "react-redux";
 import { color } from "../../components/style/style";
-import selectDayInCalendar from "../actions";
+import selectDay from "../actions";
 
 const styles = StyleSheet.create({
 	background: {
@@ -34,7 +34,8 @@ const dayFormatForCalendarComponent = "YYYY-MM-DD";
 class CalendarScreen extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { selectedDay: moment() };
+		const { selectedDay } = this.props;
+		this.state = { selectedDay };
 		this.onDaySelected = this.onDaySelected.bind(this);
 		this.onCancelSelected = this.onCancelSelected.bind(this);
 		this.onAcceptSelected = this.onAcceptSelected.bind(this);
@@ -46,9 +47,10 @@ class CalendarScreen extends React.Component {
 	}
 
 	onAcceptSelected() {
-		const { selectDayInCalendar } = this.props;
+		const { selectDay, navigation } = this.props;
 		const { selectedDay } = this.state;
-		selectDayInCalendar(selectedDay);
+		selectDay(selectedDay);
+		navigation.goBack();
 	}
 
 	onDaySelected(calendarDay) {
@@ -89,7 +91,13 @@ class CalendarScreen extends React.Component {
 	}
 }
 
+function mapStateToProps(state) {
+	return {
+		selectedDay: state.dailyTracker.selectedDay
+	};
+}
+
 export default connect(
-	null,
-	{ selectDayInCalendar }
+	mapStateToProps,
+	{ selectDay }
 )(CalendarScreen);

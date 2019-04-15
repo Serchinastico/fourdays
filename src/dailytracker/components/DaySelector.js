@@ -7,7 +7,9 @@ import {
 	View,
 	TouchableHighlight
 } from "react-native";
+import { connect } from "react-redux";
 import { color, style } from "../../components/style/style";
+import selectDay from "../actions";
 
 const styles = StyleSheet.create({
 	container: {
@@ -48,7 +50,6 @@ class DaySelector extends React.PureComponent {
 		this.onPreviousDayPressed = this.onPreviousDayPressed.bind(this);
 		this.onNextDayPressed = this.onNextDayPressed.bind(this);
 		this.onCurrentDayPressed = this.onCurrentDayPressed.bind(this);
-		this.state = { selectedDay: moment() };
 	}
 
 	onPreviousDayPressed() {
@@ -69,17 +70,16 @@ class DaySelector extends React.PureComponent {
 	}
 
 	updateSelectedDay(updateBlock) {
-		const { selectedDay } = this.state;
-		const { onDayChanged } = this.props;
+		const { onDayChanged, selectedDay, selectDay } = this.props;
 
 		const updatedDay = updateBlock(moment(selectedDay));
-		this.setState({ selectedDay: updatedDay });
+		selectDay(updatedDay);
 
 		onDayChanged(updatedDay);
 	}
 
 	renderSelectedDay() {
-		const { selectedDay } = this.state;
+		const { selectedDay } = this.props;
 		const today = moment();
 
 		if (selectedDay.year() === today.year()) {
@@ -138,4 +138,13 @@ class DaySelector extends React.PureComponent {
 	}
 }
 
-export default DaySelector;
+function mapStateToProps(state) {
+	return {
+		selectedDay: state.dailyTracker.selectedDay
+	};
+}
+
+export default connect(
+	mapStateToProps,
+	{ selectDay }
+)(DaySelector);
