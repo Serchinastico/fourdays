@@ -95,7 +95,7 @@ class SetupScreen extends React.Component {
 
 	renderFoodGroup({ item }) {
 		if (item.type === "header") {
-			return this.renderDescription();
+			return SetupScreen.renderDescription();
 		} else if (item.type === "group") {
 			return this.renderGroupHeader(item);
 		} else if (item.type === "row") {
@@ -105,7 +105,7 @@ class SetupScreen extends React.Component {
 		}
 	}
 
-	renderDescription() {
+	static renderDescription() {
 		return (
 			<View style={{ marginTop: 80 }}>
 				<SetupDescription />
@@ -146,7 +146,7 @@ class SetupScreen extends React.Component {
 			return { ...foodItem, name: I18n.t(foodItem.nameTranslationKey) };
 		}, foods);
 
-		var options = {
+		const options = {
 			keys: ["name"],
 			threshold: 0.3,
 			distance: 100
@@ -177,12 +177,12 @@ class SetupScreen extends React.Component {
 		const { groups, foods } = this.props;
 		const { currentSearch, openGroupIds } = this.state;
 
-		if (currentSearch != "") {
+		if (currentSearch !== "") {
 			return this.renderSearch(currentSearch);
 		}
 
 		const content = R.map(group => {
-			var groupFoods = [];
+			let groupFoods = [];
 			if (openGroupIds.includes(group.id)) {
 				groupFoods = R.filter(food => food.groupId === group.id, foods);
 			}
