@@ -52,15 +52,25 @@ class DaySelector extends React.PureComponent {
 	}
 
 	onPreviousDayPressed() {
-		const { selectedDay } = this.state;
-		const previousDay = moment(selectedDay).subtract(1, "day");
-		this.setState({ selectedDay: previousDay });
+		this.updateSelectedDay(selectedDay => {
+			return selectedDay.subtract(1, "day");
+		});
 	}
 
 	onNextDayPressed() {
+		this.updateSelectedDay(selectedDay => {
+			return selectedDay.add(1, "day");
+		});
+	}
+
+	updateSelectedDay(updateBlock) {
 		const { selectedDay } = this.state;
-		const previousDay = moment(selectedDay).add(1, "day");
-		this.setState({ selectedDay: previousDay });
+		const { onDayChanged } = this.props;
+
+		const updatedDay = updateBlock(moment(selectedDay));
+		this.setState({ selectedDay: updatedDay });
+
+		onDayChanged(updatedDay);
 	}
 
 	renderSelectedDay() {
