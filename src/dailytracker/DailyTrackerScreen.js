@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
 class DailyTrackerScreen extends React.Component {
 	constructor(props) {
 		super(props);
+		this.onFoodSelected = this.onFoodSelected.bind(this);
 		this.onPreviousDayPressed = this.onPreviousDayPressed.bind(this);
 		this.onNextDayPressed = this.onNextDayPressed.bind(this);
 		this.onSearchChange = this.onSearchChange.bind(this);
@@ -46,6 +47,8 @@ class DailyTrackerScreen extends React.Component {
 			currentSearch: ""
 		};
 	}
+
+	onFoodSelected() {}
 
 	onSearchChange(text) {
 		this.setState({ currentSearch: text });
@@ -116,6 +119,7 @@ class DailyTrackerScreen extends React.Component {
 			<FoodList
 				items={items}
 				searchExpression={currentSearch}
+				onFoodSelected={this.onFoodSelected}
 				paddingTopForEmptySearch={148}
 			/>
 		);
