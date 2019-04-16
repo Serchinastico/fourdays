@@ -6,6 +6,7 @@ import { color, style } from "./style/style";
 const styles = StyleSheet.create({
 	emptyCaseContainer: {
 		height: "100%",
+		marginTop: 20,
 		flex: 1,
 		flexDirection: "column",
 		justifyContent: "center",

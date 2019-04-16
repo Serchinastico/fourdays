@@ -105,7 +105,8 @@ class SetupScreen extends React.Component {
 		const items = [
 			FoodList.createDescriptionItem(
 				I18n.t("screen.setup.description.title"),
-				I18n.t("screen.setup.description.text")
+				I18n.t("screen.setup.description.text"),
+				80
 			),
 			...groupItems
 		];
@@ -115,6 +116,7 @@ class SetupScreen extends React.Component {
 				items={items}
 				searchExpression={currentSearch}
 				onFoodSelected={this.onFoodSelected}
+				paddingTopForEmptySearch={98}
 			/>
 		);
 	}
