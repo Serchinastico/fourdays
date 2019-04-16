@@ -3,19 +3,18 @@ import { View, FlatList } from "react-native";
 import * as R from "ramda";
 import SetupFoodGroupHeader from "../setup/components/SetupFoodGroupHeader";
 import SetupFoodRow from "../setup/components/SetupFoodRow";
-// import fuzzySearch from "../FuzzySearch";
+import fuzzySearch from "../FuzzySearch";
 import FoodListDescription from "./FoodListDescription";
 
 const PADDING_ITEM = "Padding";
 const GROUP_ITEM = "Group";
 const DESCRIPTION_ITEM = "Description";
-const FOOD_ITEM = "Food";
 const HEADER_ITEM = "Header";
 const FOOD_ROW_ITEM = "Row";
 
 class FoodList extends React.PureComponent {
 	static createPaddingItem(height) {
-		return { type: PADDING_ITEM, payload: height };
+		return { type: PADDING_ITEM, key: PADDING_ITEM, payload: height };
 	}
 
 	static createGroupItem(id, name, children) {
@@ -26,10 +25,7 @@ class FoodList extends React.PureComponent {
 	}
 
 	static createItem(id, name, thumbnailProvider, isSelected) {
-		return {
-			type: FOOD_ITEM,
-			payload: { id, name, isSelected, thumbnailProvider }
-		};
+		return { id, name, isSelected, thumbnailProvider };
 	}
 
 	static createDescriptionItem(title, description) {
@@ -77,11 +73,9 @@ class FoodList extends React.PureComponent {
 	mapFoodItemsIntoRows(foodItems) {
 		const { selectedFoodIds } = this.state;
 
-		const foodItemsWithSelection = R.map(item => item.payload, foodItems).map(
-			item => {
-				return { ...item, isSelected: selectedFoodIds.includes(item.id) };
-			}
-		);
+		const foodItemsWithSelection = R.map(item => {
+			return { ...item, isSelected: selectedFoodIds.includes(item.id) };
+		}, foodItems);
 
 		return R.splitEvery(3, foodItemsWithSelection).map(row => {
 			return {
@@ -92,21 +86,7 @@ class FoodList extends React.PureComponent {
 		});
 	}
 
-	mapGroupItemToFlatListItems(
-		payload,
-		searchExpression,
-		shouldIncludeChildren
-	) {
-		// if (searchExpression !== "") {
-		// 	const filteredItems = fuzzySearch(
-		// 		searchExpression,
-		// 		"name",
-		// 		payload.children
-		// 	);
-		//
-		// 	// TODO
-		// }
-
+	mapGroupItemToFlatListItems(payload, shouldIncludeChildren) {
 		const items = shouldIncludeChildren
 			? this.mapFoodItemsIntoRows(payload.children)
 			: [];
@@ -124,22 +104,31 @@ class FoodList extends React.PureComponent {
 		];
 	}
 
-	mapToFlatListItems(items, searchExpression) {
+	mapToFlatListItems(items) {
 		const { expandedGroupIds } = this.state;
 
 		return R.chain(item => {
 			switch (item.type) {
 				case DESCRIPTION_ITEM:
-				case PADDING_ITEM:
 					return [{ ...item, key: item.type }];
 				case GROUP_ITEM:
 					return this.mapGroupItemToFlatListItems(
 						item.payload,
-						searchExpression,
 						expandedGroupIds.includes(item.payload.id)
 					);
 			}
 		}, items);
+	}
+
+	mapToFlatListItemsWithSearchExpression(items, searchExpression) {
+		const allFoodItems = R.chain(item => {
+			return item.type === GROUP_ITEM ? item.payload.children : [];
+		}, items);
+		const filteredItems = fuzzySearch(searchExpression, "name", allFoodItems);
+		return [
+			FoodList.createPaddingItem(98),
+			...this.mapFoodItemsIntoRows(filteredItems)
+		];
 	}
 
 	static renderDescriptionItem(payload) {
@@ -174,7 +163,7 @@ class FoodList extends React.PureComponent {
 	renderItem({ item }) {
 		switch (item.type) {
 			case PADDING_ITEM:
-				return <View style={{ height: item.payload.height }} />;
+				return <View style={{ height: item.payload }} />;
 			case DESCRIPTION_ITEM:
 				return FoodList.renderDescriptionItem(item.payload);
 			case HEADER_ITEM:
@@ -187,12 +176,12 @@ class FoodList extends React.PureComponent {
 	render() {
 		const { items, searchExpression } = this.props;
 
-		return (
-			<FlatList
-				data={this.mapToFlatListItems(items, searchExpression)}
-				renderItem={this.renderItem}
-			/>
-		);
+		const flatListItems =
+			searchExpression === ""
+				? this.mapToFlatListItems(items)
+				: this.mapToFlatListItemsWithSearchExpression(items, searchExpression);
+
+		return <FlatList data={flatListItems} renderItem={this.renderItem} />;
 	}
 }
 

@@ -123,7 +123,6 @@ class SetupScreen extends React.Component {
 		}, groups);
 
 		const items = [
-			FoodList.createPaddingItem(98),
 			FoodList.createDescriptionItem(
 				I18n.t("screen.setup.description.title"),
 				I18n.t("screen.setup.description.text")
