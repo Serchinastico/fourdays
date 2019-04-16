@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
 });
 
 class FoodItem extends React.PureComponent {
-	renderThumbnail(thumbnailUrl, isSelected) {
+	static renderThumbnail(thumbnailUrl, isSelected) {
 		if (isSelected) {
 			return (
 				<View style={styles.thumbnailContainer}>
@@ -67,7 +67,7 @@ class FoodItem extends React.PureComponent {
 		}
 	}
 
-	renderName(name, isSelected) {
+	static renderName(name, isSelected) {
 		if (isSelected) {
 			return <Text style={styles.name}>{name}</Text>;
 		} else {
@@ -84,8 +84,8 @@ class FoodItem extends React.PureComponent {
 				onPress={() => onFoodSelected(id)}
 			>
 				<View>
-					{this.renderThumbnail(thumbnailUrl, isSelected)}
-					{this.renderName(name, isSelected)}
+					{FoodItem.renderThumbnail(thumbnailUrl, isSelected)}
+					{FoodItem.renderName(name, isSelected)}
 				</View>
 			</TouchableHighlight>
 		);

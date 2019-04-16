@@ -115,8 +115,10 @@
 	},
 	"screen": {
 		"setup": {
-			"descriptionTitle": "Configuration",
-			"descriptionSubtitle": "Here you can configure all allowed foods from your diet."
+			"description": {
+				"title": "Configuration",
+				"text": "Here you can configure all allowed foods from your diet."
+			}
 		}
 	}
 }
