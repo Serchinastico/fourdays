@@ -28,32 +28,45 @@ const dayFormatForCalendarComponent = "YYYY-MM-DD";
 class DaySelectorCalendar extends React.Component {
 	constructor(props) {
 		super(props);
-		const { initialDay } = this.props;
-		this.state = { selectedDay: initialDay };
 		this.onDayPress = this.onDayPress.bind(this);
 		this.onCancelSelected = this.onCancelSelected.bind(this);
 		this.onAcceptSelected = this.onAcceptSelected.bind(this);
+		this.state = { inCalendarSelectedDay: null };
 	}
 
 	onCancelSelected() {
 		const { onCancel } = this.props;
 		onCancel();
+		this.setState({ inCalendarSelectedDay: null });
 	}
 
 	onAcceptSelected() {
 		const { onAccept } = this.props;
-		const { selectedDay } = this.state;
-		onAccept(selectedDay);
+		const { inCalendarSelectedDay } = this.state;
+		onAccept(inCalendarSelectedDay);
+		this.setState({ inCalendarSelectedDay: null });
+	}
+
+	static getMomentBySubtractingOneMonthBecauseItsInDateFormat(calendarDay) {
+		return moment({
+			y: calendarDay.year,
+			M: calendarDay.month - 1,
+			d: calendarDay.day
+		});
 	}
 
 	onDayPress(calendarDay) {
-		const selectedDay = moment(calendarDay).subtract(1, "month");
-		this.setState({ selectedDay });
+		const selectedDay = DaySelectorCalendar.getMomentBySubtractingOneMonthBecauseItsInDateFormat(
+			calendarDay
+		);
+		this.setState({ inCalendarSelectedDay: selectedDay });
 	}
 
 	render() {
-		const { selectedDay } = this.state;
-		const calendarDay = selectedDay.format(dayFormatForCalendarComponent);
+		const { inCalendarSelectedDay } = this.state;
+		const { selectedDay } = this.props;
+		const markedDate = inCalendarSelectedDay || selectedDay;
+		const calendarDay = markedDate.format(dayFormatForCalendarComponent);
 
 		return (
 			<View style={styles.container}>
