@@ -42,36 +42,52 @@ class FoodList extends React.PureComponent {
 		};
 	}
 
+	static addOrRemoveIdToListOfIds(id, list) {
+		if (list.includes(id)) {
+			return R.without([id], list);
+		} else {
+			return R.append(id, list);
+		}
+	}
+
 	constructor(props) {
 		super(props);
 		this.renderItem = this.renderItem.bind(this);
 		this.onGroupSelected = this.onGroupSelected.bind(this);
 		this.onFoodSelected = this.onFoodSelected.bind(this);
-		this.state = { expandedGroupIds: [] };
+		this.state = { expandedGroupIds: [], selectedFoodIds: [] };
 	}
 
 	onGroupSelected(id) {
 		const { expandedGroupIds } = this.state;
 
-		if (expandedGroupIds.includes(id)) {
-			this.setState({ expandedGroupIds: R.without([id], expandedGroupIds) });
-		} else {
-			this.setState({ expandedGroupIds: R.append(id, expandedGroupIds) });
-		}
+		this.setState({
+			expandedGroupIds: FoodList.addOrRemoveIdToListOfIds(id, expandedGroupIds)
+		});
 	}
+
 	onFoodSelected(id) {
 		const { selectedFoodIds } = this.state;
 
-		if (selectedFoodIds.includes(id)) {
-			this.setState({ selectedFoodIds: R.without([id], selectedFoodIds) });
-		} else {
-			this.setState({ selectedFoodIds: R.append(id, selectedFoodIds) });
-		}
+		this.setState({
+			selectedFoodIds: FoodList.addOrRemoveIdToListOfIds(id, selectedFoodIds)
+		});
 	}
 
 	mapFoodItemsIntoRows(foodItems) {
-		return R.splitEvery(3, foodItems).map(row => {
-			return { type: FOOD_ROW_ITEM, key: row[0].id, payload: row };
+		const { selectedFoodIds } = this.state;
+
+		const foodItemsWithSelection = R.map(item => item.payload, foodItems).map(
+			item => {
+				return { ...item, isSelected: selectedFoodIds.includes(item.id) };
+			}
+		);
+
+		return R.splitEvery(3, foodItemsWithSelection).map(row => {
+			return {
+				type: FOOD_ROW_ITEM,
+				payload: row
+			};
 		});
 	}
 
@@ -109,6 +125,7 @@ class FoodList extends React.PureComponent {
 
 	mapToFlatListItems(items, searchExpression) {
 		const { expandedGroupIds } = this.state;
+
 		return R.chain(item => {
 			switch (item.type) {
 				case DESCRIPTION_ITEM:
@@ -124,9 +141,9 @@ class FoodList extends React.PureComponent {
 		}, items);
 	}
 
-	renderDescriptionItem(payload) {
+	static renderDescriptionItem(payload) {
 		return (
-			<View style={{ marginTop: 80 }}>
+			<View key={DESCRIPTION_ITEM} style={{ marginTop: 80 }}>
 				<FoodListDescription
 					title={payload.title}
 					description={payload.description}
@@ -148,22 +165,29 @@ class FoodList extends React.PureComponent {
 		);
 	}
 
+	renderFoodRowItem(payload) {
+		return (
+			<SetupFoodRow
+				key={payload[0].id}
+				onFoodSelected={this.onFoodSelected}
+				items={payload}
+			/>
+		);
+	}
+
 	renderItem({ item }) {
 		switch (item.type) {
 			case PADDING_ITEM:
-				return <View style={{ height: item.payload.height }} />;
+				return (
+					<View key={PADDING_ITEM} style={{ height: item.payload.height }} />
+				);
 			case DESCRIPTION_ITEM:
-				return this.renderDescriptionItem(item.payload);
+				return FoodList.renderDescriptionItem(item.payload);
 			case HEADER_ITEM:
 				return this.renderHeaderItem(item.payload);
 			case FOOD_ROW_ITEM:
 				return this.renderFoodRowItem(item.payload);
 		}
-	}
-
-	renderFoodRowItem(payload) {
-		const items = R.map(item => item.payload, payload);
-		return <SetupFoodRow onFoodSelected={this.onFoodSelected} items={items} />;
 	}
 
 	render() {
