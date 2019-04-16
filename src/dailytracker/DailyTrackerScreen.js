@@ -74,7 +74,7 @@ class DailyTrackerScreen extends React.Component {
 				onTouchOutside={this.hideCalendar}
 			>
 				<DaySelectorCalendar
-					initialDay={selectedDay}
+					selectedDay={selectedDay}
 					onAccept={day => {
 						this.setState({ isShowingCalendar: false, selectedDay: day });
 					}}
