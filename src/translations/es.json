@@ -39,6 +39,12 @@
 				"title": "Configuración",
 				"text": "Desde esta pantalla puedes configurar la comida que tienes permitido comer de tu dieta."
 			}
+		},
+		"dailyTracker": {
+			"description": {
+				"title": "Seguimiento diario",
+				"text": "Desde aquí puedes mantener un registro de lo que comes y lo que puedes comer."
+			}
 		}
 	}
 }

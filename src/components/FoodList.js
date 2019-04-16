@@ -25,8 +25,8 @@ class FoodList extends React.PureComponent {
 		};
 	}
 
-	static createItem(id, name, thumbnailProvider, isSelected) {
-		return { id, name, isSelected, thumbnailProvider };
+	static createItem(id, name, thumbnailProvider) {
+		return { id, name, thumbnailProvider };
 	}
 
 	static createDescriptionItem(title, description) {
@@ -65,10 +65,14 @@ class FoodList extends React.PureComponent {
 
 	onFoodSelected(id) {
 		const { selectedFoodIds } = this.state;
+		const { onFoodSelected } = this.props;
 
-		this.setState({
-			selectedFoodIds: FoodList.addOrRemoveIdToListOfIds(id, selectedFoodIds)
-		});
+		const updatedFoodIds = FoodList.addOrRemoveIdToListOfIds(
+			id,
+			selectedFoodIds
+		);
+		this.setState({ selectedFoodIds: updatedFoodIds });
+		onFoodSelected(updatedFoodIds);
 	}
 
 	mapFoodItemsIntoRows(foodItems) {

@@ -119,6 +119,12 @@
 				"title": "Configuration",
 				"text": "Here you can configure all allowed foods from your diet."
 			}
+		},
+		"dailyTracker": {
+			"description": {
+				"title": "Daily tracking",
+				"text": "Here you can configure the food you ate and the food you can eat."
+			}
 		}
 	}
 }

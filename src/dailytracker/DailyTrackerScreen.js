@@ -1,9 +1,12 @@
 import moment from "moment";
+import * as R from "ramda";
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Dialog } from "react-native-popup-dialog/src";
 import { connect } from "react-redux";
+import FoodList from "../components/FoodList";
 import SearchBar from "../components/SearchBar";
+import I18n from "../translations/i18n";
 import DaySelector from "./components/DaySelector";
 import { color } from "../components/style/style";
 import DaySelectorCalendar from "./components/DaySelectorCalendar";
@@ -36,7 +39,15 @@ class DailyTrackerScreen extends React.Component {
 		this.onNextDayPressed = this.onNextDayPressed.bind(this);
 		this.showCalendar = this.showCalendar.bind(this);
 		this.hideCalendar = this.hideCalendar.bind(this);
-		this.state = { isShowingCalendar: false, selectedDay: moment() };
+		this.state = {
+			isShowingCalendar: false,
+			selectedDay: moment(),
+			currentSearch: ""
+		};
+	}
+
+	onSearchChange(text) {
+		this.setState({ currentSearch: text });
 	}
 
 	onPreviousDayPressed() {
@@ -65,6 +76,29 @@ class DailyTrackerScreen extends React.Component {
 		this.setState({ selectedDay: updatedDay });
 	}
 
+	renderFoodList() {
+		const { groups } = this.props;
+		const { currentSearch } = this.state;
+
+		const groupItems = R.map(group => {
+			return FoodList.createGroupItem(
+				group.id,
+				I18n.t(group.nameTranslationKey),
+				this.getChildrenFromGroup(group)
+			);
+		}, groups);
+
+		const items = [
+			FoodList.createDescriptionItem(
+				I18n.t("screen.dailyTracker.description.title"),
+				I18n.t("screen.dailyTracker.description.text")
+			),
+			...groupItems
+		];
+
+		return <FoodList items={items} searchExpression={currentSearch} />;
+	}
+
 	renderCalendar() {
 		const { isShowingCalendar, selectedDay } = this.state;
 		return (
@@ -90,7 +124,7 @@ class DailyTrackerScreen extends React.Component {
 			<View style={styles.container}>
 				<View style={{ backgroundColor: color.darkMint, flex: 1 }} />
 				<View style={styles.header}>
-					<SearchBar />
+					<SearchBar onChangeText={this.onSearchChange} />
 					<DaySelector
 						style={styles.daySelector}
 						onPreviousDayPress={this.onPreviousDayPressed}

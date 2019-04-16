@@ -52,14 +52,12 @@ const styles = StyleSheet.create({
 class SetupScreen extends React.Component {
 	constructor(props) {
 		super(props);
-		this.onGroupSelected = this.onGroupSelected.bind(this);
-		this.onFoodSelected = this.onFoodSelected.bind(this);
 		this.onSearchChange = this.onSearchChange.bind(this);
 		this.onAcceptPress = this.onAcceptPress.bind(this);
+		this.onFoodSelected = this.onFoodSelected.bind(this);
 		this.state = {
 			currentSearch: "",
-			selectedFoodIds: [],
-			expandedGroupIds: []
+			selectedFoodIds: []
 		};
 	}
 
@@ -70,33 +68,16 @@ class SetupScreen extends React.Component {
 		navigation.navigate("DailyTracker");
 	}
 
+	onFoodSelected(foodIds) {
+		this.setState({ selectedFoodIds: foodIds });
+	}
+
 	onSearchChange(text) {
 		this.setState({ currentSearch: text });
 	}
 
-	onGroupSelected(id) {
-		const { expandedGroupIds } = this.state;
-
-		if (expandedGroupIds.includes(id)) {
-			this.setState({ expandedGroupIds: R.without([id], expandedGroupIds) });
-		} else {
-			this.setState({ expandedGroupIds: R.append(id, expandedGroupIds) });
-		}
-	}
-
-	onFoodSelected(id) {
-		const { selectedFoodIds } = this.state;
-
-		if (selectedFoodIds.includes(id)) {
-			this.setState({ selectedFoodIds: R.without([id], selectedFoodIds) });
-		} else {
-			this.setState({ selectedFoodIds: R.append(id, selectedFoodIds) });
-		}
-	}
-
 	getChildrenFromGroup(group) {
 		const { foods } = this.props;
-		const { selectedFoodIds } = this.state;
 
 		return R.filter(food => {
 			return food.groupId === group.id;
@@ -104,8 +85,7 @@ class SetupScreen extends React.Component {
 			return FoodList.createItem(
 				food.id,
 				I18n.t(food.nameTranslationKey),
-				food.thumbnailProvider,
-				selectedFoodIds.includes(food.id)
+				food.thumbnailProvider
 			);
 		});
 	}
@@ -130,7 +110,13 @@ class SetupScreen extends React.Component {
 			...groupItems
 		];
 
-		return <FoodList items={items} searchExpression={currentSearch} />;
+		return (
+			<FoodList
+				items={items}
+				searchExpression={currentSearch}
+				onFoodSelected={this.onFoodSelected}
+			/>
+		);
 	}
 
 	render() {
