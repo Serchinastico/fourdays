@@ -1,7 +1,7 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { createSwitchNavigator, createAppContainer } from "react-navigation";
-import { AppRegistry } from "react-native";
+import { AppRegistry, YellowBox } from "react-native";
 import SetupScreen from "./setup/SetupScreen";
 import DailyTrackerScreen from "./dailytracker/DailyTrackerScreen";
 
@@ -26,6 +26,8 @@ const App = () => (
 		<AppContainer />
 	</Provider>
 );
+
+YellowBox.ignoreWarnings(["Require cycle:"]);
 
 AppRegistry.registerComponent("fourdays", () => App);
 
