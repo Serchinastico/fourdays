@@ -5,14 +5,14 @@ const textSizeL = 16;
 
 export const color = {
 	transparent: "transparent",
-	white: "#FFFFFF",
+	white: "#FFF",
 	black: "#383838",
 	black05: "#3838380C",
 	black70: "#000000B3",
 	brownGray: "#A1A1A1",
 	darkMint: "#52BD76",
 	darkMint50: "#52BD7680",
-	seafoamGreen: "#87e0a5"
+	seafoamGreen: "#87E0A5"
 };
 
 export const style = StyleSheet.create({

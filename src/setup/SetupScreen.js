@@ -139,7 +139,7 @@ class SetupScreen extends React.Component {
 		);
 	}
 
-	renderEmptySearch() {
+	static renderEmptySearch() {
 		return (
 			<View style={styles.emptyCaseContainer}>
 				<Image source={require("../images/icon/Empty.png")} />
@@ -168,7 +168,7 @@ class SetupScreen extends React.Component {
 		const matchingFoodItems = fuse.search(currentSearch);
 
 		if (matchingFoodItems.length === 0) {
-			return this.renderEmptySearch();
+			return SetupScreen.renderEmptySearch();
 		}
 
 		const items = R.splitEvery(3, matchingFoodItems).map(row => {
