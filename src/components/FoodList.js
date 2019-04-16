@@ -86,6 +86,7 @@ class FoodList extends React.PureComponent {
 		return R.splitEvery(3, foodItemsWithSelection).map(row => {
 			return {
 				type: FOOD_ROW_ITEM,
+				key: row[0].id,
 				payload: row
 			};
 		});
@@ -143,7 +144,7 @@ class FoodList extends React.PureComponent {
 
 	static renderDescriptionItem(payload) {
 		return (
-			<View key={DESCRIPTION_ITEM} style={{ marginTop: 80 }}>
+			<View style={{ marginTop: 80 }}>
 				<FoodListDescription
 					title={payload.title}
 					description={payload.description}
@@ -157,7 +158,6 @@ class FoodList extends React.PureComponent {
 		return (
 			<SetupFoodGroupHeader
 				id={payload.id}
-				key={payload.id}
 				isOpen={expandedGroupIds.includes(payload.id)}
 				name={payload.name}
 				onGroupSelected={this.onGroupSelected}
@@ -167,20 +167,14 @@ class FoodList extends React.PureComponent {
 
 	renderFoodRowItem(payload) {
 		return (
-			<SetupFoodRow
-				key={payload[0].id}
-				onFoodSelected={this.onFoodSelected}
-				items={payload}
-			/>
+			<SetupFoodRow onFoodSelected={this.onFoodSelected} items={payload} />
 		);
 	}
 
 	renderItem({ item }) {
 		switch (item.type) {
 			case PADDING_ITEM:
-				return (
-					<View key={PADDING_ITEM} style={{ height: item.payload.height }} />
-				);
+				return <View style={{ height: item.payload.height }} />;
 			case DESCRIPTION_ITEM:
 				return FoodList.renderDescriptionItem(item.payload);
 			case HEADER_ITEM:
