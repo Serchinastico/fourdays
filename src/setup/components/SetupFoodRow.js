@@ -50,13 +50,8 @@ class SetupFoodRow extends React.PureComponent {
 		const foodItemsPadded = this.fillWithEmptyViewsToRenderWithEqualSpacing(
 			foodItems
 		);
-		const rowKey = items[0].id;
 
-		return (
-			<View key={rowKey} style={styles.itemsContainer}>
-				{foodItemsPadded}
-			</View>
-		);
+		return <View style={styles.itemsContainer}>{foodItemsPadded}</View>;
 	}
 }
 
