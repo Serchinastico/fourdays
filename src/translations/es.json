@@ -35,8 +35,10 @@
 	},
 	"screen": {
 		"setup": {
-			"descriptionTitle": "Configuration",
-			"descriptionSubtitle": "Here you can configure all allowed foods from your diet."
+			"description": {
+				"title": "Configuración",
+				"text": "Desde esta pantalla puedes configurar la comida que tienes permitido comer de tu dieta."
+			}
 		}
 	}
 }

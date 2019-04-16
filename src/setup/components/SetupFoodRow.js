@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import * as R from "ramda";
 import FoodItem from "../../components/FoodItem";
-import I18n from "../../translations/i18n";
 
 const styles = StyleSheet.create({
 	itemsContainer: {
@@ -30,18 +29,16 @@ class SetupFoodRow extends React.PureComponent {
 	}
 
 	renderFood(food) {
-		const { selectedFoodIds, onFoodSelected } = this.props;
-
-		const isSelected = R.contains(food.id, selectedFoodIds);
+		const { onFoodSelected } = this.props;
 
 		return (
 			<FoodItem
 				id={food.id}
 				key={food.id}
-				name={I18n.t(food.nameTranslationKey)}
+				name={food.name}
 				thumbnailUrl={food.thumbnailProvider()}
 				onFoodSelected={onFoodSelected}
-				isSelected={isSelected}
+				isSelected={food.isSelected}
 			/>
 		);
 	}
