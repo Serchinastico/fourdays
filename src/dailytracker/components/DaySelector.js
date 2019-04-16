@@ -7,9 +7,7 @@ import {
 	View,
 	TouchableHighlight
 } from "react-native";
-import { connect } from "react-redux";
 import { color, style } from "../../components/style/style";
-import selectDay from "../actions";
 
 const styles = StyleSheet.create({
 	container: {
@@ -52,29 +50,18 @@ class DaySelector extends React.PureComponent {
 	}
 
 	onPreviousDayPressed() {
-		this.updateSelectedDay(selectedDay => {
-			return selectedDay.subtract(1, "day");
-		});
+		const { onPreviousDayPress } = this.props;
+		onPreviousDayPress();
 	}
 
 	onNextDayPressed() {
-		this.updateSelectedDay(selectedDay => {
-			return selectedDay.add(1, "day");
-		});
+		const { onNextDayPress } = this.props;
+		onNextDayPress();
 	}
 
 	onCurrentDayPressed() {
-		const { navigation } = this.props;
-		navigation.navigate("Calendar");
-	}
-
-	updateSelectedDay(updateBlock) {
-		const { onDayChanged, selectedDay, selectDay } = this.props;
-
-		const updatedDay = updateBlock(moment(selectedDay));
-		selectDay(updatedDay);
-
-		onDayChanged(updatedDay);
+		const { onCurrentDayPress } = this.props;
+		onCurrentDayPress();
 	}
 
 	renderSelectedDay() {
@@ -103,7 +90,7 @@ class DaySelector extends React.PureComponent {
 				<TouchableHighlight
 					underlayColor={color.black05}
 					style={styles.previousNextIconContainer}
-					onPress={() => this.onPreviousDayPressed()}
+					onPress={this.onPreviousDayPressed}
 				>
 					<Image
 						style={styles.previousNextIcon}
@@ -113,7 +100,7 @@ class DaySelector extends React.PureComponent {
 				<TouchableHighlight
 					style={{ flex: 2, alignItems: "center", justifyContent: "center" }}
 					underlayColor={color.black05}
-					onPress={() => this.onCurrentDayPressed()}
+					onPress={this.onCurrentDayPressed}
 				>
 					<View style={styles.currentDayContainer}>
 						<Image
@@ -126,7 +113,7 @@ class DaySelector extends React.PureComponent {
 				<TouchableHighlight
 					underlayColor={color.black05}
 					style={styles.previousNextIconContainer}
-					onPress={() => this.onNextDayPressed()}
+					onPress={this.onNextDayPressed}
 				>
 					<Image
 						style={styles.previousNextIcon}
@@ -138,13 +125,4 @@ class DaySelector extends React.PureComponent {
 	}
 }
 
-function mapStateToProps(state) {
-	return {
-		selectedDay: state.dailyTracker.selectedDay
-	};
-}
-
-export default connect(
-	mapStateToProps,
-	{ selectDay }
-)(DaySelector);
+export default DaySelector;
