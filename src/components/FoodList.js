@@ -4,6 +4,7 @@ import * as R from "ramda";
 import SetupFoodGroupHeader from "../setup/components/SetupFoodGroupHeader";
 import SetupFoodRow from "../setup/components/SetupFoodRow";
 import fuzzySearch from "../FuzzySearch";
+import EmptySearch from "./EmptySearch";
 import FoodListDescription from "./FoodListDescription";
 
 const PADDING_ITEM = "Padding";
@@ -181,7 +182,11 @@ class FoodList extends React.PureComponent {
 				? this.mapToFlatListItems(items)
 				: this.mapToFlatListItemsWithSearchExpression(items, searchExpression);
 
-		return <FlatList data={flatListItems} renderItem={this.renderItem} />;
+		if (searchExpression !== "" && flatListItems.length === 1) {
+			return <EmptySearch />;
+		} else {
+			return <FlatList data={flatListItems} renderItem={this.renderItem} />;
+		}
 	}
 }
 
