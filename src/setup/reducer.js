@@ -23,558 +23,558 @@ const initialSetupState = {
 		{
 			id: "chard",
 			nameTranslationKey: "food.chard",
-			thumbnailProvider: () => require("../images/food/chard.jpg"),
+			thumbnailUrl: "chard",
 			groupId: "Group 1"
 		},
 		{
 			id: "avocado",
 			nameTranslationKey: "food.avocado",
-			thumbnailProvider: () => require("../images/food/avocado.jpg"),
+			thumbnailUrl: "avocado",
 			groupId: "Group 4"
 		},
 		{
 			id: "garlic",
 			nameTranslationKey: "food.garlic",
-			thumbnailProvider: () => require("../images/food/garlic.jpg"),
+			thumbnailUrl: "garlic",
 			groupId: "Group 1"
 		},
 		{
 			id: "artichoke",
 			nameTranslationKey: "food.artichoke",
-			thumbnailProvider: () => require("../images/food/artichoke.jpg"),
+			thumbnailUrl: "artichoke",
 			groupId: "Group 1"
 		},
 		{
 			id: "alfalfa",
 			nameTranslationKey: "food.alfalfa",
-			thumbnailProvider: () => require("../images/food/alfalfa.jpg"),
+			thumbnailUrl: "alfalfa",
 			groupId: "Group 1"
 		},
 		{
 			id: "clams",
 			nameTranslationKey: "food.clams",
-			thumbnailProvider: () => require("../images/food/clams.jpg"),
+			thumbnailUrl: "clams",
 			groupId: "Group 3"
 		},
 		{
 			id: "blueberries",
 			nameTranslationKey: "food.blueberries",
-			thumbnailProvider: () => require("../images/food/blueberries.jpg"),
-			imageResourceName: "food/blueberries.jpg",
+			thumbnailUrl: "blueberries",
+			imageResourceName: "food/blueberries",
 			groupId: "Group 4"
 		},
 		{
 			id: "rice",
 			nameTranslationKey: "food.rice",
-			thumbnailProvider: () => require("../images/food/rice.jpg"),
-			imageResourceName: "food/rice.jpg",
+			thumbnailUrl: "rice",
+			imageResourceName: "food/rice",
 			groupId: "Group 2"
 		},
 		{
 			id: "tuna",
 			nameTranslationKey: "food.tuna",
-			thumbnailProvider: () => require("../images/food/tuna.jpg"),
+			thumbnailUrl: "tuna",
 			groupId: "Group 3"
 		},
 		{
 			id: "oat",
 			nameTranslationKey: "food.oat",
-			thumbnailProvider: () => require("../images/food/oat.jpg"),
+			thumbnailUrl: "oat",
 			groupId: "Group 2"
 		},
 		{
 			id: "cod",
 			nameTranslationKey: "food.cod",
-			thumbnailProvider: () => require("../images/food/cod.jpg"),
+			thumbnailUrl: "cod",
 			groupId: "Group 2"
 		},
 		{
 			id: "sweet potato",
 			nameTranslationKey: "food.sweetPotato",
-			thumbnailProvider: () => require("../images/food/sweetPotato.jpg"),
+			thumbnailUrl: "sweet_potato",
 			groupId: "Group 2"
 		},
 		{
 			id: "cockles",
 			nameTranslationKey: "food.cockles",
-			thumbnailProvider: () => require("../images/food/cockles.jpg"),
+			thumbnailUrl: "cockles",
 			groupId: "Group 3"
 		},
 		{
 			id: "eggplant",
 			nameTranslationKey: "food.eggplant",
-			thumbnailProvider: () => require("../images/food/eggplant.jpg"),
+			thumbnailUrl: "eggplant",
 			groupId: "Group 2"
 		},
 		{
 			id: "watercress",
 			nameTranslationKey: "food.watercress",
-			thumbnailProvider: () => require("../images/food/watercress.jpg"),
+			thumbnailUrl: "watercress",
 			groupId: "Group 1"
 		},
 		{
 			id: "anchovy",
 			nameTranslationKey: "food.anchovy",
-			thumbnailProvider: () => require("../images/food/anchovy.jpg"),
+			thumbnailUrl: "anchovy",
 			groupId: "Group 3"
 		},
 		{
 			id: "broccoli",
 			nameTranslationKey: "food.broccoli",
-			thumbnailProvider: () => require("../images/food/broccoli.jpg"),
+			thumbnailUrl: "broccoli",
 			groupId: "Group 1"
 		},
 		{
 			id: "zucchini",
 			nameTranslationKey: "food.zucchini",
-			thumbnailProvider: () => require("../images/food/zucchini.jpg"),
+			thumbnailUrl: "zucchini",
 			groupId: "Group 1"
 		},
 		{
 			id: "pumpkin",
 			nameTranslationKey: "food.pumpkin",
-			thumbnailProvider: () => require("../images/food/pumpkin.jpg"),
+			thumbnailUrl: "pumpkin",
 			groupId: "Group 1"
 		},
 		{
 			id: "crab",
 			nameTranslationKey: "food.crab",
-			thumbnailProvider: () => require("../images/food/crab.jpg"),
+			thumbnailUrl: "crab",
 			groupId: "Group 3"
 		},
 		{
 			id: "prawn",
 			nameTranslationKey: "food.prawn",
-			thumbnailProvider: () => require("../images/food/prawn.jpg"),
+			thumbnailUrl: "prawn",
 			groupId: "Group 3"
 		},
 		{
 			id: "thistle",
 			nameTranslationKey: "food.thistle",
-			thumbnailProvider: () => require("../images/food/thistle.jpg"),
+			thumbnailUrl: "thistle",
 			groupId: "Group 1"
 		},
 		{
 			id: "onion",
 			nameTranslationKey: "food.onion",
-			thumbnailProvider: () => require("../images/food/onion.jpg"),
+			thumbnailUrl: "onion",
 			groupId: "Group 1"
 		},
 		{
 			id: "spring onion",
 			nameTranslationKey: "food.springOnion",
-			thumbnailProvider: () => require("../images/food/springOnion.jpg"),
+			thumbnailUrl: "spring_onion",
 			groupId: "Group 1"
 		},
 		{
 			id: "rye",
 			nameTranslationKey: "food.rye",
-			thumbnailProvider: () => require("../images/food/rye.jpg"),
+			thumbnailUrl: "rye",
 			groupId: "Group 2"
 		},
 		{
 			id: "pork",
 			nameTranslationKey: "food.pork",
-			thumbnailProvider: () => require("../images/food/pork.jpg"),
+			thumbnailUrl: "pork",
 			groupId: "Group 3"
 		},
 		{
 			id: "cherry",
 			nameTranslationKey: "food.cherry",
-			thumbnailProvider: () => require("../images/food/cherry.jpg"),
+			thumbnailUrl: "cherry",
 			groupId: "Group 4"
 		},
 		{
 			id: "custard apple",
 			nameTranslationKey: "food.custardApple",
-			thumbnailProvider: () => require("../images/food/custardApple.jpg"),
+			thumbnailUrl: "custard_apple",
 			groupId: "Group 4"
 		},
 		{
 			// TODO GERSIO Champiñon no va en ningun lado
 			id: "mushroom",
 			nameTranslationKey: "food.mushroom",
-			thumbnailProvider: () => require("../images/food/mushroom.jpg"),
+			thumbnailUrl: "mushroom",
 			groupId: "Group 1"
 		},
 		{
 			// TODO GERSIO Zanahoria no va en ningun lado
 			id: "carrot",
 			nameTranslationKey: "food.carrot",
-			thumbnailProvider: () => require("../images/food/carrot.jpg"),
+			thumbnailUrl: "carrot",
 			groupId: "Group 1"
 		},
 		{
 			id: "cabbage",
 			nameTranslationKey: "food.cabbage",
-			thumbnailProvider: () => require("../images/food/cabbage.jpg"),
+			thumbnailUrl: "cabbage",
 			groupId: "Group 1"
 		},
 		{
 			id: "plum",
 			nameTranslationKey: "food.plum",
-			thumbnailProvider: () => require("../images/food/plum.jpg"),
+			thumbnailUrl: "plum",
 			groupId: "Group 4"
 		},
 		{
 			id: "brussels sprouts",
 			nameTranslationKey: "food.brusselsSprouts",
-			thumbnailProvider: () => require("../images/food/brusselsSprouts.jpg"),
+			thumbnailUrl: "brussels_sprouts",
 			groupId: "Group 1"
 		},
 		{
 			id: "medlar",
 			nameTranslationKey: "food.medlar",
-			thumbnailProvider: () => require("../images/food/medlar.jpg"),
+			thumbnailUrl: "medlar",
 			groupId: "Group 4"
 		},
 		{
 			id: "cauliflower",
 			nameTranslationKey: "food.cauliflower",
-			thumbnailProvider: () => require("../images/food/cauliflower.jpg"),
+			thumbnailUrl: "cauliflower",
 			groupId: "Group 1"
 		},
 		{
 			id: "rabbit",
 			nameTranslationKey: "food.rabbit",
-			thumbnailProvider: () => require("../images/food/rabbit.jpg"),
+			thumbnailUrl: "rabbit",
 			groupId: "Group 3"
 		},
 		{
 			id: "lamb",
 			nameTranslationKey: "food.lamb",
-			thumbnailProvider: () => require("../images/food/lamb.jpg"),
+			thumbnailUrl: "lamb",
 			groupId: "Group 3"
 		},
 		{
 			id: "endive",
 			nameTranslationKey: "food.endive",
-			thumbnailProvider: () => require("../images/food/endive.jpg"),
+			thumbnailUrl: "endive",
 			groupId: "Group 1"
 		},
 		{
 			id: "belgian endive",
 			nameTranslationKey: "food.belgianEndive",
-			thumbnailProvider: () => require("../images/food/belgianEndive.jpg"),
+			thumbnailUrl: "belgian_endive",
 			groupId: "Group 1"
 		},
 		{
 			id: "kiwi",
 			nameTranslationKey: "food.kiwi",
-			thumbnailProvider: () => require("../images/food/kiwi.jpg"),
+			thumbnailUrl: "kiwi",
 			groupId: "Group 4"
 		},
 		{
 			id: "asparagus",
 			nameTranslationKey: "food.asparagus",
-			thumbnailProvider: () => require("../images/food/asparagus.jpg"),
+			thumbnailUrl: "asparagus",
 			groupId: "Group 1"
 		},
 		{
 			id: "spinach",
 			nameTranslationKey: "food.spinach",
-			thumbnailProvider: () => require("../images/food/spinach.jpg"),
+			thumbnailUrl: "spinach",
 			groupId: "Group 1"
 		},
 		{
 			id: "raspberry",
 			nameTranslationKey: "food.raspberry",
-			thumbnailProvider: () => require("../images/food/raspberry.jpg"),
+			thumbnailUrl: "raspberry",
 			groupId: "Group 4"
 		},
 		{
 			id: "strawberry",
 			nameTranslationKey: "food.strawberry",
-			thumbnailProvider: () => require("../images/food/strawberry.jpg"),
+			thumbnailUrl: "strawberry",
 			groupId: "Group 4"
 		},
 		{
 			id: "lettuce",
 			nameTranslationKey: "food.lettuce",
-			thumbnailProvider: () => require("../images/food/lettuce.jpg"),
+			thumbnailUrl: "lettuce",
 			groupId: "Group 1"
 		},
 		{
 			id: "tomato",
 			nameTranslationKey: "food.tomato",
-			thumbnailProvider: () => require("../images/food/tomato.jpg"),
+			thumbnailUrl: "tomato",
 			groupId: "Group 1"
 		},
 		{
 			id: "grape",
 			nameTranslationKey: "food.grape",
-			thumbnailProvider: () => require("../images/food/grape.jpg"),
+			thumbnailUrl: "grape",
 			groupId: "Group 4"
 		},
 		{
 			id: "trout",
 			nameTranslationKey: "food.trout",
-			thumbnailProvider: () => require("../images/food/trout.jpg"),
+			thumbnailUrl: "trout",
 			groupId: "Group 3"
 		},
 		{
 			id: "wheat",
 			nameTranslationKey: "food.wheat",
-			thumbnailProvider: () => require("../images/food/wheat.jpg"),
+			thumbnailUrl: "wheat",
 			groupId: "Group 2"
 		},
 		{
 			id: "veal",
 			nameTranslationKey: "food.veal",
-			thumbnailProvider: () => require("../images/food/veal.jpg"),
+			thumbnailUrl: "veal",
 			groupId: "Group 3"
 		},
 		{
 			id: "sepia",
 			nameTranslationKey: "food.sepia",
-			thumbnailProvider: () => require("../images/food/sepia.jpg"),
+			thumbnailUrl: "sepia",
 			groupId: "Group 3"
 		},
 		{
 			id: "semolina",
 			nameTranslationKey: "food.semolina",
-			thumbnailProvider: () => require("../images/food/semolina.jpg"),
+			thumbnailUrl: "semolina",
 			groupId: "Group 2"
 		},
 		{
 			id: "sardines",
 			nameTranslationKey: "food.sardines",
-			thumbnailProvider: () => require("../images/food/sardines.jpg"),
+			thumbnailUrl: "sardines",
 			groupId: "Group 3"
 		},
 		{
 			id: "watermelon",
 			nameTranslationKey: "food.watermelon",
-			thumbnailProvider: () => require("../images/food/watermelon.jpg"),
+			thumbnailUrl: "watermelon",
 			groupId: "Group 4"
 		},
 		{
 			id: "salmon",
 			nameTranslationKey: "food.salmon",
-			thumbnailProvider: () => require("../images/food/salmon.jpg"),
+			thumbnailUrl: "salmon",
 			groupId: "Group 3"
 		},
 		{
 			id: "turbot",
 			nameTranslationKey: "food.turbot",
-			thumbnailProvider: () => require("../images/food/turbot.jpg"),
+			thumbnailUrl: "turbot",
 			groupId: "Group 3"
 		},
 		{
 			// TODO GERSIO Rábano no va en ningun lado
 			id: "radish",
 			nameTranslationKey: "food.radish",
-			thumbnailProvider: () => require("../images/food/radish.jpg"),
+			thumbnailUrl: "radish",
 			groupId: "Group 1"
 		},
 		{
 			id: "octopus",
 			nameTranslationKey: "food.octopus",
-			thumbnailProvider: () => require("../images/food/octopus.jpg"),
+			thumbnailUrl: "octopus",
 			groupId: "Group 3"
 		},
 		{
 			id: "leek",
 			nameTranslationKey: "food.leek",
-			thumbnailProvider: () => require("../images/food/leek.jpg"),
+			thumbnailUrl: "leek",
 			groupId: "Group 1"
 		},
 		{
 			id: "grapefruit",
 			nameTranslationKey: "food.grapefruit",
-			thumbnailProvider: () => require("../images/food/grapefruit.jpg"),
+			thumbnailUrl: "grapefruit",
 			groupId: "Group 4"
 		},
 		{
 			id: "banana",
 			nameTranslationKey: "food.banana",
-			thumbnailProvider: () => require("../images/food/banana.jpg"),
+			thumbnailUrl: "banana",
 			groupId: "Group 4"
 		},
 		{
 			id: "pepper",
 			nameTranslationKey: "food.pepper",
-			thumbnailProvider: () => require("../images/food/pepper.jpg"),
+			thumbnailUrl: "pepper",
 			groupId: "Group 1"
 		},
 		{
 			id: "whiting",
 			nameTranslationKey: "food.whiting",
-			thumbnailProvider: () => require("../images/food/whiting.jpg"),
+			thumbnailUrl: "whiting",
 			groupId: "Group 3"
 		},
 		{
 			id: "chicken",
 			nameTranslationKey: "food.chicken",
-			thumbnailProvider: () => require("../images/food/chicken.jpg"),
+			thumbnailUrl: "chicken",
 			groupId: "Group 3"
 		},
 		{
 			id: "parsley",
 			nameTranslationKey: "food.parsley",
-			thumbnailProvider: () => require("../images/food/parsley.jpg"),
+			thumbnailUrl: "parsley",
 			groupId: "Group 1"
 		},
 		{
 			id: "pear",
 			nameTranslationKey: "food.pear",
-			thumbnailProvider: () => require("../images/food/pear.jpg"),
+			thumbnailUrl: "pear",
 			groupId: "Group 4"
 		},
 		{
 			id: "cucumber",
 			nameTranslationKey: "food.cucumber",
-			thumbnailProvider: () => require("../images/food/cucumber.jpg"),
+			thumbnailUrl: "cucumber",
 			groupId: "Group 1"
 		},
 		{
 			id: "turkey",
 			nameTranslationKey: "food.turkey",
-			thumbnailProvider: () => require("../images/food/turkey.jpg"),
+			thumbnailUrl: "turkey",
 			groupId: "Group 3"
 		},
 		{
 			id: "potato",
 			nameTranslationKey: "food.potato",
-			thumbnailProvider: () => require("../images/food/potato.jpg"),
+			thumbnailUrl: "potato",
 			groupId: "Group 2"
 		},
 		{
 			id: "snapper",
 			nameTranslationKey: "food.snapper",
-			thumbnailProvider: () => require("../images/food/snapper.jpg"),
+			thumbnailUrl: "snapper",
 			groupId: "Group 3"
 		},
 		{
 			id: "paraguayan",
 			nameTranslationKey: "food.paraguayan",
-			thumbnailProvider: () => require("../images/food/paraguayan.jpg"),
+			thumbnailUrl: "paraguayan",
 			groupId: "Group 4"
 		},
 		{
 			id: "yam",
 			nameTranslationKey: "food.yam",
-			thumbnailProvider: () => require("../images/food/yam.jpg"),
+			thumbnailUrl: "yam",
 			groupId: "Group 2"
 		},
 		{
 			id: "oyster",
 			nameTranslationKey: "food.oyster",
-			thumbnailProvider: () => require("../images/food/oyster.jpg"),
+			thumbnailUrl: "oyster",
 			groupId: "Group 3"
 		},
 		{
 			id: "orange",
 			nameTranslationKey: "food.orange",
-			thumbnailProvider: () => require("../images/food/orange.jpg"),
+			thumbnailUrl: "orange",
 			groupId: "Group 4"
 		},
 		{
 			id: "turnip",
 			nameTranslationKey: "food.turnip",
-			thumbnailProvider: () => require("../images/food/turnip.jpg"),
+			thumbnailUrl: "turnip",
 			groupId: "Group 1"
 		},
 		{
 			id: "hake",
 			nameTranslationKey: "food.hake",
-			thumbnailProvider: () => require("../images/food/hake.jpg"),
+			thumbnailUrl: "hake",
 			groupId: "Group 3"
 		},
 		{
 			id: "peach",
 			nameTranslationKey: "food.peach",
-			thumbnailProvider: () => require("../images/food/peach.jpg"),
+			thumbnailUrl: "peach",
 			groupId: "Group 4"
 		},
 		{
 			id: "cantaloupe",
 			nameTranslationKey: "food.cantaloupe",
-			thumbnailProvider: () => require("../images/food/cantaloupe.jpg"),
+			thumbnailUrl: "cantaloupe",
 			groupId: "Group 4"
 		},
 		{
 			id: "apple",
 			nameTranslationKey: "food.apple",
-			thumbnailProvider: () => require("../images/food/apple.jpg"),
+			thumbnailUrl: "apple",
 			groupId: "Group 4"
 		},
 		{
 			id: "mango",
 			nameTranslationKey: "food.mango",
-			thumbnailProvider: () => require("../images/food/mango.jpg"),
+			thumbnailUrl: "mango",
 			groupId: "Group 4"
 		},
 		{
 			id: "corn",
 			nameTranslationKey: "food.corn",
-			thumbnailProvider: () => require("../images/food/corn.jpg"),
+			thumbnailUrl: "corn",
 			groupId: "Group 2"
 		},
 		{
 			id: "beans",
 			nameTranslationKey: "food.beans",
-			thumbnailProvider: () => require("../images/food/beans.jpg"),
+			thumbnailUrl: "beans",
 			groupId: "Group 2"
 		},
 		{
 			id: "whiteBeans",
 			nameTranslationKey: "food.whiteBeans",
-			thumbnailProvider: () => require("../images/food/whiteBeans.jpg"),
+			thumbnailUrl: "white_beans",
 			groupId: "Group 2"
 		},
 		{
 			id: "yellowBeans",
 			nameTranslationKey: "food.yellowBeans",
-			thumbnailProvider: () => require("../images/food/yellowBeans.jpg"),
+			thumbnailUrl: "yellow_beans",
 			groupId: "Group 2"
 		},
 		{
 			id: "cranberryBeans",
 			nameTranslationKey: "food.cranberryBeans",
-			thumbnailProvider: () => require("../images/food/cranberryBeans.jpg"),
+			thumbnailUrl: "cranberry_beans",
 			groupId: "Group 2"
 		},
 		{
 			id: "lemon",
 			nameTranslationKey: "food.lemon",
-			thumbnailProvider: () => require("../images/food/lemon.jpg"),
+			thumbnailUrl: "lemon",
 			groupId: "Group 4"
 		},
 		{
 			id: "lime",
 			nameTranslationKey: "food.lime",
-			thumbnailProvider: () => require("../images/food/lime.jpg"),
+			thumbnailUrl: "lime",
 			groupId: "Group 4"
 		},
 		{
 			id: "lobster",
 			nameTranslationKey: "food.lobster",
-			thumbnailProvider: () => require("../images/food/lobster.jpg"),
+			thumbnailUrl: "lobster",
 			groupId: "Group 3"
 		},
 		{
 			id: "peas",
 			nameTranslationKey: "food.peas",
-			thumbnailProvider: () => require("../images/food/peas.jpg"),
+			thumbnailUrl: "peas",
 			groupId: "Group 2"
 		},
 		{
 			id: "lentils",
 			nameTranslationKey: "food.lentils",
-			thumbnailProvider: () => require("../images/food/lentils.jpg"),
+			thumbnailUrl: "lentils",
 			groupId: "Group 2"
 		},
 		{
 			id: "sole",
 			nameTranslationKey: "food.sole",
-			thumbnailProvider: () => require("../images/food/sole.jpg"),
+			thumbnailUrl: "sole",
 			groupId: "Group 3"
 		},
 		{
 			id: "green beans",
 			nameTranslationKey: "food.greenBeans",
-			thumbnailProvider: () => require("../images/food/greenBeans.jpg"),
+			thumbnailUrl: "green_beans",
 			groupId: "Group 1"
 		}
 	],

@@ -75,7 +75,7 @@ class DailyTrackerScreen extends React.Component {
 			return FoodList.createItem(
 				food.id,
 				I18n.t(food.nameTranslationKey),
-				food.thumbnailProvider
+				food.thumbnailUrl
 			);
 		});
 	}

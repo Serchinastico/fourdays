@@ -54,13 +54,23 @@ class FoodItem extends React.PureComponent {
 		if (isSelected) {
 			return (
 				<View style={styles.thumbnailContainer}>
-					<Image style={styles.thumbnail} source={thumbnailUrl} />
+					<Image
+						style={styles.thumbnail}
+						width="100%"
+						height={(Dimensions.get("window").width - 64) / 3}
+						source={{ uri: thumbnailUrl }}
+					/>
 				</View>
 			);
 		} else {
 			return (
 				<View style={styles.thumbnailContainer}>
-					<Image style={styles.thumbnail} source={thumbnailUrl} />
+					<Image
+						style={styles.thumbnail}
+						width="100%"
+						height={(Dimensions.get("window").width - 64) / 3}
+						source={{ uri: thumbnailUrl }}
+					/>
 					<View style={styles.unselectedThumbnailTopLayer} />
 				</View>
 			);

@@ -25,8 +25,8 @@ class FoodList extends React.PureComponent {
 		};
 	}
 
-	static createItem(id, name, thumbnailProvider) {
-		return { id, name, thumbnailProvider };
+	static createItem(id, name, thumbnailUrl) {
+		return { id, name, thumbnailUrl };
 	}
 
 	static createDescriptionItem(title, description, marginTop) {

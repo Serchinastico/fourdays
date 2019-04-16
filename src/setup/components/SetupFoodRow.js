@@ -36,7 +36,7 @@ class SetupFoodRow extends React.PureComponent {
 				id={food.id}
 				key={food.id}
 				name={food.name}
-				thumbnailUrl={food.thumbnailProvider()}
+				thumbnailUrl={food.thumbnailUrl}
 				onFoodSelected={onFoodSelected}
 				isSelected={food.isSelected}
 			/>
