@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import * as R from "ramda";
-import FoodItem from "../../common/FoodItem";
+import FoodItem from "../../components/FoodItem";
 import I18n from "../../translations/i18n";
 
 const styles = StyleSheet.create({
