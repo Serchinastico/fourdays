@@ -37,6 +37,7 @@ class DailyTrackerScreen extends React.Component {
 		super(props);
 		this.onPreviousDayPressed = this.onPreviousDayPressed.bind(this);
 		this.onNextDayPressed = this.onNextDayPressed.bind(this);
+		this.onSearchChange = this.onSearchChange.bind(this);
 		this.showCalendar = this.showCalendar.bind(this);
 		this.hideCalendar = this.hideCalendar.bind(this);
 		this.state = {
@@ -59,6 +60,20 @@ class DailyTrackerScreen extends React.Component {
 	onNextDayPressed() {
 		this.updateSelectedDay(selectedDay => {
 			return selectedDay.add(1, "day");
+		});
+	}
+
+	getChildrenFromGroup(group) {
+		const { foods } = this.props;
+
+		return R.filter(food => {
+			return food.groupId === group.id;
+		}, foods).map(food => {
+			return FoodList.createItem(
+				food.id,
+				I18n.t(food.nameTranslationKey),
+				food.thumbnailProvider
+			);
 		});
 	}
 
@@ -91,12 +106,19 @@ class DailyTrackerScreen extends React.Component {
 		const items = [
 			FoodList.createDescriptionItem(
 				I18n.t("screen.dailyTracker.description.title"),
-				I18n.t("screen.dailyTracker.description.text")
+				I18n.t("screen.dailyTracker.description.text"),
+				140
 			),
 			...groupItems
 		];
 
-		return <FoodList items={items} searchExpression={currentSearch} />;
+		return (
+			<FoodList
+				items={items}
+				searchExpression={currentSearch}
+				paddingTopForEmptySearch={148}
+			/>
+		);
 	}
 
 	renderCalendar() {
@@ -122,7 +144,7 @@ class DailyTrackerScreen extends React.Component {
 		const { selectedDay } = this.state;
 		return (
 			<View style={styles.container}>
-				<View style={{ backgroundColor: color.darkMint, flex: 1 }} />
+				{this.renderFoodList()}
 				<View style={styles.header}>
 					<SearchBar onChangeText={this.onSearchChange} />
 					<DaySelector

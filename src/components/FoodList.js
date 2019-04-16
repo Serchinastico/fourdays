@@ -29,12 +29,13 @@ class FoodList extends React.PureComponent {
 		return { id, name, thumbnailProvider };
 	}
 
-	static createDescriptionItem(title, description) {
+	static createDescriptionItem(title, description, marginTop) {
 		return {
 			type: DESCRIPTION_ITEM,
 			payload: {
 				title,
-				description
+				description,
+				marginTop
 			}
 		};
 	}
@@ -126,19 +127,20 @@ class FoodList extends React.PureComponent {
 	}
 
 	mapToFlatListItemsWithSearchExpression(items, searchExpression) {
+		const { paddingTopForEmptySearch } = this.props;
 		const allFoodItems = R.chain(item => {
 			return item.type === GROUP_ITEM ? item.payload.children : [];
 		}, items);
 		const filteredItems = fuzzySearch(searchExpression, "name", allFoodItems);
 		return [
-			FoodList.createPaddingItem(98),
+			FoodList.createPaddingItem(paddingTopForEmptySearch),
 			...this.mapFoodItemsIntoRows(filteredItems)
 		];
 	}
 
 	static renderDescriptionItem(payload) {
 		return (
-			<View style={{ marginTop: 80 }}>
+			<View style={{ marginTop: payload.marginTop }}>
 				<FoodListDescription
 					title={payload.title}
 					description={payload.description}
