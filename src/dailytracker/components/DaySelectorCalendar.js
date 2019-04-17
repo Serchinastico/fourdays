@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 
 const dayFormatForCalendarComponent = "YYYY-MM-DD";
 
-class DaySelectorCalendar extends React.Component {
+class DaySelectorCalendar extends React.PureComponent {
 	constructor(props) {
 		super(props);
 		this.onDayPress = this.onDayPress.bind(this);
