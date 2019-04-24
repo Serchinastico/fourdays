@@ -1,9 +1,9 @@
-import React from "react";
-import { View, FlatList } from "react-native";
 import * as R from "ramda";
+import React from "react";
+import { FlatList, View } from "react-native";
+import fuzzySearch from "../FuzzySearch";
 import SetupFoodGroupHeader from "../setup/components/SetupFoodGroupHeader";
 import SetupFoodRow from "../setup/components/SetupFoodRow";
-import fuzzySearch from "../FuzzySearch";
 import EmptySearch from "./EmptySearch";
 import FoodListDescription from "./FoodListDescription";
 
@@ -54,7 +54,6 @@ class FoodList extends React.PureComponent {
 		this.onGroupSelected = this.onGroupSelected.bind(this);
 		this.onFoodSelected = this.onFoodSelected.bind(this);
 		this.state = { expandedGroupIds: [], selectedFoodIds: [] };
-		this.cachedFlatListItems = {};
 	}
 
 	onGroupSelected(id) {
@@ -114,12 +113,7 @@ class FoodList extends React.PureComponent {
 	mapToFlatListItems(items) {
 		const { expandedGroupIds } = this.state;
 
-		const cacheKey = R.sort((a, b) => a - b, expandedGroupIds).join(",");
-		if (this.cachedFlatListItems[cacheKey] !== undefined) {
-			return this.cachedFlatListItems[cacheKey];
-		}
-
-		const flatListItems = R.chain(item => {
+		return R.chain(item => {
 			switch (item.type) {
 				case DESCRIPTION_ITEM:
 					return [{ ...item, key: item.type }];
@@ -130,10 +124,6 @@ class FoodList extends React.PureComponent {
 					);
 			}
 		}, items);
-
-		this.cachedFlatListItems[cacheKey] = flatListItems;
-
-		return flatListItems;
 	}
 
 	mapToFlatListItemsWithSearchExpression(items, searchExpression) {
