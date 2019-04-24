@@ -1,6 +1,9 @@
 import React from "react";
-import { View, FlatList } from "react-native";
+import { View, Dimensions } from "react-native";
 import * as R from "ramda";
+import DataProvider from "recyclerlistview/dist/reactnative/core/dependencies/DataProvider";
+import LayoutProvider from "recyclerlistview/dist/reactnative/core/dependencies/LayoutProvider";
+import RecyclerListView from "recyclerlistview/dist/reactnative/core/RecyclerListView";
 import SetupFoodGroupHeader from "../setup/components/SetupFoodGroupHeader";
 import SetupFoodRow from "../setup/components/SetupFoodRow";
 import fuzzySearch from "../FuzzySearch";
@@ -167,16 +170,16 @@ class FoodList extends React.PureComponent {
 		);
 	}
 
-	renderItem({ item }) {
-		switch (item.type) {
+	renderItem({ type, data }) {
+		switch (type) {
 			case PADDING_ITEM:
-				return <View style={{ height: item.payload }} />;
+				return <View style={{ height: data.payload }} />;
 			case DESCRIPTION_ITEM:
-				return FoodList.renderDescriptionItem(item.payload);
+				return FoodList.renderDescriptionItem(data.payload);
 			case HEADER_ITEM:
-				return this.renderHeaderItem(item.payload);
+				return this.renderHeaderItem(data.payload);
 			case FOOD_ROW_ITEM:
-				return this.renderFoodRowItem(item.payload);
+				return this.renderFoodRowItem(data.payload);
 		}
 	}
 
@@ -188,10 +191,48 @@ class FoodList extends React.PureComponent {
 				? this.mapToFlatListItems(items)
 				: this.mapToFlatListItemsWithSearchExpression(items, searchExpression);
 
+		const dataProvider = new DataProvider((r1, r2) => {
+			return r1 !== r2;
+		});
+
+		let { width } = Dimensions.get("window");
+
+		const layoutProvider = new LayoutProvider(
+			index => {
+				return flatListItems[index].type;
+			},
+			(type, dim) => {
+				switch (type) {
+					case PADDING_ITEM:
+						dim.width = width;
+						dim.height = 90;
+						break;
+					case DESCRIPTION_ITEM:
+						dim.width = width;
+						dim.height = 100;
+						break;
+					case HEADER_ITEM:
+						dim.width = width;
+						dim.height = 48;
+						break;
+					case FOOD_ROW_ITEM:
+						dim.width = width;
+						dim.height = 104;
+						break;
+				}
+			}
+		);
+
 		if (searchExpression !== "" && flatListItems.length === 1) {
 			return <EmptySearch />;
 		} else {
-			return <FlatList data={flatListItems} renderItem={this.renderItem} />;
+			return (
+				<RecyclerListView
+					dataProvider={dataProvider}
+					layoutProvider={layoutProvider}
+					rowRenderer={this.renderItem}
+				/>
+			);
 		}
 	}
 }
