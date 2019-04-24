@@ -1,9 +1,6 @@
 import React from "react";
-import { View, Dimensions } from "react-native";
+import { View, FlatList } from "react-native";
 import * as R from "ramda";
-import DataProvider from "recyclerlistview/dist/reactnative/core/dependencies/DataProvider";
-import LayoutProvider from "recyclerlistview/dist/reactnative/core/dependencies/LayoutProvider";
-import RecyclerListView from "recyclerlistview/dist/reactnative/core/RecyclerListView";
 import SetupFoodGroupHeader from "../setup/components/SetupFoodGroupHeader";
 import SetupFoodRow from "../setup/components/SetupFoodRow";
 import fuzzySearch from "../FuzzySearch";
@@ -57,6 +54,7 @@ class FoodList extends React.PureComponent {
 		this.onGroupSelected = this.onGroupSelected.bind(this);
 		this.onFoodSelected = this.onFoodSelected.bind(this);
 		this.state = { expandedGroupIds: [], selectedFoodIds: [] };
+		this.cachedFlatListItems = {};
 	}
 
 	onGroupSelected(id) {
@@ -116,7 +114,12 @@ class FoodList extends React.PureComponent {
 	mapToFlatListItems(items) {
 		const { expandedGroupIds } = this.state;
 
-		return R.chain(item => {
+		const cacheKey = R.sort((a, b) => a - b, expandedGroupIds).join(",");
+		if (this.cachedFlatListItems[cacheKey] !== undefined) {
+			return this.cachedFlatListItems[cacheKey];
+		}
+
+		const flatListItems = R.chain(item => {
 			switch (item.type) {
 				case DESCRIPTION_ITEM:
 					return [{ ...item, key: item.type }];
@@ -127,6 +130,10 @@ class FoodList extends React.PureComponent {
 					);
 			}
 		}, items);
+
+		this.cachedFlatListItems[cacheKey] = flatListItems;
+
+		return flatListItems;
 	}
 
 	mapToFlatListItemsWithSearchExpression(items, searchExpression) {
@@ -170,16 +177,16 @@ class FoodList extends React.PureComponent {
 		);
 	}
 
-	renderItem({ type, data }) {
-		switch (type) {
+	renderItem({ item }) {
+		switch (item.type) {
 			case PADDING_ITEM:
-				return <View style={{ height: data.payload }} />;
+				return <View style={{ height: item.payload }} />;
 			case DESCRIPTION_ITEM:
-				return FoodList.renderDescriptionItem(data.payload);
+				return FoodList.renderDescriptionItem(item.payload);
 			case HEADER_ITEM:
-				return this.renderHeaderItem(data.payload);
+				return this.renderHeaderItem(item.payload);
 			case FOOD_ROW_ITEM:
-				return this.renderFoodRowItem(data.payload);
+				return this.renderFoodRowItem(item.payload);
 		}
 	}
 
@@ -191,48 +198,10 @@ class FoodList extends React.PureComponent {
 				? this.mapToFlatListItems(items)
 				: this.mapToFlatListItemsWithSearchExpression(items, searchExpression);
 
-		const dataProvider = new DataProvider((r1, r2) => {
-			return r1 !== r2;
-		});
-
-		let { width } = Dimensions.get("window");
-
-		const layoutProvider = new LayoutProvider(
-			index => {
-				return flatListItems[index].type;
-			},
-			(type, dim) => {
-				switch (type) {
-					case PADDING_ITEM:
-						dim.width = width;
-						dim.height = 90;
-						break;
-					case DESCRIPTION_ITEM:
-						dim.width = width;
-						dim.height = 100;
-						break;
-					case HEADER_ITEM:
-						dim.width = width;
-						dim.height = 48;
-						break;
-					case FOOD_ROW_ITEM:
-						dim.width = width;
-						dim.height = 104;
-						break;
-				}
-			}
-		);
-
 		if (searchExpression !== "" && flatListItems.length === 1) {
 			return <EmptySearch />;
 		} else {
-			return (
-				<RecyclerListView
-					dataProvider={dataProvider}
-					layoutProvider={layoutProvider}
-					rowRenderer={this.renderItem}
-				/>
-			);
+			return <FlatList data={flatListItems} renderItem={this.renderItem} />;
 		}
 	}
 }
