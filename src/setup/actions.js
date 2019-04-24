@@ -7,7 +7,7 @@ import {
 
 export default function storeForbiddenFood(ids) {
 	return dispatch => {
-		dispatch({ type: STORE_FORBIDDEN_FOOD_START });
+		dispatch({ type: STORE_FORBIDDEN_FOOD_START, payload: ids });
 		AsyncStorage.setItem("forbidden_food_ids", JSON.stringify(ids))
 			.then(() => {
 				dispatch({

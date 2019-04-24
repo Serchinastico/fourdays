@@ -1,4 +1,9 @@
-import { STORE_FORBIDDEN_FOOD_FINISHED } from "./types";
+import { STORE_FORBIDDEN_FOOD_START } from "./types";
+import {
+	FETCH_FORBIDDEN_FOOD_ERROR,
+	FETCH_FORBIDDEN_FOOD_FINISHED,
+	FETCH_FORBIDDEN_FOOD_START
+} from "../start/types";
 
 const initialSetupState = {
 	groups: [
@@ -578,17 +583,39 @@ const initialSetupState = {
 			groupId: "Group 1"
 		}
 	],
-	forbiddenFoodIds: []
+	forbiddenFoodIds: undefined
 };
 
-const onStoreForbiddenFoodFinished = (state, action) => {
+const onStoreForbiddenFoodStart = (state, action) => {
 	return { ...state, forbiddenFoodIds: action.payload };
+};
+
+const onFetchForbiddenFoodStart = state => {
+	return {
+		...state,
+		forbiddenFoodIdsError: undefined,
+		forbiddenFoodIds: undefined
+	};
+};
+
+const onFetchForbiddenFoodFinished = (state, action) => {
+	return { ...state, forbiddenFoodIds: action.payload };
+};
+
+const onFetchForbiddenFoodError = (state, action) => {
+	return { ...state, forbiddenFoodIdsError: action.payload };
 };
 
 const setupReducer = (state = initialSetupState, action) => {
 	switch (action.type) {
-		case STORE_FORBIDDEN_FOOD_FINISHED:
-			return onStoreForbiddenFoodFinished(state, action);
+		case STORE_FORBIDDEN_FOOD_START:
+			return onStoreForbiddenFoodStart(state, action);
+		case FETCH_FORBIDDEN_FOOD_START:
+			return onFetchForbiddenFoodStart(state);
+		case FETCH_FORBIDDEN_FOOD_FINISHED:
+			return onFetchForbiddenFoodFinished(state, action);
+		case FETCH_FORBIDDEN_FOOD_ERROR:
+			return onFetchForbiddenFoodError(state, action);
 		default:
 			return state;
 	}
