@@ -80,17 +80,36 @@ class DailyTrackerScreen extends React.Component {
 	}
 
 	getChildrenFromGroup(group) {
-		const { foods } = this.props;
+		const { selectedDay } = this.state;
+		const { foods, consumedFoodIdsByDay } = this.props;
 
-		return R.filter(food => {
-			return food.groupId === group.id;
-		}, foods).map(food => {
-			return FoodList.createItem(
-				food.id,
-				I18n.t(food.nameTranslationKey),
-				food.thumbnailUrl
-			);
-		});
+		const formattedDay = selectedDay.format(dayFormatForStoringConsumedFoodIds);
+		const consumedFoodIds = consumedFoodIdsByDay[formattedDay] || [];
+
+		if (group.id === "Forbidden food") {
+			return R.map(id => {
+				const food = R.find(f => f.id === id, foods);
+				FoodList.createItem(
+					food.id,
+					I18n.t(food.nameTranslationKey),
+					food.thumbnailUrl
+				);
+			}, consumedFoodIds);
+		} else {
+			return R.filter(food => {
+				return food.groupId === group.id;
+			}, foods)
+				.filter(food => {
+					return !consumedFoodIds.includes(food.id);
+				})
+				.map(food => {
+					return FoodList.createItem(
+						food.id,
+						I18n.t(food.nameTranslationKey),
+						food.thumbnailUrl
+					);
+				});
+		}
 	}
 
 	fetchFoodForSelectedDay() {
@@ -121,13 +140,19 @@ class DailyTrackerScreen extends React.Component {
 		const { groups } = this.props;
 		const { currentSearch } = this.state;
 
-		const groupItems = R.map(group => {
-			return FoodList.createGroupItem(
-				group.id,
-				I18n.t(group.nameTranslationKey),
-				this.getChildrenFromGroup(group)
-			);
-		}, groups);
+		const groupItems = R.map(
+			group => {
+				return FoodList.createGroupItem(
+					group.id,
+					I18n.t(group.nameTranslationKey),
+					this.getChildrenFromGroup(group)
+				);
+			},
+			[
+				...groups,
+				{ id: "Forbidden food", nameTranslationKey: "food.group.forbidden" }
+			]
+		);
 
 		const items = [
 			FoodList.createDescriptionItem(
