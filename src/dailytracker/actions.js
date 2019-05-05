@@ -8,7 +8,7 @@ import {
 	FETCH_CONSUMED_FOOD_FOR_DAY_ERROR
 } from "./types";
 
-const dayFormatForStoringConsumedFoodIds = "DD-MMM-YYYY";
+export const dayFormatForStoringConsumedFoodIds = "DD-MM-YYYY";
 
 export function fetchConsumedFoodForDay(day) {
 	return dispatch => {

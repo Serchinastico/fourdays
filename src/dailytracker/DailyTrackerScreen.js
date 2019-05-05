@@ -7,6 +7,11 @@ import { connect } from "react-redux";
 import FoodList from "../components/FoodList";
 import SearchBar from "../components/SearchBar";
 import I18n from "../translations/i18n";
+import {
+	dayFormatForStoringConsumedFoodIds,
+	fetchConsumedFoodForDay,
+	storeConsumedFoodForDay
+} from "./actions";
 import DaySelector from "./components/DaySelector";
 import { color } from "../components/style/style";
 import DaySelectorCalendar from "./components/DaySelectorCalendar";
@@ -48,6 +53,14 @@ class DailyTrackerScreen extends React.Component {
 		};
 	}
 
+	componentDidMount() {
+		this.fetchFoodForSelectedDay();
+	}
+
+	componentDidUpdate() {
+		this.fetchFoodForSelectedDay();
+	}
+
 	onFoodSelected() {}
 
 	onSearchChange(text) {
@@ -78,6 +91,16 @@ class DailyTrackerScreen extends React.Component {
 				food.thumbnailUrl
 			);
 		});
+	}
+
+	fetchFoodForSelectedDay() {
+		const { selectedDay } = this.state;
+		const { consumedFoodIdsByDay, fetchConsumedFoodForDay } = this.props;
+
+		const formattedDay = selectedDay.format(dayFormatForStoringConsumedFoodIds);
+		if (consumedFoodIdsByDay[formattedDay] === undefined) {
+			fetchConsumedFoodForDay(selectedDay);
+		}
 	}
 
 	showCalendar() {
@@ -127,6 +150,7 @@ class DailyTrackerScreen extends React.Component {
 
 	renderCalendar() {
 		const { isShowingCalendar, selectedDay } = this.state;
+
 		return (
 			<Dialog
 				visible={isShowingCalendar}
@@ -168,11 +192,12 @@ class DailyTrackerScreen extends React.Component {
 function mapStateToProps(state) {
 	return {
 		groups: state.setup.groups,
-		foods: state.setup.foods
+		foods: state.setup.foods,
+		consumedFoodIdsByDay: state.dailyTracker.consumedFoodIdsByDay
 	};
 }
 
 export default connect(
 	mapStateToProps,
-	null
+	{ fetchConsumedFoodForDay, storeConsumedFoodForDay }
 )(DailyTrackerScreen);
