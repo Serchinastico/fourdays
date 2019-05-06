@@ -168,6 +168,7 @@ class DailyTrackerScreen extends React.Component {
 				items={items}
 				searchExpression={currentSearch}
 				onFoodSelected={this.onFoodSelected}
+				looksAlwaysSelected
 				paddingTopForEmptySearch={148}
 			/>
 		);

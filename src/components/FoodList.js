@@ -78,9 +78,14 @@ class FoodList extends React.PureComponent {
 
 	mapFoodItemsIntoRows(foodItems) {
 		const { selectedFoodIds } = this.state;
+		let { looksAlwaysSelected } = this.props;
+		looksAlwaysSelected = looksAlwaysSelected || false;
 
 		const foodItemsWithSelection = R.map(item => {
-			return { ...item, isSelected: selectedFoodIds.includes(item.id) };
+			return {
+				...item,
+				isSelected: looksAlwaysSelected || selectedFoodIds.includes(item.id)
+			};
 		}, foodItems);
 
 		return R.splitEvery(3, foodItemsWithSelection).map(row => {
