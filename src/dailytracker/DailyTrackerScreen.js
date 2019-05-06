@@ -92,7 +92,7 @@ class DailyTrackerScreen extends React.Component {
 				FoodList.createItem(
 					food.id,
 					I18n.t(food.nameTranslationKey),
-					food.thumbnailUrl
+					food.thumbnail
 				);
 			}, consumedFoodIds);
 		} else {
@@ -106,7 +106,7 @@ class DailyTrackerScreen extends React.Component {
 					return FoodList.createItem(
 						food.id,
 						I18n.t(food.nameTranslationKey),
-						food.thumbnailUrl
+						food.thumbnail
 					);
 				});
 		}

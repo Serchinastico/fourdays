@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
 });
 
 class FoodItem extends React.PureComponent {
-	static renderThumbnail(thumbnailUrl, isSelected) {
+	static renderThumbnail(thumbnail, isSelected) {
 		if (isSelected) {
 			return (
 				<View style={styles.thumbnailContainer}>
@@ -58,7 +58,7 @@ class FoodItem extends React.PureComponent {
 						style={styles.thumbnail}
 						width="100%"
 						height={(Dimensions.get("window").width - 64) / 3}
-						source={{ uri: thumbnailUrl }}
+						source={thumbnail}
 					/>
 				</View>
 			);
@@ -69,7 +69,7 @@ class FoodItem extends React.PureComponent {
 						style={styles.thumbnail}
 						width="100%"
 						height={(Dimensions.get("window").width - 64) / 3}
-						source={{ uri: thumbnailUrl }}
+						source={thumbnail}
 					/>
 					<View style={styles.unselectedThumbnailTopLayer} />
 				</View>
@@ -86,7 +86,7 @@ class FoodItem extends React.PureComponent {
 	}
 
 	render() {
-		const { id, name, isSelected, thumbnailUrl, onFoodSelected } = this.props;
+		const { id, name, isSelected, thumbnail, onFoodSelected } = this.props;
 		return (
 			<TouchableHighlight
 				underlayColor="#FAFAFA"
@@ -94,7 +94,7 @@ class FoodItem extends React.PureComponent {
 				onPress={() => onFoodSelected(id)}
 			>
 				<View>
-					{FoodItem.renderThumbnail(thumbnailUrl, isSelected)}
+					{FoodItem.renderThumbnail(thumbnail, isSelected)}
 					{FoodItem.renderName(name, isSelected)}
 				</View>
 			</TouchableHighlight>

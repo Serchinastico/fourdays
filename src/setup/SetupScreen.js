@@ -85,7 +85,7 @@ class SetupScreen extends React.Component {
 			return FoodList.createItem(
 				food.id,
 				I18n.t(food.nameTranslationKey),
-				food.thumbnailUrl
+				food.thumbnail
 			);
 		});
 	}
