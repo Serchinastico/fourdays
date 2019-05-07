@@ -12,7 +12,7 @@ const initialSetupState = {
 };
 
 const onStoreConsumedFoodForDayStart = (state, payload) => {
-	const { id, day } = payload;
+	const { ids, day } = payload;
 
 	const formattedDay = day.format(dayFormatForStoringConsumedFoodIds);
 	return R.evolve(
@@ -20,7 +20,7 @@ const onStoreConsumedFoodForDayStart = (state, payload) => {
 			consumedFoodIdsByDay: idsByDay => {
 				return {
 					...idsByDay,
-					[formattedDay]: R.append(id, idsByDay[formattedDay])
+					[formattedDay]: ids
 				};
 			}
 		},

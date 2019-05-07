@@ -61,7 +61,12 @@ class DailyTrackerScreen extends React.Component {
 		this.fetchFoodForSelectedDay();
 	}
 
-	onFoodSelected() {}
+	onFoodSelected(selectedIds) {
+		const { storeConsumedFoodForDay } = this.props;
+		const { selectedDay } = this.state;
+
+		storeConsumedFoodForDay(selectedIds, selectedDay);
+	}
 
 	onSearchChange(text) {
 		this.setState({ currentSearch: text });
@@ -79,22 +84,26 @@ class DailyTrackerScreen extends React.Component {
 		});
 	}
 
-	getChildrenFromGroup(group) {
+	getFormattedSelectedDay() {
 		const { selectedDay } = this.state;
-		const { foods, consumedFoodIdsByDay } = this.props;
+		return selectedDay.format(dayFormatForStoringConsumedFoodIds);
+	}
 
-		const formattedDay = selectedDay.format(dayFormatForStoringConsumedFoodIds);
-		const consumedFoodIds = consumedFoodIdsByDay[formattedDay] || [];
+	getChildrenFromGroup(group) {
+		const { foods, consumedFoodIdsByDay } = this.props;
+		const selectedDay = this.getFormattedSelectedDay();
+		const consumedFoodIds = consumedFoodIdsByDay[selectedDay] || [];
 
 		if (group.id === "Forbidden food") {
 			return R.map(id => {
-				const food = R.find(f => f.id === id, foods);
-				FoodList.createItem(
+				return R.find(f => f.id === id, foods);
+			}, consumedFoodIds).map(food => {
+				return FoodList.createItem(
 					food.id,
 					I18n.t(food.nameTranslationKey),
 					food.thumbnail
 				);
-			}, consumedFoodIds);
+			});
 		} else {
 			return R.filter(food => {
 				return food.groupId === group.id;

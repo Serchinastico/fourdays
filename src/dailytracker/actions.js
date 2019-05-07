@@ -10,15 +10,31 @@ import {
 
 export const dayFormatForStoringConsumedFoodIds = "DD-MM-YYYY";
 
+function formatDayForStorage(day) {
+	return day.format(dayFormatForStoringConsumedFoodIds);
+}
+
+function getStorageKeyForDay(day) {
+	const formattedDay = formatDayForStorage(day);
+	return `consumed_food_ids:${formattedDay}`;
+}
+
+async function getConsumedFoodIdsForDay(day) {
+	const ids = await AsyncStorage.getItem(getStorageKeyForDay(day));
+	return ids === null ? [] : JSON.parse(ids);
+}
+
+async function addOrRemoveConsumedFoodIdForDay(day, ids) {
+	await AsyncStorage.setItem(getStorageKeyForDay(day), JSON.stringify(ids));
+	return ids;
+}
+
 export function fetchConsumedFoodForDay(day) {
 	return dispatch => {
 		dispatch({ type: FETCH_CONSUMED_FOOD_FOR_DAY_START, payload: { day } });
 
-		const formattedDay = day.format(dayFormatForStoringConsumedFoodIds);
-		AsyncStorage.getItem(`consumed_food_ids:${formattedDay}`)
-			.then(rawIds => {
-				const ids = rawIds === null ? [] : JSON.parse(rawIds);
-
+		getConsumedFoodIdsForDay(day)
+			.then(ids => {
 				dispatch({
 					type: FETCH_CONSUMED_FOOD_FOR_DAY_FINISHED,
 					payload: { day, ids }
@@ -32,15 +48,15 @@ export function fetchConsumedFoodForDay(day) {
 	};
 }
 
-export function storeConsumedFoodForDay(id, day) {
+export function storeConsumedFoodForDay(ids, day) {
 	return dispatch => {
-		dispatch({ type: STORE_CONSUMED_FOOD_FOR_DAY_START, payload: { id, day } });
+		dispatch({
+			type: STORE_CONSUMED_FOOD_FOR_DAY_START,
+			payload: { ids, day }
+		});
 
-		const formattedDay = day.format(dayFormatForStoringConsumedFoodIds);
-		AsyncStorage.getItem(`consumed_food_ids:${formattedDay}`)
-			.then(rawIds => {
-				const ids = rawIds === null ? [] : JSON.parse(rawIds);
-
+		addOrRemoveConsumedFoodIdForDay(day, ids)
+			.then(ids => {
 				dispatch({
 					type: STORE_CONSUMED_FOOD_FOR_DAY_FINISHED,
 					payload: ids
