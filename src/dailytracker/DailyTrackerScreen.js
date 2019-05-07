@@ -9,7 +9,7 @@ import SearchBar from "../components/SearchBar";
 import I18n from "../translations/i18n";
 import {
 	dayFormatForStoringConsumedFoodIds,
-	fetchConsumedFoodForDay,
+	fetchForbiddenFoodForDay,
 	storeConsumedFoodForDay
 } from "./actions";
 import DaySelector from "./components/DaySelector";
@@ -84,20 +84,26 @@ class DailyTrackerScreen extends React.Component {
 		});
 	}
 
-	getFormattedSelectedDay() {
-		const { selectedDay } = this.state;
-		return selectedDay.format(dayFormatForStoringConsumedFoodIds);
-	}
-
 	getChildrenFromGroup(group) {
 		const { foods, consumedFoodIdsByDay } = this.props;
-		const selectedDay = this.getFormattedSelectedDay();
-		const consumedFoodIds = consumedFoodIdsByDay[selectedDay] || [];
+		const { selectedDay } = this.state;
+
+		const forbiddenFoodIds = R.uniq(
+			R.chain(
+				i => {
+					const day = moment(selectedDay);
+					day.subtract(i, "day");
+					const formattedDay = day.format(dayFormatForStoringConsumedFoodIds);
+					return consumedFoodIdsByDay[formattedDay] || [];
+				},
+				[0, 1, 2, 3]
+			)
+		);
 
 		if (group.id === "Forbidden food") {
 			return R.map(id => {
 				return R.find(f => f.id === id, foods);
-			}, consumedFoodIds).map(food => {
+			}, forbiddenFoodIds).map(food => {
 				return FoodList.createItem(
 					food.id,
 					I18n.t(food.nameTranslationKey),
@@ -109,7 +115,7 @@ class DailyTrackerScreen extends React.Component {
 				return food.groupId === group.id;
 			}, foods)
 				.filter(food => {
-					return !consumedFoodIds.includes(food.id);
+					return !forbiddenFoodIds.includes(food.id);
 				})
 				.map(food => {
 					return FoodList.createItem(
@@ -123,11 +129,11 @@ class DailyTrackerScreen extends React.Component {
 
 	fetchFoodForSelectedDay() {
 		const { selectedDay } = this.state;
-		const { consumedFoodIdsByDay, fetchConsumedFoodForDay } = this.props;
+		const { consumedFoodIdsByDay, fetchForbiddenFoodForDay } = this.props;
 
 		const formattedDay = selectedDay.format(dayFormatForStoringConsumedFoodIds);
 		if (consumedFoodIdsByDay[formattedDay] === undefined) {
-			fetchConsumedFoodForDay(selectedDay);
+			fetchForbiddenFoodForDay(selectedDay);
 		}
 	}
 
@@ -234,5 +240,5 @@ function mapStateToProps(state) {
 
 export default connect(
 	mapStateToProps,
-	{ fetchConsumedFoodForDay, storeConsumedFoodForDay }
+	{ fetchForbiddenFoodForDay, storeConsumedFoodForDay }
 )(DailyTrackerScreen);

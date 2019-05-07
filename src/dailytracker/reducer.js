@@ -1,7 +1,6 @@
 import * as R from "ramda";
 import { dayFormatForStoringConsumedFoodIds } from "./actions";
 import {
-	FETCH_CONSUMED_FOOD_FOR_DAY_ERROR,
 	FETCH_CONSUMED_FOOD_FOR_DAY_FINISHED,
 	FETCH_CONSUMED_FOOD_FOR_DAY_START,
 	STORE_CONSUMED_FOOD_FOR_DAY_START
@@ -29,36 +28,45 @@ const onStoreConsumedFoodForDayStart = (state, payload) => {
 };
 
 function onFetchConsumedFoodForDayStart(state, payload) {
-	const { day } = payload;
+	const { days } = payload;
 
-	const formattedDay = day.format(dayFormatForStoringConsumedFoodIds);
-	return R.evolve(
-		{
-			fetchConsumedFoodForDayError: () => undefined,
-			consumedFoodIdsByDay: idsByDay => {
-				return { ...idsByDay, [formattedDay]: [] };
-			}
+	return R.reduce(
+		(state, day) => {
+			const formattedDay = day.format(dayFormatForStoringConsumedFoodIds);
+			return R.evolve(
+				{
+					consumedFoodIdsByDay: idsByDay => {
+						return { ...idsByDay, [formattedDay]: [] };
+					}
+				},
+				state
+			);
 		},
-		state
+		state,
+		days
 	);
 }
 
 const onFetchConsumedFoodForDayFinished = (state, payload) => {
-	const { ids, day } = payload;
+	const { byDay } = payload;
 
-	const formattedDay = day.format(dayFormatForStoringConsumedFoodIds);
-	return R.evolve(
-		{
-			consumedFoodIdsByDay: idsByDay => {
-				return { ...idsByDay, [formattedDay]: ids };
-			}
+	return R.reduce(
+		(state, idsAndDay) => {
+			const formattedDay = idsAndDay.day.format(
+				dayFormatForStoringConsumedFoodIds
+			);
+			return R.evolve(
+				{
+					consumedFoodIdsByDay: idsByDay => {
+						return { ...idsByDay, [formattedDay]: idsAndDay.ids };
+					}
+				},
+				state
+			);
 		},
-		state
+		state,
+		byDay
 	);
-};
-
-const onFetchConsumedFoodForDayError = (state, payload) => {
-	return { ...state, fetchConsumedFoodForDayError: payload };
 };
 
 const dailyTrackerReducer = (state = initialSetupState, action) => {
@@ -69,8 +77,6 @@ const dailyTrackerReducer = (state = initialSetupState, action) => {
 			return onFetchConsumedFoodForDayStart(state, action.payload);
 		case FETCH_CONSUMED_FOOD_FOR_DAY_FINISHED:
 			return onFetchConsumedFoodForDayFinished(state, action.payload);
-		case FETCH_CONSUMED_FOOD_FOR_DAY_ERROR:
-			return onFetchConsumedFoodForDayError(state, action.payload);
 		default:
 			return state;
 	}

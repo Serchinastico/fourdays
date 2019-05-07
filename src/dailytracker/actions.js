@@ -1,11 +1,10 @@
 import AsyncStorage from "@react-native-community/async-storage";
+import moment from "moment";
 import {
 	STORE_CONSUMED_FOOD_FOR_DAY_START,
 	STORE_CONSUMED_FOOD_FOR_DAY_FINISHED,
-	STORE_CONSUMED_FOOD_FOR_DAY_ERROR,
 	FETCH_CONSUMED_FOOD_FOR_DAY_START,
-	FETCH_CONSUMED_FOOD_FOR_DAY_FINISHED,
-	FETCH_CONSUMED_FOOD_FOR_DAY_ERROR
+	FETCH_CONSUMED_FOOD_FOR_DAY_FINISHED
 } from "./types";
 
 export const dayFormatForStoringConsumedFoodIds = "DD-MM-YYYY";
@@ -29,43 +28,53 @@ async function addOrRemoveConsumedFoodIdForDay(day, ids) {
 	return ids;
 }
 
-export function fetchConsumedFoodForDay(day) {
-	return dispatch => {
-		dispatch({ type: FETCH_CONSUMED_FOOD_FOR_DAY_START, payload: { day } });
+function dayBySubtractingDays(date, days) {
+	const updatedDate = moment(date);
+	updatedDate.subtract(days, "day");
+	return updatedDate;
+}
 
-		getConsumedFoodIdsForDay(day)
-			.then(ids => {
-				dispatch({
-					type: FETCH_CONSUMED_FOOD_FOR_DAY_FINISHED,
-					payload: { day, ids }
-				});
-			})
-			.catch(() => {
-				dispatch({
-					type: FETCH_CONSUMED_FOOD_FOR_DAY_ERROR
-				});
-			});
+export function fetchForbiddenFoodForDay(day) {
+	return async dispatch => {
+		const selectedDay = day;
+		const dayMinusOne = dayBySubtractingDays(selectedDay, 1);
+		const dayMinusTwo = dayBySubtractingDays(selectedDay, 2);
+		const dayMinusThree = dayBySubtractingDays(selectedDay, 3);
+
+		dispatch({
+			type: FETCH_CONSUMED_FOOD_FOR_DAY_START,
+			payload: { days: [selectedDay, dayMinusOne, dayMinusTwo, dayMinusThree] }
+		});
+
+		const idsOnDay = await getConsumedFoodIdsForDay(selectedDay);
+		const idsOnDayMinusOne = await getConsumedFoodIdsForDay(dayMinusOne);
+		const idsOnDayMinusTwo = await getConsumedFoodIdsForDay(dayMinusTwo);
+		const idsOnDayMinusThree = await getConsumedFoodIdsForDay(dayMinusThree);
+
+		dispatch({
+			type: FETCH_CONSUMED_FOOD_FOR_DAY_FINISHED,
+			payload: {
+				byDay: [
+					{ day: selectedDay, ids: idsOnDay },
+					{ day: dayMinusOne, ids: idsOnDayMinusOne },
+					{ day: dayMinusTwo, ids: idsOnDayMinusTwo },
+					{ day: dayMinusThree, ids: idsOnDayMinusThree }
+				]
+			}
+		});
 	};
 }
 
 export function storeConsumedFoodForDay(ids, day) {
-	return dispatch => {
+	return async dispatch => {
 		dispatch({
 			type: STORE_CONSUMED_FOOD_FOR_DAY_START,
 			payload: { ids, day }
 		});
 
-		addOrRemoveConsumedFoodIdForDay(day, ids)
-			.then(ids => {
-				dispatch({
-					type: STORE_CONSUMED_FOOD_FOR_DAY_FINISHED,
-					payload: ids
-				});
-			})
-			.catch(() => {
-				dispatch({
-					type: STORE_CONSUMED_FOOD_FOR_DAY_ERROR
-				});
-			});
+		await addOrRemoveConsumedFoodIdForDay(day, ids);
+		dispatch({
+			type: STORE_CONSUMED_FOOD_FOR_DAY_FINISHED
+		});
 	};
 }
