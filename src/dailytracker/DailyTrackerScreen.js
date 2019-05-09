@@ -100,30 +100,42 @@ class DailyTrackerScreen extends React.Component {
 			)
 		);
 
-		if (group.id === "Forbidden food") {
-			return R.map(id => {
-				return R.find(f => f.id === id, foods);
-			}, forbiddenFoodIds).map(food => {
-				return FoodList.createItem(
-					food.id,
-					I18n.t(food.nameTranslationKey),
-					food.thumbnail
-				);
-			});
-		} else {
-			return R.filter(food => {
-				return food.groupId === group.id;
-			}, foods)
-				.filter(food => {
-					return !forbiddenFoodIds.includes(food.id);
-				})
-				.map(food => {
-					return FoodList.createItem(
+		const day = moment(selectedDay);
+		const formattedDay = day.format(dayFormatForStoringConsumedFoodIds);
+
+		switch (group.id) {
+			case "Forbidden food":
+				return R.map(
+					id => R.find(f => f.id === id, foods),
+					forbiddenFoodIds
+				).map(food =>
+					FoodList.createItem(
 						food.id,
 						I18n.t(food.nameTranslationKey),
 						food.thumbnail
+					)
+				);
+			case "Consumed food":
+				return R.map(
+					id => R.find(f => f.id === id, foods),
+					consumedFoodIdsByDay[formattedDay] || []
+				).map(food =>
+					FoodList.createItem(
+						food.id,
+						I18n.t(food.nameTranslationKey),
+						food.thumbnail
+					)
+				);
+			default:
+				return R.filter(food => food.groupId === group.id, foods)
+					.filter(food => !forbiddenFoodIds.includes(food.id))
+					.map(food =>
+						FoodList.createItem(
+							food.id,
+							I18n.t(food.nameTranslationKey),
+							food.thumbnail
+						)
 					);
-				});
 		}
 	}
 
@@ -165,7 +177,8 @@ class DailyTrackerScreen extends React.Component {
 			},
 			[
 				...groups,
-				{ id: "Forbidden food", nameTranslationKey: "food.group.forbidden" }
+				{ id: "Forbidden food", nameTranslationKey: "food.group.forbidden" },
+				{ id: "Consumed food", nameTranslationKey: "food.group.consumed" }
 			]
 		);
 

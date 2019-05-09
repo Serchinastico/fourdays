@@ -18,7 +18,8 @@
 			"second": "Grupo 2",
 			"third": "Grupo 3",
 			"fourth": "Grupo 4",
-			"forbidden": "Forbidden food"
+			"forbidden": "Comida prohibida",
+			"consumed": "Comida consumida"
 		},
 		"chard": "Acelgas",
 		"avocado": "Aguacate",

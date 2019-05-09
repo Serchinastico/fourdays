@@ -18,7 +18,8 @@
 			"second": "Group 2",
 			"third": "Group 3",
 			"fourth": "Group 4",
-			"forbidden": "Forbidden food"
+			"forbidden": "Forbidden food",
+			"consumed": "Consumed food"
 		},
 		"chard": "Chard",
 		"avocado": "Avocado",
