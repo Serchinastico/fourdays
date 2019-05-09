@@ -37,6 +37,9 @@ const styles = StyleSheet.create({
 	}
 });
 
+const FORBIDDEN_FOOD_GROUP_ID = "Forbidden food";
+const CONSUMED_FOOD_GROUP_ID = "Consumed food";
+
 class DailyTrackerScreen extends React.Component {
 	constructor(props) {
 		super(props);
@@ -104,24 +107,26 @@ class DailyTrackerScreen extends React.Component {
 		const formattedDay = day.format(dayFormatForStoringConsumedFoodIds);
 
 		switch (group.id) {
-			case "Forbidden food":
+			case FORBIDDEN_FOOD_GROUP_ID:
 				return R.map(
 					id => R.find(f => f.id === id, foods),
 					forbiddenFoodIds
 				).map(food =>
 					FoodList.createItem(
 						food.id,
+						FORBIDDEN_FOOD_GROUP_ID,
 						I18n.t(food.nameTranslationKey),
 						food.thumbnail
 					)
 				);
-			case "Consumed food":
+			case CONSUMED_FOOD_GROUP_ID:
 				return R.map(
 					id => R.find(f => f.id === id, foods),
 					consumedFoodIdsByDay[formattedDay] || []
 				).map(food =>
 					FoodList.createItem(
 						food.id,
+						CONSUMED_FOOD_GROUP_ID,
 						I18n.t(food.nameTranslationKey),
 						food.thumbnail
 					)
@@ -132,6 +137,7 @@ class DailyTrackerScreen extends React.Component {
 					.map(food =>
 						FoodList.createItem(
 							food.id,
+							"Group food",
 							I18n.t(food.nameTranslationKey),
 							food.thumbnail
 						)
@@ -177,8 +183,14 @@ class DailyTrackerScreen extends React.Component {
 			},
 			[
 				...groups,
-				{ id: "Forbidden food", nameTranslationKey: "food.group.forbidden" },
-				{ id: "Consumed food", nameTranslationKey: "food.group.consumed" }
+				{
+					id: FORBIDDEN_FOOD_GROUP_ID,
+					nameTranslationKey: "food.group.forbidden"
+				},
+				{
+					id: CONSUMED_FOOD_GROUP_ID,
+					nameTranslationKey: "food.group.consumed"
+				}
 			]
 		);
 

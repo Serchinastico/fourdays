@@ -25,8 +25,8 @@ class FoodList extends React.PureComponent {
 		};
 	}
 
-	static createItem(id, name, thumbnail) {
-		return { id, name, thumbnail };
+	static createItem(id, keyPrefix, name, thumbnail) {
+		return { id, keyPrefix, name, thumbnail };
 	}
 
 	static createDescriptionItem(title, description, marginTop) {
@@ -91,7 +91,7 @@ class FoodList extends React.PureComponent {
 		return R.splitEvery(3, foodItemsWithSelection).map(row => {
 			return {
 				type: FOOD_ROW_ITEM,
-				key: row[0].id,
+				key: `${row[0].keyPrefix}${row[0].id}`,
 				payload: row
 			};
 		});
@@ -108,7 +108,8 @@ class FoodList extends React.PureComponent {
 				key: payload.id,
 				payload: {
 					id: payload.id,
-					name: payload.name
+					name: payload.name,
+					hasFood: items.length > 0
 				}
 			},
 			...items
@@ -159,7 +160,7 @@ class FoodList extends React.PureComponent {
 		return (
 			<SetupFoodGroupHeader
 				id={payload.id}
-				isOpen={expandedGroupIds.includes(payload.id)}
+				isOpen={payload.hasFood && expandedGroupIds.includes(payload.id)}
 				name={payload.name}
 				onGroupSelected={this.onGroupSelected}
 			/>
