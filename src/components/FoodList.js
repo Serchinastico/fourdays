@@ -137,7 +137,11 @@ class FoodList extends React.PureComponent {
 		const allFoodItems = R.chain(item => {
 			return item.type === GROUP_ITEM ? item.payload.children : [];
 		}, items);
-		const filteredItems = fuzzySearch(searchExpression, "name", allFoodItems);
+
+		const filteredItems = R.uniqBy(
+			food => food.name,
+			fuzzySearch(searchExpression, "name", allFoodItems)
+		);
 		return [
 			FoodList.createPaddingItem(paddingTopForEmptySearch),
 			...this.mapFoodItemsIntoRows(filteredItems)
