@@ -84,6 +84,7 @@ class SetupScreen extends React.Component {
 		}, foods).map(food => {
 			return FoodList.createItem(
 				food.id,
+				"Group food",
 				I18n.t(food.nameTranslationKey),
 				food.thumbnail
 			);
