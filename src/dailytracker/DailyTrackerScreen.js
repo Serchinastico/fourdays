@@ -256,9 +256,13 @@ class DailyTrackerScreen extends React.Component {
 }
 
 function mapStateToProps(state) {
+	const { forbiddenFoodIds } = state.setup;
 	return {
 		groups: state.setup.groups,
-		foods: state.setup.foods,
+		foods: R.filter(
+			food => !forbiddenFoodIds.includes(food.id),
+			state.setup.foods
+		),
 		consumedFoodIdsByDay: state.dailyTracker.consumedFoodIdsByDay
 	};
 }
