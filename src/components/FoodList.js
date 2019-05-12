@@ -57,7 +57,11 @@ class FoodList extends React.PureComponent {
 		this.renderItem = this.renderItem.bind(this);
 		this.onGroupSelected = this.onGroupSelected.bind(this);
 		this.onFoodSelected = this.onFoodSelected.bind(this);
-		this.state = { expandedGroupIds: [], selectedFoodIds: [] };
+		const { selectedFoodIds } = this.props;
+		this.state = {
+			expandedGroupIds: [],
+			selectedFoodIds: selectedFoodIds || []
+		};
 	}
 
 	onGroupSelected(id) {

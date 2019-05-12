@@ -119,7 +119,7 @@
 		"setup": {
 			"description": {
 				"title": "Configuración",
-				"text": "Desde esta pantalla puedes configurar la comida que tienes permitido comer de tu dieta."
+				"text": "Deselecciona la comida que no puedes comer acorde a tus intolerancias y la dieta que estés siguiendo."
 			}
 		},
 		"dailyTracker": {
