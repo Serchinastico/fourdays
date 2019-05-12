@@ -51,5 +51,10 @@
 			"git add"
 		]
 	},
+	"rnpm": {
+		"assets": [
+			"./assets/fonts/"
+		]
+	},
 	"private": true
 }
