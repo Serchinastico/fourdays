@@ -107,42 +107,42 @@ class DailyTrackerScreen extends React.Component {
 		const day = moment(selectedDay);
 		const formattedDay = day.format(dayFormatForStoringConsumedFoodIds);
 
+		const filterByGroupId = R.filter(food => food.groupId === group.id);
+		const filterOutForbiddenFoods = R.filter(
+			food => !forbiddenFoodIds.includes(food.id)
+		);
+		const mapIdToFood = R.map(id => R.find(f => f.id === id, foods));
+		const mapFoodToFoodListItem = prefix =>
+			R.map(food =>
+				FoodList.createItem(
+					food.id,
+					prefix,
+					I18n.t(food.nameTranslationKey),
+					food.thumbnail
+				)
+			);
+		const sortByName = R.sortBy(item => item.name);
+
 		switch (group.id) {
 			case FORBIDDEN_FOOD_GROUP_ID:
-				return R.map(
-					id => R.find(f => f.id === id, foods),
-					forbiddenFoodIds
-				).map(food =>
-					FoodList.createItem(
-						food.id,
-						FORBIDDEN_FOOD_GROUP_ID,
-						I18n.t(food.nameTranslationKey),
-						food.thumbnail
-					)
-				);
+				return R.pipe(
+					mapIdToFood,
+					mapFoodToFoodListItem(FORBIDDEN_FOOD_GROUP_ID),
+					sortByName
+				)(forbiddenFoodIds);
 			case CONSUMED_FOOD_GROUP_ID:
-				return R.map(
-					id => R.find(f => f.id === id, foods),
-					consumedFoodIdsByDay[formattedDay] || []
-				).map(food =>
-					FoodList.createItem(
-						food.id,
-						CONSUMED_FOOD_GROUP_ID,
-						I18n.t(food.nameTranslationKey),
-						food.thumbnail
-					)
-				);
+				return R.pipe(
+					mapIdToFood,
+					mapFoodToFoodListItem(CONSUMED_FOOD_GROUP_ID),
+					sortByName
+				)(consumedFoodIdsByDay[formattedDay] || []);
 			default:
-				return R.filter(food => food.groupId === group.id, foods)
-					.filter(food => !forbiddenFoodIds.includes(food.id))
-					.map(food =>
-						FoodList.createItem(
-							food.id,
-							"Group food",
-							I18n.t(food.nameTranslationKey),
-							food.thumbnail
-						)
-					);
+				return R.pipe(
+					filterByGroupId,
+					filterOutForbiddenFoods,
+					mapFoodToFoodListItem("Group food"),
+					sortByName
+				)(foods);
 		}
 	}
 
