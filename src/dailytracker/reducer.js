@@ -1,4 +1,5 @@
 import * as R from "ramda";
+import addItemToListIfPresentRemoveOtherwise from "../common/collections";
 import { dayFormatForStoringConsumedFoodIds } from "./actions";
 import {
 	FETCH_CONSUMED_FOOD_FOR_DAY_FINISHED,
@@ -11,15 +12,17 @@ const initialSetupState = {
 };
 
 const onStoreConsumedFoodForDayStart = (state, payload) => {
-	const { ids, day } = payload;
+	const { id, day } = payload;
 
 	const formattedDay = day.format(dayFormatForStoringConsumedFoodIds);
+	const storedIds = state.consumedFoodIdsByDay[formattedDay];
+
 	return R.evolve(
 		{
 			consumedFoodIdsByDay: idsByDay => {
 				return {
 					...idsByDay,
-					[formattedDay]: ids
+					[formattedDay]: addItemToListIfPresentRemoveOtherwise(id, storedIds)
 				};
 			}
 		},

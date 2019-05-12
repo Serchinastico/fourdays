@@ -52,7 +52,8 @@ class DailyTrackerScreen extends React.Component {
 		this.state = {
 			isShowingCalendar: false,
 			selectedDay: moment(),
-			currentSearch: ""
+			currentSearch: "",
+			selectedFoodIds: []
 		};
 	}
 
@@ -64,11 +65,11 @@ class DailyTrackerScreen extends React.Component {
 		this.fetchFoodForSelectedDay();
 	}
 
-	onFoodSelected(selectedIds) {
+	onFoodSelected(selectedId) {
 		const { storeConsumedFoodForDay } = this.props;
 		const { selectedDay } = this.state;
 
-		storeConsumedFoodForDay(selectedIds, selectedDay);
+		storeConsumedFoodForDay(selectedId, selectedDay);
 	}
 
 	onSearchChange(text) {
@@ -166,12 +167,12 @@ class DailyTrackerScreen extends React.Component {
 	updateSelectedDay(updateBlock) {
 		const { selectedDay } = this.state;
 		const updatedDay = updateBlock(moment(selectedDay));
-		this.setState({ selectedDay: updatedDay });
+		this.setState({ selectedDay: updatedDay, selectedFoodIds: [] });
 	}
 
 	renderFoodList() {
 		const { groups } = this.props;
-		const { currentSearch } = this.state;
+		const { currentSearch, selectedFoodIds } = this.state;
 
 		const groupItems = R.map(
 			group => {
@@ -207,6 +208,7 @@ class DailyTrackerScreen extends React.Component {
 			<FoodList
 				items={items}
 				searchExpression={currentSearch}
+				selectedFoodIds={selectedFoodIds}
 				onFoodSelected={this.onFoodSelected}
 				looksAlwaysSelected
 				paddingTopForEmptySearch={148}
@@ -226,7 +228,11 @@ class DailyTrackerScreen extends React.Component {
 				<DaySelectorCalendar
 					selectedDay={selectedDay}
 					onAccept={day => {
-						this.setState({ isShowingCalendar: false, selectedDay: day });
+						this.setState({
+							isShowingCalendar: false,
+							selectedDay: day,
+							selectedFoodIds: []
+						});
 					}}
 					onCancel={this.hideCalendar}
 				/>

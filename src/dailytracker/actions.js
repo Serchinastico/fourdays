@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-community/async-storage";
 import moment from "moment";
+import addItemToListIfPresentRemoveOtherwise from "../common/collections";
 import {
 	STORE_CONSUMED_FOOD_FOR_DAY_START,
 	STORE_CONSUMED_FOOD_FOR_DAY_FINISHED,
@@ -23,8 +24,14 @@ async function getConsumedFoodIdsForDay(day) {
 	return ids === null ? [] : JSON.parse(ids);
 }
 
-async function addOrRemoveConsumedFoodIdForDay(day, ids) {
-	await AsyncStorage.setItem(getStorageKeyForDay(day), JSON.stringify(ids));
+async function addOrRemoveConsumedFoodIdForDay(day, id) {
+	const ids = await getConsumedFoodIdsForDay(day);
+	const updatedIds = addItemToListIfPresentRemoveOtherwise(id, ids || []);
+
+	await AsyncStorage.setItem(
+		getStorageKeyForDay(day),
+		JSON.stringify(updatedIds)
+	);
 	return ids;
 }
 
@@ -65,14 +72,14 @@ export function fetchForbiddenFoodForDay(day) {
 	};
 }
 
-export function storeConsumedFoodForDay(ids, day) {
+export function storeConsumedFoodForDay(id, day) {
 	return async dispatch => {
 		dispatch({
 			type: STORE_CONSUMED_FOOD_FOR_DAY_START,
-			payload: { ids, day }
+			payload: { id, day }
 		});
 
-		await addOrRemoveConsumedFoodIdForDay(day, ids);
+		await addOrRemoveConsumedFoodIdForDay(day, id);
 		dispatch({
 			type: STORE_CONSUMED_FOOD_FOR_DAY_FINISHED
 		});
