@@ -62,9 +62,13 @@ class SetupScreen extends React.Component {
 	}
 
 	onAcceptPress() {
-		const { storeForbiddenFood, navigation } = this.props;
+		const { storeForbiddenFood, foods, navigation } = this.props;
 		const { selectedFoodIds } = this.state;
-		storeForbiddenFood(selectedFoodIds);
+		const forbiddenFoodIds = R.without(
+			selectedFoodIds,
+			R.map(f => f.id, foods)
+		);
+		storeForbiddenFood(forbiddenFoodIds);
 		navigation.navigate("DailyTracker");
 	}
 
@@ -92,7 +96,7 @@ class SetupScreen extends React.Component {
 	}
 
 	renderFoodList() {
-		const { groups } = this.props;
+		const { foods, groups } = this.props;
 		const { currentSearch } = this.state;
 
 		const groupItems = R.map(group => {
@@ -113,9 +117,12 @@ class SetupScreen extends React.Component {
 			FoodList.createPaddingItem(80, "bottomPadding")
 		];
 
+		const selectedFoodIds = R.map(f => f.id, foods);
+
 		return (
 			<FoodList
 				items={items}
+				selectedFoodIds={selectedFoodIds}
 				searchExpression={currentSearch}
 				onFoodSelected={this.onFoodSelected}
 				paddingTopForEmptySearch={98}
