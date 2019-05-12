@@ -199,7 +199,7 @@ class FoodList extends React.PureComponent {
 				? this.mapToFlatListItems(items)
 				: this.mapToFlatListItemsWithSearchExpression(items, searchExpression);
 
-		if (searchExpression !== "" && flatListItems.length === 1) {
+		if (searchExpression !== "" && flatListItems.length === 2) {
 			return <EmptySearch />;
 		} else {
 			return <FlatList data={flatListItems} renderItem={this.renderItem} />;
