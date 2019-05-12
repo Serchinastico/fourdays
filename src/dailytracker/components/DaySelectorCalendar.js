@@ -41,9 +41,13 @@ class DaySelectorCalendar extends React.PureComponent {
 	}
 
 	onAcceptSelected() {
-		const { onAccept } = this.props;
+		const { onAccept, onCancel } = this.props;
 		const { inCalendarSelectedDay } = this.state;
-		onAccept(inCalendarSelectedDay);
+		if (inCalendarSelectedDay === null) {
+			onCancel();
+		} else {
+			onAccept(inCalendarSelectedDay);
+		}
 		this.setState({ inCalendarSelectedDay: null });
 	}
 

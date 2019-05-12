@@ -68,7 +68,13 @@ class DaySelector extends React.PureComponent {
 		const { selectedDay } = this.props;
 		const today = moment();
 
-		if (selectedDay.year() === today.year()) {
+		if (selectedDay === null) {
+			return (
+				<Text style={styles.currentDayText}>
+					{today.format(dayFormatForDisplayInThisYear)}
+				</Text>
+			);
+		} else if (selectedDay.year() === today.year()) {
 			return (
 				<Text style={styles.currentDayText}>
 					{selectedDay.format(dayFormatForDisplayInThisYear)}
