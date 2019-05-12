@@ -91,7 +91,7 @@ const initialSetupState = {
 			id: "cod",
 			nameTranslationKey: "food.cod",
 			thumbnail: require("../images/food/cod.jpg"),
-			groupId: "Group 2"
+			groupId: "Group 3"
 		},
 		{
 			id: "sweet potato",
@@ -196,14 +196,12 @@ const initialSetupState = {
 			groupId: "Group 4"
 		},
 		{
-			// TODO GERSIO Champiñon no va en ningun lado
 			id: "mushroom",
 			nameTranslationKey: "food.mushroom",
 			thumbnail: require("../images/food/mushroom.jpg"),
 			groupId: "Group 1"
 		},
 		{
-			// TODO GERSIO Zanahoria no va en ningun lado
 			id: "carrot",
 			nameTranslationKey: "food.carrot",
 			thumbnail: require("../images/food/carrot.jpg"),
@@ -366,7 +364,6 @@ const initialSetupState = {
 			groupId: "Group 3"
 		},
 		{
-			// TODO GERSIO Rábano no va en ningun lado
 			id: "radish",
 			nameTranslationKey: "food.radish",
 			thumbnail: require("../images/food/radish.jpg"),
@@ -581,6 +578,90 @@ const initialSetupState = {
 			nameTranslationKey: "food.greenBeans",
 			thumbnail: require("../images/food/greenBeans.jpg"),
 			groupId: "Group 1"
+		},
+		{
+			id: "wholemeal bread",
+			nameTranslationKey: "food.wholemealBread",
+			thumbnail: require("../images/food/wholemealBread.jpg"),
+			groupId: "Group 2"
+		},
+		{
+			id: "soy",
+			nameTranslationKey: "food.soy",
+			thumbnail: require("../images/food/soy.jpg"),
+			groupId: "Group 2"
+		},
+		{
+			id: "spelled wheat",
+			nameTranslationKey: "food.spelledWheat",
+			thumbnail: require("../images/food/spelledWheat.jpg"),
+			groupId: "Group 2"
+		},
+		{
+			id: "italian pasta",
+			nameTranslationKey: "food.italianPasta",
+			thumbnail: require("../images/food/italianPasta.jpg"),
+			groupId: "Group 2"
+		},
+		{
+			id: "bass",
+			nameTranslationKey: "food.bass",
+			thumbnail: require("../images/food/bass.jpg"),
+			groupId: "Group 3"
+		},
+		{
+			id: "gilt-head seabream",
+			nameTranslationKey: "food.giltHeadSeabream",
+			thumbnail: require("../images/food/giltHeadSeabream.jpg"),
+			groupId: "Group 3"
+		},
+		{
+			id: "squid",
+			nameTranslationKey: "food.squid",
+			thumbnail: require("../images/food/squid.jpg"),
+			groupId: "Group 3"
+		},
+		{
+			id: "egg",
+			nameTranslationKey: "food.egg",
+			thumbnail: require("../images/food/egg.jpg"),
+			groupId: "Group 3"
+		},
+		{
+			id: "scallops",
+			nameTranslationKey: "food.scallops",
+			thumbnail: require("../images/food/scallops.jpg"),
+			groupId: "Group 3"
+		},
+		{
+			id: "cheese",
+			nameTranslationKey: "food.cheese",
+			thumbnail: require("../images/food/cheese.jpg"),
+			groupId: "Group 3"
+		},
+		{
+			id: "yogurt",
+			nameTranslationKey: "food.yogurt",
+			thumbnail: require("../images/food/yogurt.jpg"),
+			groupId: "Group 3"
+		},
+		{
+			id: "pineapple",
+			nameTranslationKey: "food.pineapple",
+			thumbnail: require("../images/food/pineapple.jpg"),
+			groupId: "Group 4"
+		},
+		{
+			id: "apricot",
+			nameTranslationKey: "food.apricot",
+			thumbnail: require("../images/food/apricot.jpg"),
+			groupId: "Group 4"
+		},
+		{
+			id: "papaya",
+			nameTranslationKey: "food.papaya",
+			thumbnail: require("../images/food/papaya.jpg"),
+			groupId: "Group 4"
 		}
 	],
 	forbiddenFoodIds: undefined

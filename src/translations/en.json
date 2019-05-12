@@ -113,7 +113,21 @@
 		"whiteBeans": "White beans",
 		"yellowBeans": "Yellow beans",
 		"cranberryBeans": "Cranberry beans",
-		"kiwi": "Kiwi"
+		"kiwi": "Kiwi",
+		"wholemealBread": "Wholemeal bread",
+		"soy": "Soy",
+		"spelledWheat": "Spelled wheat",
+		"italianPasta": "Italian pasta",
+		"bass": "Bass",
+		"giltHeadSeabream": "Gilt-Head seabream",
+		"squid": "Squid",
+		"egg": "Egg",
+		"scallops": "Scallops",
+		"cheese": "Cheese",
+		"yogurt": "Yogurt",
+		"pineapple": "Pineapple",
+		"apricot": "Apricot",
+		"papaya": "Papaya"
 	},
 	"screen": {
 		"setup": {
