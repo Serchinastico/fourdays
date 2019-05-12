@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, TextInput, StyleSheet, View } from "react-native";
 import I18n from "../translations/i18n";
-import { color } from "./style/style";
+import { color, style } from "./style/style";
 
 const styles = StyleSheet.create({
 	shadowContainer: {
@@ -24,7 +24,10 @@ const styles = StyleSheet.create({
 		marginLeft: 16
 	},
 	textInput: {
+		...style.extraLargeRegularNeutral,
 		marginLeft: 16,
+		marginBottom: -4,
+		textAlignVertical: "center",
 		flex: 1
 	}
 });
@@ -42,6 +45,7 @@ class SearchBar extends React.PureComponent {
 					<TextInput
 						style={styles.textInput}
 						placeholder={I18n.t("common.search.placeholder")}
+						placeholderTextColor={color.black50}
 						onChangeText={text => onChangeText(text)}
 					/>
 				</View>
