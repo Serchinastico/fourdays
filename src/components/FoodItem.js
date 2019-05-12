@@ -40,11 +40,13 @@ const styles = StyleSheet.create({
 	name: {
 		...style.midRegularPrimary,
 		alignSelf: "center",
+		textAlign: "center",
 		margin: 8
 	},
 	disabledName: {
 		...style.midRegularDisabled,
 		alignSelf: "center",
+		textAlign: "center",
 		margin: 8
 	}
 });
