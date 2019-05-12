@@ -1,6 +1,7 @@
 import * as R from "ramda";
 import React from "react";
 import { FlatList, View } from "react-native";
+import addItemToListIfPresentRemoveOtherwise from "../common/collections";
 import fuzzySearch from "../FuzzySearch";
 import SetupFoodGroupHeader from "../setup/components/SetupFoodGroupHeader";
 import SetupFoodRow from "../setup/components/SetupFoodRow";
@@ -44,49 +45,32 @@ class FoodList extends React.PureComponent {
 		};
 	}
 
-	static addOrRemoveIdToListOfIds(id, list) {
-		if (list.includes(id)) {
-			return R.without([id], list);
-		} else {
-			return R.append(id, list);
-		}
-	}
-
 	constructor(props) {
 		super(props);
 		this.renderItem = this.renderItem.bind(this);
 		this.onGroupSelected = this.onGroupSelected.bind(this);
 		this.onFoodSelected = this.onFoodSelected.bind(this);
-		const { selectedFoodIds } = this.props;
-		this.state = {
-			expandedGroupIds: [],
-			selectedFoodIds: selectedFoodIds || []
-		};
+		this.state = { expandedGroupIds: [] };
 	}
 
 	onGroupSelected(id) {
 		const { expandedGroupIds } = this.state;
 
 		this.setState({
-			expandedGroupIds: FoodList.addOrRemoveIdToListOfIds(id, expandedGroupIds)
+			expandedGroupIds: addItemToListIfPresentRemoveOtherwise(
+				id,
+				expandedGroupIds
+			)
 		});
 	}
 
 	onFoodSelected(id) {
-		const { selectedFoodIds } = this.state;
 		const { onFoodSelected } = this.props;
-
-		const updatedFoodIds = FoodList.addOrRemoveIdToListOfIds(
-			id,
-			selectedFoodIds
-		);
-		this.setState({ selectedFoodIds: updatedFoodIds });
-		onFoodSelected(updatedFoodIds);
+		onFoodSelected(id);
 	}
 
 	mapFoodItemsIntoRows(foodItems) {
-		const { selectedFoodIds } = this.state;
-		let { looksAlwaysSelected } = this.props;
+		let { selectedFoodIds, looksAlwaysSelected } = this.props;
 		looksAlwaysSelected = looksAlwaysSelected || false;
 
 		const foodItemsWithSelection = R.map(item => {

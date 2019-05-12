@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
 import * as R from "ramda";
+import addItemToListIfPresentRemoveOtherwise from "../common/collections";
 import FoodList from "../components/FoodList";
 import SearchBar from "../components/SearchBar";
 import AcceptButton from "../components/AcceptButton";
@@ -55,9 +56,10 @@ class SetupScreen extends React.Component {
 		this.onSearchChange = this.onSearchChange.bind(this);
 		this.onAcceptPress = this.onAcceptPress.bind(this);
 		this.onFoodSelected = this.onFoodSelected.bind(this);
+		const { foods } = this.props;
 		this.state = {
 			currentSearch: "",
-			selectedFoodIds: []
+			selectedFoodIds: R.map(f => f.id, foods)
 		};
 	}
 
@@ -72,8 +74,13 @@ class SetupScreen extends React.Component {
 		navigation.navigate("DailyTracker");
 	}
 
-	onFoodSelected(foodIds) {
-		this.setState({ selectedFoodIds: foodIds });
+	onFoodSelected(foodId) {
+		const { selectedFoodIds } = this.state;
+		const updatedSelectedFoodIds = addItemToListIfPresentRemoveOtherwise(
+			foodId,
+			selectedFoodIds
+		);
+		this.setState({ selectedFoodIds: updatedSelectedFoodIds });
 	}
 
 	onSearchChange(text) {
@@ -96,8 +103,8 @@ class SetupScreen extends React.Component {
 	}
 
 	renderFoodList() {
-		const { foods, groups } = this.props;
-		const { currentSearch } = this.state;
+		const { groups } = this.props;
+		const { currentSearch, selectedFoodIds } = this.state;
 
 		const groupItems = R.map(group => {
 			return FoodList.createGroupItem(
@@ -116,8 +123,6 @@ class SetupScreen extends React.Component {
 			...groupItems,
 			FoodList.createPaddingItem(80, "bottomPadding")
 		];
-
-		const selectedFoodIds = R.map(f => f.id, foods);
 
 		return (
 			<FoodList
