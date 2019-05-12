@@ -37,7 +37,7 @@
 		"cockles": "Berberechos",
 		"eggplant": "Berenjena",
 		"watercress": "Berro",
-		"anchovy": "Anchoas",
+		"anchovy": "Anchoas / Boquerones",
 		"broccoli": "Brocoli",
 		"zucchini": "Calabacín",
 		"pumpkin": "Calabaza",
@@ -113,7 +113,21 @@
 		"whiteBeans": "Judías blancas",
 		"yellowBeans": "Judías amarillas",
 		"cranberryBeans": "Frijoles",
-		"kiwi": "Kiwi"
+		"kiwi": "Kiwi",
+		"wholemealBread": "Pan integral",
+		"soy": "Soja",
+		"spelledWheat": "Trigo de espelta",
+		"italianPasta": "Pasta italiana",
+		"bass": "Lubina",
+		"giltHeadSeabream": "Dorada",
+		"squid": "Calamar",
+		"egg": "Huevos",
+		"scallops": "Vieiras",
+		"cheese": "Queso",
+		"yogurt": "Yogur",
+		"pineapple": "Piña",
+		"apricot": "Albaricoque",
+		"papaya": "Papaya"
 	},
 	"screen": {
 		"setup": {
