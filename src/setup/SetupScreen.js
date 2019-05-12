@@ -90,16 +90,22 @@ class SetupScreen extends React.Component {
 	getChildrenFromGroup(group) {
 		const { foods } = this.props;
 
-		return R.filter(food => {
-			return food.groupId === group.id;
-		}, foods).map(food => {
-			return FoodList.createItem(
+		const filterByGroupId = R.filter(food => food.groupId === group.id);
+		const mapToFoodListItem = R.map(food =>
+			FoodList.createItem(
 				food.id,
 				"Group food",
 				I18n.t(food.nameTranslationKey),
 				food.thumbnail
-			);
-		});
+			)
+		);
+		const sortByName = R.sortBy(item => item.name);
+
+		return R.pipe(
+			filterByGroupId,
+			mapToFoodListItem,
+			sortByName
+		)(foods);
 	}
 
 	renderFoodList() {
