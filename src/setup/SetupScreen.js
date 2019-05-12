@@ -109,7 +109,8 @@ class SetupScreen extends React.Component {
 				I18n.t("screen.setup.description.text"),
 				80
 			),
-			...groupItems
+			...groupItems,
+			FoodList.createPaddingItem(80, "bottomPadding")
 		];
 
 		return (
@@ -118,6 +119,7 @@ class SetupScreen extends React.Component {
 				searchExpression={currentSearch}
 				onFoodSelected={this.onFoodSelected}
 				paddingTopForEmptySearch={98}
+				paddingBottomForSearch={80}
 			/>
 		);
 	}

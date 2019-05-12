@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 });
 
 class SetupFoodGroupHeader extends React.PureComponent {
-	getOpenCloseImage(isOpen) {
+	static getOpenCloseImage(isOpen) {
 		if (isOpen) {
 			return (
 				<Image
@@ -54,7 +54,7 @@ class SetupFoodGroupHeader extends React.PureComponent {
 			>
 				<View style={styles.container}>
 					<Text style={styles.text}>{name}</Text>
-					{this.getOpenCloseImage(isOpen)}
+					{SetupFoodGroupHeader.getOpenCloseImage(isOpen)}
 				</View>
 			</TouchableHighlight>
 		);

@@ -14,8 +14,12 @@ const HEADER_ITEM = "Header";
 const FOOD_ROW_ITEM = "Row";
 
 class FoodList extends React.PureComponent {
-	static createPaddingItem(height) {
-		return { type: PADDING_ITEM, key: PADDING_ITEM, payload: height };
+	static createPaddingItem(height, keyPrefix) {
+		return {
+			type: PADDING_ITEM,
+			key: `${keyPrefix}-padding`,
+			payload: { height }
+		};
 	}
 
 	static createGroupItem(id, name, children) {
@@ -123,6 +127,8 @@ class FoodList extends React.PureComponent {
 			switch (item.type) {
 				case DESCRIPTION_ITEM:
 					return [{ ...item, key: item.type }];
+				case PADDING_ITEM:
+					return [item];
 				case GROUP_ITEM:
 					return this.mapGroupItemToFlatListItems(
 						item.payload,
@@ -133,7 +139,7 @@ class FoodList extends React.PureComponent {
 	}
 
 	mapToFlatListItemsWithSearchExpression(items, searchExpression) {
-		const { paddingTopForEmptySearch } = this.props;
+		const { paddingTopForEmptySearch, paddingBottomForSearch } = this.props;
 		const allFoodItems = R.chain(item => {
 			return item.type === GROUP_ITEM ? item.payload.children : [];
 		}, items);
@@ -143,8 +149,15 @@ class FoodList extends React.PureComponent {
 			fuzzySearch(searchExpression, "name", allFoodItems)
 		);
 		return [
-			FoodList.createPaddingItem(paddingTopForEmptySearch),
-			...this.mapFoodItemsIntoRows(filteredItems)
+			FoodList.createPaddingItem(
+				paddingTopForEmptySearch,
+				"searchListTopPadding"
+			),
+			...this.mapFoodItemsIntoRows(filteredItems),
+			FoodList.createPaddingItem(
+				paddingBottomForSearch || 0,
+				"searchListBottomPadding"
+			)
 		];
 	}
 
@@ -180,7 +193,7 @@ class FoodList extends React.PureComponent {
 	renderItem({ item }) {
 		switch (item.type) {
 			case PADDING_ITEM:
-				return <View style={{ height: item.payload }} />;
+				return <View style={{ height: item.payload.height }} />;
 			case DESCRIPTION_ITEM:
 				return FoodList.renderDescriptionItem(item.payload);
 			case HEADER_ITEM:
