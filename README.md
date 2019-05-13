@@ -1,2 +1,2 @@
-# 4Days
-Code for the 4Days application
+# Four Days
+Code for the Four Days application
