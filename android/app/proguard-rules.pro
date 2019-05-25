@@ -15,3 +15,9 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-dontwarn **
+-keep class okio.** { *; }
+-keep class com.swmansion.gesturehandler.** { *; }
+-keep class com.facebook.** { *; }
+-keep class bolts.** { *; }
+-keep class com.BV.LinearGradient.** { *; }
