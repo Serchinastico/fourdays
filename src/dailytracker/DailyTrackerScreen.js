@@ -4,13 +4,12 @@ import React from "react";
 import { View, StyleSheet, TouchableHighlight, Image } from "react-native";
 import { Dialog } from "react-native-popup-dialog/src";
 import { connect } from "react-redux";
-import RNHTMLtoPDF from "react-native-html-to-pdf";
-import Share from "react-native-share";
 import FoodList from "../components/FoodList";
 import SearchBar from "../components/SearchBar";
 import I18n from "../translations/i18n";
 import {
 	dayFormatForStoringConsumedFoodIds,
+	shareMonthlyReport,
 	fetchForbiddenFoodForDay,
 	storeConsumedFoodForDay
 } from "./actions";
@@ -54,9 +53,8 @@ class DailyTrackerScreen extends React.Component {
 		this.onPreviousDayPressed = this.onPreviousDayPressed.bind(this);
 		this.onNextDayPressed = this.onNextDayPressed.bind(this);
 		this.onSearchChange = this.onSearchChange.bind(this);
-		DailyTrackerScreen.onSetupPressed = DailyTrackerScreen.onSetupPressed.bind(
-			this
-		);
+		this.onSetupPressed = this.onSetupPressed.bind(this);
+		this.onSharePressed = this.onSharePressed.bind(this);
 		this.showCalendar = this.showCalendar.bind(this);
 		this.hideCalendar = this.hideCalendar.bind(this);
 		this.state = {
@@ -86,20 +84,15 @@ class DailyTrackerScreen extends React.Component {
 		this.setState({ currentSearch: text });
 	}
 
-	static async onSetupPressed() {
-		let options = {
-			html: "<h1>PDF TEST</h1>",
-			fileName: "Reporte"
-		};
+	onSetupPressed() {
+		const { navigation } = this.props;
+		navigation.navigate("Setup");
+	}
+	onSharePressed() {
+		const { shareMonthlyReport } = this.props;
+		const { selectedDay } = this.state;
 
-		let file = await RNHTMLtoPDF.convert(options);
-
-		await Share.open({
-			title: "This is my report ",
-			message: "Message:",
-			url: `file://${file.filePath}`,
-			subject: "Report"
-		});
+		shareMonthlyReport(selectedDay);
 	}
 
 	onPreviousDayPressed() {
@@ -292,11 +285,20 @@ class DailyTrackerScreen extends React.Component {
 						<SearchBar style={{ flex: 1 }} onChangeText={this.onSearchChange} />
 						<TouchableHighlight
 							underlayColor={color.black05}
-							onPress={DailyTrackerScreen.onSetupPressed}
+							onPress={this.onSetupPressed}
 						>
 							<Image
 								style={styles.setupIcon}
 								source={require("../images/icon/Configure.png")}
+							/>
+						</TouchableHighlight>
+						<TouchableHighlight
+							underlayColor={color.black05}
+							onPress={this.onSharePressed}
+						>
+							<Image
+								style={styles.setupIcon}
+								source={require("../images/icon/Share.png")}
 							/>
 						</TouchableHighlight>
 					</View>
@@ -329,5 +331,5 @@ function mapStateToProps(state) {
 
 export default connect(
 	mapStateToProps,
-	{ fetchForbiddenFoodForDay, storeConsumedFoodForDay }
+	{ shareMonthlyReport, fetchForbiddenFoodForDay, storeConsumedFoodForDay }
 )(DailyTrackerScreen);
