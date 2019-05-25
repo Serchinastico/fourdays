@@ -126,16 +126,18 @@ class DailyTrackerScreen extends React.Component {
 		const filterOutForbiddenFoods = R.filter(
 			food => !allForbiddenFoodIds.includes(food.id)
 		);
+		const filterOutForbiddenFood = R.filter(food => food !== undefined);
 		const mapIdToFood = R.map(id => R.find(f => f.id === id, foods));
+
 		const mapFoodToFoodListItem = prefix =>
-			R.map(food =>
-				FoodList.createItem(
+			R.map(food => {
+				return FoodList.createItem(
 					food.id,
 					prefix,
 					I18n.t(food.nameTranslationKey),
 					food.thumbnail
-				)
-			);
+				);
+			});
 		const sortByName = R.sortBy(item => item.name);
 
 		const groupByDaysSinceLastConsumption = R.groupBy(food => {
@@ -149,12 +151,14 @@ class DailyTrackerScreen extends React.Component {
 			case FORBIDDEN_FOOD_GROUP_ID:
 				return R.pipe(
 					mapIdToFood,
+					filterOutForbiddenFood,
 					mapFoodToFoodListItem(FORBIDDEN_FOOD_GROUP_ID),
 					groupByDaysSinceLastConsumption
 				)(allForbiddenFoodIds);
 			case CONSUMED_FOOD_GROUP_ID:
 				return R.pipe(
 					mapIdToFood,
+					filterOutForbiddenFood,
 					mapFoodToFoodListItem(CONSUMED_FOOD_GROUP_ID),
 					sortByName
 				)(consumedFoodIdsByDay[formattedDay] || []);
@@ -297,6 +301,7 @@ class DailyTrackerScreen extends React.Component {
 
 function mapStateToProps(state) {
 	const { forbiddenFoodIds } = state.setup;
+
 	return {
 		groups: state.setup.groups,
 		foods: R.filter(
