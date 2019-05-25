@@ -2,6 +2,8 @@ package com.fourdays.setup
 
 import android.content.Intent
 import android.support.test.espresso.intent.rule.IntentsTestRule
+import com.facebook.react.bridge.ReactMarker
+import com.facebook.react.bridge.ReactMarkerConstants
 import com.facebook.testing.screenshot.Screenshot
 import com.fourdays.MainActivity
 import org.junit.Rule
@@ -24,12 +26,24 @@ class SetupScreenshotTest {
     fun theActivityIsShownProperly() {
         val activity = startActivity()
 
-        Thread.sleep(5000)
-
         Screenshot.snapActivity(activity).record()
     }
 
     private fun startActivity(): MainActivity {
-        return testRule.launchActivity(Intent())
+        val activity = testRule.launchActivity(Intent())
+        waitForBundleToLoad()
+        return activity
+    }
+
+    private fun waitForBundleToLoad() {
+        var canContinue = false
+        ReactMarker.addListener { name, _, _ ->
+            if (name == ReactMarkerConstants.CONTENT_APPEARED) {
+                canContinue = true
+            }
+        }
+        while (!canContinue) {
+            Thread.sleep(10)
+        }
     }
 }
