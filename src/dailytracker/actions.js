@@ -53,6 +53,16 @@ export function shareMonthlyReport(day) {
 
 		const firstDayOfMonth = moment(day).startOf("month");
 		const lastDayOfMonth = moment(day).endOf("month");
+
+		const consumedFoodIdsForDays = {};
+		let queryDay = moment(firstDayOfMonth);
+		while (queryDay.isSameOrBefore(lastDayOfMonth)) {
+			consumedFoodIdsForDays[queryDay] = await getConsumedFoodIdsForDay(
+				queryDay
+			);
+			queryDay.add("1", "days");
+		}
+
 		const numberOfDaysPastMonday = (firstDayOfMonth.day() - 1) % 7;
 		const numberOfDaysToFillFirstWeek = 7 - numberOfDaysPastMonday;
 
@@ -65,20 +75,47 @@ export function shareMonthlyReport(day) {
 			i => `<td class="dayNumber">${i}</td>`,
 			R.range(1, numberOfDaysToFillFirstWeek + 1)
 		);
+		const firstWeekFillingForbiddenFoodIds = R.pipe(
+			R.map(i => moment(firstDayOfMonth).add(i - 1, "days")),
+			R.map(day => consumedFoodIdsForDays[day]),
+			R.map(ids => R.join("</p><p>", ids || [])),
+			R.map(content => `<td class="foodName"><p>${content}</p></td>`)
+		)(R.range(1, numberOfDaysToFillFirstWeek + 1));
+
 		const firstWeek = R.join("", [
 			...firstWeekEmptyDays,
 			...firstWeekFillingDays
 		]);
+		const firstWeekFoodIds = R.join("", [
+			...firstWeekEmptyDays,
+			...firstWeekFillingForbiddenFoodIds
+		]);
+
 		const weeksOtherThanFirst = R.pipe(
 			R.map(i => `<td class="dayNumber">${i}</td>`),
 			R.splitEvery(7),
 			R.map(s => R.join("", s))
 		)(R.range(numberOfDaysToFillFirstWeek + 1, lastDayOfMonth.date() + 1));
 
+		const weeksOtherThanFirstFoodIds = R.pipe(
+			R.map(i => moment(firstDayOfMonth).add(i - 1, "days")),
+
+			R.map(day => consumedFoodIdsForDays[day]),
+			R.map(ids => R.join("</p><p>", ids || [])),
+			R.map(content => `<td class="foodName"><p>${content}</p></td>`),
+			R.splitEvery(7),
+			R.map(s => R.join("", s))
+		)(R.range(numberOfDaysToFillFirstWeek + 1, lastDayOfMonth.date() + 1));
+
 		const content =
 			"<tr>" +
-			R.join("</tr><tr>", [firstWeek, ...weeksOtherThanFirst]) +
+			R.join("</tr><tr>", [
+				firstWeek,
+				firstWeekFoodIds,
+				...R.flatten(R.zip(weeksOtherThanFirst, weeksOtherThanFirstFoodIds))
+			]) +
 			"</tr>";
+
 		contentsInHtml = contentsInHtml
 			.replace("%TITLE%", I18n.t("report.title"))
 			.replace("%DATE%", day.format(monthFormat))
@@ -99,8 +136,11 @@ export function shareMonthlyReport(day) {
 		let file = await RNHTMLtoPDF.convert(options);
 
 		await Share.open({
-			title: "This is my report ",
-			message: "Message:",
+			title: I18n.t("report.sharingTitle"),
+			message: I18n.t("report.sharingMessage").replace(
+				"%s",
+				day.format(monthFormat)
+			),
 			url: `file://${file.filePath}`,
 			subject: "Report"
 		});

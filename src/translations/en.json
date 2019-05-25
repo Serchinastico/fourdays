@@ -131,6 +131,8 @@
 	},
 	"report": {
 		"title": "Monthly report",
+		"sharingTitle": "Share my monthly report",
+		"sharingMessage": "This is my Four Days report for %s",
 		"monday": "Monday",
 		"tuesday": "Tuesday",
 		"wednesday": "Wednesday",

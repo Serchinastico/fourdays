@@ -22,6 +22,5 @@ target "fourdays" do
 
   pod 'RNShare', :path => '../node_modules/react-native-share'
 
-  pod 'RNFS', :path => '../node_modules/react-native-fs'
 
 end

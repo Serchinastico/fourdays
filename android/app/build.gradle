@@ -167,7 +167,6 @@ android {
 }
 
 dependencies {
-    implementation project(':react-native-fs')
     implementation project(':react-native-share')
     implementation project(':react-native-html-to-pdf')
     implementation project(':react-native-localize')

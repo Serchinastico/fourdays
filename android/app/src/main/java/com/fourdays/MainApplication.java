@@ -6,7 +6,6 @@ import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.christopherdro.htmltopdf.RNHTMLtoPDFPackage;
 import com.facebook.react.ReactApplication;
-import com.rnfs.RNFSPackage;
 import cl.json.RNSharePackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -31,7 +30,6 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
     protected List<ReactPackage> getPackages() {
       return Arrays.asList(
           new MainReactPackage(),
-            new RNFSPackage(),
             new RNSharePackage(),
             new RNHTMLtoPDFPackage(),
             new RNLocalizePackage(),
