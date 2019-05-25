@@ -129,6 +129,16 @@
 		"apricot": "Albaricoque",
 		"papaya": "Papaya"
 	},
+	"report": {
+		"title": "Reporte mensual",
+		"monday": "Lunes",
+		"tuesday": "Martes",
+		"wednesday": "Miércoles",
+		"thursday": "Jueves",
+		"friday": "Viernes",
+		"saturday": "Sábado",
+		"sunday": "Domingo"
+	},
 	"screen": {
 		"setup": {
 			"description": {

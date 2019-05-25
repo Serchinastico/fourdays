@@ -129,6 +129,16 @@
 		"apricot": "Apricot",
 		"papaya": "Papaya"
 	},
+	"report": {
+		"title": "Monthly report",
+		"monday": "Monday",
+		"tuesday": "Tuesday",
+		"wednesday": "Wednesday",
+		"thursday": "Thursday",
+		"friday": "Friday",
+		"saturday": "Saturday",
+		"sunday": "Sunday"
+	},
 	"screen": {
 		"setup": {
 			"description": {

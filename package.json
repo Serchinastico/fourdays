@@ -17,6 +17,7 @@
 		"react-native": "^0.59.4",
 		"react-native-button": "^2.3.0",
 		"react-native-calendars": "^1.32.0",
+		"react-native-fs": "^2.13.3",
 		"react-native-gesture-handler": "^1.1.0",
 		"react-native-html-to-pdf": "^0.7.0",
 		"react-native-i18n": "^2.0.15",
