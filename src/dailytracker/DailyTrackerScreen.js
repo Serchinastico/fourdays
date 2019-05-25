@@ -92,16 +92,20 @@ class DailyTrackerScreen extends React.Component {
 		const { foods, consumedFoodIdsByDay } = this.props;
 		const { selectedDay } = this.state;
 
-		const forbiddenFoodIds = R.uniq(
-			R.chain(
-				i => {
-					const day = moment(selectedDay);
-					day.subtract(i, "day");
-					const formattedDay = day.format(dayFormatForStoringConsumedFoodIds);
-					return consumedFoodIdsByDay[formattedDay] || [];
-				},
-				[0, 1, 2, 3]
-			)
+		const daysUpToFourDaysAgo = [0, 1, 2, 3];
+		const forbiddenFoodIdsForForTodayMinusDays = days => {
+			const day = moment(selectedDay);
+			day.subtract(days, "day");
+			const formattedDay = day.format(dayFormatForStoringConsumedFoodIds);
+			return consumedFoodIdsByDay[formattedDay] || [];
+		};
+		const allForbiddenFoodIds = R.uniq(
+			R.chain(forbiddenFoodIdsForForTodayMinusDays, daysUpToFourDaysAgo)
+		);
+
+		const forbiddenFoodIdsByDay = R.map(
+			forbiddenFoodIdsForForTodayMinusDays,
+			daysUpToFourDaysAgo
 		);
 
 		const day = moment(selectedDay);
@@ -109,7 +113,7 @@ class DailyTrackerScreen extends React.Component {
 
 		const filterByGroupId = R.filter(food => food.groupId === group.id);
 		const filterOutForbiddenFoods = R.filter(
-			food => !forbiddenFoodIds.includes(food.id)
+			food => !allForbiddenFoodIds.includes(food.id)
 		);
 		const mapIdToFood = R.map(id => R.find(f => f.id === id, foods));
 		const mapFoodToFoodListItem = prefix =>
@@ -123,13 +127,20 @@ class DailyTrackerScreen extends React.Component {
 			);
 		const sortByName = R.sortBy(item => item.name);
 
+		const groupByDaysSinceLastConsumption = R.groupBy(food => {
+			return R.find(
+				i => forbiddenFoodIdsByDay[i].includes(food.id),
+				daysUpToFourDaysAgo
+			);
+		});
+
 		switch (group.id) {
 			case FORBIDDEN_FOOD_GROUP_ID:
 				return R.pipe(
 					mapIdToFood,
 					mapFoodToFoodListItem(FORBIDDEN_FOOD_GROUP_ID),
-					sortByName
-				)(forbiddenFoodIds);
+					groupByDaysSinceLastConsumption
+				)(allForbiddenFoodIds);
 			case CONSUMED_FOOD_GROUP_ID:
 				return R.pipe(
 					mapIdToFood,
@@ -179,7 +190,8 @@ class DailyTrackerScreen extends React.Component {
 				return FoodList.createGroupItem(
 					group.id,
 					I18n.t(group.nameTranslationKey),
-					this.getChildrenFromGroup(group)
+					this.getChildrenFromGroup(group),
+					group.id === FORBIDDEN_FOOD_GROUP_ID
 				);
 			},
 			[

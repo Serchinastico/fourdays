@@ -23,6 +23,11 @@ export const style = StyleSheet.create({
 		fontSize: textSizeM,
 		color: color.darkMint
 	},
+	midRegularNeutral: {
+		fontFamily: "AvenirNext-Regular",
+		fontSize: textSizeM,
+		color: color.brownGray
+	},
 	midRegularDisabled: {
 		fontFamily: "AvenirNext-Regular",
 		fontSize: textSizeM,
