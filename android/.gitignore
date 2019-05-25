@@ -1,1 +1,5 @@
 *.keystore
+
+# Simulator
+sdcard.img
+sdcard.img.qcow2
