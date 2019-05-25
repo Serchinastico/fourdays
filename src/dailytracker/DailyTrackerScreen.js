@@ -4,6 +4,8 @@ import React from "react";
 import { View, StyleSheet, TouchableHighlight, Image } from "react-native";
 import { Dialog } from "react-native-popup-dialog/src";
 import { connect } from "react-redux";
+import RNHTMLtoPDF from "react-native-html-to-pdf";
+import Share from "react-native-share";
 import FoodList from "../components/FoodList";
 import SearchBar from "../components/SearchBar";
 import I18n from "../translations/i18n";
@@ -52,7 +54,9 @@ class DailyTrackerScreen extends React.Component {
 		this.onPreviousDayPressed = this.onPreviousDayPressed.bind(this);
 		this.onNextDayPressed = this.onNextDayPressed.bind(this);
 		this.onSearchChange = this.onSearchChange.bind(this);
-		this.onSetupPressed = this.onSetupPressed.bind(this);
+		DailyTrackerScreen.onSetupPressed = DailyTrackerScreen.onSetupPressed.bind(
+			this
+		);
 		this.showCalendar = this.showCalendar.bind(this);
 		this.hideCalendar = this.hideCalendar.bind(this);
 		this.state = {
@@ -82,9 +86,20 @@ class DailyTrackerScreen extends React.Component {
 		this.setState({ currentSearch: text });
 	}
 
-	onSetupPressed() {
-		const { navigation } = this.props;
-		navigation.navigate("Setup");
+	static async onSetupPressed() {
+		let options = {
+			html: "<h1>PDF TEST</h1>",
+			fileName: "Reporte"
+		};
+
+		let file = await RNHTMLtoPDF.convert(options);
+
+		await Share.open({
+			title: "This is my report ",
+			message: "Message:",
+			url: `file://${file.filePath}`,
+			subject: "Report"
+		});
 	}
 
 	onPreviousDayPressed() {
@@ -277,7 +292,7 @@ class DailyTrackerScreen extends React.Component {
 						<SearchBar style={{ flex: 1 }} onChangeText={this.onSearchChange} />
 						<TouchableHighlight
 							underlayColor={color.black05}
-							onPress={this.onSetupPressed}
+							onPress={DailyTrackerScreen.onSetupPressed}
 						>
 							<Image
 								style={styles.setupIcon}
