@@ -1,7 +1,7 @@
 import moment from "moment";
 import * as R from "ramda";
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableHighlight, Image } from "react-native";
 import { Dialog } from "react-native-popup-dialog/src";
 import { connect } from "react-redux";
 import FoodList from "../components/FoodList";
@@ -27,14 +27,19 @@ const styles = StyleSheet.create({
 		left: 0,
 		right: 0,
 		height: 128,
-		padding: 16,
 		flexDirection: "column",
 		backgroundColor: color.white
 	},
 	daySelector: {
 		marginVertical: 16,
 		marginHorizontal: 16
-	}
+	},
+	searchBarContainer: {
+		flexDirection: "row",
+		marginTop: 16,
+		marginLeft: 16
+	},
+	setupIcon: { width: 48, height: 48 }
 });
 
 const FORBIDDEN_FOOD_GROUP_ID = "Forbidden food";
@@ -47,6 +52,7 @@ class DailyTrackerScreen extends React.Component {
 		this.onPreviousDayPressed = this.onPreviousDayPressed.bind(this);
 		this.onNextDayPressed = this.onNextDayPressed.bind(this);
 		this.onSearchChange = this.onSearchChange.bind(this);
+		this.onSetupPressed = this.onSetupPressed.bind(this);
 		this.showCalendar = this.showCalendar.bind(this);
 		this.hideCalendar = this.hideCalendar.bind(this);
 		this.state = {
@@ -74,6 +80,11 @@ class DailyTrackerScreen extends React.Component {
 
 	onSearchChange(text) {
 		this.setState({ currentSearch: text });
+	}
+
+	onSetupPressed() {
+		const { navigation } = this.props;
+		navigation.navigate("Setup");
 	}
 
 	onPreviousDayPressed() {
@@ -258,7 +269,18 @@ class DailyTrackerScreen extends React.Component {
 			<View style={styles.container}>
 				{this.renderFoodList()}
 				<View style={styles.header}>
-					<SearchBar onChangeText={this.onSearchChange} />
+					<View style={styles.searchBarContainer}>
+						<SearchBar style={{ flex: 1 }} onChangeText={this.onSearchChange} />
+						<TouchableHighlight
+							underlayColor={color.black05}
+							onPress={this.onSetupPressed}
+						>
+							<Image
+								style={styles.setupIcon}
+								source={require("../images/icon/Configure.png")}
+							/>
+						</TouchableHighlight>
+					</View>
 					<DaySelector
 						style={styles.daySelector}
 						onPreviousDayPress={this.onPreviousDayPressed}
