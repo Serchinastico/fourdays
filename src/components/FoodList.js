@@ -1,17 +1,20 @@
 import * as R from "ramda";
 import React from "react";
-import { FlatList, View } from "react-native";
+import { FlatList, View, Text } from "react-native";
 import addItemToListIfPresentRemoveOtherwise from "../common/collections";
 import fuzzySearch from "../FuzzySearch";
 import SetupFoodGroupHeader from "../setup/components/SetupFoodGroupHeader";
 import SetupFoodRow from "../setup/components/SetupFoodRow";
 import EmptySearch from "./EmptySearch";
 import FoodListDescription from "./FoodListDescription";
+import { style } from "./style/style";
+import I18n from "../translations/i18n";
 
 const PADDING_ITEM = "Padding";
 const GROUP_ITEM = "Group";
 const DESCRIPTION_ITEM = "Description";
 const HEADER_ITEM = "Header";
+const SUBHEADER_ITEM = "Subheader";
 const FOOD_ROW_ITEM = "Row";
 
 class FoodList extends React.PureComponent {
@@ -23,10 +26,15 @@ class FoodList extends React.PureComponent {
 		};
 	}
 
-	static createGroupItem(id, name, children) {
+	static createGroupItem(id, name, children, containsSubgroups) {
 		return {
 			type: GROUP_ITEM,
-			payload: { id, name, children }
+			payload: {
+				id,
+				name,
+				children,
+				containsSubgroups: containsSubgroups || false
+			}
 		};
 	}
 
@@ -69,6 +77,25 @@ class FoodList extends React.PureComponent {
 		onFoodSelected(id);
 	}
 
+	mapFoodSubgroupsIntoRows(subgroups) {
+		const subgroupTuples = R.pipe(
+			R.toPairs,
+			R.reverse
+		)(subgroups);
+		return R.chain(tuple => {
+			return [
+				{
+					type: SUBHEADER_ITEM,
+					key: `subheader#${tuple[0]}`,
+					payload: {
+						daysSinceLastConsumption: 4 - tuple[0]
+					}
+				},
+				...this.mapFoodItemsIntoRows(tuple[1])
+			];
+		}, subgroupTuples);
+	}
+
 	mapFoodItemsIntoRows(foodItems) {
 		let { selectedFoodIds, looksAlwaysSelected } = this.props;
 		looksAlwaysSelected = looksAlwaysSelected || false;
@@ -89,9 +116,17 @@ class FoodList extends React.PureComponent {
 		});
 	}
 
+	mapGroupChildrenIntoRows(payload) {
+		if (payload.containsSubgroups) {
+			return this.mapFoodSubgroupsIntoRows(payload.children);
+		} else {
+			return this.mapFoodItemsIntoRows(payload.children);
+		}
+	}
+
 	mapGroupItemToFlatListItems(payload, shouldIncludeChildren) {
 		const items = shouldIncludeChildren
-			? this.mapFoodItemsIntoRows(payload.children)
+			? this.mapGroupChildrenIntoRows(payload)
 			: [];
 
 		return [
@@ -172,6 +207,26 @@ class FoodList extends React.PureComponent {
 		);
 	}
 
+	static renderSubheaderItem(payload) {
+		const text =
+			payload.daysSinceLastConsumption === 1
+				? I18n.t("screen.dailyTracker.subgroup.singular").replace(
+						"%s",
+						payload.daysSinceLastConsumption
+				  )
+				: I18n.t("screen.dailyTracker.subgroup.plural").replace(
+						"%s",
+						payload.daysSinceLastConsumption
+				  );
+		return (
+			<View
+				style={{ flex: 1, height: 16, marginHorizontal: 16, marginBottom: 16 }}
+			>
+				<Text style={style.midRegularNeutral}>{text}</Text>
+			</View>
+		);
+	}
+
 	renderFoodRowItem(payload) {
 		return (
 			<SetupFoodRow onFoodSelected={this.onFoodSelected} items={payload} />
@@ -186,6 +241,8 @@ class FoodList extends React.PureComponent {
 				return FoodList.renderDescriptionItem(item.payload);
 			case HEADER_ITEM:
 				return this.renderHeaderItem(item.payload);
+			case SUBHEADER_ITEM:
+				return FoodList.renderSubheaderItem(item.payload);
 			case FOOD_ROW_ITEM:
 				return this.renderFoodRowItem(item.payload);
 		}
