@@ -131,6 +131,8 @@
 	},
 	"report": {
 		"title": "Reporte mensual",
+		"sharingTitle": "Compartir mi reporte mensual",
+		"sharingMessage": "Este es mi reporte Four Days de %s",
 		"monday": "Lunes",
 		"tuesday": "Martes",
 		"wednesday": "Miércoles",
