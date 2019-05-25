@@ -56,10 +56,13 @@ class SetupScreen extends React.Component {
 		this.onSearchChange = this.onSearchChange.bind(this);
 		this.onAcceptPress = this.onAcceptPress.bind(this);
 		this.onFoodSelected = this.onFoodSelected.bind(this);
-		const { foods } = this.props;
+		const { foods, forbiddenFoodIdsOnStart } = this.props;
 		this.state = {
 			currentSearch: "",
-			selectedFoodIds: R.map(f => f.id, foods)
+			selectedFoodIds: R.pipe(
+				R.map(f => f.id),
+				R.filter(id => !forbiddenFoodIdsOnStart.includes(id))
+			)(foods)
 		};
 	}
 
@@ -160,7 +163,8 @@ class SetupScreen extends React.Component {
 function mapStateToProps(state) {
 	return {
 		groups: state.setup.groups,
-		foods: state.setup.foods
+		foods: state.setup.foods,
+		forbiddenFoodIdsOnStart: state.setup.forbiddenFoodIds || []
 	};
 }
 
