@@ -14,10 +14,10 @@
 	},
 	"food": {
 		"group": {
-			"first": "Group 1",
-			"second": "Group 2",
-			"third": "Group 3",
-			"fourth": "Group 4",
+			"first": "Vegetables",
+			"second": "Starches and carbohydrates",
+			"third": "Proteins",
+			"fourth": "Fruit",
 			"forbidden": "Forbidden food",
 			"consumed": "Consumed food"
 		},
