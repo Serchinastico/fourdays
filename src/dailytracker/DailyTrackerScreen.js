@@ -89,10 +89,16 @@ class DailyTrackerScreen extends React.Component {
 		navigation.navigate("Setup");
 	}
 	onSharePressed() {
-		const { shareMonthlyReport } = this.props;
+		const { shareMonthlyReport, allFoods } = this.props;
 		const { selectedDay } = this.state;
 
-		shareMonthlyReport(selectedDay);
+		const allFoodNamesById = {};
+		for (let i = 0, size = allFoods.length; i < size; i++) {
+			const food = allFoods[i];
+			allFoodNamesById[food.id] = I18n.t(food.nameTranslationKey);
+		}
+
+		shareMonthlyReport(selectedDay, allFoodNamesById);
 	}
 
 	onPreviousDayPressed() {
@@ -325,6 +331,7 @@ function mapStateToProps(state) {
 			food => !forbiddenFoodIds.includes(food.id),
 			state.setup.foods
 		),
+		allFoods: state.setup.foods,
 		consumedFoodIdsByDay: state.dailyTracker.consumedFoodIdsByDay
 	};
 }

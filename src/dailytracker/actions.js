@@ -45,7 +45,7 @@ function dayBySubtractingDays(date, days) {
 	return updatedDate;
 }
 
-export function shareMonthlyReport(day) {
+export function shareMonthlyReport(day, foodNamesById) {
 	return async () => {
 		const monthFormat = "MMM YYYY";
 		let contentsInHtml =
@@ -78,7 +78,8 @@ export function shareMonthlyReport(day) {
 		const firstWeekFillingForbiddenFoodIds = R.pipe(
 			R.map(i => moment(firstDayOfMonth).add(i - 1, "days")),
 			R.map(day => consumedFoodIdsForDays[day]),
-			R.map(ids => R.join("</p><p>", ids || [])),
+			R.map(ids => R.map(id => foodNamesById[id], ids)),
+			R.map(names => R.join("</p><p>", names || [])),
 			R.map(content => `<td class="foodName"><p>${content}</p></td>`)
 		)(R.range(1, numberOfDaysToFillFirstWeek + 1));
 
@@ -101,7 +102,8 @@ export function shareMonthlyReport(day) {
 			R.map(i => moment(firstDayOfMonth).add(i - 1, "days")),
 
 			R.map(day => consumedFoodIdsForDays[day]),
-			R.map(ids => R.join("</p><p>", ids || [])),
+			R.map(ids => R.map(id => foodNamesById[id], ids)),
+			R.map(names => R.join("</p><p>", names || [])),
 			R.map(content => `<td class="foodName"><p>${content}</p></td>`),
 			R.splitEvery(7),
 			R.map(s => R.join("", s))
