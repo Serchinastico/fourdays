@@ -1,11 +1,10 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { Image, StyleSheet, TouchableHighlight } from "react-native";
 import { connect } from "react-redux";
 import * as R from "ramda";
 import addItemToListIfPresentRemoveOtherwise from "../common/collections";
 import FoodList from "../components/FoodList";
-import SearchBar from "../components/SearchBar";
-import AcceptButton from "../components/AcceptButton";
+import TopAppBar from "../components/TopAppBar";
 import storeForbiddenFood from "./actions";
 import I18n from "../translations/i18n";
 import { style, color } from "../components/style/style";
@@ -47,6 +46,12 @@ const styles = StyleSheet.create({
 		padding: 16,
 		flexDirection: "row",
 		justifyContent: "space-between"
+	},
+
+	searchIcon: {
+		width: 48,
+		borderRadius: 24,
+		height: 48
 	}
 });
 
@@ -56,6 +61,7 @@ class SetupScreen extends React.Component {
 		this.onSearchChange = this.onSearchChange.bind(this);
 		this.onAcceptPress = this.onAcceptPress.bind(this);
 		this.onFoodSelected = this.onFoodSelected.bind(this);
+		this.onSearchPressed = this.onSearchPressed.bind(this);
 		const { foods, forbiddenFoodIdsOnStart } = this.props;
 		this.state = {
 			currentSearch: "",
@@ -89,6 +95,8 @@ class SetupScreen extends React.Component {
 	onSearchChange(text) {
 		this.setState({ currentSearch: text });
 	}
+
+	onSearchPressed() {}
 
 	getChildrenFromGroup(group) {
 		const { foods } = this.props;
@@ -145,18 +153,36 @@ class SetupScreen extends React.Component {
 		);
 	}
 
+	renderTopAppBarButtons() {
+		return (
+			<TouchableHighlight
+				underlayColor={color.black05}
+				style={styles.searchIcon}
+				onPress={this.onSearchPressed}
+			>
+				<Image source={require("../images/icon/Search.png")} />
+			</TouchableHighlight>
+		);
+	}
+
 	render() {
 		return (
-			<View style={styles.container}>
-				{this.renderFoodList()}
-				<View style={styles.header}>
-					<SearchBar onChangeText={this.onSearchChange} />
-				</View>
-				<View style={styles.footer}>
-					<AcceptButton onPress={this.onAcceptPress} />
-				</View>
-			</View>
+			<TopAppBar
+				title={I18n.t("screen.setup.title")}
+				buttons={this.renderTopAppBarButtons()}
+			/>
 		);
+		// return (
+		// 	<View style={styles.container}>
+		// 		{this.renderFoodList()}
+		// 		<View style={styles.header}>
+		// 			<SearchBar onChangeText={this.onSearchChange} />
+		// 		</View>
+		// 		<View style={styles.footer}>
+		// 			<AcceptButton onPress={this.onAcceptPress} />
+		// 		</View>
+		// 	</View>
+		// );
 	}
 }
 

@@ -143,8 +143,8 @@
 	},
 	"screen": {
 		"setup": {
+			"title": "Configuration",
 			"description": {
-				"title": "Configuration",
 				"text": "Deselect all the items you have food intolerance or causes you allergic reactions."
 			}
 		},

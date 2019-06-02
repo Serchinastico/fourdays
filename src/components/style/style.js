@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 const textSizeM = 12;
 const textSizeL = 16;
 const textSizeXL = 20;
+const textSizeXXL = 32;
 
 export const color = {
 	transparent: "transparent",
@@ -16,6 +17,19 @@ export const color = {
 	darkMint50: "#52BD7680",
 	seafoamGreen: "#87E0A5"
 };
+
+export const shadows = StyleSheet.create({
+	regular: {
+		shadowColor: color.black,
+		shadowOffset: {
+			width: 0,
+			height: 2
+		},
+		shadowOpacity: 0.2,
+		shadowRadius: 2,
+		elevation: 2
+	}
+});
 
 export const style = StyleSheet.create({
 	midRegularPrimary: {
@@ -52,5 +66,10 @@ export const style = StyleSheet.create({
 		fontFamily: "AvenirNext-Regular",
 		fontSize: textSizeXL,
 		color: color.black50
+	},
+	extraExtraLargeBoldNeutral: {
+		fontFamily: "AvenirNext-Bold",
+		fontSize: textSizeXXL,
+		color: color.black
 	}
 });
