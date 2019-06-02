@@ -1,8 +1,9 @@
 import React from "react";
-import { Image, StyleSheet, TouchableHighlight } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
 import * as R from "ramda";
 import addItemToListIfPresentRemoveOtherwise from "../common/collections";
+import IconButton from "../components/IconButton";
 import FoodList from "../components/FoodList";
 import TopAppBar from "../components/TopAppBar";
 import storeForbiddenFood from "./actions";
@@ -18,8 +19,7 @@ const styles = StyleSheet.create({
 		position: "absolute",
 		top: 0,
 		left: 0,
-		right: 0,
-		padding: 16
+		right: 0
 	},
 	footer: {
 		position: "absolute",
@@ -46,12 +46,6 @@ const styles = StyleSheet.create({
 		padding: 16,
 		flexDirection: "row",
 		justifyContent: "space-between"
-	},
-
-	searchIcon: {
-		width: 48,
-		borderRadius: 24,
-		height: 48
 	}
 });
 
@@ -155,22 +149,21 @@ class SetupScreen extends React.Component {
 
 	renderTopAppBarButtons() {
 		return (
-			<TouchableHighlight
-				underlayColor={color.black05}
-				style={styles.searchIcon}
-				onPress={this.onSearchPressed}
-			>
-				<Image source={require("../images/icon/Search.png")} />
-			</TouchableHighlight>
+			<IconButton icon={IconButton.Search} onPressed={this.onSearchPressed} />
 		);
 	}
 
 	render() {
 		return (
-			<TopAppBar
-				title={I18n.t("screen.setup.title")}
-				buttons={this.renderTopAppBarButtons()}
-			/>
+			<View style={styles.container}>
+				{this.renderFoodList()}
+				<View style={styles.header}>
+					<TopAppBar
+						title={I18n.t("screen.setup.title")}
+						buttons={this.renderTopAppBarButtons()}
+					/>
+				</View>
+			</View>
 		);
 		// return (
 		// 	<View style={styles.container}>
