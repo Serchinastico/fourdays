@@ -3,7 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
 import * as R from "ramda";
 import addItemToListIfPresentRemoveOtherwise from "../common/collections";
-import IconButton from "../components/IconButton";
+import IconButton, { IconButtonSearch } from "../components/IconButton";
 import FoodList from "../components/FoodList";
 import TopAppBar from "../components/TopAppBar";
 import storeForbiddenFood from "./actions";
@@ -149,7 +149,7 @@ class SetupScreen extends React.Component {
 
 	renderTopAppBarButtons() {
 		return (
-			<IconButton icon={IconButton.Search} onPressed={this.onSearchPressed} />
+			<IconButton icon={IconButtonSearch} onPressed={this.onSearchPressed} />
 		);
 	}
 

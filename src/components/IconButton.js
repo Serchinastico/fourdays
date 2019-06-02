@@ -10,8 +10,8 @@ const styles = StyleSheet.create({
 	}
 });
 
-IconButton.Search = "Search";
-IconButton.Close = "Clear";
+export const IconButtonSearch = "Search";
+export const IconButtonClose = "Close";
 
 class IconButton extends React.PureComponent {
 	constructor(props) {
@@ -26,9 +26,9 @@ class IconButton extends React.PureComponent {
 
 	static getImageForIcon(icon) {
 		switch (icon) {
-			case IconButton.Search:
+			case IconButtonSearch:
 				return require("../images/icon/Search.png");
-			case IconButton.Close:
+			case IconButtonClose:
 				return require("../images/icon/Clear.png");
 		}
 	}

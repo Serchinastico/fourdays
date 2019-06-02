@@ -1,7 +1,7 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { createSwitchNavigator, createAppContainer } from "react-navigation";
-import { AppRegistry, YellowBox } from "react-native";
+import { AppRegistry, YellowBox, StatusBar } from "react-native";
 import SetupScreen from "./setup/SetupScreen";
 import DailyTrackerScreen from "./dailytracker/DailyTrackerScreen";
 
@@ -25,6 +25,7 @@ const AppContainer = createAppContainer(AppNavigator);
 
 const App = () => (
 	<Provider store={store}>
+		<StatusBar backgroundColor="white" barStyle="dark-content" />
 		<AppContainer />
 	</Provider>
 );
