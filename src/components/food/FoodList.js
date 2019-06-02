@@ -1,14 +1,14 @@
 import * as R from "ramda";
 import React from "react";
 import { FlatList, View, Text } from "react-native";
-import addItemToListIfPresentRemoveOtherwise from "../common/collections";
-import fuzzySearch from "../FuzzySearch";
-import SetupFoodGroupHeader from "../setup/components/SetupFoodGroupHeader";
-import SetupFoodRow from "../setup/components/SetupFoodRow";
-import EmptySearch from "./EmptySearch";
+import addItemToListIfPresentRemoveOtherwise from "../../common/collections";
+import fuzzySearch from "../../FuzzySearch";
+import FoodGroupHeader from "./FoodGroupHeader";
+import SetupFoodRow from "./FoodRow";
+import EmptySearch from "../EmptySearch";
 import FoodListDescription from "./FoodListDescription";
-import { style } from "./style/style";
-import I18n from "../translations/i18n";
+import { style } from "../style/style";
+import I18n from "../../translations/i18n";
 
 const PADDING_ITEM = "Padding";
 const GROUP_ITEM = "Group";
@@ -194,7 +194,7 @@ class FoodList extends React.PureComponent {
 	renderHeaderItem(payload) {
 		const { expandedGroupIds } = this.state;
 		return (
-			<SetupFoodGroupHeader
+			<FoodGroupHeader
 				id={payload.id}
 				isOpen={payload.hasFood && expandedGroupIds.includes(payload.id)}
 				name={payload.name}

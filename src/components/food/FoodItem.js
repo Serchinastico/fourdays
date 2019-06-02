@@ -7,44 +7,45 @@ import {
 	TouchableHighlight,
 	View
 } from "react-native";
-import { style } from "./style/style";
+import { color, style, shadow } from "../style/style";
 
 const styles = StyleSheet.create({
-	container: {
+	highlightContainer: {
 		width: "30%"
+	},
+	container: {
+		borderRadius: 4,
+		shadowOffset: { width: 0, height: 0 },
+		backgroundColor: color.white,
+		...shadow.strong
 	},
 	thumbnailContainer: {
 		borderRadius: 8,
-		shadowRadius: 8,
-		shadowColor: "#000",
-		shadowOpacity: 0.2,
-		shadowOffset: { width: 0, height: 0 },
-		backgroundColor: "#FFF",
-		elevation: 8
+		backgroundColor: "#FFF"
 	},
 	thumbnail: {
 		width: "100%",
-		height: (Dimensions.get("window").width - 64) / 3,
-		borderRadius: 8,
+		height: 32 + (Dimensions.get("window").width - 64) / 3,
+		borderRadius: 4,
 		resizeMode: "contain"
 	},
 	unselectedThumbnailTopLayer: {
 		width: "100%",
-		height: (Dimensions.get("window").width - 64) / 3,
-		borderRadius: 8,
+		height: 32 + (Dimensions.get("window").width - 64) / 3,
+		borderRadius: 4,
 		resizeMode: "contain",
-		backgroundColor: "#FFF",
+		backgroundColor: color.white,
 		opacity: 0.5,
 		position: "absolute"
 	},
 	name: {
-		...style.midRegularPrimary,
+		...style.midMediumBlack,
 		alignSelf: "center",
 		textAlign: "center",
 		margin: 8
 	},
 	disabledName: {
-		...style.midRegularDisabled,
+		...style.midMediumBlack,
 		alignSelf: "center",
 		textAlign: "center",
 		margin: 8
@@ -55,18 +56,16 @@ class FoodItem extends React.PureComponent {
 	static renderThumbnail(thumbnail, isSelected) {
 		if (isSelected) {
 			return (
-				<View style={styles.thumbnailContainer}>
-					<Image
-						style={styles.thumbnail}
-						width="100%"
-						height={(Dimensions.get("window").width - 64) / 3}
-						source={thumbnail}
-					/>
-				</View>
+				<Image
+					style={styles.thumbnail}
+					width="100%"
+					height={(Dimensions.get("window").width - 64) / 3}
+					source={thumbnail}
+				/>
 			);
 		} else {
 			return (
-				<View style={styles.thumbnailContainer}>
+				<View>
 					<Image
 						style={styles.thumbnail}
 						width="100%"
@@ -92,10 +91,10 @@ class FoodItem extends React.PureComponent {
 		return (
 			<TouchableHighlight
 				underlayColor="#FAFAFA"
-				style={styles.container}
+				style={styles.highlightContainer}
 				onPress={() => onFoodSelected(id)}
 			>
-				<View>
+				<View style={styles.container}>
 					{FoodItem.renderThumbnail(thumbnail, isSelected)}
 					{FoodItem.renderName(name, isSelected)}
 				</View>

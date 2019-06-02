@@ -4,7 +4,7 @@ import React from "react";
 import { View, StyleSheet, TouchableHighlight, Image } from "react-native";
 import { Dialog } from "react-native-popup-dialog/src";
 import { connect } from "react-redux";
-import FoodList from "../components/FoodList";
+import FoodList from "../components/food/FoodList";
 import SearchBar from "../components/SearchBar";
 import I18n from "../translations/i18n";
 import {

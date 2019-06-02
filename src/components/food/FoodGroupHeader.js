@@ -6,7 +6,7 @@ import {
 	TouchableHighlight,
 	View
 } from "react-native";
-import { style } from "../../components/style/style";
+import { style } from "../style/style";
 
 const styles = StyleSheet.create({
 	container: {
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 	}
 });
 
-class SetupFoodGroupHeader extends React.PureComponent {
+class FoodGroupHeader extends React.PureComponent {
 	static getOpenCloseImage(isOpen) {
 		if (isOpen) {
 			return (
@@ -54,11 +54,11 @@ class SetupFoodGroupHeader extends React.PureComponent {
 			>
 				<View style={styles.container}>
 					<Text style={styles.text}>{name}</Text>
-					{SetupFoodGroupHeader.getOpenCloseImage(isOpen)}
+					{FoodGroupHeader.getOpenCloseImage(isOpen)}
 				</View>
 			</TouchableHighlight>
 		);
 	}
 }
 
-export default SetupFoodGroupHeader;
+export default FoodGroupHeader;

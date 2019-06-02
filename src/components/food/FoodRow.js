@@ -1,14 +1,15 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import * as R from "ramda";
-import FoodItem from "../../components/FoodItem";
+import FoodItem from "./FoodItem";
 
 const styles = StyleSheet.create({
 	itemsContainer: {
 		flexDirection: "row",
 		justifyContent: "space-between",
 		marginLeft: 16,
-		marginRight: 16
+		marginRight: 16,
+		marginBottom: 16
 	}
 });
 

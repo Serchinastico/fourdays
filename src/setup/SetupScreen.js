@@ -5,7 +5,7 @@ import * as R from "ramda";
 import addItemToListIfPresentRemoveOtherwise from "../common/collections";
 import AcceptButton from "../components/AcceptButton";
 import IconButton, { IconButtonSearch } from "../components/IconButton";
-import FoodList from "../components/FoodList";
+import FoodList from "../components/food/FoodList";
 import TopAppBar from "../components/TopAppBar";
 import storeForbiddenFood from "./actions";
 import I18n from "../translations/i18n";

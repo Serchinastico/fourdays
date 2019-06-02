@@ -8,10 +8,10 @@ const textSizeXXL = 32;
 export const color = {
 	transparent: "transparent",
 	white: "#FFF",
-	black: "#383838",
-	black05: "#3838380C",
-	black50: "#38383877",
-	black70: "#000000B3",
+	black: "#2E2E2E",
+	black05: "#2E2E2E0C",
+	black50: "#2E2E2E77",
+	black70: "#2E2E2EB3",
 	brownGray: "#A1A1A1",
 	grass: "#95D163",
 	darkMint: "#52BD76",
@@ -29,6 +29,16 @@ export const shadow = StyleSheet.create({
 		shadowOpacity: 0.2,
 		shadowRadius: 2,
 		elevation: 2
+	},
+	strong: {
+		shadowColor: color.black,
+		shadowOffset: {
+			width: 0,
+			height: 0
+		},
+		shadowOpacity: 0.2,
+		shadowRadius: 8,
+		elevation: 8
 	}
 });
 
@@ -47,6 +57,11 @@ export const style = StyleSheet.create({
 		fontFamily: "AvenirNext-Regular",
 		fontSize: textSizeM,
 		color: color.darkMint50
+	},
+	midMediumBlack: {
+		fontFamily: "AvenirNext-Medium",
+		fontSize: textSizeM,
+		color: color.black
 	},
 	largeMediumNeutral: {
 		fontFamily: "AvenirNext-Medium",
