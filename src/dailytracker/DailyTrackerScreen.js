@@ -238,7 +238,6 @@ class DailyTrackerScreen extends React.Component {
 
 		const items = [
 			FoodList.createDescriptionItem(
-				I18n.t("screen.dailyTracker.description.title"),
 				I18n.t("screen.dailyTracker.description.text"),
 				140
 			),

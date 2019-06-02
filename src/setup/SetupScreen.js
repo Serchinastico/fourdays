@@ -128,7 +128,6 @@ class SetupScreen extends React.Component {
 
 		const items = [
 			FoodList.createDescriptionItem(
-				I18n.t("screen.setup.description.title"),
 				I18n.t("screen.setup.description.text"),
 				80
 			),
@@ -169,17 +168,6 @@ class SetupScreen extends React.Component {
 				</View>
 			</View>
 		);
-		// return (
-		// 	<View style={styles.container}>
-		// 		{this.renderFoodList()}
-		// 		<View style={styles.header}>
-		// 			<SearchBar onChangeText={this.onSearchChange} />
-		// 		</View>
-		// 		<View style={styles.footer}>
-		// 			<AcceptButton onPress={this.onAcceptPress} />
-		// 		</View>
-		// 	</View>
-		// );
 	}
 }
 

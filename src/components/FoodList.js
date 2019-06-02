@@ -42,11 +42,10 @@ class FoodList extends React.PureComponent {
 		return { id, keyPrefix, name, thumbnail };
 	}
 
-	static createDescriptionItem(title, description, marginTop) {
+	static createDescriptionItem(description, marginTop) {
 		return {
 			type: DESCRIPTION_ITEM,
 			payload: {
-				title,
 				description,
 				marginTop
 			}
@@ -187,10 +186,7 @@ class FoodList extends React.PureComponent {
 	static renderDescriptionItem(payload) {
 		return (
 			<View style={{ marginTop: payload.marginTop }}>
-				<FoodListDescription
-					title={payload.title}
-					description={payload.description}
-				/>
+				<FoodListDescription description={payload.description} />
 			</View>
 		);
 	}

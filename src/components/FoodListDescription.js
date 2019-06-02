@@ -19,10 +19,9 @@ const styles = StyleSheet.create({
 
 class FoodListDescription extends React.PureComponent {
 	render() {
-		const { title, description } = this.props;
+		const { description } = this.props;
 		return (
 			<View style={styles.container}>
-				<Text style={styles.title}>{title}</Text>
 				<Text style={styles.subtitle}>{description}</Text>
 			</View>
 		);
