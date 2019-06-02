@@ -3,6 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
 import * as R from "ramda";
 import addItemToListIfPresentRemoveOtherwise from "../common/collections";
+import AcceptButton from "../components/AcceptButton";
 import IconButton, { IconButtonSearch } from "../components/IconButton";
 import FoodList from "../components/FoodList";
 import TopAppBar from "../components/TopAppBar";
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
 	},
 	footer: {
 		position: "absolute",
-		bottom: 16,
+		bottom: 0,
 		left: 0,
 		right: 0
 	},
@@ -162,6 +163,9 @@ class SetupScreen extends React.Component {
 						title={I18n.t("screen.setup.title")}
 						buttons={this.renderTopAppBarButtons()}
 					/>
+				</View>
+				<View style={styles.footer}>
+					<AcceptButton onPress={this.onAcceptPress} />
 				</View>
 			</View>
 		);

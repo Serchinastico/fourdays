@@ -1,12 +1,12 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { style, color, shadows } from "./style/style";
+import { style, color, shadow } from "./style/style";
 
 const styles = StyleSheet.create({
 	container: {
 		backgroundColor: color.white,
 		flexDirection: "column",
-		...shadows.regular
+		...shadow.regular
 	},
 	topContainer: {
 		height: 88,

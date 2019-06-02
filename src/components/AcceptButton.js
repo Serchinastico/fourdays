@@ -1,29 +1,25 @@
 import React from "react";
-import { TouchableHighlight, StyleSheet, Text } from "react-native";
-import LinearGradient from "react-native-linear-gradient";
+import { TouchableHighlight, StyleSheet, Text, View } from "react-native";
 import setTestId from "../testIds";
 import I18n from "../translations/i18n";
-import { color, style } from "./style/style";
+import { color, style, shadow } from "./style/style";
 
 const styles = StyleSheet.create({
 	container: {
-		height: 48
+		height: 64
 	},
-	gradient: {
+	background: {
 		flex: 1,
+		backgroundColor: color.grass,
 		justifyContent: "center",
-		alignItems: "stretch",
-		elevation: 2,
-		borderRadius: 24,
-		marginHorizontal: 32
+		alignItems: "center",
+		flexDirection: "column",
+		...shadow.regular
 	},
 	text: {
 		...style.largeMediumNeutral,
 		color: color.white,
-		textAlign: "center",
-		alignSelf: "center",
-		marginTop: 8,
-		flex: 1
+		textAlign: "center"
 	}
 });
 
@@ -38,12 +34,9 @@ class AcceptButton extends React.PureComponent {
 				style={[styles.container, style]}
 				onPress={() => onPress()}
 			>
-				<LinearGradient
-					colors={[color.seafoamGreen, color.darkMint]}
-					style={styles.gradient}
-				>
+				<View style={styles.background}>
 					<Text style={styles.text}>{I18n.t("common.accept.text")}</Text>
-				</LinearGradient>
+				</View>
 			</TouchableHighlight>
 		);
 	}

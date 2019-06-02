@@ -13,12 +13,13 @@ export const color = {
 	black50: "#38383877",
 	black70: "#000000B3",
 	brownGray: "#A1A1A1",
+	grass: "#95D163",
 	darkMint: "#52BD76",
 	darkMint50: "#52BD7680",
 	seafoamGreen: "#87E0A5"
 };
 
-export const shadows = StyleSheet.create({
+export const shadow = StyleSheet.create({
 	regular: {
 		shadowColor: color.black,
 		shadowOffset: {
