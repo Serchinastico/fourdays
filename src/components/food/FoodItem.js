@@ -19,9 +19,15 @@ const styles = StyleSheet.create({
 		backgroundColor: color.white,
 		...shadow.strong
 	},
+	containerUnselected: {
+		borderRadius: 4,
+		shadowOffset: { width: 0, height: 0 },
+		backgroundColor: color.white,
+		...shadow.regular
+	},
 	thumbnailContainer: {
-		borderRadius: 8,
-		backgroundColor: "#FFF"
+		borderRadius: 4,
+		backgroundColor: color.white
 	},
 	thumbnail: {
 		width: "100%",
@@ -29,9 +35,9 @@ const styles = StyleSheet.create({
 		borderRadius: 4,
 		resizeMode: "contain"
 	},
-	unselectedThumbnailTopLayer: {
+	unselectedTopLayer: {
 		width: "100%",
-		height: 32 + (Dimensions.get("window").width - 64) / 3,
+		height: "100%",
 		borderRadius: 4,
 		resizeMode: "contain",
 		backgroundColor: color.white,
@@ -43,60 +49,50 @@ const styles = StyleSheet.create({
 		alignSelf: "center",
 		textAlign: "center",
 		margin: 8
-	},
-	disabledName: {
-		...style.midMediumBlack,
-		alignSelf: "center",
-		textAlign: "center",
-		margin: 8
 	}
 });
 
 class FoodItem extends React.PureComponent {
-	static renderThumbnail(thumbnail, isSelected) {
-		if (isSelected) {
-			return (
-				<Image
-					style={styles.thumbnail}
-					width="100%"
-					height={(Dimensions.get("window").width - 64) / 3}
-					source={thumbnail}
-				/>
-			);
-		} else {
-			return (
-				<View>
-					<Image
-						style={styles.thumbnail}
-						width="100%"
-						height={(Dimensions.get("window").width - 64) / 3}
-						source={thumbnail}
-					/>
-					<View style={styles.unselectedThumbnailTopLayer} />
-				</View>
-			);
-		}
+	static renderThumbnail(thumbnail) {
+		return (
+			<Image
+				style={styles.thumbnail}
+				width="95%"
+				height={(Dimensions.get("window").width - 64) / 3}
+				source={thumbnail}
+			/>
+		);
 	}
 
-	static renderName(name, isSelected) {
-		if (isSelected) {
-			return <Text style={styles.name}>{name}</Text>;
+	static renderName(name) {
+		return <Text style={styles.name}>{name}</Text>;
+	}
+
+	static renderUnselectedTopLayer(isSelected) {
+		if (!isSelected) {
+			return <View style={styles.unselectedTopLayer} />;
 		} else {
-			return <Text style={styles.disabledName}>{name}</Text>;
+			return null;
 		}
 	}
 
 	render() {
 		const { id, name, isSelected, thumbnail, onFoodSelected } = this.props;
+
+		const containerStyle = isSelected
+			? styles.container
+			: styles.containerUnselected;
+
 		return (
 			<TouchableHighlight
 				underlayColor="#FAFAFA"
 				style={styles.highlightContainer}
 				onPress={() => onFoodSelected(id)}
 			>
-				<View style={styles.container}>
-					{FoodItem.renderThumbnail(thumbnail, isSelected)}
-					{FoodItem.renderName(name, isSelected)}
+				<View style={containerStyle}>
+					{FoodItem.renderThumbnail(thumbnail)}
+					{FoodItem.renderName(name)}
+					{FoodItem.renderUnselectedTopLayer(isSelected)}
 				</View>
 			</TouchableHighlight>
 		);
