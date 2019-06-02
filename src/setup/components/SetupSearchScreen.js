@@ -2,14 +2,12 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
 import * as R from "ramda";
-import addItemToListIfPresentRemoveOtherwise from "../common/collections";
-import AcceptButton from "../components/AcceptButton";
-import IconButton, { IconButtonSearch } from "../components/IconButton";
-import FoodList from "../components/food/FoodList";
-import TopAppBar from "../components/TopAppBar";
-import storeForbiddenFood from "./actions";
-import I18n from "../translations/i18n";
-import { style, color } from "../components/style/style";
+import addItemToListIfPresentRemoveOtherwise from "../../common/collections";
+import FoodList from "../../components/food/FoodList";
+import SearchBar from "../../components/SearchBar";
+import storeForbiddenFood from "../actions";
+import I18n from "../../translations/i18n";
+import { style, color } from "../../components/style/style";
 
 const styles = StyleSheet.create({
 	container: {
@@ -20,7 +18,8 @@ const styles = StyleSheet.create({
 		position: "absolute",
 		top: 0,
 		left: 0,
-		right: 0
+		right: 0,
+		padding: 16
 	},
 	footer: {
 		position: "absolute",
@@ -50,13 +49,11 @@ const styles = StyleSheet.create({
 	}
 });
 
-class SetupScreen extends React.Component {
+class SetupSearchScreen extends React.Component {
 	constructor(props) {
 		super(props);
 		this.onSearchChange = this.onSearchChange.bind(this);
-		this.onAcceptPress = this.onAcceptPress.bind(this);
 		this.onFoodSelected = this.onFoodSelected.bind(this);
-		this.onSearchPressed = this.onSearchPressed.bind(this);
 		const { foods, forbiddenFoodIdsOnStart } = this.props;
 		this.state = {
 			currentSearch: "",
@@ -65,17 +62,6 @@ class SetupScreen extends React.Component {
 				R.filter(id => !forbiddenFoodIdsOnStart.includes(id))
 			)(foods)
 		};
-	}
-
-	onAcceptPress() {
-		const { storeForbiddenFood, foods, navigation } = this.props;
-		const { selectedFoodIds } = this.state;
-		const forbiddenFoodIds = R.without(
-			selectedFoodIds,
-			R.map(f => f.id, foods)
-		);
-		storeForbiddenFood(forbiddenFoodIds);
-		navigation.navigate("DailyTracker");
 	}
 
 	onFoodSelected(foodId) {
@@ -89,11 +75,6 @@ class SetupScreen extends React.Component {
 
 	onSearchChange(text) {
 		this.setState({ currentSearch: text });
-	}
-
-	onSearchPressed() {
-		const { navigation } = this.props;
-		navigation.navigate("Search");
 	}
 
 	getChildrenFromGroup(group) {
@@ -150,24 +131,12 @@ class SetupScreen extends React.Component {
 		);
 	}
 
-	renderTopAppBarButtons() {
-		return (
-			<IconButton icon={IconButtonSearch} onPressed={this.onSearchPressed} />
-		);
-	}
-
 	render() {
 		return (
 			<View style={styles.container}>
 				{this.renderFoodList()}
 				<View style={styles.header}>
-					<TopAppBar
-						title={I18n.t("screen.setup.title")}
-						buttons={this.renderTopAppBarButtons()}
-					/>
-				</View>
-				<View style={styles.footer}>
-					<AcceptButton onPress={this.onAcceptPress} />
+					<SearchBar onChangeText={this.onSearchChange} />
 				</View>
 			</View>
 		);
@@ -185,4 +154,4 @@ function mapStateToProps(state) {
 export default connect(
 	mapStateToProps,
 	{ storeForbiddenFood }
-)(SetupScreen);
+)(SetupSearchScreen);

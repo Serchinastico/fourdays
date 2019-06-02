@@ -5,13 +5,14 @@ import { color } from "./style/style";
 const styles = StyleSheet.create({
 	button: {
 		width: 48,
-		borderRadius: 24,
-		height: 48
+		height: 48,
+		borderRadius: 24
 	}
 });
 
 export const IconButtonSearch = "Search";
-export const IconButtonClose = "Close";
+export const IconButtonBack = "Back";
+export const IconButtonClear = "Clear";
 
 class IconButton extends React.PureComponent {
 	constructor(props) {
@@ -28,7 +29,9 @@ class IconButton extends React.PureComponent {
 		switch (icon) {
 			case IconButtonSearch:
 				return require("../images/icon/Search.png");
-			case IconButtonClose:
+			case IconButtonBack:
+				return require("../images/icon/Back.png");
+			case IconButtonClear:
 				return require("../images/icon/Clear.png");
 		}
 	}
