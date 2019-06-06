@@ -14,6 +14,35 @@ import I18n from "../translations/i18n";
 
 export const dayFormatForStoringConsumedFoodIds = "DD-MM-YYYY";
 
+function getMonthName(day) {
+	switch (day.month()) {
+		case 0:
+			return I18n.t("report.month.january");
+		case 1:
+			return I18n.t("report.month.february");
+		case 2:
+			return I18n.t("report.month.march");
+		case 3:
+			return I18n.t("report.month.april");
+		case 4:
+			return I18n.t("report.month.may");
+		case 5:
+			return I18n.t("report.month.june");
+		case 6:
+			return I18n.t("report.month.july");
+		case 7:
+			return I18n.t("report.month.august");
+		case 8:
+			return I18n.t("report.month.september");
+		case 9:
+			return I18n.t("report.month.october");
+		case 10:
+			return I18n.t("report.month.november");
+		case 11:
+			return I18n.t("report.month.december");
+	}
+}
+
 function formatDayForStorage(day) {
 	return day.format(dayFormatForStoringConsumedFoodIds);
 }
@@ -47,7 +76,6 @@ function dayBySubtractingDays(date, days) {
 
 export function shareMonthlyReport(day, foodNamesById) {
 	return async () => {
-		const monthFormat = "MMM YYYY";
 		let contentsInHtml =
 			"<style>table{width:100%}td{color: #444;line-height: 22px;text-align: center;height: 40px;}tr:first-child td{font-size: 14px;font-weight: 200;}.dayNumber{font-size: 16px;font-weight: 800;}.foodName{font-size: 12px;font-weight: 400;}.foodName p{margin: 0;}</style><h1>Four Days</h1><h2>%TITLE% - %DATE%</h2><table><tr><td>%FIRST_DAY%</td><td>%SECOND_DAY%</td><td>%THIRD_DAY%</td><td>%FOURTH_DAY%</td><td>%FIFTH_DAY%</td><td>%SIXTH_DAY%</td><td>%SEVENTH_DAY%</td></tr>%CONTENT%</table>";
 
@@ -120,14 +148,14 @@ export function shareMonthlyReport(day, foodNamesById) {
 
 		contentsInHtml = contentsInHtml
 			.replace("%TITLE%", I18n.t("report.title"))
-			.replace("%DATE%", day.format(monthFormat))
-			.replace("%FIRST_DAY%", I18n.t("report.monday"))
-			.replace("%SECOND_DAY%", I18n.t("report.tuesday"))
-			.replace("%THIRD_DAY%", I18n.t("report.wednesday"))
-			.replace("%FOURTH_DAY%", I18n.t("report.thursday"))
-			.replace("%FIFTH_DAY%", I18n.t("report.friday"))
-			.replace("%SIXTH_DAY%", I18n.t("report.saturday"))
-			.replace("%SEVENTH_DAY%", I18n.t("report.sunday"))
+			.replace("%DATE%", `${getMonthName(day)} ${day.year()}`)
+			.replace("%FIRST_DAY%", I18n.t("report.week.monday"))
+			.replace("%SECOND_DAY%", I18n.t("report.week.tuesday"))
+			.replace("%THIRD_DAY%", I18n.t("report.week.wednesday"))
+			.replace("%FOURTH_DAY%", I18n.t("report.week.thursday"))
+			.replace("%FIFTH_DAY%", I18n.t("report.week.friday"))
+			.replace("%SIXTH_DAY%", I18n.t("report.week.saturday"))
+			.replace("%SEVENTH_DAY%", I18n.t("report.week.sunday"))
 			.replace("%CONTENT%", content);
 
 		let options = {
@@ -139,10 +167,7 @@ export function shareMonthlyReport(day, foodNamesById) {
 
 		await Share.open({
 			title: I18n.t("report.sharingTitle"),
-			message: I18n.t("report.sharingMessage").replace(
-				"%s",
-				day.format(monthFormat)
-			),
+			message: I18n.t("report.sharingMessage").replace("%s", getMonthName(day)),
 			url: `file://${file.filePath}`,
 			subject: "Report"
 		});

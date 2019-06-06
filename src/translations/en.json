@@ -135,13 +135,29 @@
 		"title": "Monthly report",
 		"sharingTitle": "Share my monthly report",
 		"sharingMessage": "This is my Four Days report for %s",
-		"monday": "Monday",
-		"tuesday": "Tuesday",
-		"wednesday": "Wednesday",
-		"thursday": "Thursday",
-		"friday": "Friday",
-		"saturday": "Saturday",
-		"sunday": "Sunday"
+		"week": {
+			"monday": "Monday",
+			"tuesday": "Tuesday",
+			"wednesday": "Wednesday",
+			"thursday": "Thursday",
+			"friday": "Friday",
+			"saturday": "Saturday",
+			"sunday": "Sunday"
+		},
+		"month": {
+			"january": "January",
+			"february": "February",
+			"march": "March",
+			"april": "April",
+			"may": "May",
+			"june": "June",
+			"july": "July",
+			"august": "August",
+			"september": "September",
+			"october": "October",
+			"november": "November",
+			"december": "December"
+		}
 	},
 	"screen": {
 		"setup": {
