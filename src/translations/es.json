@@ -127,7 +127,9 @@
 		"yogurt": "Yogur",
 		"pineapple": "Piña",
 		"apricot": "Albaricoque",
-		"papaya": "Papaya"
+		"papaya": "Papaya",
+		"chickpeas": "Garbanzos",
+		"açai": "Açai"
 	},
 	"report": {
 		"title": "Reporte mensual",
