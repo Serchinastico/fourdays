@@ -1,7 +1,13 @@
 import moment from "moment";
 import * as R from "ramda";
 import React from "react";
-import { View, StyleSheet, TouchableHighlight, Image } from "react-native";
+import {
+	View,
+	SafeAreaView,
+	StyleSheet,
+	TouchableHighlight,
+	Image
+} from "react-native";
 import { Dialog } from "react-native-popup-dialog/src";
 import { connect } from "react-redux";
 import FoodList from "../components/FoodList";
@@ -284,40 +290,45 @@ class DailyTrackerScreen extends React.Component {
 	render() {
 		const { selectedDay } = this.state;
 		return (
-			<View style={styles.container}>
-				{this.renderFoodList()}
-				<View style={styles.header}>
-					<View style={styles.searchBarContainer}>
-						<SearchBar style={{ flex: 1 }} onChangeText={this.onSearchChange} />
-						<TouchableHighlight
-							underlayColor={color.black05}
-							onPress={this.onSetupPressed}
-						>
-							<Image
-								style={styles.setupIcon}
-								source={require("../images/icon/Configure.png")}
+			<SafeAreaView style={styles.container}>
+				<View style={styles.container}>
+					{this.renderFoodList()}
+					<View style={styles.header}>
+						<View style={styles.searchBarContainer}>
+							<SearchBar
+								style={{ flex: 1 }}
+								onChangeText={this.onSearchChange}
 							/>
-						</TouchableHighlight>
-						<TouchableHighlight
-							underlayColor={color.black05}
-							onPress={this.onSharePressed}
-						>
-							<Image
-								style={styles.setupIcon}
-								source={require("../images/icon/Share.png")}
-							/>
-						</TouchableHighlight>
+							<TouchableHighlight
+								underlayColor={color.black05}
+								onPress={this.onSetupPressed}
+							>
+								<Image
+									style={styles.setupIcon}
+									source={require("../images/icon/Configure.png")}
+								/>
+							</TouchableHighlight>
+							<TouchableHighlight
+								underlayColor={color.black05}
+								onPress={this.onSharePressed}
+							>
+								<Image
+									style={styles.setupIcon}
+									source={require("../images/icon/Share.png")}
+								/>
+							</TouchableHighlight>
+						</View>
+						<DaySelector
+							style={styles.daySelector}
+							onPreviousDayPress={this.onPreviousDayPressed}
+							onNextDayPress={this.onNextDayPressed}
+							onCurrentDayPress={this.showCalendar}
+							selectedDay={selectedDay}
+						/>
 					</View>
-					<DaySelector
-						style={styles.daySelector}
-						onPreviousDayPress={this.onPreviousDayPressed}
-						onNextDayPress={this.onNextDayPressed}
-						onCurrentDayPress={this.showCalendar}
-						selectedDay={selectedDay}
-					/>
+					{this.renderCalendar()}
 				</View>
-				{this.renderCalendar()}
-			</View>
+			</SafeAreaView>
 		);
 	}
 }

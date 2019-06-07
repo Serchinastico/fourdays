@@ -21,9 +21,7 @@ const styles = StyleSheet.create({
 		...style.largeMediumNeutral,
 		color: color.white,
 		textAlign: "center",
-		alignSelf: "center",
-		marginTop: 8,
-		flex: 1
+		alignSelf: "center"
 	}
 });
 
