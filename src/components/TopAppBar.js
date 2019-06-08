@@ -13,9 +13,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center"
 	},
-	bottomContainer: {
-		padding: 8
-	},
+	bottomContainer: {},
 	title: {
 		...style.extraExtraLargeBoldNeutral,
 		marginLeft: 16,

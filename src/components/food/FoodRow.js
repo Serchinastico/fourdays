@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 	}
 });
 
-class SetupFoodRow extends React.PureComponent {
+class FoodRow extends React.PureComponent {
 	constructor(props) {
 		super(props);
 		this.renderFood = this.renderFood.bind(this);
@@ -30,7 +30,7 @@ class SetupFoodRow extends React.PureComponent {
 	}
 
 	renderFood(food) {
-		const { onFoodSelected } = this.props;
+		const { onFoodSelected, shouldAnimateOnSelected } = this.props;
 
 		return (
 			<FoodItem
@@ -40,6 +40,7 @@ class SetupFoodRow extends React.PureComponent {
 				thumbnail={food.thumbnail}
 				onFoodSelected={onFoodSelected}
 				isSelected={food.isSelected}
+				shouldAnimate={shouldAnimateOnSelected}
 			/>
 		);
 	}
@@ -56,4 +57,4 @@ class SetupFoodRow extends React.PureComponent {
 	}
 }
 
-export default SetupFoodRow;
+export default FoodRow;

@@ -4,7 +4,7 @@ import { FlatList, View, Text } from "react-native";
 import addItemToListIfPresentRemoveOtherwise from "../../common/collections";
 import fuzzySearch from "../../FuzzySearch";
 import FoodGroupHeader from "./FoodGroupHeader";
-import SetupFoodRow from "./FoodRow";
+import FoodRow from "./FoodRow";
 import EmptySearch from "../EmptySearch";
 import FoodListDescription from "./FoodListDescription";
 import { style } from "../style/style";
@@ -224,8 +224,13 @@ class FoodList extends React.PureComponent {
 	}
 
 	renderFoodRowItem(payload) {
+		const { looksAlwaysSelected } = this.props;
 		return (
-			<SetupFoodRow onFoodSelected={this.onFoodSelected} items={payload} />
+			<FoodRow
+				onFoodSelected={this.onFoodSelected}
+				items={payload}
+				shouldAnimateOnSelected={!looksAlwaysSelected}
+			/>
 		);
 	}
 

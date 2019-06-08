@@ -39,6 +39,9 @@ const styles = StyleSheet.create({
 		marginTop: 16,
 		marginLeft: 16
 	},
+	daySelector: {
+		margin: 8
+	},
 	setupIcon: { width: 48, height: 48 }
 });
 
@@ -301,6 +304,7 @@ class DailyTrackerScreen extends React.Component {
 
 		return (
 			<DaySelector
+				styles={styles.daySelector}
 				onPreviousDayPress={this.onPreviousDayPressed}
 				onNextDayPress={this.onNextDayPressed}
 				onCurrentDayPress={this.showCalendar}

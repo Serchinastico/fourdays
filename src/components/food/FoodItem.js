@@ -95,21 +95,30 @@ class FoodItem extends React.PureComponent {
 	}
 
 	onPressed() {
-		const { id, onFoodSelected } = this.props;
+		const {
+			id,
+			onFoodSelected,
+			shouldDisappearWhenSelected: shouldAnimate
+		} = this.props;
 		const { isSelected, shadowAnim, opacityAnim } = this.state;
 
-		Animated.parallel([
-			Animated.timing(shadowAnim, {
-				toValue: isSelected
-					? styles.containerUnselected.shadowRadius
-					: styles.container.shadowRadius,
-				duration: 100
-			}),
-			Animated.timing(opacityAnim, {
-				toValue: isSelected ? styles.unselectedTopLayer.opacity : 0,
-				duration: 100
-			})
-		]).start(() => onFoodSelected(id));
+		if (shouldAnimate) {
+			Animated.parallel([
+				Animated.timing(shadowAnim, {
+					toValue: isSelected
+						? styles.containerUnselected.shadowRadius
+						: styles.container.shadowRadius,
+					duration: 100
+				}),
+				Animated.timing(opacityAnim, {
+					toValue: isSelected ? styles.unselectedTopLayer.opacity : 0,
+					duration: 100
+				})
+			]).start(() => onFoodSelected(id));
+		} else {
+			onFoodSelected(id);
+		}
+
 		this.setState({ isSelected: !isSelected });
 	}
 
