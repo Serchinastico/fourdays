@@ -4,7 +4,7 @@
 		"android": "react-native run-android",
 		"ios": "react-native run-ios",
 		"precommit": "lint-staged",
-		"postInstall" : "rm -rf node_modules/react-native-html-to-pdf/example"
+		"postInstall": "rm -rf node_modules/react-native-html-to-pdf/example"
 	},
 	"dependencies": {
 		"@react-native-community/async-storage": "^1.3.0",

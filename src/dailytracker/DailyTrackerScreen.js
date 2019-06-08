@@ -254,14 +254,16 @@ class DailyTrackerScreen extends React.Component {
 		];
 
 		return (
-			<FoodList
-				items={items}
-				searchExpression={currentSearch}
-				selectedFoodIds={selectedFoodIds}
-				onFoodSelected={this.onFoodSelected}
-				looksAlwaysSelected
-				paddingTopForEmptySearch={148}
-			/>
+			<SafeAreaView>
+				<FoodList
+					items={items}
+					searchExpression={currentSearch}
+					selectedFoodIds={selectedFoodIds}
+					onFoodSelected={this.onFoodSelected}
+					looksAlwaysSelected
+					paddingTopForEmptySearch={148}
+				/>
+			</SafeAreaView>
 		);
 	}
 
@@ -334,13 +336,13 @@ class DailyTrackerScreen extends React.Component {
 
 	render() {
 		return (
-			<SafeAreaView style={styles.container}>
+			<View style={styles.container}>
 				<View style={styles.container}>
 					{this.renderFoodList()}
 					{this.renderTopBar()}
 					{this.renderCalendar()}
 				</View>
-			</SafeAreaView>
+			</View>
 		);
 	}
 }

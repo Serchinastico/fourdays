@@ -140,14 +140,16 @@ class SetupScreen extends React.Component {
 		];
 
 		return (
-			<FoodList
-				items={items}
-				selectedFoodIds={selectedFoodIds}
-				searchExpression={currentSearch}
-				onFoodSelected={this.onFoodSelected}
-				paddingTopForEmptySearch={98}
-				paddingBottomForSearch={80}
-			/>
+			<SafeAreaView>
+				<FoodList
+					items={items}
+					selectedFoodIds={selectedFoodIds}
+					searchExpression={currentSearch}
+					onFoodSelected={this.onFoodSelected}
+					paddingTopForEmptySearch={98}
+					paddingBottomForSearch={80}
+				/>
+			</SafeAreaView>
 		);
 	}
 
@@ -177,15 +179,13 @@ class SetupScreen extends React.Component {
 
 	render() {
 		return (
-			<SafeAreaView styles={styles.container}>
-				<View style={styles.container}>
-					{this.renderFoodList()}
-					{this.renderTopBar()}
-					<View style={styles.footer}>
-						<AcceptButton onPress={this.onAcceptPress} />
-					</View>
-				</View>
-			</SafeAreaView>
+			<View style={styles.container}>
+				{this.renderFoodList()}
+				{this.renderTopBar()}
+				<SafeAreaView style={styles.footer}>
+					<AcceptButton onPress={this.onAcceptPress} />
+				</SafeAreaView>
+			</View>
 		);
 	}
 }

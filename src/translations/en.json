@@ -167,7 +167,7 @@
 			}
 		},
 		"dailyTracker": {
-			"title": "Daily tracking",
+			"title": "Tracker",
 			"description": {
 				"text": "Here you can configure the food you ate and the food you can eat."
 			},

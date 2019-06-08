@@ -1,17 +1,30 @@
 import React from "react";
-import { TextInput, StyleSheet, Keyboard, View } from "react-native";
+import {
+	SafeAreaView,
+	TextInput,
+	StyleSheet,
+	Keyboard,
+	View
+} from "react-native";
 import I18n from "../translations/i18n";
 import IconButton, { IconButtonBack, IconButtonClear } from "./IconButton";
 import { color, style, shadow } from "./style/style";
 
 const styles = StyleSheet.create({
 	container: {
-		flexDirection: "row",
-		alignItems: "center",
 		backgroundColor: color.white,
-		height: 88,
 		padding: 8,
 		...shadow.regular
+	},
+	innerContainer: {
+		flexDirection: "row",
+		alignItems: "center",
+		/* Weird spacing to make it look the same height in Android with no notch.
+			 In iOS with notch is still noticeable a different height but it looks
+			 good enough for now
+		 */
+		paddingTop: 11,
+		paddingBottom: 10
 	},
 	textInput: {
 		...style.extraLargeRegularNeutral,
@@ -77,19 +90,21 @@ class TopSearchBar extends React.PureComponent {
 		const { currentSearch } = this.state;
 
 		return (
-			<View style={styles.container}>
-				{this.renderBackIcon()}
-				<TextInput
-					ref={input => (this.textInput = input)}
-					style={styles.textInput}
-					autoFocus
-					placeholder={I18n.t("common.search.placeholder")}
-					placeholderTextColor={color.black50}
-					onChangeText={text => this.onChangeText(text)}
-					value={currentSearch}
-				/>
-				{this.renderClearIcon()}
-			</View>
+			<SafeAreaView style={styles.container}>
+				<View style={styles.innerContainer}>
+					{this.renderBackIcon()}
+					<TextInput
+						ref={input => (this.textInput = input)}
+						style={styles.textInput}
+						autoFocus
+						placeholder={I18n.t("common.search.placeholder")}
+						placeholderTextColor={color.black50}
+						onChangeText={text => this.onChangeText(text)}
+						value={currentSearch}
+					/>
+					{this.renderClearIcon()}
+				</View>
+			</SafeAreaView>
 		);
 	}
 }
