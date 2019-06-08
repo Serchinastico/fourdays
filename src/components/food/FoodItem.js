@@ -1,11 +1,11 @@
 import React from "react";
 import {
+	Animated,
 	Dimensions,
 	Image,
 	Text,
 	StyleSheet,
-	TouchableHighlight,
-	View
+	TouchableHighlight
 } from "react-native";
 import { color, style, shadow } from "../style/style";
 
@@ -53,6 +53,20 @@ const styles = StyleSheet.create({
 });
 
 class FoodItem extends React.PureComponent {
+	constructor(props) {
+		super(props);
+		this.onPressed = this.onPressed.bind(this);
+
+		const { isSelected } = this.props;
+		this.state = {
+			shadowAnim: new Animated.Value(styles.container.shadowRadius),
+			opacityAnim: new Animated.Value(
+				isSelected ? 0 : styles.unselectedTopLayer.opacity
+			),
+			isSelected: isSelected
+		};
+	}
+
 	static renderThumbnail(thumbnail) {
 		return (
 			<Image
@@ -68,32 +82,54 @@ class FoodItem extends React.PureComponent {
 		return <Text style={styles.name}>{name}</Text>;
 	}
 
-	static renderUnselectedTopLayer(isSelected) {
-		if (!isSelected) {
-			return <View style={styles.unselectedTopLayer} />;
-		} else {
-			return null;
-		}
+	static renderUnselectedTopLayer(opacityAnim) {
+		return (
+			<Animated.View
+				style={{ ...styles.unselectedTopLayer, opacity: opacityAnim }}
+			/>
+		);
+	}
+
+	onPressed() {
+		const { id, onFoodSelected } = this.props;
+		const { isSelected, shadowAnim, opacityAnim } = this.state;
+
+		Animated.parallel([
+			Animated.timing(shadowAnim, {
+				toValue: isSelected
+					? styles.containerUnselected.shadowRadius
+					: styles.container.shadowRadius,
+				duration: 100
+			}),
+			Animated.timing(opacityAnim, {
+				toValue: isSelected ? styles.unselectedTopLayer.opacity : 0,
+				duration: 100
+			})
+		]).start(() => onFoodSelected(id));
+		this.setState({ isSelected: !isSelected });
 	}
 
 	render() {
-		const { id, name, isSelected, thumbnail, onFoodSelected } = this.props;
+		const { name, thumbnail } = this.props;
+		const { shadowAnim, opacityAnim } = this.state;
 
-		const containerStyle = isSelected
-			? styles.container
-			: styles.containerUnselected;
+		const containerStyle = {
+			...styles.container,
+			shadowRadius: shadowAnim,
+			elevation: shadowAnim
+		};
 
 		return (
 			<TouchableHighlight
-				underlayColor="#FAFAFA"
+				underlayColor={color.white}
 				style={styles.highlightContainer}
-				onPress={() => onFoodSelected(id)}
+				onPress={this.onPressed}
 			>
-				<View style={containerStyle}>
+				<Animated.View style={containerStyle}>
 					{FoodItem.renderThumbnail(thumbnail)}
 					{FoodItem.renderName(name)}
-					{FoodItem.renderUnselectedTopLayer(isSelected)}
-				</View>
+					{FoodItem.renderUnselectedTopLayer(opacityAnim)}
+				</Animated.View>
 			</TouchableHighlight>
 		);
 	}
