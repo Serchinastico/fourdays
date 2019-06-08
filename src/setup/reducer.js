@@ -448,6 +448,18 @@ const initialSetupState = {
 			groupId: "Group 3"
 		},
 		{
+			id: "açai",
+			nameTranslationKey: "food.açai",
+			thumbnail: require("../images/food/acai.jpg"),
+			groupId: "Group 4"
+		},
+		{
+			id: "chickpeas",
+			nameTranslationKey: "food.chickpeas",
+			thumbnail: require("../images/food/chickpeas.jpg"),
+			groupId: "Group 2"
+		},
+		{
 			id: "paraguayan",
 			nameTranslationKey: "food.paraguayan",
 			thumbnail: require("../images/food/paraguayan.jpg"),

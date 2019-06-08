@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { SafeAreaView, StyleSheet, View } from "react-native";
 import { connect } from "react-redux";
 import * as R from "ramda";
 import addItemToListIfPresentRemoveOtherwise from "../common/collections";
@@ -177,13 +177,15 @@ class SetupScreen extends React.Component {
 
 	render() {
 		return (
-			<View style={styles.container}>
-				{this.renderFoodList()}
-				{this.renderTopBar()}
-				<View style={styles.footer}>
-					<AcceptButton onPress={this.onAcceptPress} />
+			<SafeAreaView styles={styles.container}>
+				<View style={styles.container}>
+					{this.renderFoodList()}
+					{this.renderTopBar()}
+					<View style={styles.footer}>
+						<AcceptButton onPress={this.onAcceptPress} />
+					</View>
 				</View>
-			</View>
+			</SafeAreaView>
 		);
 	}
 }

@@ -118,8 +118,8 @@ android {
     applicationId "com.fourdays"
     minSdkVersion rootProject.ext.minSdkVersion
     targetSdkVersion rootProject.ext.targetSdkVersion
-    versionCode 5
-    versionName "1.0.4"
+    versionCode 7
+    versionName "1.0.6"
     ndk {
       abiFilters "armeabi-v7a", 'arm64-v8a', "x86", "x86_64"
     }
@@ -170,7 +170,6 @@ dependencies {
     implementation project(':react-native-share')
     implementation project(':react-native-html-to-pdf')
     implementation project(':react-native-localize')
-    implementation project(':react-native-linear-gradient')
   implementation project(':react-native-gesture-handler')
   implementation project(':react-native-i18n')
   implementation project(':@react-native-community_async-storage')

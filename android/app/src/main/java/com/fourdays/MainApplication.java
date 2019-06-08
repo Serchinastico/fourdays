@@ -3,7 +3,6 @@ package com.fourdays;
 import android.support.multidex.MultiDexApplication;
 import cl.json.ShareApplication;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
-import com.BV.LinearGradient.LinearGradientPackage;
 import com.christopherdro.htmltopdf.RNHTMLtoPDFPackage;
 import com.facebook.react.ReactApplication;
 import cl.json.RNSharePackage;
@@ -33,7 +32,6 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
             new RNSharePackage(),
             new RNHTMLtoPDFPackage(),
             new RNLocalizePackage(),
-            new LinearGradientPackage(),
             new RNGestureHandlerPackage(),
             new RNI18nPackage(),
             new AsyncStoragePackage()

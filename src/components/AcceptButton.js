@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
 	text: {
 		...style.largeMediumNeutral,
 		color: color.white,
-		textAlign: "center"
+		textAlign: "center",
+		alignSelf: "center"
 	}
 });
 

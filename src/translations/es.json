@@ -127,19 +127,37 @@
 		"yogurt": "Yogur",
 		"pineapple": "Piña",
 		"apricot": "Albaricoque",
-		"papaya": "Papaya"
+		"papaya": "Papaya",
+		"chickpeas": "Garbanzos",
+		"açai": "Açai"
 	},
 	"report": {
 		"title": "Reporte mensual",
 		"sharingTitle": "Compartir mi reporte mensual",
 		"sharingMessage": "Este es mi reporte Four Days de %s",
-		"monday": "Lunes",
-		"tuesday": "Martes",
-		"wednesday": "Miércoles",
-		"thursday": "Jueves",
-		"friday": "Viernes",
-		"saturday": "Sábado",
-		"sunday": "Domingo"
+		"week": {
+			"monday": "Lunes",
+			"tuesday": "Martes",
+			"wednesday": "Miércoles",
+			"thursday": "Jueves",
+			"friday": "Viernes",
+			"saturday": "Sábado",
+			"sunday": "Domingo"
+		},
+		"month": {
+			"january": "Enero",
+			"february": "Febrero",
+			"march": "Marzo",
+			"april": "Abril",
+			"may": "Mayo",
+			"june": "Junio",
+			"july": "Julio",
+			"august": "Agosto",
+			"september": "Septiembre",
+			"october": "Octubre",
+			"november": "Noviembre",
+			"december": "Diciembre"
+		}
 	},
 	"screen": {
 		"setup": {

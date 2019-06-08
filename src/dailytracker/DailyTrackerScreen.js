@@ -1,7 +1,7 @@
 import moment from "moment";
 import * as R from "ramda";
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { SafeAreaView, View, StyleSheet } from "react-native";
 import { Dialog } from "react-native-popup-dialog/src";
 import { connect } from "react-redux";
 import FoodList from "../components/food/FoodList";
@@ -334,11 +334,13 @@ class DailyTrackerScreen extends React.Component {
 
 	render() {
 		return (
-			<View style={styles.container}>
-				{this.renderFoodList()}
-				{this.renderTopBar()}
-				{this.renderCalendar()}
-			</View>
+			<SafeAreaView style={styles.container}>
+				<View style={styles.container}>
+					{this.renderFoodList()}
+					{this.renderTopBar()}
+					{this.renderCalendar()}
+				</View>
+			</SafeAreaView>
 		);
 	}
 }
