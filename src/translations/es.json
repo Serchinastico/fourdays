@@ -149,8 +149,8 @@
 			}
 		},
 		"dailyTracker": {
+			"title": "Registro",
 			"description": {
-				"title": "Seguimiento diario",
 				"text": "Desde aquí puedes mantener un registro de lo que comes y lo que puedes comer."
 			},
 			"subgroup": {

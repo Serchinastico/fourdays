@@ -13,6 +13,8 @@ const styles = StyleSheet.create({
 export const IconButtonSearch = "Search";
 export const IconButtonBack = "Back";
 export const IconButtonClear = "Clear";
+export const IconButtonSettings = "Settings";
+export const IconButtonShare = "Share";
 
 class IconButton extends React.PureComponent {
 	constructor(props) {
@@ -33,6 +35,10 @@ class IconButton extends React.PureComponent {
 				return require("../images/icon/Back.png");
 			case IconButtonClear:
 				return require("../images/icon/Clear.png");
+			case IconButtonSettings:
+				return require("../images/icon/Settings.png");
+			case IconButtonShare:
+				return require("../images/icon/Share.png");
 		}
 	}
 

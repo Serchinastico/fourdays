@@ -1,11 +1,17 @@
 import moment from "moment";
 import * as R from "ramda";
 import React from "react";
-import { View, StyleSheet, TouchableHighlight, Image } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Dialog } from "react-native-popup-dialog/src";
 import { connect } from "react-redux";
 import FoodList from "../components/food/FoodList";
-import SearchBar from "../components/SearchBar";
+import IconButton, {
+	IconButtonSearch,
+	IconButtonSettings,
+	IconButtonShare
+} from "../components/IconButton";
+import TopAppBar from "../components/TopAppBar";
+import TopSearchBar from "../components/TopSearchBar";
 import I18n from "../translations/i18n";
 import {
 	dayFormatForStoringConsumedFoodIds,
@@ -22,18 +28,11 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: color.white
 	},
-	header: {
+	topBarContainer: {
 		position: "absolute",
 		top: 0,
 		left: 0,
-		right: 0,
-		height: 128,
-		flexDirection: "column",
-		backgroundColor: color.white
-	},
-	daySelector: {
-		marginVertical: 16,
-		marginHorizontal: 16
+		right: 0
 	},
 	searchBarContainer: {
 		flexDirection: "row",
@@ -53,12 +52,14 @@ class DailyTrackerScreen extends React.Component {
 		this.onPreviousDayPressed = this.onPreviousDayPressed.bind(this);
 		this.onNextDayPressed = this.onNextDayPressed.bind(this);
 		this.onSearchChange = this.onSearchChange.bind(this);
+		this.onSearchPressed = this.onSearchPressed.bind(this);
 		this.onSetupPressed = this.onSetupPressed.bind(this);
 		this.onSharePressed = this.onSharePressed.bind(this);
 		this.showCalendar = this.showCalendar.bind(this);
 		this.hideCalendar = this.hideCalendar.bind(this);
 		this.state = {
 			isShowingCalendar: false,
+			isSearchActive: false,
 			selectedDay: moment(),
 			currentSearch: "",
 			selectedFoodIds: []
@@ -84,10 +85,15 @@ class DailyTrackerScreen extends React.Component {
 		this.setState({ currentSearch: text });
 	}
 
+	onSearchPressed() {
+		this.setState({ isSearchActive: true });
+	}
+
 	onSetupPressed() {
 		const { navigation } = this.props;
 		navigation.navigate("Setup");
 	}
+
 	onSharePressed() {
 		const { shareMonthlyReport, allFoods } = this.props;
 		const { selectedDay } = this.state;
@@ -212,7 +218,7 @@ class DailyTrackerScreen extends React.Component {
 
 	renderFoodList() {
 		const { groups } = this.props;
-		const { currentSearch, selectedFoodIds } = this.state;
+		const { currentSearch, selectedFoodIds, isSearchActive } = this.state;
 
 		const groupItems = R.map(
 			group => {
@@ -239,7 +245,7 @@ class DailyTrackerScreen extends React.Component {
 		const items = [
 			FoodList.createDescriptionItem(
 				I18n.t("screen.dailyTracker.description.text"),
-				140
+				isSearchActive ? 80 : 140
 			),
 			...groupItems
 		];
@@ -280,41 +286,53 @@ class DailyTrackerScreen extends React.Component {
 		);
 	}
 
-	render() {
+	renderTopAppBarButtons() {
+		return (
+			<View style={{ flexDirection: "row" }}>
+				<IconButton icon={IconButtonSearch} onPressed={this.onSearchPressed} />
+				<IconButton icon={IconButtonSettings} onPressed={this.onSetupPressed} />
+				<IconButton icon={IconButtonShare} onPressed={this.onSharePressed} />
+			</View>
+		);
+	}
+
+	renderDaySelector() {
 		const { selectedDay } = this.state;
+
+		return (
+			<DaySelector
+				onPreviousDayPress={this.onPreviousDayPressed}
+				onNextDayPress={this.onNextDayPressed}
+				onCurrentDayPress={this.showCalendar}
+				selectedDay={selectedDay}
+			/>
+		);
+	}
+
+	renderTopBar() {
+		const { isSearchActive } = this.state;
+
+		const topBar = isSearchActive ? (
+			<TopSearchBar
+				onBackPress={() => this.setState({ isSearchActive: false })}
+				onChangeText={this.onSearchChange}
+			/>
+		) : (
+			<TopAppBar
+				title={I18n.t("screen.dailyTracker.title")}
+				buttons={this.renderTopAppBarButtons()}
+				bottomViews={this.renderDaySelector()}
+			/>
+		);
+
+		return <View style={styles.topBarContainer}>{topBar}</View>;
+	}
+
+	render() {
 		return (
 			<View style={styles.container}>
 				{this.renderFoodList()}
-				<View style={styles.header}>
-					<View style={styles.searchBarContainer}>
-						<SearchBar style={{ flex: 1 }} onChangeText={this.onSearchChange} />
-						<TouchableHighlight
-							underlayColor={color.black05}
-							onPress={this.onSetupPressed}
-						>
-							<Image
-								style={styles.setupIcon}
-								source={require("../images/icon/Configure.png")}
-							/>
-						</TouchableHighlight>
-						<TouchableHighlight
-							underlayColor={color.black05}
-							onPress={this.onSharePressed}
-						>
-							<Image
-								style={styles.setupIcon}
-								source={require("../images/icon/Share.png")}
-							/>
-						</TouchableHighlight>
-					</View>
-					<DaySelector
-						style={styles.daySelector}
-						onPreviousDayPress={this.onPreviousDayPressed}
-						onNextDayPress={this.onNextDayPressed}
-						onCurrentDayPress={this.showCalendar}
-						selectedDay={selectedDay}
-					/>
-				</View>
+				{this.renderTopBar()}
 				{this.renderCalendar()}
 			</View>
 		);
