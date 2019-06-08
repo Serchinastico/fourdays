@@ -7,6 +7,7 @@ import AcceptButton from "../components/AcceptButton";
 import IconButton, { IconButtonSearch } from "../components/IconButton";
 import FoodList from "../components/food/FoodList";
 import TopAppBar from "../components/TopAppBar";
+import TopSearchBar from "../components/TopSearchBar";
 import storeForbiddenFood from "./actions";
 import I18n from "../translations/i18n";
 import { style, color } from "../components/style/style";
@@ -16,7 +17,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: color.white
 	},
-	header: {
+	topBarContainer: {
 		position: "absolute",
 		top: 0,
 		left: 0,
@@ -60,6 +61,7 @@ class SetupScreen extends React.Component {
 		const { foods, forbiddenFoodIdsOnStart } = this.props;
 		this.state = {
 			currentSearch: "",
+			isSearchActive: false,
 			selectedFoodIds: R.pipe(
 				R.map(f => f.id),
 				R.filter(id => !forbiddenFoodIdsOnStart.includes(id))
@@ -92,8 +94,7 @@ class SetupScreen extends React.Component {
 	}
 
 	onSearchPressed() {
-		const { navigation } = this.props;
-		navigation.navigate("Search");
+		this.setState({ isSearchActive: true });
 	}
 
 	getChildrenFromGroup(group) {
@@ -156,16 +157,29 @@ class SetupScreen extends React.Component {
 		);
 	}
 
+	renderTopBar() {
+		const { isSearchActive } = this.state;
+
+		const topBar = isSearchActive ? (
+			<TopSearchBar
+				onBackPress={() => this.setState({ isSearchActive: false })}
+				onChangeText={this.onSearchChange}
+			/>
+		) : (
+			<TopAppBar
+				title={I18n.t("screen.setup.title")}
+				buttons={this.renderTopAppBarButtons()}
+			/>
+		);
+
+		return <View style={styles.topBarContainer}>{topBar}</View>;
+	}
+
 	render() {
 		return (
 			<View style={styles.container}>
 				{this.renderFoodList()}
-				<View style={styles.header}>
-					<TopAppBar
-						title={I18n.t("screen.setup.title")}
-						buttons={this.renderTopAppBarButtons()}
-					/>
-				</View>
+				{this.renderTopBar()}
 				<View style={styles.footer}>
 					<AcceptButton onPress={this.onAcceptPress} />
 				</View>

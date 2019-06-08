@@ -59,7 +59,11 @@ class FoodItem extends React.PureComponent {
 
 		const { isSelected } = this.props;
 		this.state = {
-			shadowAnim: new Animated.Value(styles.container.shadowRadius),
+			shadowAnim: new Animated.Value(
+				isSelected
+					? styles.container.shadowRadius
+					: styles.containerUnselected.shadowRadius
+			),
 			opacityAnim: new Animated.Value(
 				isSelected ? 0 : styles.unselectedTopLayer.opacity
 			),
