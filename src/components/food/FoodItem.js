@@ -95,11 +95,7 @@ class FoodItem extends React.PureComponent {
 	}
 
 	onPressed() {
-		const {
-			id,
-			onFoodSelected,
-			shouldDisappearWhenSelected: shouldAnimate
-		} = this.props;
+		const { id, onFoodSelected, shouldAnimate } = this.props;
 		const { isSelected, shadowAnim, opacityAnim } = this.state;
 
 		if (shouldAnimate) {
@@ -108,11 +104,11 @@ class FoodItem extends React.PureComponent {
 					toValue: isSelected
 						? styles.containerUnselected.shadowRadius
 						: styles.container.shadowRadius,
-					duration: 1000
+					duration: 100
 				}),
 				Animated.timing(opacityAnim, {
 					toValue: isSelected ? styles.unselectedTopLayer.opacity : 0,
-					duration: 1000
+					duration: 100
 				})
 			]).start(() => onFoodSelected(id));
 		} else {
