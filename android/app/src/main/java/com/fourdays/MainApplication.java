@@ -2,17 +2,14 @@ package com.fourdays;
 
 import android.support.multidex.MultiDexApplication;
 import cl.json.ShareApplication;
-import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
-import com.christopherdro.htmltopdf.RNHTMLtoPDFPackage;
 import com.facebook.react.ReactApplication;
 import cl.json.RNSharePackage;
+import com.reactcommunity.rnlocalize.RNLocalizePackage;
+import com.christopherdro.htmltopdf.RNHTMLtoPDFPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.reactcommunity.rnlocalize.RNLocalizePackage;
-import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
-import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,11 +27,8 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
       return Arrays.asList(
           new MainReactPackage(),
             new RNSharePackage(),
-            new RNHTMLtoPDFPackage(),
             new RNLocalizePackage(),
-            new RNGestureHandlerPackage(),
-            new RNI18nPackage(),
-            new AsyncStoragePackage()
+            new RNHTMLtoPDFPackage()
       );
     }
 
