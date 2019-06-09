@@ -108,11 +108,11 @@ class FoodItem extends React.PureComponent {
 					toValue: isSelected
 						? styles.containerUnselected.shadowRadius
 						: styles.container.shadowRadius,
-					duration: 100
+					duration: 1000
 				}),
 				Animated.timing(opacityAnim, {
 					toValue: isSelected ? styles.unselectedTopLayer.opacity : 0,
-					duration: 100
+					duration: 1000
 				})
 			]).start(() => onFoodSelected(id));
 		} else {

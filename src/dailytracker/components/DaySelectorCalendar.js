@@ -3,6 +3,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Calendar } from "react-native-calendars";
 import Button from "react-native-button";
+import I18n from "../../translations/i18n";
 import { color } from "../../components/style/style";
 
 const styles = StyleSheet.create({
@@ -16,6 +17,7 @@ const styles = StyleSheet.create({
 		justifyContent: "flex-end"
 	},
 	button: {
+		color: color.black,
 		padding: 16,
 		minWidth: 100,
 		alignItems: "center",
@@ -75,7 +77,13 @@ class DaySelectorCalendar extends React.PureComponent {
 		return (
 			<View style={styles.container}>
 				<Calendar
-					style={styles.calendar}
+					theme={{
+						textSectionTitleColor: color.grass,
+						selectedDayBackgroundColor: color.grass,
+						todayTextColor: color.grass,
+						arrowColor: color.black,
+						indicatorColor: color.grass
+					}}
 					markedDates={{ [calendarDay]: { selected: true } }}
 					onDayPress={this.onDayPress}
 				/>
@@ -85,14 +93,14 @@ class DaySelectorCalendar extends React.PureComponent {
 						color={color.white}
 						onPress={() => this.onCancelSelected()}
 					>
-						CANCEL
+						{I18n.t("screen.dailyTracker.calendar.cancel")}
 					</Button>
 					<Button
 						style={styles.button}
 						color={color.white}
 						onPress={() => this.onAcceptSelected()}
 					>
-						OK
+						{I18n.t("screen.dailyTracker.calendar.ok")}
 					</Button>
 				</View>
 			</View>
