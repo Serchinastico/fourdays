@@ -30,6 +30,15 @@
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		38ADADBDA6354D45BE8C0D2C /* AvenirNext-DemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 737351050FB74D08A7EA61A4 /* AvenirNext-DemiBold.ttf */; };
 		437905AAE6814F808F81E39B /* AvenirNext-UltraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DBF146529464D4ABD875E9D /* AvenirNext-UltraLightItalic.ttf */; };
+		49A7798922B062BA0058CD4E /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
+		49A779BE22B067F50058CD4E /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		49A779E422B067FB0058CD4E /* libRCTImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302C01ABCB91800DB3ED1 /* libRCTImage.a */; };
+		49A779E522B068010058CD4E /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
+		49A779E622B068070058CD4E /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
+		49A779E722B0680C0058CD4E /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
+		49A779E822B068130058CD4E /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
+		49A779E922B068190058CD4E /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
+		49A779EA22B0681F0058CD4E /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
 		49CEB86322A456FE000F5EDC /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49CEB86222A456FE000F5EDC /* Social.framework */; };
 		49CEB86522A45706000F5EDC /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49CEB86422A45706000F5EDC /* MessageUI.framework */; };
 		525F41D19D624943A97EBA48 /* AvenirNext-DemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45BC1143C1D24396944C4EA2 /* AvenirNext-DemiBoldItalic.ttf */; };
@@ -282,19 +291,19 @@
 			remoteGlobalIDString = ED296FEE214C9CF800B7C4FE;
 			remoteInfo = "jsiexecutor-tvOS";
 		};
-		4956305A22ADAFE500D36006 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 49562FC922ADAE3100D36006;
-			remoteInfo = folly;
-		};
 		4956305F22ADAFE500D36006 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EC26EBDEACF54F7E853E0127 /* RNHTMLtoPDF.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 117405EF1B9954BF004425E1;
 			remoteInfo = RNHTMLtoPDF;
+		};
+		49A779AD22B062BA0058CD4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC26EBDEACF54F7E853E0127 /* RNHTMLtoPDF.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 117405FA1B9954BF004425E1;
+			remoteInfo = RNHTMLtoPDFTests;
 		};
 		5E9157321DD0AC6500FF2AA8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -395,6 +404,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49A779EA22B0681F0058CD4E /* libRCTNetwork.a in Frameworks */,
+				49A779E922B068190058CD4E /* libRCTActionSheet.a in Frameworks */,
+				49A779E822B068130058CD4E /* libRCTGeolocation.a in Frameworks */,
+				49A779E722B0680C0058CD4E /* libRCTVibration.a in Frameworks */,
+				49A779E622B068070058CD4E /* libRCTSettings.a in Frameworks */,
+				49A779E522B068010058CD4E /* libRCTLinking.a in Frameworks */,
+				49A779E422B067FB0058CD4E /* libRCTImage.a in Frameworks */,
+				49A779BE22B067F50058CD4E /* libRCTText.a in Frameworks */,
+				49A7798922B062BA0058CD4E /* libRCTWebSocket.a in Frameworks */,
 				49CEB86522A45706000F5EDC /* MessageUI.framework in Frameworks */,
 				49CEB86322A456FE000F5EDC /* Social.framework in Frameworks */,
 				D3702261C7AD6BFA3D93C3CA /* libPods-fourdays.a in Frameworks */,
@@ -558,7 +576,6 @@
 				490968E4226694FB0037B0CB /* libjsiexecutor.a */,
 				490968E6226694FB0037B0CB /* libjsi-tvOS.a */,
 				490968E8226694FB0037B0CB /* libjsiexecutor-tvOS.a */,
-				4956305B22ADAFE500D36006 /* libfolly.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -587,6 +604,7 @@
 			isa = PBXGroup;
 			children = (
 				4956306022ADAFE500D36006 /* libRNHTMLtoPDF.a */,
+				49A779AE22B062BA0058CD4E /* RNHTMLtoPDFTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1088,18 +1106,18 @@
 			remoteRef = 490968E7226694FB0037B0CB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4956305B22ADAFE500D36006 /* libfolly.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libfolly.a;
-			remoteRef = 4956305A22ADAFE500D36006 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		4956306022ADAFE500D36006 /* libRNHTMLtoPDF.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNHTMLtoPDF.a;
 			remoteRef = 4956305F22ADAFE500D36006 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		49A779AE22B062BA0058CD4E /* RNHTMLtoPDFTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RNHTMLtoPDFTests.xctest;
+			remoteRef = 49A779AD22B062BA0058CD4E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */ = {
