@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -12,29 +12,46 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="401" height="641"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Title" translatesAutoresizingMaskIntoConstraints="NO" id="mSF-bm-jKU">
-                    <rect key="frame" x="117" y="64" width="167" height="126"/>
-                </imageView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tlw-rR-EKr">
-                    <rect key="frame" x="0.0" y="240" width="401" height="401"/>
+                    <rect key="frame" x="0.0" y="333.5" width="375" height="375"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="tlw-rR-EKr" secondAttribute="height" multiplier="1:1" id="bz4-VU-3hJ"/>
                     </constraints>
                 </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Title" translatesAutoresizingMaskIntoConstraints="NO" id="mSF-bm-jKU">
+                    <rect key="frame" x="64" y="32" width="247" height="301.5"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="mSF-bm-jKU" secondAttribute="trailing" constant="104" id="1yc-uH-Sny">
+                    <variation key="heightClass=regular-widthClass=compact" constant="64"/>
+                </constraint>
+                <constraint firstItem="tlw-rR-EKr" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="3xQ-0s-Glq"/>
                 <constraint firstItem="mSF-bm-jKU" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="FxJ-D6-0pp"/>
-                <constraint firstItem="mSF-bm-jKU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="Pm6-8r-qgP"/>
-                <constraint firstAttribute="bottom" secondItem="tlw-rR-EKr" secondAttribute="bottom" id="UlH-0m-UHs"/>
-                <constraint firstAttribute="trailing" secondItem="tlw-rR-EKr" secondAttribute="trailing" id="sni-ct-2Qk"/>
-                <constraint firstItem="tlw-rR-EKr" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="w4W-Z4-2kX"/>
+                <constraint firstItem="mSF-bm-jKU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="32" id="Pm6-8r-qgP"/>
+                <constraint firstItem="tlw-rR-EKr" firstAttribute="top" relation="lessThanOrEqual" secondItem="mSF-bm-jKU" secondAttribute="bottom" priority="900" id="TRC-Js-lWb"/>
+                <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="tlw-rR-EKr" secondAttribute="bottom" id="j8K-NH-u7c"/>
+                <constraint firstAttribute="bottom" secondItem="mSF-bm-jKU" secondAttribute="bottom" multiplier="2" id="jcn-7a-eIP"/>
+                <constraint firstItem="tlw-rR-EKr" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="mPR-5U-v0b"/>
+                <constraint firstItem="tlw-rR-EKr" firstAttribute="top" secondItem="mSF-bm-jKU" secondAttribute="bottom" priority="600" id="q89-46-5jf"/>
+                <constraint firstAttribute="bottom" secondItem="tlw-rR-EKr" secondAttribute="bottom" priority="500" id="tll-EL-0wH"/>
+                <constraint firstItem="mSF-bm-jKU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="64" id="vKL-QN-e9q"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="1yc-uH-Sny"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="constraints">
+                    <include reference="1yc-uH-Sny"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="589.13043478260875" y="507.25446428571428"/>
         </view>
     </objects>
