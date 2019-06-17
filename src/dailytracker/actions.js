@@ -165,12 +165,19 @@ export function shareMonthlyReport(day, foodNamesById) {
 
 		let file = await RNHTMLtoPDF.convert(options);
 
-		await Share.open({
-			title: I18n.t("report.sharingTitle"),
-			message: I18n.t("report.sharingMessage").replace("%s", getMonthName(day)),
-			url: `file://${file.filePath}`,
-			subject: "Report"
-		});
+		try {
+			await Share.open({
+				title: I18n.t("report.sharingTitle"),
+				message: I18n.t("report.sharingMessage").replace(
+					"%s",
+					getMonthName(day)
+				),
+				url: `file://${file.filePath}`,
+				subject: "Report"
+			});
+		} catch (err) {
+			// The user rejected sharing the pdf in the end
+		}
 	};
 }
 
