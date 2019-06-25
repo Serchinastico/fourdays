@@ -93,6 +93,20 @@ class FoodList extends React.PureComponent {
 		}
 	}
 
+	getAllFoodItems(items) {
+		return R.chain(item => {
+			if (item.type === GROUP_ITEM) {
+				if (item.payload.id === "Forbidden food") {
+					return R.flatten(R.values(item.payload.children));
+				} else {
+					return item.payload.children;
+				}
+			} else {
+				return [];
+			}
+		}, items);
+	}
+
 	mapFoodSubgroupsIntoRows(subgroups) {
 		const subgroupTuples = R.pipe(
 			R.toPairs,
@@ -184,19 +198,7 @@ class FoodList extends React.PureComponent {
 			showSubgroupsWhenSearching,
 			daysSinceConsumptionByFoodId
 		} = this.props;
-		const allFoodItems = R.chain(item => {
-			return item.type === GROUP_ITEM ? item.payload.children : [];
-		}, items);
-
-		const groupIdsByFoodId = R.pipe(
-			R.filter(item => item.type === GROUP_ITEM),
-			R.chain(item =>
-				R.map(food => {
-					return { [food.id]: daysSinceConsumptionByFoodId[food.id] };
-				}, item.payload.children)
-			),
-			R.mergeAll
-		)(items);
+		const allFoodItems = this.getAllFoodItems(items);
 
 		const filteredItems = R.uniqBy(
 			food => food.name,
@@ -205,7 +207,7 @@ class FoodList extends React.PureComponent {
 
 		if (showSubgroupsWhenSearching) {
 			const searchItems = R.groupBy(
-				item => groupIdsByFoodId[item.id],
+				item => daysSinceConsumptionByFoodId[item.id],
 				filteredItems
 			);
 

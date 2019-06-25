@@ -281,7 +281,6 @@ class DailyTrackerScreen extends React.Component {
 			R.map(getDaysSinceConsumptionByFoodId),
 			R.mergeAll
 		)(foods);
-
 		return (
 			<SafeAreaView>
 				<FoodList
