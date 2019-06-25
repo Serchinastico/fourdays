@@ -172,6 +172,7 @@
 				"text": "Desde aquí puedes mantener un registro de lo que comes y lo que puedes comer."
 			},
 			"subgroup": {
+				"available": "Disponible",
 				"singular": "Disponible en %s día",
 				"plural": "Disponible en %s días"
 			},
