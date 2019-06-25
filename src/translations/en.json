@@ -172,6 +172,7 @@
 				"text": "Here you can configure the food you ate and the food you can eat."
 			},
 			"subgroup": {
+				"available": "Available",
 				"singular": "Available in %s day",
 				"plural": "Available in %s days"
 			},

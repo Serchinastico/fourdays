@@ -76,6 +76,23 @@ class FoodList extends React.PureComponent {
 		onFoodSelected(id);
 	}
 
+	static getSubheaderText(daysSinceLastConsumption) {
+		switch (daysSinceLastConsumption) {
+			case 0:
+				return I18n.t("screen.dailyTracker.subgroup.available");
+			case 1:
+				return I18n.t("screen.dailyTracker.subgroup.singular").replace(
+					"%s",
+					daysSinceLastConsumption
+				);
+			default:
+				return I18n.t("screen.dailyTracker.subgroup.plural").replace(
+					"%s",
+					daysSinceLastConsumption
+				);
+		}
+	}
+
 	mapFoodSubgroupsIntoRows(subgroups) {
 		const subgroupTuples = R.pipe(
 			R.toPairs,
@@ -161,15 +178,57 @@ class FoodList extends React.PureComponent {
 	}
 
 	mapToFlatListItemsWithSearchExpression(items, searchExpression) {
-		const { paddingTopForEmptySearch, paddingBottomForSearch } = this.props;
+		const {
+			paddingTopForEmptySearch,
+			paddingBottomForSearch,
+			showSubgroupsWhenSearching,
+			daysSinceConsumptionByFoodId
+		} = this.props;
 		const allFoodItems = R.chain(item => {
 			return item.type === GROUP_ITEM ? item.payload.children : [];
 		}, items);
+
+		const groupIdsByFoodId = R.pipe(
+			R.filter(item => item.type === GROUP_ITEM),
+			R.chain(item =>
+				R.map(food => {
+					return { [food.id]: daysSinceConsumptionByFoodId[food.id] };
+				}, item.payload.children)
+			),
+			R.mergeAll
+		)(items);
 
 		const filteredItems = R.uniqBy(
 			food => food.name,
 			fuzzySearch(searchExpression, "name", allFoodItems)
 		);
+
+		if (showSubgroupsWhenSearching) {
+			const searchItems = R.groupBy(
+				item => groupIdsByFoodId[item.id],
+				filteredItems
+			);
+
+			return [
+				FoodList.createPaddingItem(
+					paddingTopForEmptySearch,
+					"searchListTopPadding"
+				),
+				...this.mapGroupChildrenIntoRows(
+					FoodList.createGroupItem(
+						"Forbidden food",
+						"Forbidden food",
+						searchItems,
+						true
+					).payload
+				),
+				FoodList.createPaddingItem(
+					paddingBottomForSearch || 0,
+					"searchListBottomPadding"
+				)
+			];
+		}
+
 		return [
 			FoodList.createPaddingItem(
 				paddingTopForEmptySearch,
@@ -204,16 +263,8 @@ class FoodList extends React.PureComponent {
 	}
 
 	static renderSubheaderItem(payload) {
-		const text =
-			payload.daysSinceLastConsumption === 1
-				? I18n.t("screen.dailyTracker.subgroup.singular").replace(
-						"%s",
-						payload.daysSinceLastConsumption
-				  )
-				: I18n.t("screen.dailyTracker.subgroup.plural").replace(
-						"%s",
-						payload.daysSinceLastConsumption
-				  );
+		const text = FoodList.getSubheaderText(payload.daysSinceLastConsumption);
+
 		return (
 			<View
 				style={{ flex: 1, height: 16, marginHorizontal: 16, marginBottom: 16 }}

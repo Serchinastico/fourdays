@@ -220,8 +220,13 @@ class DailyTrackerScreen extends React.Component {
 	}
 
 	renderFoodList() {
-		const { groups } = this.props;
-		const { currentSearch, selectedFoodIds, isSearchActive } = this.state;
+		const { groups, foods, consumedFoodIdsByDay } = this.props;
+		const {
+			currentSearch,
+			selectedFoodIds,
+			isSearchActive,
+			selectedDay
+		} = this.state;
 
 		const groupItems = R.map(
 			group => {
@@ -253,6 +258,30 @@ class DailyTrackerScreen extends React.Component {
 			...groupItems
 		];
 
+		const daysUpToFourDaysAgo = [0, 1, 2, 3];
+
+		const idsForEveryDay = R.map(days => {
+			const day = moment(selectedDay);
+			day.subtract(days, "day");
+			const formattedDay = day.format(dayFormatForStoringConsumedFoodIds);
+			return { days, ids: consumedFoodIdsByDay[formattedDay] || [] };
+		}, daysUpToFourDaysAgo);
+
+		const getDaysSinceConsumptionByFoodId = foodId => {
+			const idsForDay = R.find(
+				idsForDay => idsForDay.ids.includes(foodId),
+				idsForEveryDay
+			);
+
+			return { [foodId]: idsForDay !== undefined ? idsForDay.days : 4 };
+		};
+
+		const daysSinceConsumptionByFoodId = R.pipe(
+			R.map(food => food.id),
+			R.map(getDaysSinceConsumptionByFoodId),
+			R.mergeAll
+		)(foods);
+
 		return (
 			<SafeAreaView>
 				<FoodList
@@ -261,6 +290,8 @@ class DailyTrackerScreen extends React.Component {
 					selectedFoodIds={selectedFoodIds}
 					onFoodSelected={this.onFoodSelected}
 					looksAlwaysSelected
+					showSubgroupsWhenSearching
+					daysSinceConsumptionByFoodId={daysSinceConsumptionByFoodId}
 					paddingTopForEmptySearch={148}
 				/>
 			</SafeAreaView>
