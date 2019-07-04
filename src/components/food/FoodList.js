@@ -212,10 +212,7 @@ class FoodList extends React.PureComponent {
 			);
 
 			return [
-				FoodList.createPaddingItem(
-					paddingTopForEmptySearch,
-					"searchListTopPadding"
-				),
+				FoodList.createPaddingItem(88, "searchListTopPadding"),
 				...this.mapGroupChildrenIntoRows(
 					FoodList.createGroupItem(
 						"Forbidden food",
@@ -311,7 +308,7 @@ class FoodList extends React.PureComponent {
 				: this.mapToFlatListItemsWithSearchExpression(items, searchExpression);
 
 		if (searchExpression !== "" && flatListItems.length === 2) {
-			return <EmptySearch />;
+			return <EmptySearch style={{ flex: 1 }} />;
 		} else {
 			return <FlatList data={flatListItems} renderItem={this.renderItem} />;
 		}

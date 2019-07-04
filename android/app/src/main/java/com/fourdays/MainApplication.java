@@ -3,6 +3,9 @@ package com.fourdays;
 import android.support.multidex.MultiDexApplication;
 import cl.json.ShareApplication;
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import cl.json.RNSharePackage;
 import com.reactcommunity.rnlocalize.RNLocalizePackage;
 import com.christopherdro.htmltopdf.RNHTMLtoPDFPackage;
@@ -26,6 +29,9 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
     protected List<ReactPackage> getPackages() {
       return Arrays.asList(
           new MainReactPackage(),
+            new AsyncStoragePackage(),
+            new RNI18nPackage(),
+            new RNGestureHandlerPackage(),
             new RNSharePackage(),
             new RNLocalizePackage(),
             new RNHTMLtoPDFPackage()

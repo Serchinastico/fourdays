@@ -1,7 +1,13 @@
 import moment from "moment";
 import * as R from "ramda";
 import React from "react";
-import { SafeAreaView, View, StyleSheet } from "react-native";
+import {
+	SafeAreaView,
+	View,
+	StyleSheet,
+	KeyboardAvoidingView,
+	Platform
+} from "react-native";
 import { Dialog } from "react-native-popup-dialog/src";
 import { connect } from "react-redux";
 import FoodList from "../components/food/FoodList";
@@ -282,18 +288,24 @@ class DailyTrackerScreen extends React.Component {
 			R.mergeAll
 		)(foods);
 		return (
-			<SafeAreaView>
-				<FoodList
-					items={items}
-					searchExpression={currentSearch}
-					selectedFoodIds={selectedFoodIds}
-					onFoodSelected={this.onFoodSelected}
-					looksAlwaysSelected
-					showSubgroupsWhenSearching
-					daysSinceConsumptionByFoodId={daysSinceConsumptionByFoodId}
-					paddingTopForEmptySearch={148}
-				/>
-			</SafeAreaView>
+			<KeyboardAvoidingView
+				style={{ flex: 1 }}
+				behavior={Platform.OS === "ios" ? "padding" : null}
+				enabled
+			>
+				<SafeAreaView style={{ flex: 1 }}>
+					<FoodList
+						items={items}
+						searchExpression={currentSearch}
+						selectedFoodIds={selectedFoodIds}
+						onFoodSelected={this.onFoodSelected}
+						looksAlwaysSelected
+						showSubgroupsWhenSearching
+						daysSinceConsumptionByFoodId={daysSinceConsumptionByFoodId}
+						paddingTopForEmptySearch={88}
+					/>
+				</SafeAreaView>
+			</KeyboardAvoidingView>
 		);
 	}
 

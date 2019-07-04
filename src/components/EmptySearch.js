@@ -1,12 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, Image, View } from "react-native";
 import I18n from "../translations/i18n";
 import { color, style } from "./style/style";
 
 const styles = StyleSheet.create({
 	emptyCaseContainer: {
-		height: "100%",
-		marginTop: 20,
+		marginTop: 40,
 		flex: 1,
 		flexDirection: "column",
 		justifyContent: "center",
