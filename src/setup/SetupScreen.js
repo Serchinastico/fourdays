@@ -1,5 +1,11 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, View } from "react-native";
+import {
+	KeyboardAvoidingView,
+	Platform,
+	SafeAreaView,
+	StyleSheet,
+	View
+} from "react-native";
 import { connect } from "react-redux";
 import * as R from "ramda";
 import addItemToListIfPresentRemoveOtherwise from "../common/collections";
@@ -140,16 +146,22 @@ class SetupScreen extends React.Component {
 		];
 
 		return (
-			<SafeAreaView>
-				<FoodList
-					items={items}
-					selectedFoodIds={selectedFoodIds}
-					searchExpression={currentSearch}
-					onFoodSelected={this.onFoodSelected}
-					paddingTopForEmptySearch={98}
-					paddingBottomForSearch={80}
-				/>
-			</SafeAreaView>
+			<KeyboardAvoidingView
+				style={{ flex: 1 }}
+				behavior={Platform.OS === "ios" ? "padding" : null}
+				enabled
+			>
+				<SafeAreaView style={{ flex: 1 }}>
+					<FoodList
+						items={items}
+						selectedFoodIds={selectedFoodIds}
+						searchExpression={currentSearch}
+						onFoodSelected={this.onFoodSelected}
+						paddingTopForEmptySearch={98}
+						paddingBottomForSearch={80}
+					/>
+				</SafeAreaView>
+			</KeyboardAvoidingView>
 		);
 	}
 
