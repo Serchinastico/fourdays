@@ -11,7 +11,7 @@ import I18n from "../translations/i18n";
 import AcceptButton from "../components/AcceptButton";
 // @ts-ignore
 import IconButton, { IconButtonClear } from "../components/IconButton";
-import AddFoodImageView from "./AddFoodImageView";
+import AddFoodImageCard from "./AddFoodImageCard";
 import InputField from "./InputField";
 
 export interface Props {}
@@ -36,7 +36,7 @@ class AddFoodScreen extends React.Component<Props, State> {
 				{this.renderTopBar()}
 				{this.renderFoodGroupNameEditor()}
 				{this.renderFoodNameEditor()}
-				{this.renderAddFoodImage()}
+				{this.renderAddFoodImage("Alubias")}
 				{this.renderAcceptButton()}
 			</View>
 		);
@@ -95,8 +95,14 @@ class AddFoodScreen extends React.Component<Props, State> {
 		);
 	}
 
-	private renderAddFoodImage() {
-		return <AddFoodImageView style={styles.addFood} />;
+	private renderAddFoodImage(name: string) {
+		return (
+			<AddFoodImageCard
+				name={name}
+				style={styles.addFood}
+				onPressed={this.onLoadImagePressed}
+			/>
+		);
 	}
 
 	private renderAcceptButton() {
@@ -112,12 +118,15 @@ class AddFoodScreen extends React.Component<Props, State> {
 	private onChangeText(text: string) {}
 
 	private onAcceptPress() {}
+
+	private onLoadImagePressed() {}
 }
 
 const styles = StyleSheet.create({
 	addFood: {
 		flex: 1,
-		margin: 16
+		margin: 16,
+		marginBottom: 64 /* Accept button */ + 16 /* Regular margin */
 	},
 	container: {
 		flex: 1,
