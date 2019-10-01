@@ -12,6 +12,7 @@ import AcceptButton from "../components/AcceptButton";
 // @ts-ignore
 import IconButton, { IconButtonClear } from "../components/IconButton";
 import AddFoodImageView from "./AddFoodImageView";
+import InputField from "./InputField";
 
 export interface Props {}
 
@@ -62,11 +63,16 @@ class AddFoodScreen extends React.Component<Props, State> {
 		const { newFoodGroupName } = this.state;
 
 		return (
-			<TextInput
-				style={styles.textInput}
-				onChangeText={text => this.onChangeText(text)}
-				value={newFoodGroupName}
-			/>
+			<InputField
+				style={styles.textInputContainer}
+				headerText={I18n.t("screen.addFood.groupNameHeader")}
+			>
+				<TextInput
+					style={styles.textInput}
+					onChangeText={text => this.onChangeText(text)}
+					value={newFoodGroupName}
+				/>
+			</InputField>
 		);
 	}
 
@@ -74,13 +80,18 @@ class AddFoodScreen extends React.Component<Props, State> {
 		const { newFoodName } = this.state;
 
 		return (
-			<TextInput
-				style={styles.textInput}
-				placeholder={I18n.t("screen.addFood.foodNamePlaceholder")}
-				placeholderTextColor={color.black50}
-				onChangeText={text => this.onChangeText(text)}
-				value={newFoodName}
-			/>
+			<InputField
+				style={styles.textInputContainer}
+				headerText={I18n.t("screen.addFood.foodNameHeader")}
+			>
+				<TextInput
+					style={styles.textInput}
+					placeholder={I18n.t("screen.addFood.foodNamePlaceholder")}
+					placeholderTextColor={color.black50}
+					onChangeText={text => this.onChangeText(text)}
+					value={newFoodName}
+				/>
+			</InputField>
 		);
 	}
 
@@ -121,7 +132,9 @@ const styles = StyleSheet.create({
 	},
 	textInput: {
 		...style.extraLargeRegularNeutral,
-		textAlignVertical: "center",
+		textAlignVertical: "center"
+	},
+	textInputContainer: {
 		marginLeft: 16,
 		marginRight: 16,
 		marginTop: 16

@@ -12,10 +12,10 @@ import StartScreen from "./start/StartScreen";
 
 const AppNavigator = createSwitchNavigator(
 	{
+		AddFood: AddFoodScreen,
 		Start: StartScreen,
 		Setup: SetupScreen,
-		DailyTracker: DailyTrackerScreen,
-		AddFood: AddFoodScreen
+		DailyTracker: DailyTrackerScreen
 	},
 	{
 		defaultNavigationOptions: {
