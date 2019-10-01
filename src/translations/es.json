@@ -182,7 +182,8 @@
 			}
 		},
 		"addFood": {
-			"title": "Añadir comida"
+			"title": "Añadir comida",
+			"foodNamePlaceholder": "e.g. Cacao en polvo"
 		}
 	}
 }
