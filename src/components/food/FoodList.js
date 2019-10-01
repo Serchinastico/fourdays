@@ -18,6 +18,14 @@ const SUBHEADER_ITEM = "Subheader";
 const FOOD_ROW_ITEM = "Row";
 
 class FoodList extends React.PureComponent {
+	constructor(props) {
+		super(props);
+		this.renderItem = this.renderItem.bind(this);
+		this.onGroupSelected = this.onGroupSelected.bind(this);
+		this.onFoodSelected = this.onFoodSelected.bind(this);
+		this.state = { expandedGroupIds: [] };
+	}
+
 	static createPaddingItem(height, keyPrefix) {
 		return {
 			type: PADDING_ITEM,
@@ -52,12 +60,41 @@ class FoodList extends React.PureComponent {
 		};
 	}
 
-	constructor(props) {
-		super(props);
-		this.renderItem = this.renderItem.bind(this);
-		this.onGroupSelected = this.onGroupSelected.bind(this);
-		this.onFoodSelected = this.onFoodSelected.bind(this);
-		this.state = { expandedGroupIds: [] };
+	static getSubheaderText(daysSinceLastConsumption) {
+		switch (daysSinceLastConsumption) {
+			case 0:
+				return I18n.t("screen.dailyTracker.subgroup.available");
+			case 1:
+				return I18n.t("screen.dailyTracker.subgroup.singular").replace(
+					"%s",
+					daysSinceLastConsumption
+				);
+			default:
+				return I18n.t("screen.dailyTracker.subgroup.plural").replace(
+					"%s",
+					daysSinceLastConsumption
+				);
+		}
+	}
+
+	static renderDescriptionItem(payload) {
+		return (
+			<View style={{ marginTop: payload.marginTop }}>
+				<FoodListDescription description={payload.description} />
+			</View>
+		);
+	}
+
+	static renderSubheaderItem(payload) {
+		const text = FoodList.getSubheaderText(payload.daysSinceLastConsumption);
+
+		return (
+			<View
+				style={{ flex: 1, height: 16, marginHorizontal: 16, marginBottom: 16 }}
+			>
+				<Text style={style.midRegularNeutral}>{text}</Text>
+			</View>
+		);
 	}
 
 	onGroupSelected(id) {
@@ -76,23 +113,6 @@ class FoodList extends React.PureComponent {
 		onFoodSelected(id);
 	}
 
-	static getSubheaderText(daysSinceLastConsumption) {
-		switch (daysSinceLastConsumption) {
-			case 0:
-				return I18n.t("screen.dailyTracker.subgroup.available");
-			case 1:
-				return I18n.t("screen.dailyTracker.subgroup.singular").replace(
-					"%s",
-					daysSinceLastConsumption
-				);
-			default:
-				return I18n.t("screen.dailyTracker.subgroup.plural").replace(
-					"%s",
-					daysSinceLastConsumption
-				);
-		}
-	}
-
 	getAllFoodItems(items) {
 		return R.chain(item => {
 			if (item.type === GROUP_ITEM) {
@@ -107,12 +127,13 @@ class FoodList extends React.PureComponent {
 		}, items);
 	}
 
-	mapFoodSubgroupsIntoRows(subgroups) {
+	mapFoodSubgroupsIntoRows(subgroups, searchExpression, isAddFoodItemIncluded) {
 		const subgroupTuples = R.pipe(
 			R.toPairs,
 			R.reverse
 		)(subgroups);
 		return R.chain(tuple => {
+			const shouldIncludeAddItem = isAddFoodItemIncluded && tuple[0] === "4";
 			return [
 				{
 					type: SUBHEADER_ITEM,
@@ -121,21 +142,37 @@ class FoodList extends React.PureComponent {
 						daysSinceLastConsumption: 4 - tuple[0]
 					}
 				},
-				...this.mapFoodItemsIntoRows(tuple[1])
+				...this.mapFoodItemsIntoRows(
+					tuple[1],
+					searchExpression,
+					shouldIncludeAddItem
+				)
 			];
 		}, subgroupTuples);
 	}
 
-	mapFoodItemsIntoRows(foodItems) {
+	mapFoodItemsIntoRows(foodItems, searchExpression, shouldIncludeAddItem) {
 		let { selectedFoodIds, looksAlwaysSelected } = this.props;
 		looksAlwaysSelected = looksAlwaysSelected || false;
+		shouldIncludeAddItem = shouldIncludeAddItem || false;
 
-		const foodItemsWithSelection = R.map(item => {
+		let foodItemsWithSelection = R.map(item => {
 			return {
 				...item,
 				isSelected: looksAlwaysSelected || selectedFoodIds.includes(item.id)
 			};
 		}, foodItems);
+
+		if (shouldIncludeAddItem) {
+			foodItemsWithSelection = [
+				{
+					id: "meta:add-food",
+					name: searchExpression,
+					isSelected: true
+				},
+				...foodItemsWithSelection
+			];
+		}
 
 		return R.splitEvery(3, foodItemsWithSelection).map(row => {
 			return {
@@ -146,9 +183,16 @@ class FoodList extends React.PureComponent {
 		});
 	}
 
-	mapGroupChildrenIntoRows(payload) {
+	mapGroupChildrenIntoRows(payload, searchExpression, isAddFoodItemIncluded) {
+		searchExpression = searchExpression || "";
+		isAddFoodItemIncluded = isAddFoodItemIncluded || false;
+
 		if (payload.containsSubgroups) {
-			return this.mapFoodSubgroupsIntoRows(payload.children);
+			return this.mapFoodSubgroupsIntoRows(
+				payload.children,
+				searchExpression,
+				isAddFoodItemIncluded
+			);
 		} else {
 			return this.mapFoodItemsIntoRows(payload.children);
 		}
@@ -219,7 +263,9 @@ class FoodList extends React.PureComponent {
 						"Forbidden food",
 						searchItems,
 						true
-					).payload
+					).payload,
+					searchExpression,
+					true
 				),
 				FoodList.createPaddingItem(
 					paddingBottomForSearch || 0,
@@ -241,14 +287,6 @@ class FoodList extends React.PureComponent {
 		];
 	}
 
-	static renderDescriptionItem(payload) {
-		return (
-			<View style={{ marginTop: payload.marginTop }}>
-				<FoodListDescription description={payload.description} />
-			</View>
-		);
-	}
-
 	renderHeaderItem(payload) {
 		const { expandedGroupIds } = this.state;
 		return (
@@ -258,18 +296,6 @@ class FoodList extends React.PureComponent {
 				name={payload.name}
 				onGroupSelected={this.onGroupSelected}
 			/>
-		);
-	}
-
-	static renderSubheaderItem(payload) {
-		const text = FoodList.getSubheaderText(payload.daysSinceLastConsumption);
-
-		return (
-			<View
-				style={{ flex: 1, height: 16, marginHorizontal: 16, marginBottom: 16 }}
-			>
-				<Text style={style.midRegularNeutral}>{text}</Text>
-			</View>
 		);
 	}
 
