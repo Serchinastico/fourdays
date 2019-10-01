@@ -183,6 +183,8 @@
 		},
 		"addFood": {
 			"title": "Añadir comida",
+			"groupNameHeader": "Grupo",
+			"foodNameHeader": "Nombre",
 			"foodNamePlaceholder": "e.g. Cacao en polvo"
 		}
 	}

@@ -10,6 +10,7 @@ export const color = {
 	white: "#FFF",
 	black: "#2E2E2E",
 	black05: "#2E2E2E0C",
+	black20: "#2E2E2E33",
 	black50: "#2E2E2E77",
 	black70: "#2E2E2EB3",
 	brownGray: "#A1A1A1",
@@ -69,7 +70,11 @@ export const style = StyleSheet.create({
 		fontSize: textSizeM,
 		color: color.dorian
 	},
-
+	midBoldBlack: {
+		fontFamily: "AvenirNext-Bold",
+		fontSize: textSizeM,
+		color: color.black
+	},
 	largeMediumNeutral: {
 		fontFamily: "AvenirNext-Medium",
 		fontSize: textSizeL,
