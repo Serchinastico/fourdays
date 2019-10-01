@@ -18,14 +18,6 @@ const SUBHEADER_ITEM = "Subheader";
 const FOOD_ROW_ITEM = "Row";
 
 class FoodList extends React.PureComponent {
-	constructor(props) {
-		super(props);
-		this.renderItem = this.renderItem.bind(this);
-		this.onGroupSelected = this.onGroupSelected.bind(this);
-		this.onFoodSelected = this.onFoodSelected.bind(this);
-		this.state = { expandedGroupIds: [] };
-	}
-
 	static createPaddingItem(height, keyPrefix) {
 		return {
 			type: PADDING_ITEM,
@@ -58,6 +50,14 @@ class FoodList extends React.PureComponent {
 				marginTop
 			}
 		};
+	}
+
+	constructor(props) {
+		super(props);
+		this.renderItem = this.renderItem.bind(this);
+		this.onGroupSelected = this.onGroupSelected.bind(this);
+		this.onFoodSelected = this.onFoodSelected.bind(this);
+		this.state = { expandedGroupIds: [] };
 	}
 
 	static getSubheaderText(daysSinceLastConsumption) {
