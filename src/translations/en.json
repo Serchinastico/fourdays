@@ -182,7 +182,8 @@
 			}
 		},
 		"addFood": {
-			"title": "Add food"
+			"title": "Add food",
+			"foodNamePlaceholder": "e.g. Cocoa powder"
 		}
 	}
 }
