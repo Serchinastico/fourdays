@@ -49,6 +49,12 @@ const styles = StyleSheet.create({
 		alignSelf: "center",
 		textAlign: "center",
 		margin: 8
+	},
+	addFoodName: {
+		...style.midMediumDorian,
+		alignSelf: "center",
+		textAlign: "center",
+		margin: 8
 	}
 });
 
@@ -71,19 +77,33 @@ class FoodItem extends React.PureComponent {
 		};
 	}
 
-	static renderThumbnail(thumbnail) {
-		return (
-			<Image
-				style={styles.thumbnail}
-				width="95%"
-				height={(Dimensions.get("window").width - 64) / 3}
-				source={thumbnail}
-			/>
-		);
+	static renderThumbnail(thumbnail, isAddFood) {
+		if (isAddFood) {
+			return (
+				<Image
+					style={styles.thumbnail}
+					height={(Dimensions.get("window").width - 64) / 3}
+					source={require("../../images/icon/AddFood.png")}
+				/>
+			);
+		} else {
+			return (
+				<Image
+					style={styles.thumbnail}
+					width="95%"
+					height={(Dimensions.get("window").width - 64) / 3}
+					source={thumbnail}
+				/>
+			);
+		}
 	}
 
-	static renderName(name) {
-		return <Text style={styles.name}>{name}</Text>;
+	static renderName(name, isAddFood) {
+		if (isAddFood) {
+			return <Text style={styles.addFoodName}>{name}</Text>;
+		} else {
+			return <Text style={styles.name}>{name}</Text>;
+		}
 	}
 
 	static renderUnselectedTopLayer(opacityAnim) {
@@ -119,7 +139,7 @@ class FoodItem extends React.PureComponent {
 	}
 
 	render() {
-		const { name, thumbnail } = this.props;
+		const { name, thumbnail, isAddFood } = this.props;
 		const { shadowAnim, opacityAnim } = this.state;
 
 		const containerStyle = {
@@ -135,8 +155,8 @@ class FoodItem extends React.PureComponent {
 				onPress={this.onPressed}
 			>
 				<Animated.View style={containerStyle}>
-					{FoodItem.renderThumbnail(thumbnail)}
-					{FoodItem.renderName(name)}
+					{FoodItem.renderThumbnail(thumbnail, isAddFood)}
+					{FoodItem.renderName(name, isAddFood)}
 					{FoodItem.renderUnselectedTopLayer(opacityAnim)}
 				</Animated.View>
 			</TouchableHighlight>

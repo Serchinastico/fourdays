@@ -40,6 +40,7 @@ class FoodRow extends React.PureComponent {
 				thumbnail={food.thumbnail}
 				onFoodSelected={onFoodSelected}
 				isSelected={food.isSelected}
+				isAddFood={food.id === "meta:add-food"}
 				shouldAnimate={shouldAnimateOnSelected}
 			/>
 		);
