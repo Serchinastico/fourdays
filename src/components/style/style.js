@@ -95,6 +95,11 @@ export const style = StyleSheet.create({
 		fontSize: textSizeXL,
 		color: color.black50
 	},
+	extraLargeMediumBlack: {
+		fontFamily: "AvenirNext-Medium",
+		fontSize: textSizeXL,
+		color: color.black
+	},
 	extraExtraLargeBoldNeutral: {
 		fontFamily: "AvenirNext-Bold",
 		fontSize: textSizeXXL,
