@@ -84,10 +84,14 @@ class DailyTrackerScreen extends React.Component {
 	}
 
 	onFoodSelected(selectedId) {
-		const { storeConsumedFoodForDay } = this.props;
+		const { storeConsumedFoodForDay, navigation } = this.props;
 		const { selectedDay } = this.state;
 
-		storeConsumedFoodForDay(selectedId, selectedDay);
+		if (selectedId === "meta:add-food") {
+			navigation.navigate("AddFood");
+		} else {
+			storeConsumedFoodForDay(selectedId, selectedDay);
+		}
 	}
 
 	onSearchChange(text) {

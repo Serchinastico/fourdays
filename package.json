@@ -3,7 +3,7 @@
     "start": "react-native start",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "postInstall": "rm -rf node_modules/react-native-html-to-pdf/example",
+    "postinstall": "rm -rf node_modules/react-native-html-to-pdf/example",
     "link": "react-native link"
   },
   "dependencies": {
@@ -33,6 +33,9 @@
   "devDependencies": {
     "@babel/core": "^7.4.3",
     "@babel/plugin-proposal-decorators": "^7.4.0",
+    "@types/react": "^16.9.4",
+    "@types/react-native": "^0.60.17",
+    "@types/react-redux": "^7.1.4",
     "babel-eslint": "^10.0.1",
     "babel-preset-expo": "^5.0.0",
     "eslint": "^5.15.3",
@@ -44,7 +47,9 @@
     "eslint-plugin-react": "^7.12.4",
     "husky": "^3.0.7",
     "lint-staged": "^8.1.5",
-    "prettier": "^1.16.4"
+    "prettier": "^1.16.4",
+    "react-native-typescript-transformer": "^1.2.13",
+    "typescript": "^3.6.3"
   },
   "lint-staged": {
     "*.{js,jsx}": [
@@ -58,10 +63,10 @@
       "./assets/fonts/"
     ]
   },
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged"
-		}
-	},
-	"private": true
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "private": true
 }

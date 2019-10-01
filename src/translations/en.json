@@ -180,6 +180,9 @@
 				"ok": "OK",
 				"cancel": "CANCEL"
 			}
+		},
+		"addFood": {
+			"title": "Add food"
 		}
 	}
 }
