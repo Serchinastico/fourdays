@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createRef } from "react";
 import { SafeAreaView, StyleSheet, TextInput, View } from "react-native";
 import { connect } from "react-redux";
 // @ts-ignore
@@ -22,6 +22,9 @@ export interface State {
 }
 
 class AddFoodScreen extends React.Component<Props, State> {
+	private groupNameRef = createRef<TextInput>();
+	private foodNameRef = createRef<TextInput>();
+
 	constructor(props: Props) {
 		super(props);
 		this.state = {
@@ -31,12 +34,14 @@ class AddFoodScreen extends React.Component<Props, State> {
 	}
 
 	public render() {
+		const { newFoodName } = this.state;
+
 		return (
 			<View style={styles.container}>
 				{this.renderTopBar()}
 				{this.renderFoodGroupNameEditor()}
 				{this.renderFoodNameEditor()}
-				{this.renderAddFoodImage("Alubias")}
+				{this.renderAddFoodImage(newFoodName)}
 				{this.renderAcceptButton()}
 			</View>
 		);
@@ -68,6 +73,7 @@ class AddFoodScreen extends React.Component<Props, State> {
 				headerText={I18n.t("screen.addFood.groupNameHeader")}
 			>
 				<TextInput
+					ref={this.groupNameRef}
 					style={styles.textInput}
 					onChangeText={text => this.onChangeText(text)}
 					value={newFoodGroupName}
@@ -85,6 +91,7 @@ class AddFoodScreen extends React.Component<Props, State> {
 				headerText={I18n.t("screen.addFood.foodNameHeader")}
 			>
 				<TextInput
+					ref={this.foodNameRef}
 					style={styles.textInput}
 					placeholder={I18n.t("screen.addFood.foodNamePlaceholder")}
 					placeholderTextColor={color.black50}
