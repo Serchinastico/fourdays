@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 		paddingTop: 11,
 		paddingBottom: 10
 	},
-	textInput: {
+	pickerItem: {
 		...style.extraLargeRegularNeutral,
 		marginBottom: -4,
 		textAlignVertical: "center",
