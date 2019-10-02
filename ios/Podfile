@@ -19,4 +19,6 @@ target "fourdays" do
   pod "RNGestureHandler", :path => "../node_modules/react-native-gesture-handler"
   pod "RNI18n", :path => "../node_modules/react-native-i18n"
   pod "RNLocalize", :path => "../node_modules/react-native-localize"
+  pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
+
 end
