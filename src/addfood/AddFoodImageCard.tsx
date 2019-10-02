@@ -7,7 +7,6 @@ import {
 	Text,
 	TouchableHighlight,
 	View,
-	ViewProps,
 	ViewStyle
 } from "react-native";
 // @ts-ignore
