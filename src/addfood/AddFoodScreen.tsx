@@ -1,12 +1,5 @@
-import * as R from "ramda";
 import React, { createRef } from "react";
-import {
-	SafeAreaView,
-	StyleSheet,
-	TextInput,
-	View,
-	Picker
-} from "react-native";
+import { SafeAreaView, StyleSheet, TextInput, View } from "react-native";
 import { connect } from "react-redux";
 // @ts-ignore
 import TopAppBar from "../components/TopAppBar";
@@ -18,10 +11,9 @@ import I18n from "../translations/i18n";
 import AcceptButton from "../components/AcceptButton";
 // @ts-ignore
 import IconButton, { IconButtonClear } from "../components/IconButton";
-// @ts-ignore
-import { Dialog } from "react-native-popup-dialog/src";
 import AddFoodImageCard from "./AddFoodImageCard";
 import InputField from "./InputField";
+import GroupNamePicker from "./GroupNamePicker";
 
 export interface Props {
 	groups: any[];
@@ -82,32 +74,18 @@ class AddFoodScreen extends React.Component<Props, State> {
 	private renderFoodGroupNameEditor(groups: any[]) {
 		const { newFoodGroupName } = this.state;
 
-		const pickerItems = R.map(
-			group => (
-				<Picker.Item
-					key={group.id}
-					label={I18n.t(group.nameTranslationKey)}
-					value={group.id}
-				/>
-			),
-			groups
-		);
-
 		return (
 			<InputField
 				style={styles.textInputContainer}
 				headerText={I18n.t("screen.addFood.groupNameHeader")}
 			>
-				<Picker
-					selectedValue={newFoodGroupName}
-					style={styles.groupNamePicker}
-					itemStyle={styles.textInput}
-					onValueChange={(itemValue, _) =>
+				<GroupNamePicker
+					groups={groups}
+					selectedGroupName={newFoodGroupName}
+					onValueChange={(itemValue: string) =>
 						this.setState({ newFoodGroupName: itemValue })
 					}
-				>
-					{pickerItems}
-				</Picker>
+				/>
 			</InputField>
 		);
 	}
@@ -177,10 +155,6 @@ const styles = StyleSheet.create({
 		bottom: 0,
 		left: 0,
 		right: 0
-	},
-	groupNamePicker: {
-		height: 55,
-		width: "100%"
 	},
 	textInput: {
 		...style.extraLargeRegularNeutral,
