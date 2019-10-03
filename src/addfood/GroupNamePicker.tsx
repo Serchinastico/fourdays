@@ -3,7 +3,6 @@ import React from "react";
 import { StyleSheet, Picker } from "react-native";
 // @ts-ignore
 import { style } from "../components/style/style";
-// @ts-ignore
 import I18n from "../translations/i18n";
 
 export interface Props {
