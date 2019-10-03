@@ -5,4 +5,15 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="DefaultExplainingPermissionsTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Used for the buttons -->
+        <item name="colorAccent">#2E2E2E</item>
+
+        <!-- Used for the title and text -->
+        <item name="android:textColorPrimary">#2E2E2E</item>
+
+        <!-- Used for the background -->
+        <item name="android:background">#FFFFFF</item>
+    </style>
+
 </resources>

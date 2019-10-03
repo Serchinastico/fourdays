@@ -11,7 +11,7 @@ import I18n from "../translations/i18n";
 import AcceptButton from "../components/AcceptButton";
 // @ts-ignore
 import IconButton, { IconButtonClear } from "../components/IconButton";
-import AddFoodImageCard from "./AddFoodImageCard";
+import AddFoodImageCard, { Base64Image } from "./AddFoodImageCard";
 import InputField from "./InputField";
 import GroupNamePicker from "./GroupNamePicker";
 
@@ -22,6 +22,7 @@ export interface Props {
 export interface State {
 	newFoodGroupName: string;
 	newFoodName: string;
+	newFoodImage?: Base64Image;
 }
 
 class AddFoodScreen extends React.Component<Props, State> {
@@ -32,23 +33,24 @@ class AddFoodScreen extends React.Component<Props, State> {
 		this.onClosePressed = this.onClosePressed.bind(this);
 		this.onChangeFoodName = this.onChangeFoodName.bind(this);
 		this.onAcceptPress = this.onAcceptPress.bind(this);
-		this.onLoadImagePressed = this.onLoadImagePressed.bind(this);
+		this.onImageSelect = this.onImageSelect.bind(this);
 		this.state = {
 			newFoodGroupName: "",
-			newFoodName: ""
+			newFoodName: "",
+			newFoodImage: undefined
 		};
 	}
 
 	public render() {
 		const { groups } = this.props;
-		const { newFoodName } = this.state;
+		const { newFoodName, newFoodImage } = this.state;
 
 		return (
 			<View style={styles.container}>
 				{this.renderTopBar()}
 				{this.renderFoodGroupNameEditor(groups)}
 				{this.renderFoodNameEditor()}
-				{this.renderAddFoodImage(newFoodName)}
+				{this.renderAddFoodImage(newFoodName, newFoodImage)}
 				{this.renderAcceptButton()}
 			</View>
 		);
@@ -110,12 +112,13 @@ class AddFoodScreen extends React.Component<Props, State> {
 		);
 	}
 
-	private renderAddFoodImage(name: string) {
+	private renderAddFoodImage(name: string, image?: Base64Image) {
 		return (
 			<AddFoodImageCard
 				name={name}
+				image={image}
 				style={styles.addFood}
-				onPressed={this.onLoadImagePressed}
+				onImageSelect={this.onImageSelect}
 			/>
 		);
 	}
@@ -136,7 +139,9 @@ class AddFoodScreen extends React.Component<Props, State> {
 
 	private onAcceptPress() {}
 
-	private onLoadImagePressed() {}
+	private onImageSelect(data: Base64Image) {
+		this.setState({ newFoodImage: data });
+	}
 }
 
 const styles = StyleSheet.create({
