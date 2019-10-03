@@ -5,15 +5,15 @@ import { connect } from "react-redux";
 import TopAppBar from "../components/TopAppBar";
 // @ts-ignore
 import { style, color } from "../components/style/style";
-// @ts-ignore
 import I18n from "../translations/i18n";
 // @ts-ignore
 import AcceptButton from "../components/AcceptButton";
 // @ts-ignore
 import IconButton, { IconButtonClear } from "../components/IconButton";
-import AddFoodImageCard, { Base64Image } from "./AddFoodImageCard";
+import AddFoodImageCard from "./AddFoodImageCard";
 import InputField from "./InputField";
 import GroupNamePicker from "./GroupNamePicker";
+import { Base64Image } from "./Camera";
 
 export interface Props {
 	groups: any[];
