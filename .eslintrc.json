@@ -25,25 +25,17 @@
 		"ecmaVersion": 2018,
 		"sourceType": "module"
 	},
-	"plugins": [
-		"prettier"
-	],
+	"plugins": ["prettier"],
 	"rules": {
+		"import/no-unresolved": "off",
 		"react/prop-types": "off",
 		"react/jsx-filename-extension": [
 			1,
 			{
-				"extensions": [
-					".js",
-					".jsx"
-				]
+				"extensions": [".js", ".jsx"]
 			}
 		],
-		"react/prefer-stateless-function": [
-			0
-		],
-		"prettier/prettier": [
-			"error"
-		]
+		"react/prefer-stateless-function": [0],
+		"prettier/prettier": ["error"]
 	}
 }
