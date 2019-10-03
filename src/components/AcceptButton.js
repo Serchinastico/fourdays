@@ -16,6 +16,14 @@ const styles = StyleSheet.create({
 		flexDirection: "column",
 		...shadow.regular
 	},
+	disabledBackground: {
+		flex: 1,
+		backgroundColor: color.clearGrass,
+		justifyContent: "center",
+		alignItems: "center",
+		flexDirection: "column",
+		...shadow.regular
+	},
 	text: {
 		...style.largeMediumNeutral,
 		color: color.white,
@@ -26,20 +34,31 @@ const styles = StyleSheet.create({
 
 class AcceptButton extends React.PureComponent {
 	render() {
-		const { onPress, style } = this.props;
+		let { onPress, isEnabled, style } = this.props;
 
-		return (
-			<TouchableHighlight
-				{...setTestId("acceptSetupButton")}
-				underlayColor={color.seafoamGreen}
-				style={[styles.container, style]}
-				onPress={() => onPress()}
-			>
-				<View style={styles.background}>
-					<Text style={styles.text}>{I18n.t("common.accept.text")}</Text>
+		if (isEnabled) {
+			return (
+				<TouchableHighlight
+					{...setTestId("acceptSetupButton")}
+					underlayColor={color.seafoamGreen}
+					style={[styles.container, style]}
+					onPress={() => onPress()}
+				>
+					<View style={styles.background}>
+						<Text style={styles.text}>{I18n.t("common.accept.text")}</Text>
+					</View>
+				</TouchableHighlight>
+			);
+		} else {
+			return (
+				<View style={[styles.container, style]}>
+					<View style={styles.disabledBackground}>
+						<Text style={styles.text}>{I18n.t("common.accept.text")}</Text>
+					</View>
 				</View>
-			</TouchableHighlight>
-		);
+			);
+		}
 	}
 }
+
 export default AcceptButton;

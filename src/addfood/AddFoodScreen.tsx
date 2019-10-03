@@ -21,7 +21,7 @@ export interface Props {
 
 export interface State {
 	newFoodGroupName: string;
-	newFoodName: string;
+	newFoodName?: string;
 	newFoodImage?: Base64Image;
 }
 
@@ -36,7 +36,7 @@ class AddFoodScreen extends React.Component<Props, State> {
 		this.onImageSelect = this.onImageSelect.bind(this);
 		this.state = {
 			newFoodGroupName: "",
-			newFoodName: "",
+			newFoodName: undefined,
 			newFoodImage: undefined
 		};
 	}
@@ -45,13 +45,16 @@ class AddFoodScreen extends React.Component<Props, State> {
 		const { groups } = this.props;
 		const { newFoodName, newFoodImage } = this.state;
 
+		const isAcceptButtonEnabled =
+			newFoodName !== undefined && newFoodImage !== undefined;
+
 		return (
 			<View style={styles.container}>
 				{this.renderTopBar()}
 				{this.renderFoodGroupNameEditor(groups)}
 				{this.renderFoodNameEditor()}
 				{this.renderAddFoodImage(newFoodName, newFoodImage)}
-				{this.renderAcceptButton()}
+				{this.renderAcceptButton(isAcceptButtonEnabled)}
 			</View>
 		);
 	}
@@ -112,10 +115,10 @@ class AddFoodScreen extends React.Component<Props, State> {
 		);
 	}
 
-	private renderAddFoodImage(name: string, image?: Base64Image) {
+	private renderAddFoodImage(name?: string, image?: Base64Image) {
 		return (
 			<AddFoodImageCard
-				name={name}
+				name={name || ""}
 				image={image}
 				style={styles.addFood}
 				onImageSelect={this.onImageSelect}
@@ -123,10 +126,10 @@ class AddFoodScreen extends React.Component<Props, State> {
 		);
 	}
 
-	private renderAcceptButton() {
+	private renderAcceptButton(isEnabled: boolean) {
 		return (
 			<SafeAreaView style={styles.footer}>
-				<AcceptButton onPress={this.onAcceptPress} />
+				<AcceptButton onPress={this.onAcceptPress} isEnabled={isEnabled} />
 			</SafeAreaView>
 		);
 	}
