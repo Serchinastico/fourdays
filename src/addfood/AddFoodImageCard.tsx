@@ -101,12 +101,12 @@ const styles = StyleSheet.create({
 		backgroundColor: color.white
 	},
 	container: {
-		flex: 1,
 		alignItems: "center",
 		justifyContent: "center"
 	},
 	foodName: {
-		...style.extraLargeMediumBlack
+		...style.extraLargeMediumBlack,
+		textAlign: "center"
 	},
 	foodNameContainer: {
 		flex: 1,

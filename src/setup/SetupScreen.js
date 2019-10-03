@@ -148,7 +148,7 @@ class SetupScreen extends React.Component {
 		return (
 			<KeyboardAvoidingView
 				style={{ flex: 1 }}
-				behavior={Platform.OS === "ios" ? "padding" : null}
+				behavior={Platform.OS === "ios" ? "padding" : undefined}
 				enabled
 			>
 				<SafeAreaView style={{ flex: 1 }}>
