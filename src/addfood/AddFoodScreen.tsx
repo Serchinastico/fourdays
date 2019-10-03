@@ -131,7 +131,7 @@ class AddFoodScreen extends React.Component<Props, State> {
 			<AddFoodImageCard
 				name={name || ""}
 				image={image}
-				style={{ flex: 1 }}
+				style={styles.addFood}
 				onImageSelect={this.onImageSelect}
 			/>
 		);
@@ -177,7 +177,8 @@ class AddFoodScreen extends React.Component<Props, State> {
 
 const styles = StyleSheet.create({
 	addFood: {
-		flex: 1
+		flex: 1,
+		marginBottom: 64
 	},
 	container: {
 		flex: 1,

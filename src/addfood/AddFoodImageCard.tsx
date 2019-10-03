@@ -78,8 +78,8 @@ class AddFoodImageCard extends React.PureComponent<Props, State> {
 		const { onImageSelect } = this.props;
 
 		showImagePicker((response: any) => {
-			if (response.data) {
-				onImageSelect(response.data);
+			if (response) {
+				onImageSelect(response);
 			}
 		});
 	}
