@@ -11,10 +11,16 @@ import {
 } from "react-native";
 // @ts-ignore
 import { style, shadow, color } from "../components/style/style";
+import ImagePicker from "react-native-image-picker";
+// @ts-ignore
+import I18n from "../translations/i18n";
+
+export type Base64Image = string;
 
 export interface Props {
 	name: string;
-	onPressed: () => void;
+	image?: Base64Image;
+	onImageSelect: (data: Base64Image) => void;
 	style?: StyleProp<ViewStyle>;
 }
 
@@ -23,20 +29,20 @@ export interface State {}
 class AddFoodImageCard extends React.PureComponent<Props, State> {
 	constructor(props: Props) {
 		super(props);
-		this.state = {};
+		this.onImagePress = this.onImagePress.bind(this);
 	}
 
 	public render() {
-		const { name, style } = this.props;
+		const { name, image, style } = this.props;
 
 		return (
 			<View style={[styles.container, style]}>
 				<TouchableHighlight
 					underlayColor={color.black05}
-					onPress={this.onPressed}
+					onPress={this.onImagePress}
 				>
 					<View style={styles.card}>
-						{AddFoodImageCard.renderImage()}
+						{AddFoodImageCard.renderImage(image)}
 						{AddFoodImageCard.renderFoodName(name)}
 					</View>
 				</TouchableHighlight>
@@ -44,13 +50,22 @@ class AddFoodImageCard extends React.PureComponent<Props, State> {
 		);
 	}
 
-	private static renderImage() {
-		return (
-			<Image
-				style={styles.image}
-				source={require("../images/icon/AddFoodL.png")}
-			/>
-		);
+	private static renderImage(image?: Base64Image) {
+		if (image) {
+			return (
+				<Image
+					style={styles.image}
+					source={{ uri: `data:image/png;base64,${image}` }}
+				/>
+			);
+		} else {
+			return (
+				<Image
+					style={styles.image}
+					source={require("../images/icon/AddFoodL.png")}
+				/>
+			);
+		}
 	}
 
 	private static renderFoodName(name: string) {
@@ -61,9 +76,33 @@ class AddFoodImageCard extends React.PureComponent<Props, State> {
 		);
 	}
 
-	private onPressed() {
-		const { onPressed } = this.props;
-		onPressed();
+	private onImagePress() {
+		const { onImageSelect } = this.props;
+
+		const options = {
+			title: I18n.t("screen.addFood.imagePicker.title"),
+			noData: false,
+			quality: 1.0,
+			cameraType: "back",
+			maxWidth: 500,
+			maxHeight: 500,
+			mediaType: "photo",
+			cancelButtonTitle: I18n.t("screen.addFood.imagePicker.cancel"),
+			takePhotoButtonTitle: I18n.t("screen.addFood.imagePicker.fromCamera"),
+			chooseFromLibraryButtonTitle: I18n.t(
+				"screen.addFood.imagePicker.fromGallery"
+			),
+			storageOptions: {
+				skipBackup: true,
+				path: "images"
+			}
+		};
+
+		ImagePicker.showImagePicker(options as any, (response: any) => {
+			if (response.data) {
+				onImageSelect(response.data);
+			}
+		});
 	}
 }
 
@@ -95,8 +134,11 @@ const styles = StyleSheet.create({
 		justifyContent: "center"
 	},
 	image: {
-		marginTop: 16,
-		resizeMode: "contain"
+		height: cardHeight - 68,
+		width: cardWidth - 8,
+		marginTop: 4,
+		resizeMode: "cover",
+		borderRadius: 4
 	}
 });
 

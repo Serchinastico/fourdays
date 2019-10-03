@@ -185,7 +185,13 @@
 			"title": "Añadir comida",
 			"groupNameHeader": "Grupo",
 			"foodNameHeader": "Nombre",
-			"foodNamePlaceholder": "e.g. Cacao en polvo"
+			"foodNamePlaceholder": "e.g. Cacao en polvo",
+			"imagePicker": {
+				"title": "Seleccionar imagen",
+				"cancel": "Cancelar",
+				"fromCamera": "De la camera",
+				"fromGallery": "De la galería"
+			}
 		}
 	}
 }

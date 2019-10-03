@@ -185,7 +185,13 @@
 			"title": "Add food",
 			"groupNameHeader": "Group",
 			"foodNameHeader": "Name",
-			"foodNamePlaceholder": "e.g. Cocoa powder"
+			"foodNamePlaceholder": "e.g. Cocoa powder",
+			"imagePicker": {
+				"title": "Select image",
+				"cancel": "Cancel",
+				"fromCamera": "From camera",
+				"fromGallery": "From gallery"
+			}
 		}
 	}
 }
