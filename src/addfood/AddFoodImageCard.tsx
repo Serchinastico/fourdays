@@ -71,7 +71,9 @@ class AddFoodImageCard extends React.PureComponent<Props, State> {
 	private static renderFoodName(name: string) {
 		return (
 			<View style={styles.foodNameContainer}>
-				<Text style={styles.foodName}>{name}</Text>
+				<Text numberOfLines={2} style={styles.foodName}>
+					{name}
+				</Text>
 			</View>
 		);
 	}
@@ -131,7 +133,9 @@ const styles = StyleSheet.create({
 	},
 	foodNameContainer: {
 		flex: 1,
-		justifyContent: "center"
+		justifyContent: "center",
+		marginHorizontal: 16,
+		marginBottom: 8
 	},
 	image: {
 		height: cardHeight - 68,
