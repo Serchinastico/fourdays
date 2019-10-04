@@ -108,12 +108,7 @@ class SetupScreen extends React.Component {
 
 		const filterByGroupId = R.filter(food => food.groupId === group.id);
 		const mapToFoodListItem = R.map(food =>
-			FoodList.createItem(
-				food.id,
-				"Group food",
-				I18n.t(food.nameTranslationKey),
-				food.thumbnail
-			)
+			FoodList.createItem(food.id, "Group food", food.name, food.thumbnail)
 		);
 		const sortByName = R.sortBy(item => item.name);
 
@@ -131,7 +126,7 @@ class SetupScreen extends React.Component {
 		const groupItems = R.map(group => {
 			return FoodList.createGroupItem(
 				group.id,
-				I18n.t(group.nameTranslationKey),
+				group.name,
 				this.getChildrenFromGroup(group)
 			);
 		}, groups);

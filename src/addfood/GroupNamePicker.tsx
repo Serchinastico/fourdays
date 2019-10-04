@@ -39,11 +39,7 @@ class GroupNamePicker extends React.PureComponent<Props> {
 
 		return R.map(
 			group => (
-				<Picker.Item
-					key={group.id}
-					label={I18n.t(group.nameTranslationKey)}
-					value={group.id}
-				/>
+				<Picker.Item key={group.id} label={group.name} value={group.id} />
 			),
 			groups
 		);

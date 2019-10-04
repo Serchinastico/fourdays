@@ -21,9 +21,15 @@ import AddFoodImageCard from "./AddFoodImageCard";
 import InputField from "./InputField";
 import GroupNamePicker from "./GroupNamePicker";
 import { Base64Image } from "./Camera";
+import { storeCustomFood } from "./actions";
 
 export interface Props {
 	groups: any[];
+	storeCustomFood: (
+		name: string,
+		groupId: string,
+		imageData: Base64Image
+	) => void;
 }
 
 export interface State {
@@ -160,7 +166,20 @@ class AddFoodScreen extends React.Component<Props, State> {
 		this.setState({ newFoodName: text });
 	}
 
-	private onAcceptPress() {}
+	private onAcceptPress() {
+		const { storeCustomFood } = this.props;
+		const { newFoodGroupName, newFoodName, newFoodImage } = this.state;
+
+		if (!newFoodName) {
+			return;
+		}
+
+		if (!newFoodImage) {
+			return;
+		}
+
+		storeCustomFood(newFoodName, newFoodGroupName, newFoodImage);
+	}
 
 	private onImageSelect(data: Base64Image) {
 		this.setState({ newFoodImage: data });
@@ -212,4 +231,7 @@ function mapStateToProps(state: any) {
 	return { groups: state.setup.groups };
 }
 
-export default connect(mapStateToProps)(AddFoodScreen);
+export default connect(
+	mapStateToProps,
+	{ storeCustomFood }
+)(AddFoodScreen);
