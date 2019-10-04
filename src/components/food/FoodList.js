@@ -5,7 +5,6 @@ import addItemToListIfPresentRemoveOtherwise from "../../common/collections";
 import fuzzySearch from "../../FuzzySearch";
 import FoodGroupHeader from "./FoodGroupHeader";
 import FoodRow from "./FoodRow";
-import EmptySearch from "../EmptySearch";
 import FoodListDescription from "./FoodListDescription";
 import { style } from "../style/style";
 import I18n from "../../translations/i18n";
@@ -127,13 +126,12 @@ class FoodList extends React.PureComponent {
 		}, items);
 	}
 
-	mapFoodSubgroupsIntoRows(subgroups, searchExpression, isAddFoodItemIncluded) {
+	mapFoodSubgroupsIntoRows(subgroups) {
 		const subgroupTuples = R.pipe(
 			R.toPairs,
 			R.reverse
 		)(subgroups);
 		return R.chain(tuple => {
-			const shouldIncludeAddItem = isAddFoodItemIncluded && tuple[0] === "4";
 			return [
 				{
 					type: SUBHEADER_ITEM,
@@ -142,19 +140,14 @@ class FoodList extends React.PureComponent {
 						daysSinceLastConsumption: 4 - tuple[0]
 					}
 				},
-				...this.mapFoodItemsIntoRows(
-					tuple[1],
-					searchExpression,
-					shouldIncludeAddItem
-				)
+				...this.mapFoodItemsIntoRows(tuple[1])
 			];
 		}, subgroupTuples);
 	}
 
-	mapFoodItemsIntoRows(foodItems, searchExpression, shouldIncludeAddItem) {
+	mapFoodItemsIntoRows(foodItems) {
 		let { selectedFoodIds, looksAlwaysSelected } = this.props;
 		looksAlwaysSelected = looksAlwaysSelected || false;
-		shouldIncludeAddItem = shouldIncludeAddItem || false;
 
 		let foodItemsWithSelection = R.map(item => {
 			return {
@@ -162,17 +155,6 @@ class FoodList extends React.PureComponent {
 				isSelected: looksAlwaysSelected || selectedFoodIds.includes(item.id)
 			};
 		}, foodItems);
-
-		if (shouldIncludeAddItem) {
-			foodItemsWithSelection = [
-				{
-					id: "meta:add-food",
-					name: searchExpression,
-					isSelected: true
-				},
-				...foodItemsWithSelection
-			];
-		}
 
 		return R.splitEvery(3, foodItemsWithSelection).map(row => {
 			return {
@@ -183,16 +165,9 @@ class FoodList extends React.PureComponent {
 		});
 	}
 
-	mapGroupChildrenIntoRows(payload, searchExpression, isAddFoodItemIncluded) {
-		searchExpression = searchExpression || "";
-		isAddFoodItemIncluded = isAddFoodItemIncluded || false;
-
+	mapGroupChildrenIntoRows(payload) {
 		if (payload.containsSubgroups) {
-			return this.mapFoodSubgroupsIntoRows(
-				payload.children,
-				searchExpression,
-				isAddFoodItemIncluded
-			);
+			return this.mapFoodSubgroupsIntoRows(payload.children);
 		} else {
 			return this.mapFoodItemsIntoRows(payload.children);
 		}
@@ -237,8 +212,6 @@ class FoodList extends React.PureComponent {
 
 	mapToFlatListItemsWithSearchExpression(items, searchExpression) {
 		const {
-			paddingTopForEmptySearch,
-			paddingBottomForSearch,
 			showSubgroupsWhenSearching,
 			daysSinceConsumptionByFoodId
 		} = this.props;
@@ -250,10 +223,25 @@ class FoodList extends React.PureComponent {
 		);
 
 		if (showSubgroupsWhenSearching) {
-			const searchItems = R.groupBy(
+			let searchItems = R.groupBy(
 				item => daysSinceConsumptionByFoodId[item.id],
 				filteredItems
 			);
+
+			// Add a fake food item first in the list of available food
+			// to add new custom foods.
+			searchItems["4"] = [
+				{
+					id: "meta:add-food",
+					name: searchExpression,
+					image: {
+						type: "Required",
+						data: require("../../images/icon/AddFood.png")
+					},
+					groupId: ""
+				},
+				...(searchItems["4"] || [])
+			];
 
 			return [
 				FoodList.createPaddingItem(88, "searchListTopPadding"),
@@ -263,28 +251,12 @@ class FoodList extends React.PureComponent {
 						"Forbidden food",
 						searchItems,
 						true
-					).payload,
-					searchExpression,
-					true
-				),
-				FoodList.createPaddingItem(
-					paddingBottomForSearch || 0,
-					"searchListBottomPadding"
+					).payload
 				)
 			];
 		}
 
-		return [
-			FoodList.createPaddingItem(
-				paddingTopForEmptySearch,
-				"searchListTopPadding"
-			),
-			...this.mapFoodItemsIntoRows(filteredItems),
-			FoodList.createPaddingItem(
-				paddingBottomForSearch || 0,
-				"searchListBottomPadding"
-			)
-		];
+		return this.mapFoodItemsIntoRows(filteredItems);
 	}
 
 	renderHeaderItem(payload) {
@@ -333,11 +305,7 @@ class FoodList extends React.PureComponent {
 				? this.mapToFlatListItems(items)
 				: this.mapToFlatListItemsWithSearchExpression(items, searchExpression);
 
-		if (searchExpression !== "" && flatListItems.length === 2) {
-			return <EmptySearch style={{ flex: 1 }} />;
-		} else {
-			return <FlatList data={flatListItems} renderItem={this.renderItem} />;
-		}
+		return <FlatList data={flatListItems} renderItem={this.renderItem} />;
 	}
 }
 

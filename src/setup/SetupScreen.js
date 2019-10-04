@@ -152,8 +152,6 @@ class SetupScreen extends React.Component {
 						selectedFoodIds={selectedFoodIds}
 						searchExpression={currentSearch}
 						onFoodSelected={this.onFoodSelected}
-						paddingTopForEmptySearch={98}
-						paddingBottomForSearch={80}
 					/>
 				</SafeAreaView>
 			</KeyboardAvoidingView>

@@ -49,7 +49,6 @@ export function fetchCustomFood() {
 
 		const customFoodList = await getStoredCustomFoodList();
 
-		console.log(`FETCH: ${JSON.stringify(customFoodList)}`);
 		dispatch({ type: "Fetch custom food finish", payload: customFoodList });
 	};
 }
