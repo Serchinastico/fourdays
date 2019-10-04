@@ -700,6 +700,10 @@ const onFetchForbiddenFoodError = (state, action) => {
 	return { ...state, forbiddenFoodIdsError: action.payload };
 };
 
+const onFetchCustomFood = (state, action) => {
+	return { ...state, foods: [...state.foods, ...action.payload] };
+};
+
 const onStoreCustomFood = (state, action) => {
 	const { id, name, groupId, image } = action.payload;
 
@@ -727,6 +731,8 @@ const setupReducer = (state = initialSetupState, action) => {
 			return onFetchForbiddenFoodFinished(state, action);
 		case FETCH_FORBIDDEN_FOOD_ERROR:
 			return onFetchForbiddenFoodError(state, action);
+		case "Fetch custom food finish":
+			return onFetchCustomFood(state, action);
 		case "Store custom food start":
 			return onStoreCustomFood(state, action);
 		default:
