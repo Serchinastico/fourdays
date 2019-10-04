@@ -44,6 +44,16 @@ async function storeCustomFoodList(newCustomFoodList: CustomFood[]) {
 	);
 }
 
+export function fetchCustomFood() {
+	return async (dispatch: (action: FetchCustomFood) => void) => {
+		dispatch({ type: "Fetch custom food start" });
+
+		const customFoodList = await getStoredCustomFoodList();
+
+		dispatch({ type: "Fetch custom food finish", payload: customFoodList });
+	};
+}
+
 export function storeCustomFood(
 	name: string,
 	groupId: string,
