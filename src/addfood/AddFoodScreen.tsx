@@ -67,13 +67,15 @@ class AddFoodScreen extends React.Component<Props, State> {
 			newFoodName !== undefined && newFoodImage !== undefined;
 
 		return (
-			<View style={styles.container}>
-				{this.renderTopBar()}
-				{this.renderFoodGroupNameEditor(groups)}
-				{this.renderFoodNameEditor()}
-				{this.renderAddFoodImage(newFoodName, newFoodImage)}
-				{this.renderAcceptButton(isAcceptButtonEnabled, isKeyboardOpen)}
-			</View>
+			<SafeAreaView style={{ flex: 1 }}>
+				<View style={styles.container}>
+					{this.renderTopBar()}
+					{this.renderFoodGroupNameEditor(groups)}
+					{this.renderFoodNameEditor()}
+					{this.renderAddFoodImage(newFoodName, newFoodImage)}
+					{this.renderAcceptButton(isAcceptButtonEnabled, isKeyboardOpen)}
+				</View>
+			</SafeAreaView>
 		);
 	}
 

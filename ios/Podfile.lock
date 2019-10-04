@@ -8,6 +8,8 @@ PODS:
   - glog (0.3.5)
   - React (0.59.8):
     - React/Core (= 0.59.8)
+  - react-native-image-picker (0.28.1):
+    - React
   - React/Core (0.59.8):
     - yoga (= 0.59.8.React)
   - React/CxxBridge (0.59.8):
@@ -64,6 +66,7 @@ DEPENDENCIES:
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - React/Core (from `../node_modules/react-native`)
   - React/CxxBridge (from `../node_modules/react-native`)
   - React/DevSupport (from `../node_modules/react-native`)
@@ -91,6 +94,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
   React:
     :path: "../node_modules/react-native"
+  react-native-image-picker:
+    :path: "../node_modules/react-native-image-picker"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-community/async-storage"
   RNGestureHandler:
@@ -110,6 +115,7 @@ SPEC CHECKSUMS:
   Folly: de497beb10f102453a1afa9edbf8cf8a251890de
   glog: aefd1eb5dda2ab95ba0938556f34b98e2da3a60d
   React: 76e6aa2b87d05eb6cccb6926d72685c9a07df152
+  react-native-image-picker: fd93361c666f397bdf72f9c6c23f13d2685b9173
   RNCAsyncStorage: 0c3ef98facf3fecf455b518d6f52e10fc964c523
   RNGestureHandler: aea90f0ad8e35fec23438db6fc3ad79be58bb734
   RNI18n: e2f7e76389fcc6e84f2c8733ea89b92502351fd8
@@ -117,6 +123,6 @@ SPEC CHECKSUMS:
   RNShare: 4f206fa36e384e95a0cbf79f2a92490647e93127
   yoga: 92b2102c3d373d1a790db4ab761d2b0ffc634f64
 
-PODFILE CHECKSUM: 38828d63b98503567b1fd462c46b305bbecd39e5
+PODFILE CHECKSUM: f372eb4af74e38a2837b8338ae14491d2eddae4f
 
 COCOAPODS: 1.6.1

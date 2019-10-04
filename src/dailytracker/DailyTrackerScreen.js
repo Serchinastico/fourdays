@@ -379,11 +379,9 @@ class DailyTrackerScreen extends React.Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<View style={styles.container}>
-					{this.renderFoodList()}
-					{this.renderTopBar()}
-					{this.renderCalendar()}
-				</View>
+				{this.renderFoodList()}
+				{this.renderTopBar()}
+				{this.renderCalendar()}
 			</View>
 		);
 	}
