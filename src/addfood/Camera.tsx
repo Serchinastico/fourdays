@@ -1,7 +1,6 @@
 import I18n from "../translations/i18n";
 import ImagePicker from "react-native-image-picker";
-
-export type Base64Image = string;
+import { Base64Image } from "./types";
 
 export function showImagePicker(onImageSelect: (data: Base64Image) => void) {
 	const options = {

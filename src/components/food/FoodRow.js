@@ -37,7 +37,7 @@ class FoodRow extends React.PureComponent {
 				id={food.id}
 				key={food.id}
 				name={food.name}
-				thumbnail={food.thumbnail}
+				thumbnail={food.image}
 				onFoodSelected={onFoodSelected}
 				isSelected={food.isSelected}
 				isAddFood={food.id === "meta:add-food"}
