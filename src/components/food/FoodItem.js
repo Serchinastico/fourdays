@@ -74,25 +74,15 @@ class FoodItem extends React.PureComponent {
 		};
 	}
 
-	static renderThumbnail(thumbnail, isAddFood) {
-		if (isAddFood) {
-			return (
-				<Image
-					style={styles.thumbnail}
-					height={(Dimensions.get("window").width - 64) / 3}
-					source={require("../../images/icon/AddFood.png")}
-				/>
-			);
-		} else {
-			return (
-				<Image
-					style={styles.thumbnail}
-					width="100%"
-					height={(Dimensions.get("window").width - 64) / 3}
-					source={thumbnail.data}
-				/>
-			);
-		}
+	static renderThumbnail(thumbnail) {
+		return (
+			<Image
+				style={styles.thumbnail}
+				width="100%"
+				height={(Dimensions.get("window").width - 64) / 3}
+				source={thumbnail.data}
+			/>
+		);
 	}
 
 	static renderName(name, isAddFood) {
@@ -152,7 +142,7 @@ class FoodItem extends React.PureComponent {
 				onPress={this.onPressed}
 			>
 				<Animated.View style={containerStyle}>
-					{FoodItem.renderThumbnail(thumbnail, isAddFood)}
+					{FoodItem.renderThumbnail(thumbnail)}
 					{FoodItem.renderName(name, isAddFood)}
 					{FoodItem.renderUnselectedTopLayer(opacityAnim)}
 				</Animated.View>

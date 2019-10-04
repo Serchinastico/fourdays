@@ -2,11 +2,7 @@
 	"appName": "Four Days",
 	"common": {
 		"search": {
-			"placeholder": "Buscar alimento",
-			"emptyCase": {
-				"title": "¡Lo sentimos!",
-				"description": "No hemos podido encontrar ningún alimento con ese nombre"
-			}
+			"placeholder": "Buscar alimento"
 		},
 		"accept": {
 			"text": "Aceptar"
