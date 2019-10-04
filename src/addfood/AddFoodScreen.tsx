@@ -22,8 +22,10 @@ import InputField from "./InputField";
 import GroupNamePicker from "./GroupNamePicker";
 import { storeCustomFood } from "./actions";
 import { FoodImage } from "./types";
+import { NavigationScreenProp } from "react-navigation";
 
 export interface Props {
+	navigation: NavigationScreenProp<any, any>;
 	groups: any[];
 	storeCustomFood: (name: string, groupId: string, image: FoodImage) => void;
 }
@@ -87,7 +89,7 @@ class AddFoodScreen extends React.Component<Props, State> {
 
 	private renderTopAppBarButtons() {
 		return (
-			<IconButton icon={IconButtonClear} onPressed={this.onClosePressed()} />
+			<IconButton icon={IconButtonClear} onPressed={this.onClosePressed} />
 		);
 	}
 
@@ -158,14 +160,17 @@ class AddFoodScreen extends React.Component<Props, State> {
 		);
 	}
 
-	private onClosePressed() {}
+	private onClosePressed() {
+		const { navigation } = this.props;
+		navigation.goBack();
+	}
 
 	private onChangeFoodName(text: string) {
 		this.setState({ newFoodName: text });
 	}
 
 	private onAcceptPress() {
-		const { storeCustomFood } = this.props;
+		const { navigation, storeCustomFood } = this.props;
 		const { newFoodGroupId, newFoodName, newFoodImage } = this.state;
 
 		if (!newFoodName) {
@@ -177,6 +182,7 @@ class AddFoodScreen extends React.Component<Props, State> {
 		}
 
 		storeCustomFood(newFoodName, newFoodGroupId, newFoodImage);
+		navigation.goBack();
 	}
 
 	private onImageSelect(data: FoodImage) {
