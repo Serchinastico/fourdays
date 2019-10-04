@@ -36,7 +36,7 @@ class AcceptButton extends React.PureComponent {
 	render() {
 		let { onPress, isEnabled, style } = this.props;
 
-		if (isEnabled) {
+		if (isEnabled === undefined || isEnabled) {
 			return (
 				<TouchableHighlight
 					{...setTestId("acceptSetupButton")}

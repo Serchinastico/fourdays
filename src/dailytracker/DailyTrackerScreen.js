@@ -114,7 +114,7 @@ class DailyTrackerScreen extends React.Component {
 		const allFoodNamesById = {};
 		for (let i = 0, size = allFoods.length; i < size; i++) {
 			const food = allFoods[i];
-			allFoodNamesById[food.id] = I18n.t(food.nameTranslationKey);
+			allFoodNamesById[food.id] = food.name;
 		}
 
 		shareMonthlyReport(selectedDay, allFoodNamesById);
@@ -164,12 +164,7 @@ class DailyTrackerScreen extends React.Component {
 
 		const mapFoodToFoodListItem = prefix =>
 			R.map(food => {
-				return FoodList.createItem(
-					food.id,
-					prefix,
-					I18n.t(food.nameTranslationKey),
-					food.thumbnail
-				);
+				return FoodList.createItem(food.id, prefix, food.name, food.thumbnail);
 			});
 		const sortByName = R.sortBy(item => item.name);
 
@@ -242,7 +237,7 @@ class DailyTrackerScreen extends React.Component {
 			group => {
 				return FoodList.createGroupItem(
 					group.id,
-					I18n.t(group.nameTranslationKey),
+					group.name,
 					this.getChildrenFromGroup(group),
 					group.id === FORBIDDEN_FOOD_GROUP_ID
 				);
@@ -251,11 +246,11 @@ class DailyTrackerScreen extends React.Component {
 				...groups,
 				{
 					id: FORBIDDEN_FOOD_GROUP_ID,
-					nameTranslationKey: "food.group.forbidden"
+					name: I18n.t("food.group.forbidden")
 				},
 				{
 					id: CONSUMED_FOOD_GROUP_ID,
-					nameTranslationKey: "food.group.consumed"
+					name: I18n.t("food.group.consumed")
 				}
 			]
 		);
