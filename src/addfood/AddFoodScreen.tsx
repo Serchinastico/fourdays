@@ -50,10 +50,10 @@ class AddFoodScreen extends React.Component<Props, State> {
 		Keyboard.addListener("keyboardDidShow", this.keyboardDidShow.bind(this));
 		Keyboard.addListener("keyboardDidHide", this.keyboardDidHide.bind(this));
 
-		const { groups } = this.props;
+		const { groups, navigation } = this.props;
 		this.state = {
 			newFoodGroupId: groups[0].id,
-			newFoodName: undefined,
+			newFoodName: navigation.getParam("foodName", undefined),
 			newFoodImage: undefined,
 			isKeyboardOpen: false
 		};

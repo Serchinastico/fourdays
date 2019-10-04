@@ -85,10 +85,10 @@ class DailyTrackerScreen extends React.Component {
 
 	onFoodSelected(selectedId) {
 		const { storeConsumedFoodForDay, navigation } = this.props;
-		const { selectedDay } = this.state;
+		const { selectedDay, currentSearch } = this.state;
 
 		if (selectedId === "meta:add-food") {
-			navigation.navigate("AddFood");
+			navigation.navigate("AddFood", { foodName: currentSearch });
 			this.setState({ currentSearch: "", isSearchActive: false });
 		} else {
 			storeConsumedFoodForDay(selectedId, selectedDay);
