@@ -777,15 +777,7 @@ const onStoreCustomFood = (state, action) => {
 
 	return {
 		...state,
-		foods: [
-			...state.foods,
-			{
-				id,
-				name,
-				image: { type: "Require", data: image },
-				groupId
-			}
-		]
+		foods: [...state.foods, { id, name, image, groupId }]
 	};
 };
 
