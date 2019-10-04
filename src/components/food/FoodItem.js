@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
 		width: "30%"
 	},
 	container: {
+		padding: 4,
 		borderRadius: 4,
 		shadowOffset: { width: 0, height: 0 },
 		backgroundColor: color.white,
@@ -25,15 +26,10 @@ const styles = StyleSheet.create({
 		backgroundColor: color.white,
 		...shadow.regular
 	},
-	thumbnailContainer: {
-		borderRadius: 4,
-		backgroundColor: color.white
-	},
 	thumbnail: {
-		width: "100%",
-		height: 32 + (Dimensions.get("window").width - 64) / 3,
 		borderRadius: 4,
-		resizeMode: "contain"
+		alignSelf: "center",
+		resizeMode: "cover"
 	},
 	unselectedTopLayer: {
 		width: "100%",
@@ -90,7 +86,7 @@ class FoodItem extends React.PureComponent {
 			return (
 				<Image
 					style={styles.thumbnail}
-					width="95%"
+					width="100%"
 					height={(Dimensions.get("window").width - 64) / 3}
 					source={thumbnail.data}
 				/>
