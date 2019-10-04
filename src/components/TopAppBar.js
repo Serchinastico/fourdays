@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
 		paddingTop: 16,
 		paddingBottom: 8
 	},
-	bottomContainer: {},
 	title: {
 		...style.extraExtraLargeBoldNeutral,
 		marginLeft: 16,
@@ -35,7 +34,7 @@ class TopAppBar extends React.PureComponent {
 					<Text style={styles.title}>{title}</Text>
 					<View style={styles.buttons}>{buttons || null}</View>
 				</View>
-				<View style={styles.bottomContainer}>{bottomViews || null}</View>
+				<View>{bottomViews || null}</View>
 			</SafeAreaView>
 		);
 	}
