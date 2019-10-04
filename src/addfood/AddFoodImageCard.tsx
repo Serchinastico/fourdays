@@ -53,7 +53,7 @@ class AddFoodImageCard extends React.PureComponent<Props, State> {
 		} else {
 			return (
 				<Image
-					style={styles.image}
+					style={[styles.image, { resizeMode: "contain" }]}
 					source={require("../images/icon/AddFoodL.png")}
 				/>
 			);
@@ -85,8 +85,17 @@ class AddFoodImageCard extends React.PureComponent<Props, State> {
 }
 
 const screenWidth = Dimensions.get("window").width;
-const cardWidth = screenWidth / 2;
-const cardHeight = cardWidth / 0.75;
+const screenHeight = Dimensions.get("window").height;
+let cardWidth = screenWidth / 2;
+let cardHeight = cardWidth / 0.75;
+const maxHeight = screenHeight - (246 + 64 + 64 + 32);
+
+console.log(`HEIGHT: ${cardHeight} >? ${maxHeight}`);
+
+if (cardHeight > maxHeight) {
+	cardHeight = maxHeight;
+	cardWidth = cardHeight * 0.75;
+}
 
 const styles = StyleSheet.create({
 	card: {

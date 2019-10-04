@@ -3,6 +3,7 @@ import {
 	Keyboard,
 	KeyboardAvoidingView,
 	SafeAreaView,
+	ScrollView,
 	StyleSheet,
 	TextInput,
 	View
