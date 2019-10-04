@@ -677,7 +677,8 @@ const initialSetupState = {
 			groupId: "Group 4"
 		}
 	],
-	forbiddenFoodIds: undefined
+	forbiddenFoodIds: undefined,
+	isCustomFoodLoaded: false
 };
 
 const onStoreForbiddenFoodStart = (state, action) => {
@@ -701,7 +702,11 @@ const onFetchForbiddenFoodError = (state, action) => {
 };
 
 const onFetchCustomFood = (state, action) => {
-	return { ...state, foods: [...state.foods, ...action.payload] };
+	return {
+		...state,
+		foods: [...state.foods, ...action.payload],
+		isCustomFoodLoaded: true
+	};
 };
 
 const onStoreCustomFood = (state, action) => {
