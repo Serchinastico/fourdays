@@ -92,7 +92,7 @@ class FoodItem extends React.PureComponent {
 					style={styles.thumbnail}
 					width="95%"
 					height={(Dimensions.get("window").width - 64) / 3}
-					source={thumbnail}
+					source={thumbnail.data}
 				/>
 			);
 		}

@@ -38,8 +38,8 @@ class FoodList extends React.PureComponent {
 		};
 	}
 
-	static createItem(id, keyPrefix, name, thumbnail) {
-		return { id, keyPrefix, name, thumbnail };
+	static createItem(id, keyPrefix, name, image) {
+		return { id, keyPrefix, name, image };
 	}
 
 	static createDescriptionItem(description, marginTop) {

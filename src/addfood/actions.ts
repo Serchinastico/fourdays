@@ -1,7 +1,6 @@
-import { Base64Image } from "./Camera";
 import * as R from "ramda";
 import AsyncStorage from "@react-native-community/async-storage";
-import { CustomFood } from "./types";
+import { CustomFood, FoodImage } from "./types";
 
 export type FETCH_CUSTOM_FOOD_LIST_START = "Fetch custom food start";
 export type FETCH_CUSTOM_FOOD_LIST_FINISH = "Fetch custom food finish";
@@ -50,6 +49,7 @@ export function fetchCustomFood() {
 
 		const customFoodList = await getStoredCustomFoodList();
 
+		console.log(`FETCH: ${JSON.stringify(customFoodList)}`);
 		dispatch({ type: "Fetch custom food finish", payload: customFoodList });
 	};
 }
@@ -57,7 +57,7 @@ export function fetchCustomFood() {
 export function storeCustomFood(
 	name: string,
 	groupId: string,
-	image: Base64Image
+	image: FoodImage
 ) {
 	return async (dispatch: (action: SaveCustomFood) => void) => {
 		const foodItemPayload: CustomFood = {

@@ -11,12 +11,13 @@ import {
 } from "react-native";
 // @ts-ignore
 import { style, shadow, color } from "../components/style/style";
-import { Base64Image, showImagePicker } from "./Camera";
+import { showImagePicker } from "./Camera";
+import { FoodImage } from "./types";
 
 export interface Props {
 	name: string;
-	image?: Base64Image;
-	onImageSelect: (data: Base64Image) => void;
+	image?: FoodImage;
+	onImageSelect: (image: FoodImage) => void;
 	style?: StyleProp<ViewStyle>;
 }
 
@@ -46,14 +47,9 @@ class AddFoodImageCard extends React.PureComponent<Props, State> {
 		);
 	}
 
-	private static renderImage(image?: Base64Image) {
+	private static renderImage(image?: FoodImage) {
 		if (image) {
-			return (
-				<Image
-					style={styles.image}
-					source={{ uri: `data:image/png;base64,${image}` }}
-				/>
-			);
+			return <Image style={styles.image} source={image.data} />;
 		} else {
 			return (
 				<Image
@@ -79,7 +75,10 @@ class AddFoodImageCard extends React.PureComponent<Props, State> {
 
 		showImagePicker((response: any) => {
 			if (response) {
-				onImageSelect(response);
+				onImageSelect({
+					type: "Base64",
+					data: { uri: `data:image/png;base64,${response}` }
+				});
 			}
 		});
 	}

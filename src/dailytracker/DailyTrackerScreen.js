@@ -164,7 +164,7 @@ class DailyTrackerScreen extends React.Component {
 
 		const mapFoodToFoodListItem = prefix =>
 			R.map(food => {
-				return FoodList.createItem(food.id, prefix, food.name, food.thumbnail);
+				return FoodList.createItem(food.id, prefix, food.name, food.image);
 			});
 		const sortByName = R.sortBy(item => item.name);
 
