@@ -2,7 +2,8 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+        <item name="android:spinnerItemStyle">@style/SpinnerItem</item>
+        <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItem</item>
     </style>
 
     <style name="DefaultExplainingPermissionsTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
@@ -14,6 +15,17 @@
 
         <!-- Used for the background -->
         <item name="android:background">#FFFFFF</item>
+    </style>
+
+    <style name="SpinnerItem" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:fontFamily">@font/avenir_next_regular</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="SpinnerDropDownItem" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:fontFamily">@font/avenir_next_regular</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:padding">8dp</item>
     </style>
 
 </resources>
