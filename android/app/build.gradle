@@ -167,14 +167,19 @@ android {
 }
 
 dependencies {
-    implementation project(':react-native-image-picker')
-    implementation project(':@react-native-community_async-storage')
-    implementation project(':react-native-i18n')
-    implementation project(':react-native-gesture-handler')
-    implementation project(':react-native-share')
-    implementation project(':react-native-localize')
-    implementation project(':react-native-html-to-pdf')
+  implementation project(':react-native-safe-area-context')
+  implementation project(':react-native-image-picker')
+  implementation project(':@react-native-community_async-storage')
+  implementation project(':react-native-i18n')
+  implementation project(':react-native-gesture-handler')
+  implementation project(':react-native-share')
+  implementation project(':react-native-localize')
+  implementation project(':react-native-html-to-pdf')
   implementation fileTree(dir: "libs", include: ["*.jar"])
+  implementation "androidx.appcompat:appcompat:1.1.0"
+  implementation "androidx.multidex:multidex:2.0.1"
+  implementation "androidx.contentpager:contentpager:1.0.0"
+  implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
   implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
   implementation "com.facebook.react:react-native:+"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version" // From node_modules
@@ -186,7 +191,6 @@ dependencies {
     exclude group: "com.android.support"
   }
   androidTestImplementation "com.android.support.test.espresso:espresso-intents:3.0.2"
-
 }
 
 // Run this once to be able to run the application with BUCK

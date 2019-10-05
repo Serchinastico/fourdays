@@ -1,39 +1,41 @@
 import React from "react";
 import { TouchableHighlight, StyleSheet, Text, View } from "react-native";
+import { SafeAreaConsumer } from "react-native-safe-area-context";
 import setTestId from "../testIds";
 import I18n from "../translations/i18n";
 import { color, style, shadow } from "./style/style";
 
+const sharedBackgroundStyle = {
+	flex: 1,
+	borderRadius: 32,
+	justifyContent: "center",
+	flexDirection: "column",
+	...shadow.regular
+};
+
 const styles = StyleSheet.create({
 	container: {
-		height: 64
+		height: 64,
+		width: 128,
+		alignSelf: "center"
 	},
 	background: {
-		flex: 1,
 		backgroundColor: color.grass,
-		justifyContent: "center",
-		alignItems: "center",
-		flexDirection: "column",
-		...shadow.regular
+		...sharedBackgroundStyle
 	},
 	disabledBackground: {
-		flex: 1,
 		backgroundColor: color.clearGrass,
-		justifyContent: "center",
-		alignItems: "center",
-		flexDirection: "column",
-		...shadow.regular
+		...sharedBackgroundStyle
 	},
 	text: {
 		...style.largeMediumNeutral,
 		color: color.white,
-		textAlign: "center",
-		alignSelf: "center"
+		textAlign: "center"
 	}
 });
 
 class AcceptButton extends React.PureComponent {
-	render() {
+	renderWithInsets(insets) {
 		let { onPress, isEnabled, style } = this.props;
 
 		if (isEnabled === undefined || isEnabled) {
@@ -41,7 +43,11 @@ class AcceptButton extends React.PureComponent {
 				<TouchableHighlight
 					{...setTestId("acceptSetupButton")}
 					underlayColor={color.seafoamGreen}
-					style={[styles.container, style]}
+					style={[
+						styles.container,
+						style,
+						{ marginBottom: insets.bottom + 24 }
+					]}
 					onPress={() => onPress()}
 				>
 					<View style={styles.background}>
@@ -51,13 +57,27 @@ class AcceptButton extends React.PureComponent {
 			);
 		} else {
 			return (
-				<View style={[styles.container, style]}>
+				<View
+					style={[
+						styles.container,
+						style,
+						{ marginBottom: insets.bottom + 24 }
+					]}
+				>
 					<View style={styles.disabledBackground}>
 						<Text style={styles.text}>{I18n.t("common.accept.text")}</Text>
 					</View>
 				</View>
 			);
 		}
+	}
+
+	render() {
+		return (
+			<SafeAreaConsumer>
+				{insets => this.renderWithInsets(insets)}
+			</SafeAreaConsumer>
+		);
 	}
 }
 

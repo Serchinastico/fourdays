@@ -67,15 +67,13 @@ class AddFoodScreen extends React.Component<Props, State> {
 			newFoodName !== undefined && newFoodImage !== undefined;
 
 		return (
-			<SafeAreaView style={{ flex: 1 }}>
-				<View style={styles.container}>
-					{this.renderTopBar()}
-					{this.renderFoodGroupNameEditor(groups)}
-					{this.renderFoodNameEditor()}
-					{this.renderAddFoodImage(newFoodName, newFoodImage)}
-					{this.renderAcceptButton(isAcceptButtonEnabled, isKeyboardOpen)}
-				</View>
-			</SafeAreaView>
+			<View style={styles.container}>
+				{this.renderTopBar()}
+				{this.renderFoodGroupNameEditor(groups)}
+				{this.renderFoodNameEditor()}
+				{this.renderAddFoodImage(newFoodName, newFoodImage)}
+				{this.renderAcceptButton(isAcceptButtonEnabled, isKeyboardOpen)}
+			</View>
 		);
 	}
 
@@ -156,9 +154,7 @@ class AddFoodScreen extends React.Component<Props, State> {
 				style={{ ...styles.footer, marginBottom }}
 				behavior="position"
 			>
-				<SafeAreaView>
-					<AcceptButton onPress={this.onAcceptPress} isEnabled={isEnabled} />
-				</SafeAreaView>
+				<AcceptButton onPress={this.onAcceptPress} isEnabled={isEnabled} />
 			</KeyboardAvoidingView>
 		);
 	}
