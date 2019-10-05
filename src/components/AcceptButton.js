@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
 		...sharedBackgroundStyle
 	},
 	text: {
-		...style.largeMediumNeutral,
+		...style.largeMediumBlack,
 		color: color.white,
 		textAlign: "center"
 	}

@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 		marginVertical: 16
 	},
 	text: {
-		...style.largeMediumNeutral
+		...style.largeMediumBlack
 	},
 	icon: {
 		marginLeft: "auto"

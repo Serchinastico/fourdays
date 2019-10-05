@@ -1,10 +1,10 @@
+import * as R from "ramda";
 import React, { createRef } from "react";
 import {
 	Keyboard,
 	KeyboardAvoidingView,
-	SafeAreaView,
-	ScrollView,
 	StyleSheet,
+	Text,
 	TextInput,
 	View
 } from "react-native";
@@ -20,7 +20,6 @@ import AcceptButton from "../components/AcceptButton";
 import IconButton, { IconButtonClear } from "../components/IconButton";
 import AddFoodImageCard from "./AddFoodImageCard";
 import InputField from "./InputField";
-import GroupNamePicker from "./GroupNamePicker";
 import { storeCustomFood } from "./actions";
 import { FoodImage } from "./types";
 import { NavigationScreenProp } from "react-navigation";
@@ -97,18 +96,14 @@ class AddFoodScreen extends React.Component<Props, State> {
 	private renderFoodGroupNameEditor(groups: any[]) {
 		const { newFoodGroupId } = this.state;
 
+		const selectedGroup = R.find(group => group.id === newFoodGroupId, groups);
+
 		return (
 			<InputField
 				style={styles.textInputContainer}
 				headerText={I18n.t("screen.addFood.groupNameHeader")}
 			>
-				<GroupNamePicker
-					groups={groups}
-					selectedGroupName={newFoodGroupId}
-					onValueChange={(itemValue: string) =>
-						this.setState({ newFoodGroupId: itemValue })
-					}
-				/>
+				<Text style={styles.textInput}>{selectedGroup.name}</Text>
 			</InputField>
 		);
 	}
@@ -214,8 +209,7 @@ const styles = StyleSheet.create({
 		right: 0
 	},
 	textInput: {
-		...style.extraLargeRegularNeutral,
-		textAlignVertical: "center"
+		...style.largeRegularBlack
 	},
 	textInputContainer: {
 		marginLeft: 16,
