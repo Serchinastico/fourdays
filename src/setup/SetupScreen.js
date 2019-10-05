@@ -11,7 +11,7 @@ import TopAppBar from "../components/TopAppBar";
 import TopSearchBar from "../components/TopSearchBar";
 import storeForbiddenFood from "./actions";
 import I18n from "../translations/i18n";
-import { style, color } from "../components/style/style";
+import { color } from "../components/style/style";
 
 const styles = StyleSheet.create({
 	container: {
@@ -29,21 +29,6 @@ const styles = StyleSheet.create({
 		bottom: 0,
 		left: 0,
 		right: 0
-	},
-	emptyCaseContainer: {
-		height: "100%",
-		flex: 1,
-		flexDirection: "column",
-		justifyContent: "center",
-		alignItems: "center"
-	},
-	emptyCaseText: {
-		...style.largeMediumBlack,
-		textAlign: "center",
-		color: color.brownGray,
-		marginTop: 8,
-		marginLeft: 48,
-		marginRight: 48
 	},
 	itemsContainer: {
 		padding: 16,

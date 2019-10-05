@@ -1,6 +1,6 @@
 import * as R from "ramda";
 import React from "react";
-import { FlatList, View, Text } from "react-native";
+import { FlatList, View, Text, Platform } from "react-native";
 import addItemToListIfPresentRemoveOtherwise from "../../common/collections";
 import fuzzySearch from "../../FuzzySearch";
 import FoodGroupHeader from "./FoodGroupHeader";
@@ -222,6 +222,8 @@ class FoodList extends React.PureComponent {
 			fuzzySearch(searchExpression, "name", allFoodItems)
 		);
 
+		const paddingTop = Platform.OS === "android" ? 88 + 16 : 88;
+
 		if (showSubgroupsWhenSearching) {
 			let searchItems = R.groupBy(
 				item => daysSinceConsumptionByFoodId[item.id],
@@ -244,7 +246,7 @@ class FoodList extends React.PureComponent {
 			];
 
 			return [
-				FoodList.createPaddingItem(88, "searchListTopPadding"),
+				FoodList.createPaddingItem(paddingTop, "searchListTopPadding"),
 				...this.mapGroupChildrenIntoRows(
 					FoodList.createGroupItem(
 						"Forbidden food",
@@ -257,7 +259,7 @@ class FoodList extends React.PureComponent {
 		}
 
 		return [
-			FoodList.createPaddingItem(88, "searchListTopPadding"),
+			FoodList.createPaddingItem(paddingTop, "searchListTopPadding"),
 			...this.mapFoodItemsIntoRows(filteredItems)
 		];
 	}
