@@ -42,6 +42,16 @@ export const shadow = StyleSheet.create({
 		shadowOpacity: 0.2,
 		shadowRadius: 16,
 		elevation: 16
+	},
+	grass: {
+		shadowColor: color.grass,
+		shadowOffset: {
+			width: 0,
+			height: 0
+		},
+		shadowOpacity: 0.2,
+		shadowRadius: 8,
+		elevation: 8
 	}
 });
 

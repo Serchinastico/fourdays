@@ -256,7 +256,10 @@ class FoodList extends React.PureComponent {
 			];
 		}
 
-		return this.mapFoodItemsIntoRows(filteredItems);
+		return [
+			FoodList.createPaddingItem(88, "searchListTopPadding"),
+			...this.mapFoodItemsIntoRows(filteredItems)
+		];
 	}
 
 	renderHeaderItem(payload) {
