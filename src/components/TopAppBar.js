@@ -1,5 +1,6 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaConsumer } from "react-native-safe-area-context";
 import { style, color, shadow } from "./style/style";
 
 const styles = StyleSheet.create({
@@ -25,17 +26,25 @@ const styles = StyleSheet.create({
 });
 
 class TopAppBar extends React.PureComponent {
-	render() {
+	renderWithInsets(insets) {
 		const { title, buttons, bottomViews } = this.props;
 
 		return (
-			<SafeAreaView style={styles.container}>
+			<View style={[styles.container, { paddingTop: insets.top }]}>
 				<View style={styles.topContainer}>
 					<Text style={styles.title}>{title}</Text>
 					<View style={styles.buttons}>{buttons || null}</View>
 				</View>
 				<View>{bottomViews || null}</View>
-			</SafeAreaView>
+			</View>
+		);
+	}
+
+	render() {
+		return (
+			<SafeAreaConsumer>
+				{insets => this.renderWithInsets(insets)}
+			</SafeAreaConsumer>
 		);
 	}
 }

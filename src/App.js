@@ -1,4 +1,5 @@
 import React from "react";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider } from "react-redux";
 import {
 	createStackNavigator,
@@ -45,7 +46,9 @@ const AppContainer = createAppContainer(AppNavigator);
 const App = () => (
 	<Provider store={store}>
 		<StatusBar backgroundColor="white" barStyle="dark-content" />
-		<AppContainer />
+		<SafeAreaProvider>
+			<AppContainer />
+		</SafeAreaProvider>
 	</Provider>
 );
 
