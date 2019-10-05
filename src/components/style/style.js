@@ -76,8 +76,13 @@ export const style = StyleSheet.create({
 		fontSize: textSizeM,
 		color: color.black
 	},
-	largeMediumNeutral: {
+	largeMediumBlack: {
 		fontFamily: "AvenirNext-Medium",
+		fontSize: textSizeL,
+		color: color.black
+	},
+	largeRegularBlack: {
+		fontFamily: "AvenirNext-Regular",
 		fontSize: textSizeL,
 		color: color.black
 	},

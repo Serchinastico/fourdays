@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
 		alignItems: "center"
 	},
 	emptyCaseText: {
-		...style.largeMediumNeutral,
+		...style.largeMediumBlack,
 		textAlign: "center",
 		color: color.brownGray,
 		marginTop: 8,

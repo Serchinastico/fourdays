@@ -15,7 +15,7 @@ class InputField extends React.PureComponent<Props> {
 		return (
 			<View style={[styles.container, style]}>
 				{InputField.renderHeader(headerText)}
-				{children}
+				<View style={styles.childrenContainer}>{children}</View>
 				{InputField.renderBottomLine()}
 			</View>
 		);
@@ -36,7 +36,12 @@ const styles = StyleSheet.create({
 		backgroundColor: color.black20
 	},
 	container: {
+		height: 68,
 		flexDirection: "column"
+	},
+	childrenContainer: {
+		flex: 1,
+		justifyContent: "center"
 	},
 	header: {
 		...style.midBoldBlack
