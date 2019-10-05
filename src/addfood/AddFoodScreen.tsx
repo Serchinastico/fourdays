@@ -1,10 +1,10 @@
 import * as R from "ramda";
 import React, { createRef } from "react";
+import RNPickerSelect from "react-native-picker-select";
 import {
 	Keyboard,
 	KeyboardAvoidingView,
 	StyleSheet,
-	Text,
 	TextInput,
 	View
 } from "react-native";
@@ -96,14 +96,23 @@ class AddFoodScreen extends React.Component<Props, State> {
 	private renderFoodGroupNameEditor(groups: any[]) {
 		const { newFoodGroupId } = this.state;
 
-		const selectedGroup = R.find(group => group.id === newFoodGroupId, groups);
+		const pickerValues = R.map(
+			group => ({ label: group.name, value: group.id }),
+			groups
+		);
 
 		return (
 			<InputField
 				style={styles.textInputContainer}
 				headerText={I18n.t("screen.addFood.groupNameHeader")}
 			>
-				<Text style={styles.textInput}>{selectedGroup.name}</Text>
+				<RNPickerSelect
+					style={styles.textInput}
+					value={newFoodGroupId}
+					placeholder={{}}
+					onValueChange={value => this.setState({ newFoodGroupId: value })}
+					items={pickerValues}
+				/>
 			</InputField>
 		);
 	}

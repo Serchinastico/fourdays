@@ -9,8 +9,7 @@ const sharedBackgroundStyle = {
 	flex: 1,
 	borderRadius: 32,
 	justifyContent: "center",
-	flexDirection: "column",
-	...shadow.regular
+	flexDirection: "column"
 };
 
 const styles = StyleSheet.create({
@@ -21,6 +20,7 @@ const styles = StyleSheet.create({
 	},
 	background: {
 		backgroundColor: color.grass,
+		...shadow.regular,
 		...sharedBackgroundStyle
 	},
 	disabledBackground: {
