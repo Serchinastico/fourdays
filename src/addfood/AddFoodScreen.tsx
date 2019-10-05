@@ -1,13 +1,7 @@
 import * as R from "ramda";
 import React, { createRef } from "react";
 import RNPickerSelect from "react-native-picker-select";
-import {
-	Keyboard,
-	KeyboardAvoidingView,
-	StyleSheet,
-	TextInput,
-	View
-} from "react-native";
+import { StyleSheet, TextInput, View } from "react-native";
 import { EdgeInsets, SafeAreaConsumer } from "react-native-safe-area-context";
 import { connect } from "react-redux";
 // @ts-ignore
@@ -35,7 +29,6 @@ export interface State {
 	newFoodGroupId: string;
 	newFoodName?: string;
 	newFoodImage?: FoodImage;
-	isKeyboardOpen: boolean;
 }
 
 class AddFoodScreen extends React.Component<Props, State> {
@@ -48,15 +41,12 @@ class AddFoodScreen extends React.Component<Props, State> {
 		this.onChangeFoodName = this.onChangeFoodName.bind(this);
 		this.onAcceptPress = this.onAcceptPress.bind(this);
 		this.onImageSelect = this.onImageSelect.bind(this);
-		Keyboard.addListener("keyboardDidShow", this.keyboardDidShow.bind(this));
-		Keyboard.addListener("keyboardDidHide", this.keyboardDidHide.bind(this));
 
 		const { groups, navigation } = this.props;
 		this.state = {
 			newFoodGroupId: groups[0].id,
 			newFoodName: navigation.getParam("foodName", undefined),
-			newFoodImage: undefined,
-			isKeyboardOpen: false
+			newFoodImage: undefined
 		};
 	}
 
@@ -66,7 +56,7 @@ class AddFoodScreen extends React.Component<Props, State> {
 
 	private renderWithInsets(insets: EdgeInsets | null) {
 		const { groups } = this.props;
-		const { newFoodName, newFoodImage, isKeyboardOpen } = this.state;
+		const { newFoodName, newFoodImage } = this.state;
 
 		const isAcceptButtonEnabled =
 			newFoodName !== undefined && newFoodImage !== undefined;
@@ -79,7 +69,7 @@ class AddFoodScreen extends React.Component<Props, State> {
 				{this.renderFoodGroupNameEditor(groups, topInset)}
 				{this.renderFoodNameEditor()}
 				{this.renderAddFoodImage(newFoodName, newFoodImage)}
-				{this.renderAcceptButton(isAcceptButtonEnabled, isKeyboardOpen)}
+				{this.renderAcceptButton(isAcceptButtonEnabled)}
 			</View>
 		);
 	}
@@ -156,19 +146,8 @@ class AddFoodScreen extends React.Component<Props, State> {
 		);
 	}
 
-	private renderAcceptButton(isEnabled: boolean, isKeyboardOpen: boolean) {
-		// Terrible hack, in my Samsung S9+, when the keyboard appears, the accept button is below it. That's why we
-		// are listening to keyboard events and adding a bogus margin at the bottom.
-		const marginBottom = isKeyboardOpen ? 24 : 0;
-
-		return (
-			<KeyboardAvoidingView
-				style={{ ...styles.footer, marginBottom }}
-				behavior="position"
-			>
-				<AcceptButton onPress={this.onAcceptPress} isEnabled={isEnabled} />
-			</KeyboardAvoidingView>
-		);
+	private renderAcceptButton(isEnabled: boolean) {
+		return <AcceptButton onPress={this.onAcceptPress} isEnabled={isEnabled} />;
 	}
 
 	private onClosePressed() {
@@ -198,14 +177,6 @@ class AddFoodScreen extends React.Component<Props, State> {
 
 	private onImageSelect(data: FoodImage) {
 		this.setState({ newFoodImage: data });
-	}
-
-	private keyboardDidShow() {
-		this.setState({ isKeyboardOpen: true });
-	}
-
-	private keyboardDidHide() {
-		this.setState({ isKeyboardOpen: false });
 	}
 }
 

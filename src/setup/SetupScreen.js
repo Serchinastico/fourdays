@@ -1,11 +1,6 @@
 import React from "react";
-import {
-	KeyboardAvoidingView,
-	Platform,
-	SafeAreaView,
-	StyleSheet,
-	View
-} from "react-native";
+import { StyleSheet, View } from "react-native";
+import { SafeAreaConsumer } from "react-native-safe-area-context";
 import { connect } from "react-redux";
 import * as R from "ramda";
 import addItemToListIfPresentRemoveOtherwise from "../common/collections";
@@ -119,7 +114,7 @@ class SetupScreen extends React.Component {
 		)(foods);
 	}
 
-	renderFoodList() {
+	renderFoodList(insets) {
 		const { groups } = this.props;
 		const { currentSearch, selectedFoodIds } = this.state;
 
@@ -141,20 +136,14 @@ class SetupScreen extends React.Component {
 		];
 
 		return (
-			<KeyboardAvoidingView
-				style={{ flex: 1 }}
-				behavior={Platform.OS === "ios" ? "padding" : undefined}
-				enabled
-			>
-				<SafeAreaView style={{ flex: 1 }}>
-					<FoodList
-						items={items}
-						selectedFoodIds={selectedFoodIds}
-						searchExpression={currentSearch}
-						onFoodSelected={this.onFoodSelected}
-					/>
-				</SafeAreaView>
-			</KeyboardAvoidingView>
+			<View style={{ flex: 1, marginTop: insets.top }}>
+				<FoodList
+					items={items}
+					selectedFoodIds={selectedFoodIds}
+					searchExpression={currentSearch}
+					onFoodSelected={this.onFoodSelected}
+				/>
+			</View>
 		);
 	}
 
@@ -182,15 +171,21 @@ class SetupScreen extends React.Component {
 		return <View style={styles.topBarContainer}>{topBar}</View>;
 	}
 
-	render() {
+	renderWithInsets(insets) {
 		return (
 			<View style={styles.container}>
-				{this.renderFoodList()}
+				{this.renderFoodList(insets)}
 				{this.renderTopBar()}
-				<SafeAreaView style={styles.footer}>
-					<AcceptButton onPress={this.onAcceptPress} />
-				</SafeAreaView>
+				<AcceptButton onPress={this.onAcceptPress} />
 			</View>
+		);
+	}
+
+	render() {
+		return (
+			<SafeAreaConsumer>
+				{insets => this.renderWithInsets(insets)}
+			</SafeAreaConsumer>
 		);
 	}
 }

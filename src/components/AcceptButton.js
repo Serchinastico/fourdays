@@ -1,5 +1,13 @@
 import React from "react";
-import { TouchableHighlight, StyleSheet, Text, View } from "react-native";
+import {
+	TouchableHighlight,
+	StyleSheet,
+	Text,
+	View,
+	Platform,
+	KeyboardAvoidingView,
+	Keyboard
+} from "react-native";
 import { SafeAreaConsumer } from "react-native-safe-area-context";
 import setTestId from "../testIds";
 import I18n from "../translations/i18n";
@@ -16,11 +24,12 @@ const styles = StyleSheet.create({
 	container: {
 		height: 64,
 		width: 128,
+		borderRadius: 32,
 		alignSelf: "center"
 	},
 	background: {
 		backgroundColor: color.grass,
-		...shadow.regular,
+		...shadow.grass,
 		...sharedBackgroundStyle
 	},
 	disabledBackground: {
@@ -35,41 +44,78 @@ const styles = StyleSheet.create({
 });
 
 class AcceptButton extends React.PureComponent {
+	constructor(props) {
+		super(props);
+		Keyboard.addListener("keyboardDidShow", this.keyboardDidShow.bind(this));
+		Keyboard.addListener("keyboardDidHide", this.keyboardDidHide.bind(this));
+		this.state = { isKeyboardOpen: false };
+	}
+
+	getContainerStyleWithInsets(style, insets) {
+		return [styles.container, style, { marginBottom: insets.bottom + 24 }];
+	}
+
+	keyboardDidHide() {
+		this.setState({ isKeyboardOpen: false });
+	}
+
+	keyboardDidShow() {
+		this.setState({ isKeyboardOpen: true });
+	}
+
+	renderButtonContent() {
+		return <Text style={styles.text}>{I18n.t("common.accept.text")}</Text>;
+	}
+
+	renderEnabledButton(style, onPress, insets) {
+		return (
+			<TouchableHighlight
+				{...setTestId("acceptSetupButton")}
+				underlayColor={color.seafoamGreen}
+				style={this.getContainerStyleWithInsets(style, insets)}
+				onPress={() => onPress()}
+			>
+				<View style={styles.background}>{this.renderButtonContent()}</View>
+			</TouchableHighlight>
+		);
+	}
+
+	renderDisabledButton(style, insets) {
+		return (
+			<View style={this.getContainerStyleWithInsets(style, insets)}>
+				<View style={styles.disabledBackground}>
+					{this.renderButtonContent()}
+				</View>
+			</View>
+		);
+	}
+
 	renderWithInsets(insets) {
 		let { onPress, isEnabled, style } = this.props;
+		const { isKeyboardOpen } = this.state;
 
-		if (isEnabled === undefined || isEnabled) {
-			return (
-				<TouchableHighlight
-					{...setTestId("acceptSetupButton")}
-					underlayColor={color.seafoamGreen}
-					style={[
-						styles.container,
-						style,
-						{ marginBottom: insets.bottom + 24 }
-					]}
-					onPress={() => onPress()}
-				>
-					<View style={styles.background}>
-						<Text style={styles.text}>{I18n.t("common.accept.text")}</Text>
-					</View>
-				</TouchableHighlight>
-			);
-		} else {
-			return (
-				<View
-					style={[
-						styles.container,
-						style,
-						{ marginBottom: insets.bottom + 24 }
-					]}
-				>
-					<View style={styles.disabledBackground}>
-						<Text style={styles.text}>{I18n.t("common.accept.text")}</Text>
-					</View>
-				</View>
-			);
-		}
+		const buttonContents =
+			isEnabled === undefined || isEnabled
+				? this.renderEnabledButton(style, onPress, insets)
+				: this.renderDisabledButton(style, insets);
+
+		// Terrible hack, in my Samsung S9+, when the keyboard appears, the accept button is below it. That's why we
+		// are listening to keyboard events and adding a bogus margin at the bottom.
+		const marginBottom = isKeyboardOpen && Platform.OS === "android" ? 24 : 0;
+
+		return (
+			<KeyboardAvoidingView
+				behavior="position"
+				style={{
+					backgroundColor: color.transparent,
+					position: "absolute",
+					alignSelf: "center",
+					bottom: marginBottom
+				}}
+			>
+				{buttonContents}
+			</KeyboardAvoidingView>
+		);
 	}
 
 	render() {
