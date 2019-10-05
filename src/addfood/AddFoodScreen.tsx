@@ -8,6 +8,7 @@ import {
 	TextInput,
 	View
 } from "react-native";
+import { EdgeInsets, SafeAreaConsumer } from "react-native-safe-area-context";
 import { connect } from "react-redux";
 // @ts-ignore
 import TopAppBar from "../components/TopAppBar";
@@ -42,6 +43,7 @@ class AddFoodScreen extends React.Component<Props, State> {
 
 	constructor(props: Props) {
 		super(props);
+		this.renderWithInsets = this.renderWithInsets.bind(this);
 		this.onClosePressed = this.onClosePressed.bind(this);
 		this.onChangeFoodName = this.onChangeFoodName.bind(this);
 		this.onAcceptPress = this.onAcceptPress.bind(this);
@@ -59,16 +61,22 @@ class AddFoodScreen extends React.Component<Props, State> {
 	}
 
 	public render() {
+		return <SafeAreaConsumer>{this.renderWithInsets}</SafeAreaConsumer>;
+	}
+
+	private renderWithInsets(insets: EdgeInsets | null) {
 		const { groups } = this.props;
 		const { newFoodName, newFoodImage, isKeyboardOpen } = this.state;
 
 		const isAcceptButtonEnabled =
 			newFoodName !== undefined && newFoodImage !== undefined;
 
+		const topInset = insets === null ? 0 : insets.top;
+
 		return (
 			<View style={styles.container}>
 				{this.renderTopBar()}
-				{this.renderFoodGroupNameEditor(groups)}
+				{this.renderFoodGroupNameEditor(groups, topInset)}
 				{this.renderFoodNameEditor()}
 				{this.renderAddFoodImage(newFoodName, newFoodImage)}
 				{this.renderAcceptButton(isAcceptButtonEnabled, isKeyboardOpen)}
@@ -93,7 +101,7 @@ class AddFoodScreen extends React.Component<Props, State> {
 		);
 	}
 
-	private renderFoodGroupNameEditor(groups: any[]) {
+	private renderFoodGroupNameEditor(groups: any[], topInset: number) {
 		const { newFoodGroupId } = this.state;
 
 		const pickerValues = R.map(
@@ -103,7 +111,7 @@ class AddFoodScreen extends React.Component<Props, State> {
 
 		return (
 			<InputField
-				style={styles.textInputContainer}
+				style={[styles.textInputContainer, { marginTop: topInset }]}
 				headerText={I18n.t("screen.addFood.groupNameHeader")}
 			>
 				<RNPickerSelect

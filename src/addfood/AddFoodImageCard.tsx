@@ -90,8 +90,6 @@ let cardWidth = screenWidth / 2;
 let cardHeight = cardWidth / 0.75;
 const maxHeight = screenHeight - (246 + 64 + 64 + 32);
 
-console.log(`HEIGHT: ${cardHeight} >? ${maxHeight}`);
-
 if (cardHeight > maxHeight) {
 	cardHeight = maxHeight;
 	cardWidth = cardHeight * 0.75;
