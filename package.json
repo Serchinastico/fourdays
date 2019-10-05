@@ -3,7 +3,7 @@
 		"start": "react-native start",
 		"android": "react-native run-android",
 		"ios": "react-native run-ios",
-		"postinstall": "rm -rf node_modules/react-native-html-to-pdf/example && jetify -r",
+		"postinstall": "rm -rf node_modules/react-native-html-to-pdf/example && jetify",
 		"link": "react-native link"
 	},
 	"dependencies": {
@@ -23,6 +23,7 @@
 		"react-native-i18n": "^2.0.15",
 		"react-native-image-picker": "^0.28.0",
 		"react-native-localize": "^1.1.0",
+		"react-native-picker-select": "^6.3.3",
 		"react-native-popup-dialog": "^0.18.2",
 		"react-native-safe-area-context": "^0.3.6",
 		"react-native-safe-area-view": "^1.0.0",
