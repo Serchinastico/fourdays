@@ -3,7 +3,7 @@ import {
 	actions,
 	fetchForbiddenFoodError,
 	fetchForbiddenFoodFinish,
-	fetchForbiddenFoodStart
+	fetchForbiddenFoodStart,
 } from "./types";
 
 export default function fetchForbiddenFood() {

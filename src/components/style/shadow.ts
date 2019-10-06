@@ -2,34 +2,34 @@ import { StyleSheet } from "react-native";
 import { color } from "./color";
 
 export const shadow = StyleSheet.create({
-	regular: {
-		shadowColor: color.black,
-		shadowOffset: {
-			width: 0,
-			height: 0
-		},
-		shadowOpacity: 0.2,
-		shadowRadius: 2,
-		elevation: 2
-	},
-	strong: {
-		shadowColor: color.black,
-		shadowOffset: {
-			width: 0,
-			height: 0
-		},
-		shadowOpacity: 0.2,
-		shadowRadius: 16,
-		elevation: 16
-	},
 	grass: {
+		elevation: 8,
 		shadowColor: color.grass,
 		shadowOffset: {
+			height: 0,
 			width: 0,
-			height: 0
 		},
 		shadowOpacity: 0.5,
 		shadowRadius: 8,
-		elevation: 8
-	}
+	},
+	regular: {
+		elevation: 2,
+		shadowColor: color.black,
+		shadowOffset: {
+			height: 0,
+			width: 0,
+		},
+		shadowOpacity: 0.2,
+		shadowRadius: 2,
+	},
+	strong: {
+		elevation: 16,
+		shadowColor: color.black,
+		shadowOffset: {
+			height: 0,
+			width: 0,
+		},
+		shadowOpacity: 0.2,
+		shadowRadius: 16,
+	},
 });

@@ -1,5 +1,5 @@
-import * as R from "ramda";
 import AsyncStorage from "@react-native-community/async-storage";
+import * as R from "ramda";
 import { CustomFood, FoodImage } from "./types";
 
 export type FETCH_CUSTOM_FOOD_LIST_START = "Fetch custom food start";
@@ -39,7 +39,7 @@ async function getStoredCustomFoodList(): Promise<[CustomFood]> {
 async function storeCustomFoodList(newCustomFoodList: CustomFood[]) {
 	await AsyncStorage.setItem(
 		"custom_food_list",
-		JSON.stringify(newCustomFoodList)
+		JSON.stringify(newCustomFoodList),
 	);
 }
 
@@ -56,19 +56,19 @@ export function fetchCustomFood() {
 export function storeCustomFood(
 	name: string,
 	groupId: string,
-	image: FoodImage
+	image: FoodImage,
 ) {
 	return async (dispatch: (action: SaveCustomFood) => void) => {
 		const foodItemPayload: CustomFood = {
-			id: createRandomId(),
-			name,
 			groupId,
-			image
+			id: createRandomId(),
+			image,
+			name,
 		};
 
 		dispatch({
+			payload: foodItemPayload,
 			type: "Store custom food start",
-			payload: foodItemPayload
 		});
 
 		const customFoodList = await getStoredCustomFoodList();
@@ -76,8 +76,8 @@ export function storeCustomFood(
 		await storeCustomFoodList(newCustomFoodList);
 
 		dispatch({
+			payload: foodItemPayload,
 			type: "Store custom food finish",
-			payload: foodItemPayload
 		});
 	};
 }
