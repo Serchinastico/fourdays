@@ -1,9 +1,32 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import SafeAreaComponent from "../react/SafeAreaComponent";
 import { color } from "./style/color";
 import { textStyle } from "./style/font";
 import { shadow } from "./style/shadow";
+import { EdgeInsets } from "react-native-safe-area-context";
+
+interface Props {
+	title: string;
+	buttons?: ReactNode;
+	bottomViews?: ReactNode;
+}
+
+class TopAppBar extends SafeAreaComponent<Props> {
+	renderWithInsets(insets: EdgeInsets) {
+		const { title, buttons, bottomViews } = this.props;
+
+		return (
+			<View style={[styles.container, { paddingTop: insets.top }]}>
+				<View style={styles.topContainer}>
+					<Text style={styles.title}>{title}</Text>
+					<View style={styles.buttons}>{buttons || null}</View>
+				</View>
+				<View>{bottomViews || null}</View>
+			</View>
+		);
+	}
+}
 
 const styles = StyleSheet.create({
 	container: {
@@ -30,21 +53,5 @@ const styles = StyleSheet.create({
 		top: 6
 	}
 });
-
-class TopAppBar extends SafeAreaComponent {
-	renderWithInsets(insets) {
-		const { title, buttons, bottomViews } = this.props;
-
-		return (
-			<View style={[styles.container, { paddingTop: insets.top }]}>
-				<View style={styles.topContainer}>
-					<Text style={styles.title}>{title}</Text>
-					<View style={styles.buttons}>{buttons || null}</View>
-				</View>
-				<View>{bottomViews || null}</View>
-			</View>
-		);
-	}
-}
 
 export default TopAppBar;
