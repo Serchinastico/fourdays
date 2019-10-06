@@ -8,7 +8,7 @@ import {
 	Text,
 	TouchableHighlight,
 	View,
-	ViewStyle,
+	ViewStyle
 } from "react-native";
 import { EdgeInsets } from "react-native-safe-area-context";
 import SafeAreaPureComponent from "../react/SafeAreaPureComponent";
@@ -38,7 +38,7 @@ class AcceptButton extends SafeAreaPureComponent<Props, State> {
 
 	public getContainerStyleWithInsets(
 		style: StyleProp<ViewStyle>,
-		insets: EdgeInsets,
+		insets: EdgeInsets
 	) {
 		return [styles.container, style, { marginBottom: insets.bottom + 24 }];
 	}
@@ -58,7 +58,7 @@ class AcceptButton extends SafeAreaPureComponent<Props, State> {
 	public renderEnabledButton(
 		style: StyleProp<ViewStyle>,
 		onPress: () => void,
-		insets: EdgeInsets,
+		insets: EdgeInsets
 	) {
 		return (
 			<TouchableHighlight
@@ -109,35 +109,35 @@ const sharedBackgroundStyle: StyleProp<ViewStyle> = {
 	borderRadius: 32,
 	flex: 1,
 	flexDirection: "column",
-	justifyContent: "center",
+	justifyContent: "center"
 };
 
 const styles = StyleSheet.create({
 	background: {
 		backgroundColor: color.grass,
 		...shadow.grass,
-		...sharedBackgroundStyle,
+		...sharedBackgroundStyle
 	},
 	container: {
 		alignSelf: "center",
 		borderRadius: 32,
 		height: 64,
-		width: 128,
+		width: 128
 	},
 	disabledBackground: {
 		backgroundColor: color.clearGrass,
-		...sharedBackgroundStyle,
+		...sharedBackgroundStyle
 	},
 	keyboardAvoidingView: {
 		alignSelf: "center",
 		backgroundColor: color.transparent,
-		position: "absolute",
+		position: "absolute"
 	},
 	text: {
 		...textStyle.largeMediumBlack,
 		color: color.white,
-		textAlign: "center",
-	},
+		textAlign: "center"
+	}
 });
 
 export default AcceptButton;
