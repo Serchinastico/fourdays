@@ -7,15 +7,15 @@ import dailyTrackerReducer from "../dailytracker/reducer";
 import setupReducer from "../setup/reducer";
 
 const rootReducer = combineReducers({
+	dailyTracker: dailyTrackerReducer,
 	setup: setupReducer,
-	dailyTracker: dailyTrackerReducer
 });
 
 const configureStore = (initialState?: any) => {
 	const middleware = compose(
 		applyMiddleware(thunk),
 		// @ts-ignore
-		devToolsEnhancer()
+		devToolsEnhancer(),
 	);
 	return createStore(rootReducer, initialState, middleware);
 };

@@ -58,12 +58,17 @@
 		"lint-staged": "^8.1.5",
 		"prettier": "^1.16.4",
 		"react-native-typescript-transformer": "^1.2.13",
+		"tslint": "^5.20.0",
 		"typescript": "^3.6.3"
 	},
 	"lint-staged": {
 		"*.{js,jsx}": [
 			"eslint src --ext .js",
 			"prettier --write",
+			"git add"
+		],
+		"*.{ts,tsx}": [
+			"tslint -c tslint.json 'src/**/*.ts' -t stylish --fix",
 			"git add"
 		]
 	},

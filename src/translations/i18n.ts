@@ -6,8 +6,8 @@ import en from "./en.json";
 import es from "./es.json";
 
 I18n.translations = {
-	en: en,
-	es: es
+	en,
+	es,
 };
 I18n.fallbacks = true;
 
