@@ -1,21 +1,21 @@
 import * as R from "ramda";
 import React, { createRef } from "react";
-import RNPickerSelect from "react-native-picker-select";
 import { StyleSheet, TextInput, View } from "react-native";
+import RNPickerSelect from "react-native-picker-select";
 import { EdgeInsets } from "react-native-safe-area-context";
+import { NavigationScreenProp } from "react-navigation";
 import { connect } from "react-redux";
-import TopAppBar from "../components/TopAppBar";
-import { color } from "../components/style/color";
-import I18n from "../translations/i18n";
 import AcceptButton from "../components/AcceptButton";
 import IconButton, { Icon } from "../components/IconButton";
+import { color } from "../components/style/color";
+import { textStyle } from "../components/style/font";
+import TopAppBar from "../components/TopAppBar";
+import SafeAreaComponent from "../react/SafeAreaComponent";
+import I18n from "../translations/i18n";
+import { storeCustomFood } from "./actions";
 import AddFoodImageCard from "./AddFoodImageCard";
 import InputFieldDecorator from "./InputFieldDecorator";
-import { storeCustomFood } from "./actions";
 import { FoodImage } from "./types";
-import { NavigationScreenProp } from "react-navigation";
-import { textStyle } from "../components/style/font";
-import SafeAreaComponent from "../react/SafeAreaComponent";
 
 export interface Props {
 	navigation: NavigationScreenProp<any, any>;
@@ -44,11 +44,11 @@ class AddFoodScreen extends SafeAreaComponent<Props, State> {
 		this.state = {
 			newFoodGroupId: groups[0].id,
 			newFoodName: navigation.getParam("foodName", undefined),
-			newFoodImage: undefined
+			newFoodImage: undefined,
 		};
 	}
 
-	renderWithInsets(insets: EdgeInsets) {
+	public renderWithInsets(insets: EdgeInsets) {
 		const { groups } = this.props;
 		const { newFoodName, newFoodImage } = this.state;
 
@@ -85,8 +85,8 @@ class AddFoodScreen extends SafeAreaComponent<Props, State> {
 		const { newFoodGroupId } = this.state;
 
 		const pickerValues = R.map(
-			group => ({ label: group.name, value: group.id }),
-			groups
+			(group) => ({ label: group.name, value: group.id }),
+			groups,
 		);
 
 		return (
@@ -98,7 +98,7 @@ class AddFoodScreen extends SafeAreaComponent<Props, State> {
 					style={styles.textInput}
 					value={newFoodGroupId}
 					placeholder={{}}
-					onValueChange={value => this.setState({ newFoodGroupId: value })}
+					onValueChange={(value) => this.setState({ newFoodGroupId: value })}
 					items={pickerValues}
 				/>
 			</InputFieldDecorator>
@@ -118,7 +118,7 @@ class AddFoodScreen extends SafeAreaComponent<Props, State> {
 					style={styles.textInput}
 					placeholder={I18n.t("screen.addFood.foodNamePlaceholder")}
 					placeholderTextColor={color.black50}
-					onChangeText={text => this.onChangeFoodName(text)}
+					onChangeText={(text) => this.onChangeFoodName(text)}
 					value={newFoodName}
 				/>
 			</InputFieldDecorator>
@@ -173,33 +173,33 @@ class AddFoodScreen extends SafeAreaComponent<Props, State> {
 const styles = StyleSheet.create({
 	addFood: {
 		flex: 1,
-		marginBottom: 64
+		marginBottom: 64,
 	},
 	container: {
 		flex: 1,
 		backgroundColor: color.white,
-		paddingTop: 88 + 16
+		paddingTop: 88 + 16,
 	},
 	footer: {
 		position: "absolute",
 		bottom: 0,
 		left: 0,
-		right: 0
+		right: 0,
 	},
 	textInput: {
-		...textStyle.largeRegularBlack
+		...textStyle.largeRegularBlack,
 	},
 	textInputContainer: {
 		marginLeft: 16,
 		marginRight: 16,
-		marginTop: 16
+		marginTop: 16,
 	},
 	topBarContainer: {
 		position: "absolute",
 		top: 0,
 		left: 0,
-		right: 0
-	}
+		right: 0,
+	},
 });
 
 function mapStateToProps(state: any) {
@@ -208,5 +208,5 @@ function mapStateToProps(state: any) {
 
 export default connect(
 	mapStateToProps,
-	{ storeCustomFood }
+	{ storeCustomFood },
 )(AddFoodScreen);

@@ -1,5 +1,5 @@
-import I18n from "../translations/i18n";
 import ImagePicker from "react-native-image-picker";
+import I18n from "../translations/i18n";
 import { Base64Image } from "./types";
 
 export function showImagePicker(onImageSelect: (data: Base64Image) => void) {
@@ -14,12 +14,12 @@ export function showImagePicker(onImageSelect: (data: Base64Image) => void) {
 		cancelButtonTitle: I18n.t("screen.addFood.imagePicker.cancel"),
 		takePhotoButtonTitle: I18n.t("screen.addFood.imagePicker.fromCamera"),
 		chooseFromLibraryButtonTitle: I18n.t(
-			"screen.addFood.imagePicker.fromGallery"
+			"screen.addFood.imagePicker.fromGallery",
 		),
 		storageOptions: {
 			skipBackup: true,
-			path: "images"
-		}
+			path: "images",
+		},
 	};
 
 	ImagePicker.showImagePicker(options as any, (response: any) => {

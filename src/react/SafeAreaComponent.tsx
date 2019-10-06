@@ -7,10 +7,10 @@ export default abstract class SafeAreaComponent<
 > extends React.Component<Props, State> {
 	public abstract renderWithInsets(insets: EdgeInsets): ReactNode;
 
-	render() {
+	public render() {
 		return (
 			<SafeAreaConsumer>
-				{insets => this.renderWithInsets(insets!)}
+				{(insets) => this.renderWithInsets(insets!)}
 			</SafeAreaConsumer>
 		);
 	}

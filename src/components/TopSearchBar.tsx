@@ -1,13 +1,13 @@
 import React, { createRef } from "react";
-import { TextInput, StyleSheet, Keyboard, View } from "react-native";
+import { Keyboard, StyleSheet, TextInput, View } from "react-native";
 import { EdgeInsets } from "react-native-safe-area-context";
+import SafeAreaPureComponent from "../react/SafeAreaPureComponent";
 import I18n from "../translations/i18n";
 // @ts-ignore
 import IconButton, { Icon } from "./IconButton";
 import { color } from "./style/color";
 import { textStyle } from "./style/font";
 import { shadow } from "./style/shadow";
-import SafeAreaPureComponent from "../react/SafeAreaPureComponent";
 
 interface Props {
 	onBackPress: () => void;
@@ -30,6 +30,20 @@ class TopSearchBar extends SafeAreaPureComponent<Props, State> {
 		this.state = { currentSearch: "" };
 	}
 
+	public renderWithInsets(insets: EdgeInsets) {
+		const { currentSearch } = this.state;
+
+		return (
+			<View style={[styles.container, { paddingTop: insets.top }]}>
+				<View style={styles.innerContainer}>
+					{this.renderBackIcon()}
+					{this.renderTextInput(currentSearch)}
+					{this.renderClearIcon()}
+				</View>
+			</View>
+		);
+	}
+
 	private onTextInput(block: (textInput: TextInput) => void) {
 		const textInput = this.textInputRef.current;
 		if (textInput) {
@@ -39,18 +53,18 @@ class TopSearchBar extends SafeAreaPureComponent<Props, State> {
 
 	private onBackPress() {
 		const { onBackPress } = this.props;
-		this.onTextInput(input => input.clear());
+		this.onTextInput((input) => input.clear());
 		Keyboard.dismiss();
 		this.onChangeText("");
 		onBackPress();
 	}
 
 	private onSearchPress() {
-		this.onTextInput(input => input.focus());
+		this.onTextInput((input) => input.focus());
 	}
 
 	private onClearPress() {
-		this.onTextInput(input => input.clear());
+		this.onTextInput((input) => input.clear());
 		this.onChangeText("");
 	}
 
@@ -85,23 +99,9 @@ class TopSearchBar extends SafeAreaPureComponent<Props, State> {
 				autoFocus
 				placeholder={I18n.t("common.search.placeholder")}
 				placeholderTextColor={color.black50}
-				onChangeText={text => this.onChangeText(text)}
+				onChangeText={(text) => this.onChangeText(text)}
 				value={currentSearch}
 			/>
-		);
-	}
-
-	public renderWithInsets(insets: EdgeInsets) {
-		const { currentSearch } = this.state;
-
-		return (
-			<View style={[styles.container, { paddingTop: insets.top }]}>
-				<View style={styles.innerContainer}>
-					{this.renderBackIcon()}
-					{this.renderTextInput(currentSearch)}
-					{this.renderClearIcon()}
-				</View>
-			</View>
 		);
 	}
 }
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
 		right: 0,
 		backgroundColor: color.white,
 		padding: 8,
-		...shadow.regular
+		...shadow.regular,
 	},
 	innerContainer: {
 		flexDirection: "row",
@@ -124,14 +124,14 @@ const styles = StyleSheet.create({
 			 good enough for now
 		 */
 		paddingTop: 11,
-		paddingBottom: 10
+		paddingBottom: 10,
 	},
 	textInput: {
 		...textStyle.extraLargeRegularNeutral,
 		marginBottom: -4,
 		textAlignVertical: "center",
-		flex: 1
-	}
+		flex: 1,
+	},
 });
 
 export default TopSearchBar;

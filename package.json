@@ -68,7 +68,6 @@
 			"git add"
 		],
 		"*.{ts,tsx}": [
-			"tslint -c tslint.json 'src/**/*.ts' -t stylish --fix",
 			"git add"
 		]
 	},
