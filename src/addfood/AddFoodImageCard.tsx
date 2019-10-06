@@ -8,14 +8,14 @@ import {
 	Text,
 	TouchableHighlight,
 	View,
-	ViewStyle
+	ViewStyle,
 } from "react-native";
 // @ts-ignore
 import { color } from "../components/style/color";
+import { textStyle } from "../components/style/font";
+import { shadow } from "../components/style/shadow";
 import { showImagePicker } from "./Camera";
 import { FoodImage } from "./types";
-import { shadow } from "../components/style/shadow";
-import { textStyle } from "../components/style/font";
 
 export interface Props {
 	name: string;
@@ -27,28 +27,6 @@ export interface Props {
 export interface State {}
 
 class AddFoodImageCard extends React.PureComponent<Props, State> {
-	constructor(props: Props) {
-		super(props);
-		this.onImagePress = this.onImagePress.bind(this);
-	}
-
-	public render() {
-		const { name, image, style } = this.props;
-
-		return (
-			<View style={[styles.container, style]}>
-				<TouchableHighlight
-					underlayColor={color.black05}
-					onPress={this.onImagePress}
-				>
-					<View style={styles.card}>
-						{AddFoodImageCard.renderImage(image)}
-						{AddFoodImageCard.renderFoodName(name)}
-					</View>
-				</TouchableHighlight>
-			</View>
-		);
-	}
 
 	private static renderImage(image?: FoodImage) {
 		if (image) {
@@ -72,6 +50,28 @@ class AddFoodImageCard extends React.PureComponent<Props, State> {
 			</View>
 		);
 	}
+	constructor(props: Props) {
+		super(props);
+		this.onImagePress = this.onImagePress.bind(this);
+	}
+
+	public render() {
+		const { name, image, style } = this.props;
+
+		return (
+			<View style={[styles.container, style]}>
+				<TouchableHighlight
+					underlayColor={color.black05}
+					onPress={this.onImagePress}
+				>
+					<View style={styles.card}>
+						{AddFoodImageCard.renderImage(image)}
+						{AddFoodImageCard.renderFoodName(name)}
+					</View>
+				</TouchableHighlight>
+			</View>
+		);
+	}
 
 	private onImagePress() {
 		const { onImageSelect } = this.props;
@@ -85,7 +85,7 @@ class AddFoodImageCard extends React.PureComponent<Props, State> {
 			if (response) {
 				onImageSelect({
 					type: "Base64",
-					data: { uri: `data:image/png;base64,${response}` }
+					data: { uri: `data:image/png;base64,${response}` },
 				});
 			}
 		});
@@ -112,29 +112,29 @@ const styles = StyleSheet.create({
 		justifyContent: "flex-start",
 		height: cardHeight,
 		width: cardWidth,
-		backgroundColor: color.white
+		backgroundColor: color.white,
 	},
 	container: {
 		alignItems: "center",
-		justifyContent: "center"
+		justifyContent: "center",
 	},
 	foodName: {
 		...textStyle.extraLargeMediumBlack,
-		textAlign: "center"
+		textAlign: "center",
 	},
 	foodNameContainer: {
 		flex: 1,
 		justifyContent: "center",
 		marginHorizontal: 16,
-		marginBottom: 8
+		marginBottom: 8,
 	},
 	image: {
 		height: cardHeight - 68,
 		width: cardWidth - 8,
 		marginTop: 4,
 		resizeMode: "cover",
-		borderRadius: 4
-	}
+		borderRadius: 4,
+	},
 });
 
 export default AddFoodImageCard;

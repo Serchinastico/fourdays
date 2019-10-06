@@ -10,6 +10,14 @@ export interface Props {
 }
 
 class InputFieldDecorator extends React.PureComponent<Props> {
+
+	private static renderHeader(text: string) {
+		return <Text style={styles.header}>{text}</Text>;
+	}
+
+	private static renderBottomLine() {
+		return <View style={styles.bottomLine} />;
+	}
 	public render() {
 		const { headerText, style, children } = this.props;
 
@@ -21,32 +29,24 @@ class InputFieldDecorator extends React.PureComponent<Props> {
 			</View>
 		);
 	}
-
-	private static renderHeader(text: string) {
-		return <Text style={styles.header}>{text}</Text>;
-	}
-
-	private static renderBottomLine() {
-		return <View style={styles.bottomLine} />;
-	}
 }
 
 const styles = StyleSheet.create({
 	bottomLine: {
 		height: 0.5,
-		backgroundColor: color.black20
+		backgroundColor: color.black20,
 	},
 	container: {
 		height: 68,
-		flexDirection: "column"
+		flexDirection: "column",
 	},
 	childrenContainer: {
 		flex: 1,
-		justifyContent: "center"
+		justifyContent: "center",
 	},
 	header: {
-		...textStyle.midBoldBlack
-	}
+		...textStyle.midBoldBlack,
+	},
 });
 
 export default InputFieldDecorator;

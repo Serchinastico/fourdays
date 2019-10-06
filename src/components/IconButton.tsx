@@ -7,7 +7,7 @@ export enum Icon {
 	Back,
 	Clear,
 	Settings,
-	Share
+	Share,
 }
 
 export interface Props {
@@ -16,17 +16,8 @@ export interface Props {
 }
 
 class IconButton extends React.PureComponent<Props> {
-	constructor(props: Props) {
-		super(props);
-		this.onButtonPress = this.onButtonPress.bind(this);
-	}
 
-	onButtonPress() {
-		const { onPress } = this.props;
-		onPress();
-	}
-
-	static getImageForIcon(icon: Icon) {
+	public static getImageForIcon(icon: Icon) {
 		switch (icon) {
 			case Icon.Search:
 				return require("../images/icon/Search.png");
@@ -40,8 +31,17 @@ class IconButton extends React.PureComponent<Props> {
 				return require("../images/icon/Share.png");
 		}
 	}
+	constructor(props: Props) {
+		super(props);
+		this.onButtonPress = this.onButtonPress.bind(this);
+	}
 
-	render() {
+	public onButtonPress() {
+		const { onPress } = this.props;
+		onPress();
+	}
+
+	public render() {
 		const { icon } = this.props;
 		return (
 			<TouchableHighlight
@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
 	button: {
 		width: 48,
 		height: 48,
-		borderRadius: 24
-	}
+		borderRadius: 24,
+	},
 });
 
 export default IconButton;

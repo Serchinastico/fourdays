@@ -1,11 +1,11 @@
 import React, { ReactNode } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { EdgeInsets } from "react-native-safe-area-context";
 import SafeAreaComponent from "../react/SafeAreaComponent";
+import SafeAreaPureComponent from "../react/SafeAreaPureComponent";
 import { color } from "./style/color";
 import { textStyle } from "./style/font";
 import { shadow } from "./style/shadow";
-import { EdgeInsets } from "react-native-safe-area-context";
-import SafeAreaPureComponent from "../react/SafeAreaPureComponent";
 
 interface Props {
 	title: string;
@@ -14,7 +14,7 @@ interface Props {
 }
 
 class TopAppBar extends SafeAreaPureComponent<Props> {
-	renderWithInsets(insets: EdgeInsets) {
+	public renderWithInsets(insets: EdgeInsets) {
 		const { title, buttons, bottomViews } = this.props;
 
 		return (
@@ -36,23 +36,23 @@ const styles = StyleSheet.create({
 		left: 0,
 		right: 0,
 		backgroundColor: color.white,
-		...shadow.regular
+		...shadow.regular,
 	},
 	topContainer: {
 		flexDirection: "row",
 		alignItems: "center",
 		paddingTop: 16,
-		paddingBottom: 8
+		paddingBottom: 8,
 	},
 	title: {
 		...textStyle.extraExtraLargeBoldNeutral,
 		marginLeft: 16,
-		flex: 1
+		flex: 1,
 	},
 	buttons: {
 		marginRight: 8,
-		top: 6
-	}
+		top: 6,
+	},
 });
 
 export default TopAppBar;
