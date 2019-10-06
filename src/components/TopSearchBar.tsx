@@ -3,7 +3,7 @@ import { TextInput, StyleSheet, Keyboard, View } from "react-native";
 import { EdgeInsets } from "react-native-safe-area-context";
 import I18n from "../translations/i18n";
 // @ts-ignore
-import IconButton, { IconButtonBack, IconButtonClear } from "./IconButton";
+import IconButton, { Icon } from "./IconButton";
 import { color } from "./style/color";
 import { textStyle } from "./style/font";
 import { shadow } from "./style/shadow";
@@ -24,9 +24,9 @@ class TopSearchBar extends SafeAreaPureComponent<Props, State> {
 	constructor(props: Props) {
 		super(props);
 		this.renderBackIcon = this.renderBackIcon.bind(this);
-		this.onBackPressed = this.onBackPressed.bind(this);
-		this.onSearchPressed = this.onSearchPressed.bind(this);
-		this.onClearPressed = this.onClearPressed.bind(this);
+		this.onBackPress = this.onBackPress.bind(this);
+		this.onSearchPress = this.onSearchPress.bind(this);
+		this.onClearPress = this.onClearPress.bind(this);
 		this.state = { currentSearch: "" };
 	}
 
@@ -37,7 +37,7 @@ class TopSearchBar extends SafeAreaPureComponent<Props, State> {
 		}
 	}
 
-	private onBackPressed() {
+	private onBackPress() {
 		const { onBackPress } = this.props;
 		this.onTextInput(input => input.clear());
 		Keyboard.dismiss();
@@ -45,11 +45,11 @@ class TopSearchBar extends SafeAreaPureComponent<Props, State> {
 		onBackPress();
 	}
 
-	private onSearchPressed() {
+	private onSearchPress() {
 		this.onTextInput(input => input.focus());
 	}
 
-	private onClearPressed() {
+	private onClearPress() {
 		this.onTextInput(input => input.clear());
 		this.onChangeText("");
 	}
@@ -66,7 +66,7 @@ class TopSearchBar extends SafeAreaPureComponent<Props, State> {
 	}
 
 	private renderBackIcon() {
-		return <IconButton icon={IconButtonBack} onPressed={this.onBackPressed} />;
+		return <IconButton icon={Icon.Back} onPress={this.onBackPress} />;
 	}
 
 	private renderClearIcon() {
@@ -74,9 +74,7 @@ class TopSearchBar extends SafeAreaPureComponent<Props, State> {
 			return null;
 		}
 
-		return (
-			<IconButton icon={IconButtonClear} onPressed={this.onClearPressed} />
-		);
+		return <IconButton icon={Icon.Clear} onPress={this.onClearPress} />;
 	}
 
 	private renderTextInput(currentSearch: string) {

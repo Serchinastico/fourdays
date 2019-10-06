@@ -22,7 +22,7 @@ import SafeAreaPureComponent from "../react/SafeAreaPureComponent";
 interface Props {
 	onPress: () => void;
 	isEnabled: boolean;
-	style: StyleProp<ViewStyle>;
+	style?: StyleProp<ViewStyle>;
 }
 
 interface State {

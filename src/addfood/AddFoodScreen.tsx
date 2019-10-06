@@ -5,13 +5,10 @@ import { StyleSheet, TextInput, View } from "react-native";
 import { EdgeInsets } from "react-native-safe-area-context";
 import { connect } from "react-redux";
 import TopAppBar from "../components/TopAppBar";
-// @ts-ignore
 import { color } from "../components/style/color";
 import I18n from "../translations/i18n";
-// @ts-ignore
 import AcceptButton from "../components/AcceptButton";
-// @ts-ignore
-import IconButton, { IconButtonClear } from "../components/IconButton";
+import IconButton, { Icon } from "../components/IconButton";
 import AddFoodImageCard from "./AddFoodImageCard";
 import InputFieldDecorator from "./InputFieldDecorator";
 import { storeCustomFood } from "./actions";
@@ -38,7 +35,7 @@ class AddFoodScreen extends SafeAreaComponent<Props, State> {
 	constructor(props: Props) {
 		super(props);
 		this.renderWithInsets = this.renderWithInsets.bind(this);
-		this.onClosePressed = this.onClosePressed.bind(this);
+		this.onClosePress = this.onClosePress.bind(this);
 		this.onChangeFoodName = this.onChangeFoodName.bind(this);
 		this.onAcceptPress = this.onAcceptPress.bind(this);
 		this.onImageSelect = this.onImageSelect.bind(this);
@@ -81,9 +78,7 @@ class AddFoodScreen extends SafeAreaComponent<Props, State> {
 	}
 
 	private renderTopAppBarButtons() {
-		return (
-			<IconButton icon={IconButtonClear} onPressed={this.onClosePressed} />
-		);
+		return <IconButton icon={Icon.Clear} onPress={this.onClosePress} />;
 	}
 
 	private renderFoodGroupNameEditor(groups: any[], topInset: number) {
@@ -145,7 +140,7 @@ class AddFoodScreen extends SafeAreaComponent<Props, State> {
 		return <AcceptButton onPress={this.onAcceptPress} isEnabled={isEnabled} />;
 	}
 
-	private onClosePressed() {
+	private onClosePress() {
 		const { navigation } = this.props;
 		navigation.goBack();
 	}

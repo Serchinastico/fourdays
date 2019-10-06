@@ -11,11 +11,7 @@ import {
 import { Dialog } from "react-native-popup-dialog/src";
 import { connect } from "react-redux";
 import FoodList from "../components/food/FoodList";
-import IconButton, {
-	IconButtonSearch,
-	IconButtonSettings,
-	IconButtonShare
-} from "../components/IconButton";
+import IconButton, { Icon } from "../components/IconButton";
 import TopAppBar from "../components/TopAppBar";
 import TopSearchBar from "../components/TopSearchBar";
 import I18n from "../translations/i18n";
@@ -52,12 +48,12 @@ class DailyTrackerScreen extends React.Component {
 	constructor(props) {
 		super(props);
 		this.onFoodSelected = this.onFoodSelected.bind(this);
-		this.onPreviousDayPressed = this.onPreviousDayPressed.bind(this);
-		this.onNextDayPressed = this.onNextDayPressed.bind(this);
+		this.onPreviousDayPress = this.onPreviousDayPress.bind(this);
+		this.onNextDayPress = this.onNextDayPress.bind(this);
 		this.onSearchChange = this.onSearchChange.bind(this);
-		this.onSearchPressed = this.onSearchPressed.bind(this);
-		this.onSetupPressed = this.onSetupPressed.bind(this);
-		this.onSharePressed = this.onSharePressed.bind(this);
+		this.onSearchPress = this.onSearchPress.bind(this);
+		this.onSetupPress = this.onSetupPress.bind(this);
+		this.onSharePress = this.onSharePress.bind(this);
 		this.showCalendar = this.showCalendar.bind(this);
 		this.hideCalendar = this.hideCalendar.bind(this);
 		this.state = {
@@ -93,16 +89,16 @@ class DailyTrackerScreen extends React.Component {
 		this.setState({ currentSearch: text });
 	}
 
-	onSearchPressed() {
+	onSearchPress() {
 		this.setState({ isSearchActive: true });
 	}
 
-	onSetupPressed() {
+	onSetupPress() {
 		const { navigation } = this.props;
 		navigation.navigate("Setup", { isModalNavigation: true });
 	}
 
-	onSharePressed() {
+	onSharePress() {
 		const { shareMonthlyReport, allFoods } = this.props;
 		const { selectedDay } = this.state;
 
@@ -115,13 +111,13 @@ class DailyTrackerScreen extends React.Component {
 		shareMonthlyReport(selectedDay, allFoodNamesById);
 	}
 
-	onPreviousDayPressed() {
+	onPreviousDayPress() {
 		this.updateSelectedDay(selectedDay => {
 			return selectedDay.subtract(1, "day");
 		});
 	}
 
-	onNextDayPressed() {
+	onNextDayPress() {
 		this.updateSelectedDay(selectedDay => {
 			return selectedDay.add(1, "day");
 		});
@@ -330,9 +326,9 @@ class DailyTrackerScreen extends React.Component {
 	renderTopAppBarButtons() {
 		return (
 			<View style={{ flexDirection: "row" }}>
-				<IconButton icon={IconButtonSearch} onPressed={this.onSearchPressed} />
-				<IconButton icon={IconButtonSettings} onPressed={this.onSetupPressed} />
-				<IconButton icon={IconButtonShare} onPressed={this.onSharePressed} />
+				<IconButton icon={Icon.Search} onPress={this.onSearchPress} />
+				<IconButton icon={Icon.Settings} onPress={this.onSetupPress} />
+				<IconButton icon={Icon.Share} onPress={this.onSharePress} />
 			</View>
 		);
 	}
@@ -343,8 +339,8 @@ class DailyTrackerScreen extends React.Component {
 		return (
 			<DaySelector
 				styles={styles.daySelector}
-				onPreviousDayPress={this.onPreviousDayPressed}
-				onNextDayPress={this.onNextDayPressed}
+				onPreviousDayPress={this.onPreviousDayPress}
+				onNextDayPress={this.onNextDayPress}
 				onCurrentDayPress={this.showCalendar}
 				selectedDay={selectedDay}
 			/>

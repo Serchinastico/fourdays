@@ -5,10 +5,7 @@ import { connect } from "react-redux";
 import * as R from "ramda";
 import addItemToListIfPresentRemoveOtherwise from "../common/collections";
 import AcceptButton from "../components/AcceptButton";
-import IconButton, {
-	IconButtonClear,
-	IconButtonSearch
-} from "../components/IconButton";
+import IconButton, { Icon } from "../components/IconButton";
 import FoodList from "../components/food/FoodList";
 import TopAppBar from "../components/TopAppBar";
 import TopSearchBar from "../components/TopSearchBar";
@@ -40,8 +37,8 @@ class SetupScreen extends React.Component {
 		this.onSearchChange = this.onSearchChange.bind(this);
 		this.onAcceptPress = this.onAcceptPress.bind(this);
 		this.onClosePress = this.onClosePress.bind(this);
-		this.onFoodSelected = this.onFoodSelected.bind(this);
-		this.onSearchPressed = this.onSearchPressed.bind(this);
+		this.onFoodSelect = this.onFoodSelect.bind(this);
+		this.onSearchPress = this.onSearchPress.bind(this);
 		const { foods, forbiddenFoodIdsOnStart } = this.props;
 		this.state = {
 			currentSearch: "",
@@ -69,7 +66,7 @@ class SetupScreen extends React.Component {
 		this.close();
 	}
 
-	onFoodSelected(foodId) {
+	onFoodSelect(foodId) {
 		const { selectedFoodIds } = this.state;
 		const updatedSelectedFoodIds = addItemToListIfPresentRemoveOtherwise(
 			foodId,
@@ -82,7 +79,7 @@ class SetupScreen extends React.Component {
 		this.setState({ currentSearch: text });
 	}
 
-	onSearchPressed() {
+	onSearchPress() {
 		this.setState({ isSearchActive: true });
 	}
 
@@ -152,17 +149,12 @@ class SetupScreen extends React.Component {
 		if (isModalNavigation) {
 			return (
 				<View style={{ flexDirection: "row" }}>
-					<IconButton
-						icon={IconButtonSearch}
-						onPressed={this.onSearchPressed}
-					/>
-					<IconButton icon={IconButtonClear} onPressed={this.onClosePress} />
+					<IconButton icon={Icon.Search} onPress={this.onSearchPress} />
+					<IconButton icon={Icon.Clear} onPress={this.onClosePress} />
 				</View>
 			);
 		} else {
-			return (
-				<IconButton icon={IconButtonSearch} onPressed={this.onSearchPressed} />
-			);
+			return <IconButton icon={Icon.Search} onPress={this.onSearchPress} />;
 		}
 	}
 
