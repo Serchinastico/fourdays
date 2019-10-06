@@ -1,9 +1,9 @@
-import { STORE_FORBIDDEN_FOOD_START } from "./types";
 import {
-	FETCH_FORBIDDEN_FOOD_ERROR,
-	FETCH_FORBIDDEN_FOOD_FINISHED,
-	FETCH_FORBIDDEN_FOOD_START
+	fetchForbiddenFoodError,
+	fetchForbiddenFoodFinish,
+	fetchForbiddenFoodStart
 } from "../start/types";
+import { STORE_FORBIDDEN_FOOD_START } from "./types";
 import I18n from "../translations/i18n";
 
 const initialSetupState = {
@@ -785,11 +785,11 @@ const setupReducer = (state = initialSetupState, action) => {
 	switch (action.type) {
 		case STORE_FORBIDDEN_FOOD_START:
 			return onStoreForbiddenFoodStart(state, action);
-		case FETCH_FORBIDDEN_FOOD_START:
+		case fetchForbiddenFoodStart.type:
 			return onFetchForbiddenFoodStart(state);
-		case FETCH_FORBIDDEN_FOOD_FINISHED:
+		case fetchForbiddenFoodFinish.type:
 			return onFetchForbiddenFoodFinished(state, action);
-		case FETCH_FORBIDDEN_FOOD_ERROR:
+		case fetchForbiddenFoodError.type:
 			return onFetchForbiddenFoodError(state, action);
 		case "Fetch custom food finish":
 			return onFetchCustomFood(state, action);
