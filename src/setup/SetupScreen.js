@@ -14,7 +14,7 @@ import TopAppBar from "../components/TopAppBar";
 import TopSearchBar from "../components/TopSearchBar";
 import storeForbiddenFood from "./actions";
 import I18n from "../translations/i18n";
-import { color } from "../components/style/style";
+import { color } from "../components/style/color";
 
 const styles = StyleSheet.create({
 	container: {

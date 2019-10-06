@@ -11,9 +11,11 @@ import {
 	ViewStyle
 } from "react-native";
 // @ts-ignore
-import { style, shadow, color } from "../components/style/style";
+import { color } from "../components/style/color";
 import { showImagePicker } from "./Camera";
 import { FoodImage } from "./types";
+import { shadow } from "../components/style/shadow";
+import { textStyle } from "../components/style/font";
 
 export interface Props {
 	name: string;
@@ -117,7 +119,7 @@ const styles = StyleSheet.create({
 		justifyContent: "center"
 	},
 	foodName: {
-		...style.extraLargeMediumBlack,
+		...textStyle.extraLargeMediumBlack,
 		textAlign: "center"
 	},
 	foodNameContainer: {

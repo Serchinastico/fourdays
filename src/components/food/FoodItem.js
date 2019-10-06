@@ -7,7 +7,9 @@ import {
 	StyleSheet,
 	TouchableHighlight
 } from "react-native";
-import { color, style, shadow } from "../style/style";
+import { color } from "../style/color";
+import { textStyle } from "../style/font";
+import { shadow } from "../style/shadow";
 
 const styles = StyleSheet.create({
 	highlightContainer: {
@@ -42,13 +44,13 @@ const styles = StyleSheet.create({
 		position: "absolute"
 	},
 	name: {
-		...style.midMediumBlack,
+		...textStyle.midMediumBlack,
 		alignSelf: "center",
 		textAlign: "center",
 		margin: 8
 	},
 	addFoodName: {
-		...style.midMediumDorian,
+		...textStyle.midMediumDorian,
 		alignSelf: "center",
 		textAlign: "center",
 		margin: 8

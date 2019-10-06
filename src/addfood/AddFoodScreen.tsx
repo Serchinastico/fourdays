@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 // @ts-ignore
 import TopAppBar from "../components/TopAppBar";
 // @ts-ignore
-import { style, color } from "../components/style/style";
+import { color } from "../components/style/color";
 import I18n from "../translations/i18n";
 // @ts-ignore
 import AcceptButton from "../components/AcceptButton";
@@ -18,6 +18,7 @@ import InputField from "./InputField";
 import { storeCustomFood } from "./actions";
 import { FoodImage } from "./types";
 import { NavigationScreenProp } from "react-navigation";
+import { textStyle } from "../components/style/font";
 
 export interface Props {
 	navigation: NavigationScreenProp<any, any>;
@@ -197,7 +198,7 @@ const styles = StyleSheet.create({
 		right: 0
 	},
 	textInput: {
-		...style.largeRegularBlack
+		...textStyle.largeRegularBlack
 	},
 	textInputContainer: {
 		marginLeft: 16,

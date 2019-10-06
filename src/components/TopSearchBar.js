@@ -3,7 +3,9 @@ import { TextInput, StyleSheet, Keyboard, View } from "react-native";
 import { SafeAreaConsumer } from "react-native-safe-area-context";
 import I18n from "../translations/i18n";
 import IconButton, { IconButtonBack, IconButtonClear } from "./IconButton";
-import { color, style, shadow } from "./style/style";
+import { color } from "./style/color";
+import { textStyle } from "./style/font";
+import { shadow } from "./style/shadow";
 
 const styles = StyleSheet.create({
 	container: {
@@ -22,7 +24,7 @@ const styles = StyleSheet.create({
 		paddingBottom: 10
 	},
 	textInput: {
-		...style.extraLargeRegularNeutral,
+		...textStyle.extraLargeRegularNeutral,
 		marginBottom: -4,
 		textAlignVertical: "center",
 		flex: 1

@@ -1,7 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaConsumer } from "react-native-safe-area-context";
-import { style, color, shadow } from "./style/style";
+import { color } from "./style/color";
+import { textStyle } from "./style/font";
+import { shadow } from "./style/shadow";
 
 const styles = StyleSheet.create({
 	container: {
@@ -15,7 +17,7 @@ const styles = StyleSheet.create({
 		paddingBottom: 8
 	},
 	title: {
-		...style.extraExtraLargeBoldNeutral,
+		...textStyle.extraExtraLargeBoldNeutral,
 		marginLeft: 16,
 		flex: 1
 	},

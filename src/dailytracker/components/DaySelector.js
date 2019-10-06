@@ -7,7 +7,8 @@ import {
 	View,
 	TouchableHighlight
 } from "react-native";
-import { color, style } from "../../components/style/style";
+import { color } from "../../components/style/color";
+import { textStyle } from "../../components/style/font";
 
 const styles = StyleSheet.create({
 	container: {
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
 		marginTop: 1
 	},
 	currentDayText: {
-		...style.largeRegularNeutral,
+		...textStyle.largeRegularNeutral,
 		color: color.black,
 		marginLeft: 8,
 		textAlign: "center"

@@ -26,7 +26,7 @@ import {
 	storeConsumedFoodForDay
 } from "./actions";
 import DaySelector from "./components/DaySelector";
-import { color } from "../components/style/style";
+import { color } from "../components/style/color";
 import DaySelectorCalendar from "./components/DaySelectorCalendar";
 
 const styles = StyleSheet.create({
