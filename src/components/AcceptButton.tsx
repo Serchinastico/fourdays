@@ -6,54 +6,38 @@ import {
 	View,
 	Platform,
 	KeyboardAvoidingView,
-	Keyboard
+	Keyboard,
+	StyleProp,
+	ViewStyle
 } from "react-native";
-import { SafeAreaConsumer } from "react-native-safe-area-context";
+import { EdgeInsets } from "react-native-safe-area-context";
+// @ts-ignore
 import setTestId from "../testIds";
 import I18n from "../translations/i18n";
 import { color } from "./style/color";
 import { textStyle } from "./style/font";
 import { shadow } from "./style/shadow";
+import SafeAreaPureComponent from "../react/SafeAreaPureComponent";
 
-const sharedBackgroundStyle = {
-	flex: 1,
-	borderRadius: 32,
-	justifyContent: "center",
-	flexDirection: "column"
-};
+interface Props {
+	onPress: () => void;
+	isEnabled: boolean;
+	style: StyleProp<ViewStyle>;
+}
 
-const styles = StyleSheet.create({
-	container: {
-		height: 64,
-		width: 128,
-		borderRadius: 32,
-		alignSelf: "center"
-	},
-	background: {
-		backgroundColor: color.grass,
-		...shadow.grass,
-		...sharedBackgroundStyle
-	},
-	disabledBackground: {
-		backgroundColor: color.clearGrass,
-		...sharedBackgroundStyle
-	},
-	text: {
-		...textStyle.largeMediumBlack,
-		color: color.white,
-		textAlign: "center"
-	}
-});
+interface State {
+	isKeyboardOpen: boolean;
+}
 
-class AcceptButton extends React.PureComponent {
-	constructor(props) {
+class AcceptButton extends SafeAreaPureComponent<Props, State> {
+	constructor(props: Props) {
 		super(props);
 		Keyboard.addListener("keyboardDidShow", this.keyboardDidShow.bind(this));
 		Keyboard.addListener("keyboardDidHide", this.keyboardDidHide.bind(this));
 		this.state = { isKeyboardOpen: false };
 	}
 
-	getContainerStyleWithInsets(style, insets) {
+	getContainerStyleWithInsets(style: StyleProp<ViewStyle>, insets: EdgeInsets) {
 		return [styles.container, style, { marginBottom: insets.bottom + 24 }];
 	}
 
@@ -69,7 +53,11 @@ class AcceptButton extends React.PureComponent {
 		return <Text style={styles.text}>{I18n.t("common.accept.text")}</Text>;
 	}
 
-	renderEnabledButton(style, onPress, insets) {
+	renderEnabledButton(
+		style: StyleProp<ViewStyle>,
+		onPress: () => void,
+		insets: EdgeInsets
+	) {
 		return (
 			<TouchableHighlight
 				{...setTestId("acceptSetupButton")}
@@ -82,7 +70,7 @@ class AcceptButton extends React.PureComponent {
 		);
 	}
 
-	renderDisabledButton(style, insets) {
+	renderDisabledButton(style: StyleProp<ViewStyle>, insets: EdgeInsets) {
 		return (
 			<View style={this.getContainerStyleWithInsets(style, insets)}>
 				<View style={styles.disabledBackground}>
@@ -92,7 +80,7 @@ class AcceptButton extends React.PureComponent {
 		);
 	}
 
-	renderWithInsets(insets) {
+	renderWithInsets(insets: EdgeInsets) {
 		let { onPress, isEnabled, style } = this.props;
 		const { isKeyboardOpen } = this.state;
 
@@ -119,14 +107,36 @@ class AcceptButton extends React.PureComponent {
 			</KeyboardAvoidingView>
 		);
 	}
-
-	render() {
-		return (
-			<SafeAreaConsumer>
-				{insets => this.renderWithInsets(insets)}
-			</SafeAreaConsumer>
-		);
-	}
 }
+
+const sharedBackgroundStyle: StyleProp<ViewStyle> = {
+	flex: 1,
+	borderRadius: 32,
+	justifyContent: "center",
+	flexDirection: "column"
+};
+
+const styles = StyleSheet.create({
+	background: {
+		backgroundColor: color.grass,
+		...shadow.grass,
+		...sharedBackgroundStyle
+	},
+	container: {
+		height: 64,
+		width: 128,
+		borderRadius: 32,
+		alignSelf: "center"
+	},
+	disabledBackground: {
+		backgroundColor: color.clearGrass,
+		...sharedBackgroundStyle
+	},
+	text: {
+		...textStyle.largeMediumBlack,
+		color: color.white,
+		textAlign: "center"
+	}
+});
 
 export default AcceptButton;
