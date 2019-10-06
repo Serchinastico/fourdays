@@ -2,9 +2,8 @@ import * as R from "ramda";
 import React, { createRef } from "react";
 import RNPickerSelect from "react-native-picker-select";
 import { StyleSheet, TextInput, View } from "react-native";
-import { EdgeInsets, SafeAreaConsumer } from "react-native-safe-area-context";
+import { EdgeInsets } from "react-native-safe-area-context";
 import { connect } from "react-redux";
-// @ts-ignore
 import TopAppBar from "../components/TopAppBar";
 // @ts-ignore
 import { color } from "../components/style/color";
