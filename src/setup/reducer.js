@@ -1,4 +1,8 @@
 import {
+	fetchCustomFoodListFinish,
+	storeCustomFoodStart
+} from "../addfood/types";
+import {
 	fetchForbiddenFoodError,
 	fetchForbiddenFoodFinish,
 	fetchForbiddenFoodStart
@@ -791,9 +795,9 @@ const setupReducer = (state = initialSetupState, action) => {
 			return onFetchForbiddenFoodFinished(state, action);
 		case fetchForbiddenFoodError.type:
 			return onFetchForbiddenFoodError(state, action);
-		case "Fetch custom food finish":
+		case fetchCustomFoodListFinish.type:
 			return onFetchCustomFood(state, action);
-		case "Store custom food start":
+		case storeCustomFoodStart.type:
 			return onStoreCustomFood(state, action);
 		default:
 			return state;

@@ -1,35 +1,15 @@
 import AsyncStorage from "@react-native-community/async-storage";
 import * as R from "ramda";
-import { CustomFood, FoodImage } from "./types";
-
-export type FETCH_CUSTOM_FOOD_LIST_START = "Fetch custom food start";
-export type FETCH_CUSTOM_FOOD_LIST_FINISH = "Fetch custom food finish";
-export type STORE_CUSTOM_FOOD_START = "Store custom food start";
-export type STORE_CUSTOM_FOOD_FINISH = "Store custom food finish";
-
-export interface FetchCustomFoodListStart {
-	type: FETCH_CUSTOM_FOOD_LIST_START;
-}
-
-export interface FetchCustomFoodListFinish {
-	type: FETCH_CUSTOM_FOOD_LIST_FINISH;
-	payload: [CustomFood];
-}
-
-export interface SaveCustomFoodStart {
-	type: STORE_CUSTOM_FOOD_START;
-	payload: CustomFood;
-}
-
-export interface SaveCustomFoodFinish {
-	type: STORE_CUSTOM_FOOD_FINISH;
-	payload: CustomFood;
-}
-
-export type FetchCustomFood =
-	| FetchCustomFoodListStart
-	| FetchCustomFoodListFinish;
-export type SaveCustomFood = SaveCustomFoodStart | SaveCustomFoodFinish;
+import {
+	CustomFood,
+	fetchCustomFoodActions,
+	fetchCustomFoodListFinish,
+	fetchCustomFoodListStart,
+	FoodImage,
+	storeCustomFoodActions,
+	storeCustomFoodFinish,
+	storeCustomFoodStart,
+} from "./types";
 
 async function getStoredCustomFoodList(): Promise<[CustomFood]> {
 	const rawCustomFoodList = await AsyncStorage.getItem("custom_food_list");
@@ -44,12 +24,12 @@ async function storeCustomFoodList(newCustomFoodList: CustomFood[]) {
 }
 
 export function fetchCustomFood() {
-	return async (dispatch: (action: FetchCustomFood) => void) => {
-		dispatch({ type: "Fetch custom food start" });
+	return async (dispatch: (action: typeof fetchCustomFoodActions) => void) => {
+		dispatch(fetchCustomFoodListStart());
 
 		const customFoodList = await getStoredCustomFoodList();
 
-		dispatch({ type: "Fetch custom food finish", payload: customFoodList });
+		dispatch(fetchCustomFoodListFinish(customFoodList));
 	};
 }
 
@@ -58,7 +38,7 @@ export function storeCustomFood(
 	groupId: string,
 	image: FoodImage,
 ) {
-	return async (dispatch: (action: SaveCustomFood) => void) => {
+	return async (dispatch: (action: typeof storeCustomFoodActions) => void) => {
 		const foodItemPayload: CustomFood = {
 			groupId,
 			id: createRandomId(),
@@ -66,19 +46,13 @@ export function storeCustomFood(
 			name,
 		};
 
-		dispatch({
-			payload: foodItemPayload,
-			type: "Store custom food start",
-		});
+		dispatch(storeCustomFoodStart(foodItemPayload));
 
 		const customFoodList = await getStoredCustomFoodList();
 		const newCustomFoodList = R.append(foodItemPayload, customFoodList);
 		await storeCustomFoodList(newCustomFoodList);
 
-		dispatch({
-			payload: foodItemPayload,
-			type: "Store custom food finish",
-		});
+		dispatch(storeCustomFoodFinish(foodItemPayload));
 	};
 }
 

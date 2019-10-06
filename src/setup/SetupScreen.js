@@ -136,7 +136,7 @@ class SetupScreen extends React.Component {
 					items={items}
 					selectedFoodIds={selectedFoodIds}
 					searchExpression={currentSearch}
-					onFoodSelected={this.onFoodSelected}
+					onFoodSelected={this.onFoodSelect}
 				/>
 			</View>
 		);
