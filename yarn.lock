@@ -6462,6 +6462,11 @@ trim-right@^1.0.1:
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
   integrity sha1-yy4SAwZ+DI3h9hQJS5/kVwTqYAM=
 
+ts-action@^10.1.0:
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/ts-action/-/ts-action-10.1.0.tgz#f8cfb5d44bbe4de76f175a44a83e78cd30c6170f"
+  integrity sha512-aRQ8QNIypHqvv3I7OyXcIgyokJCu8b12yCUip/x8s4V9ovgFulc7W+E2RlePDgQ+m5N37fzKUTTQa17EIjZaQA==
+
 ts-toolbelt@^4.7.7:
   version "4.7.24"
   resolved "https://registry.yarnpkg.com/ts-toolbelt/-/ts-toolbelt-4.7.24.tgz#9e150a552bed3618c385d0fb276127937f473ff2"
