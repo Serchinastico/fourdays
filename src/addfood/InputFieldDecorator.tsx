@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native";
-// @ts-ignore
 import { color } from "../components/style/color";
 import { textStyle } from "../components/style/font";
 
@@ -10,7 +9,6 @@ export interface Props {
 }
 
 class InputFieldDecorator extends React.PureComponent<Props> {
-
 	private static renderHeader(text: string) {
 		return <Text style={styles.header}>{text}</Text>;
 	}
@@ -33,16 +31,16 @@ class InputFieldDecorator extends React.PureComponent<Props> {
 
 const styles = StyleSheet.create({
 	bottomLine: {
-		height: 0.5,
 		backgroundColor: color.black20,
-	},
-	container: {
-		height: 68,
-		flexDirection: "column",
+		height: 0.5,
 	},
 	childrenContainer: {
 		flex: 1,
 		justifyContent: "center",
+	},
+	container: {
+		flexDirection: "column",
+		height: 68,
 	},
 	header: {
 		...textStyle.midBoldBlack,

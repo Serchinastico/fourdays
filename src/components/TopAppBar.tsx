@@ -1,7 +1,6 @@
 import React, { ReactNode } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { EdgeInsets } from "react-native-safe-area-context";
-import SafeAreaComponent from "../react/SafeAreaComponent";
 import SafeAreaPureComponent from "../react/SafeAreaPureComponent";
 import { color } from "./style/color";
 import { textStyle } from "./style/font";
@@ -30,28 +29,28 @@ class TopAppBar extends SafeAreaPureComponent<Props> {
 }
 
 const styles = StyleSheet.create({
-	container: {
-		position: "absolute",
-		top: 0,
-		left: 0,
-		right: 0,
-		backgroundColor: color.white,
-		...shadow.regular,
-	},
-	topContainer: {
-		flexDirection: "row",
-		alignItems: "center",
-		paddingTop: 16,
-		paddingBottom: 8,
-	},
-	title: {
-		...textStyle.extraExtraLargeBoldNeutral,
-		marginLeft: 16,
-		flex: 1,
-	},
 	buttons: {
 		marginRight: 8,
 		top: 6,
+	},
+	container: {
+		backgroundColor: color.white,
+		left: 0,
+		position: "absolute",
+		right: 0,
+		top: 0,
+		...shadow.regular,
+	},
+	title: {
+		...textStyle.extraExtraLargeBoldNeutral,
+		flex: 1,
+		marginLeft: 16,
+	},
+	topContainer: {
+		alignItems: "center",
+		flexDirection: "row",
+		paddingBottom: 8,
+		paddingTop: 16,
 	},
 });
 

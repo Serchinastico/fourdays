@@ -4,6 +4,7 @@
 		"android": "react-native run-android",
 		"ios": "react-native run-ios",
 		"postinstall": "rm -rf node_modules/react-native-html-to-pdf/example && jetify",
+		"lint": "tslint -c tslint.json -p tsconfig.json -t stylish 'src/**/*.{ts,tsx}' --fix",
 		"link": "react-native link"
 	},
 	"dependencies": {
@@ -59,6 +60,9 @@
 		"prettier": "^1.16.4",
 		"react-native-typescript-transformer": "^1.2.13",
 		"tslint": "^5.20.0",
+		"tslint-config-prettier": "^1.18.0",
+		"tslint-config-standard": "^8.0.1",
+		"tslint-react": "^4.1.0",
 		"typescript": "^3.6.3"
 	},
 	"lint-staged": {
@@ -68,6 +72,7 @@
 			"git add"
 		],
 		"*.{ts,tsx}": [
+			"lint",
 			"git add"
 		]
 	},

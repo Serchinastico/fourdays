@@ -24,10 +24,7 @@ export interface Props {
 	style?: StyleProp<ViewStyle>;
 }
 
-export interface State {}
-
-class AddFoodImageCard extends React.PureComponent<Props, State> {
-
+class AddFoodImageCard extends React.PureComponent<Props, {}> {
 	private static renderImage(image?: FoodImage) {
 		if (image) {
 			return <Image style={styles.image} source={image.data} />;
@@ -84,8 +81,8 @@ class AddFoodImageCard extends React.PureComponent<Props, State> {
 		showImagePicker((response: any) => {
 			if (response) {
 				onImageSelect({
-					type: "Base64",
 					data: { uri: `data:image/png;base64,${response}` },
+					type: "Base64",
 				});
 			}
 		});
@@ -106,13 +103,13 @@ if (cardHeight > maxHeight) {
 const styles = StyleSheet.create({
 	card: {
 		...shadow.strong,
+		alignItems: "center",
+		backgroundColor: color.white,
 		borderRadius: 4,
 		flexDirection: "column",
-		alignItems: "center",
-		justifyContent: "flex-start",
 		height: cardHeight,
+		justifyContent: "flex-start",
 		width: cardWidth,
-		backgroundColor: color.white,
 	},
 	container: {
 		alignItems: "center",
@@ -125,15 +122,15 @@ const styles = StyleSheet.create({
 	foodNameContainer: {
 		flex: 1,
 		justifyContent: "center",
-		marginHorizontal: 16,
 		marginBottom: 8,
+		marginHorizontal: 16,
 	},
 	image: {
+		borderRadius: 4,
 		height: cardHeight - 68,
-		width: cardWidth - 8,
 		marginTop: 4,
 		resizeMode: "cover",
-		borderRadius: 4,
+		width: cardWidth - 8,
 	},
 });
 

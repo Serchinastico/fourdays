@@ -179,7 +179,7 @@ class SetupScreen extends React.Component {
 			<View style={styles.container}>
 				{this.renderFoodList(insets)}
 				{this.renderTopBar()}
-				<AcceptButton onPress={this.onAcceptPress} />
+				<AcceptButton onPress={this.onAcceptPress} isEnabled />
 			</View>
 		);
 	}
