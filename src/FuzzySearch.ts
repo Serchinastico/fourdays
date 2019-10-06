@@ -1,6 +1,10 @@
 import Fuse from "fuse.js";
 
-export default function fuzzySearch(searchExpression, key, items) {
+export default function fuzzySearch<T>(
+	searchExpression: string,
+	key: string,
+	items: T[]
+) {
 	const options = {
 		keys: [key],
 		threshold: 0.3,
