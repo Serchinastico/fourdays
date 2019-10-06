@@ -20,7 +20,7 @@ import { FoodImage } from "./types";
 export interface Props {
 	navigation: NavigationScreenProp<any, any>;
 	groups: any[];
-	storeCustomFood: (name: string, groupId: string, image: FoodImage) => void;
+	store: (name: string, groupId: string, image: FoodImage) => void;
 }
 
 export interface State {
@@ -36,15 +36,16 @@ class AddFoodScreen extends SafeAreaComponent<Props, State> {
 		super(props);
 		this.renderWithInsets = this.renderWithInsets.bind(this);
 		this.onClosePress = this.onClosePress.bind(this);
-		this.onChangeFoodName = this.onChangeFoodName.bind(this);
+		this.onFoodNameChange = this.onFoodNameChange.bind(this);
+		this.onPickerValueChange = this.onPickerValueChange.bind(this);
 		this.onAcceptPress = this.onAcceptPress.bind(this);
 		this.onImageSelect = this.onImageSelect.bind(this);
 
 		const { groups, navigation } = this.props;
 		this.state = {
 			newFoodGroupId: groups[0].id,
-			newFoodName: navigation.getParam("foodName", undefined),
 			newFoodImage: undefined,
+			newFoodName: navigation.getParam("foodName", undefined),
 		};
 	}
 
@@ -55,12 +56,10 @@ class AddFoodScreen extends SafeAreaComponent<Props, State> {
 		const isAcceptButtonEnabled =
 			newFoodName !== undefined && newFoodImage !== undefined;
 
-		const topInset = insets === null ? 0 : insets.top;
-
 		return (
 			<View style={styles.container}>
 				{this.renderTopBar()}
-				{this.renderFoodGroupNameEditor(groups, topInset)}
+				{this.renderFoodGroupNameEditor(groups, insets.top)}
 				{this.renderFoodNameEditor()}
 				{this.renderAddFoodImage(newFoodName, newFoodImage)}
 				{this.renderAcceptButton(isAcceptButtonEnabled)}
@@ -85,7 +84,7 @@ class AddFoodScreen extends SafeAreaComponent<Props, State> {
 		const { newFoodGroupId } = this.state;
 
 		const pickerValues = R.map(
-			(group) => ({ label: group.name, value: group.id }),
+			group => ({ label: group.name, value: group.id }),
 			groups,
 		);
 
@@ -98,7 +97,7 @@ class AddFoodScreen extends SafeAreaComponent<Props, State> {
 					style={styles.textInput}
 					value={newFoodGroupId}
 					placeholder={{}}
-					onValueChange={(value) => this.setState({ newFoodGroupId: value })}
+					onValueChange={this.onPickerValueChange}
 					items={pickerValues}
 				/>
 			</InputFieldDecorator>
@@ -118,7 +117,7 @@ class AddFoodScreen extends SafeAreaComponent<Props, State> {
 					style={styles.textInput}
 					placeholder={I18n.t("screen.addFood.foodNamePlaceholder")}
 					placeholderTextColor={color.black50}
-					onChangeText={(text) => this.onChangeFoodName(text)}
+					onChangeText={this.onFoodNameChange}
 					value={newFoodName}
 				/>
 			</InputFieldDecorator>
@@ -145,12 +144,16 @@ class AddFoodScreen extends SafeAreaComponent<Props, State> {
 		navigation.goBack();
 	}
 
-	private onChangeFoodName(text: string) {
+	private onFoodNameChange(text: string) {
 		this.setState({ newFoodName: text });
 	}
 
+	private onPickerValueChange(value: string) {
+		this.setState({ newFoodGroupId: value });
+	}
+
 	private onAcceptPress() {
-		const { navigation, storeCustomFood } = this.props;
+		const { navigation, store } = this.props;
 		const { newFoodGroupId, newFoodName, newFoodImage } = this.state;
 
 		if (!newFoodName) {
@@ -161,7 +164,7 @@ class AddFoodScreen extends SafeAreaComponent<Props, State> {
 			return;
 		}
 
-		storeCustomFood(newFoodName, newFoodGroupId, newFoodImage);
+		store(newFoodName, newFoodGroupId, newFoodImage);
 		navigation.goBack();
 	}
 
@@ -176,14 +179,14 @@ const styles = StyleSheet.create({
 		marginBottom: 64,
 	},
 	container: {
-		flex: 1,
 		backgroundColor: color.white,
+		flex: 1,
 		paddingTop: 88 + 16,
 	},
 	footer: {
-		position: "absolute",
 		bottom: 0,
 		left: 0,
+		position: "absolute",
 		right: 0,
 	},
 	textInput: {
@@ -195,10 +198,10 @@ const styles = StyleSheet.create({
 		marginTop: 16,
 	},
 	topBarContainer: {
-		position: "absolute",
-		top: 0,
 		left: 0,
+		position: "absolute",
 		right: 0,
+		top: 0,
 	},
 });
 

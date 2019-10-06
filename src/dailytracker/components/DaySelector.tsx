@@ -19,7 +19,7 @@ export interface Props {
 	onPreviousDayPress: () => void;
 	onNextDayPress: () => void;
 	onCurrentDayPress: () => void;
-	selectedDay: moment.Moment;
+	selectedDay: moment.Moment | null;
 	style: StyleProp<ViewStyle>;
 }
 
@@ -40,10 +40,7 @@ class DaySelector extends React.PureComponent<Props> {
 					style={styles.previousNextIconContainer}
 					onPress={this.onPreviousDayPress}
 				>
-					<Image
-						style={styles.previousNextIcon}
-						source={require("../../images/icon/ChevronLeft.png")}
-					/>
+					<Image source={require("../../images/icon/ChevronLeft.png")} />
 				</TouchableHighlight>
 				<TouchableHighlight
 					style={{ flex: 2, alignItems: "center", justifyContent: "center" }}
@@ -63,10 +60,7 @@ class DaySelector extends React.PureComponent<Props> {
 					style={styles.previousNextIconContainer}
 					onPress={this.onNextDayPress}
 				>
-					<Image
-						style={styles.previousNextIcon}
-						source={require("../../images/icon/ChevronRight.png")}
-					/>
+					<Image source={require("../../images/icon/ChevronRight.png")} />
 				</TouchableHighlight>
 			</View>
 		);
@@ -115,20 +109,14 @@ class DaySelector extends React.PureComponent<Props> {
 
 const styles = StyleSheet.create({
 	container: {
-		height: 48,
-		flexDirection: "row",
-		backgroundColor: color.white,
 		alignItems: "stretch",
-	},
-	previousNextIconContainer: {
-		width: 48,
-		justifyContent: "center",
-		alignItems: "center",
-	},
-	previousNextIcon: {},
-	currentDayContainer: {
+		backgroundColor: color.white,
 		flexDirection: "row",
+		height: 48,
+	},
+	currentDayContainer: {
 		alignItems: "center",
+		flexDirection: "row",
 		justifyContent: "center",
 	},
 	currentDayIcon: {
@@ -139,6 +127,11 @@ const styles = StyleSheet.create({
 		color: color.black,
 		marginLeft: 8,
 		textAlign: "center",
+	},
+	previousNextIconContainer: {
+		alignItems: "center",
+		justifyContent: "center",
+		width: 48,
 	},
 });
 

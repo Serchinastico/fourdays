@@ -16,7 +16,6 @@ export interface Props {
 }
 
 class IconButton extends React.PureComponent<Props> {
-
 	public static getImageForIcon(icon: Icon) {
 		switch (icon) {
 			case Icon.Search:
@@ -57,9 +56,9 @@ class IconButton extends React.PureComponent<Props> {
 
 const styles = StyleSheet.create({
 	button: {
-		width: 48,
-		height: 48,
 		borderRadius: 24,
+		height: 48,
+		width: 48,
 	},
 });
 
