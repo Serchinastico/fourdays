@@ -105,7 +105,7 @@ class DailyTrackerScreen extends React.Component {
 
 	onSetupPressed() {
 		const { navigation } = this.props;
-		navigation.navigate("Setup");
+		navigation.navigate("Setup", { isModalNavigation: true });
 	}
 
 	onSharePressed() {

@@ -5,7 +5,10 @@ import { connect } from "react-redux";
 import * as R from "ramda";
 import addItemToListIfPresentRemoveOtherwise from "../common/collections";
 import AcceptButton from "../components/AcceptButton";
-import IconButton, { IconButtonSearch } from "../components/IconButton";
+import IconButton, {
+	IconButtonClear,
+	IconButtonSearch
+} from "../components/IconButton";
 import FoodList from "../components/food/FoodList";
 import TopAppBar from "../components/TopAppBar";
 import TopSearchBar from "../components/TopSearchBar";
@@ -42,6 +45,7 @@ class SetupScreen extends React.Component {
 		super(props);
 		this.onSearchChange = this.onSearchChange.bind(this);
 		this.onAcceptPress = this.onAcceptPress.bind(this);
+		this.onClosePress = this.onClosePress.bind(this);
 		this.onFoodSelected = this.onFoodSelected.bind(this);
 		this.onSearchPressed = this.onSearchPressed.bind(this);
 		const { foods, forbiddenFoodIdsOnStart } = this.props;
@@ -56,14 +60,19 @@ class SetupScreen extends React.Component {
 	}
 
 	onAcceptPress() {
-		const { storeForbiddenFood, foods, navigation } = this.props;
+		const { storeForbiddenFood, foods } = this.props;
 		const { selectedFoodIds } = this.state;
 		const forbiddenFoodIds = R.without(
 			selectedFoodIds,
 			R.map(f => f.id, foods)
 		);
 		storeForbiddenFood(forbiddenFoodIds);
-		navigation.navigate("DailyTracker");
+
+		this.close();
+	}
+
+	onClosePress() {
+		this.close();
 	}
 
 	onFoodSelected(foodId) {
@@ -97,6 +106,16 @@ class SetupScreen extends React.Component {
 			mapToFoodListItem,
 			sortByName
 		)(foods);
+	}
+
+	close() {
+		const { navigation } = this.props;
+		const isModalNavigation = navigation.getParam("isModalNavigation") || false;
+		if (isModalNavigation) {
+			navigation.pop();
+		} else {
+			navigation.navigate("DailyTracker");
+		}
 	}
 
 	renderFoodList(insets) {
@@ -133,9 +152,24 @@ class SetupScreen extends React.Component {
 	}
 
 	renderTopAppBarButtons() {
-		return (
-			<IconButton icon={IconButtonSearch} onPressed={this.onSearchPressed} />
-		);
+		const { navigation } = this.props;
+		const isModalNavigation = navigation.getParam("isModalNavigation") || false;
+
+		if (isModalNavigation) {
+			return (
+				<View style={{ flexDirection: "row" }}>
+					<IconButton
+						icon={IconButtonSearch}
+						onPressed={this.onSearchPressed}
+					/>
+					<IconButton icon={IconButtonClear} onPressed={this.onClosePress} />
+				</View>
+			);
+		} else {
+			return (
+				<IconButton icon={IconButtonSearch} onPressed={this.onSearchPressed} />
+			);
+		}
 	}
 
 	renderTopBar() {
