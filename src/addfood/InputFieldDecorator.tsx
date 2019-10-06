@@ -9,15 +9,15 @@ export interface Props {
 	style?: StyleProp<ViewStyle>;
 }
 
-class InputField extends React.PureComponent<Props> {
+class InputFieldDecorator extends React.PureComponent<Props> {
 	public render() {
 		const { headerText, style, children } = this.props;
 
 		return (
 			<View style={[styles.container, style]}>
-				{InputField.renderHeader(headerText)}
+				{InputFieldDecorator.renderHeader(headerText)}
 				<View style={styles.childrenContainer}>{children}</View>
-				{InputField.renderBottomLine()}
+				{InputFieldDecorator.renderBottomLine()}
 			</View>
 		);
 	}
@@ -49,4 +49,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default InputField;
+export default InputFieldDecorator;

@@ -34,12 +34,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: color.white
 	},
-	topBarContainer: {
-		position: "absolute",
-		top: 0,
-		left: 0,
-		right: 0
-	},
 	searchBarContainer: {
 		flexDirection: "row",
 		marginTop: 16,
@@ -360,7 +354,7 @@ class DailyTrackerScreen extends React.Component {
 	renderTopBar() {
 		const { isSearchActive } = this.state;
 
-		const topBar = isSearchActive ? (
+		return isSearchActive ? (
 			<TopSearchBar
 				onBackPress={() => this.setState({ isSearchActive: false })}
 				onChangeText={this.onSearchChange}
@@ -372,8 +366,6 @@ class DailyTrackerScreen extends React.Component {
 				bottomViews={this.renderDaySelector()}
 			/>
 		);
-
-		return <View style={styles.topBarContainer}>{topBar}</View>;
 	}
 
 	render() {
