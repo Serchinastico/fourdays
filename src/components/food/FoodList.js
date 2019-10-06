@@ -310,7 +310,13 @@ class FoodList extends React.PureComponent {
 				? this.mapToFlatListItems(items)
 				: this.mapToFlatListItemsWithSearchExpression(items, searchExpression);
 
-		return <FlatList data={flatListItems} renderItem={this.renderItem} />;
+		return (
+			<FlatList
+				keyboardShouldPersistTaps="always"
+				data={flatListItems}
+				renderItem={this.renderItem}
+			/>
+		);
 	}
 }
 
