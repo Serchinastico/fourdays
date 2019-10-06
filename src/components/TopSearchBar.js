@@ -1,11 +1,6 @@
 import React from "react";
-import {
-	SafeAreaView,
-	TextInput,
-	StyleSheet,
-	Keyboard,
-	View
-} from "react-native";
+import { TextInput, StyleSheet, Keyboard, View } from "react-native";
+import { SafeAreaConsumer } from "react-native-safe-area-context";
 import I18n from "../translations/i18n";
 import IconButton, { IconButtonBack, IconButtonClear } from "./IconButton";
 import { color, style, shadow } from "./style/style";
@@ -86,11 +81,11 @@ class TopSearchBar extends React.PureComponent {
 		);
 	}
 
-	render() {
+	renderWithInsets(insets) {
 		const { currentSearch } = this.state;
 
 		return (
-			<SafeAreaView style={styles.container}>
+			<View style={[styles.container, { paddingTop: insets.top }]}>
 				<View style={styles.innerContainer}>
 					{this.renderBackIcon()}
 					<TextInput
@@ -104,7 +99,15 @@ class TopSearchBar extends React.PureComponent {
 					/>
 					{this.renderClearIcon()}
 				</View>
-			</SafeAreaView>
+			</View>
+		);
+	}
+
+	render() {
+		return (
+			<SafeAreaConsumer>
+				{insets => this.renderWithInsets(insets)}
+			</SafeAreaConsumer>
 		);
 	}
 }
