@@ -1,12 +1,16 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { SafeAreaConsumer } from "react-native-safe-area-context";
+import SafeAreaComponent from "../react/SafeAreaComponent";
 import { color } from "./style/color";
 import { textStyle } from "./style/font";
 import { shadow } from "./style/shadow";
 
 const styles = StyleSheet.create({
 	container: {
+		position: "absolute",
+		top: 0,
+		left: 0,
+		right: 0,
 		backgroundColor: color.white,
 		...shadow.regular
 	},
@@ -27,7 +31,7 @@ const styles = StyleSheet.create({
 	}
 });
 
-class TopAppBar extends React.PureComponent {
+class TopAppBar extends SafeAreaComponent {
 	renderWithInsets(insets) {
 		const { title, buttons, bottomViews } = this.props;
 
@@ -39,14 +43,6 @@ class TopAppBar extends React.PureComponent {
 				</View>
 				<View>{bottomViews || null}</View>
 			</View>
-		);
-	}
-
-	render() {
-		return (
-			<SafeAreaConsumer>
-				{insets => this.renderWithInsets(insets)}
-			</SafeAreaConsumer>
 		);
 	}
 }

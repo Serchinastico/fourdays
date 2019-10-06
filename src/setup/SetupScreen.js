@@ -21,12 +21,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: color.white
 	},
-	topBarContainer: {
-		position: "absolute",
-		top: 0,
-		left: 0,
-		right: 0
-	},
 	footer: {
 		position: "absolute",
 		bottom: 0,
@@ -175,7 +169,7 @@ class SetupScreen extends React.Component {
 	renderTopBar() {
 		const { isSearchActive } = this.state;
 
-		const topBar = isSearchActive ? (
+		return isSearchActive ? (
 			<TopSearchBar
 				onBackPress={() => this.setState({ isSearchActive: false })}
 				onChangeText={this.onSearchChange}
@@ -186,8 +180,6 @@ class SetupScreen extends React.Component {
 				buttons={this.renderTopAppBarButtons()}
 			/>
 		);
-
-		return <View style={styles.topBarContainer}>{topBar}</View>;
 	}
 
 	renderWithInsets(insets) {

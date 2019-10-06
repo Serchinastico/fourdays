@@ -14,11 +14,12 @@ import AcceptButton from "../components/AcceptButton";
 // @ts-ignore
 import IconButton, { IconButtonClear } from "../components/IconButton";
 import AddFoodImageCard from "./AddFoodImageCard";
-import InputField from "./InputField";
+import InputFieldDecorator from "./InputFieldDecorator";
 import { storeCustomFood } from "./actions";
 import { FoodImage } from "./types";
 import { NavigationScreenProp } from "react-navigation";
 import { textStyle } from "../components/style/font";
+import SafeAreaComponent from "../react/SafeAreaComponent";
 
 export interface Props {
 	navigation: NavigationScreenProp<any, any>;
@@ -32,7 +33,7 @@ export interface State {
 	newFoodImage?: FoodImage;
 }
 
-class AddFoodScreen extends React.Component<Props, State> {
+class AddFoodScreen extends SafeAreaComponent<Props, State> {
 	private foodNameRef = createRef<TextInput>();
 
 	constructor(props: Props) {
@@ -51,11 +52,7 @@ class AddFoodScreen extends React.Component<Props, State> {
 		};
 	}
 
-	public render() {
-		return <SafeAreaConsumer>{this.renderWithInsets}</SafeAreaConsumer>;
-	}
-
-	private renderWithInsets(insets: EdgeInsets | null) {
+	renderWithInsets(insets: EdgeInsets) {
 		const { groups } = this.props;
 		const { newFoodName, newFoodImage } = this.state;
 
@@ -76,14 +73,12 @@ class AddFoodScreen extends React.Component<Props, State> {
 	}
 
 	private renderTopBar() {
-		const topBar = (
+		return (
 			<TopAppBar
 				title={I18n.t("screen.addFood.title")}
 				buttons={this.renderTopAppBarButtons()}
 			/>
 		);
-
-		return <View style={styles.topBarContainer}>{topBar}</View>;
 	}
 
 	private renderTopAppBarButtons() {
@@ -101,7 +96,7 @@ class AddFoodScreen extends React.Component<Props, State> {
 		);
 
 		return (
-			<InputField
+			<InputFieldDecorator
 				style={[styles.textInputContainer, { marginTop: topInset }]}
 				headerText={I18n.t("screen.addFood.groupNameHeader")}
 			>
@@ -112,7 +107,7 @@ class AddFoodScreen extends React.Component<Props, State> {
 					onValueChange={value => this.setState({ newFoodGroupId: value })}
 					items={pickerValues}
 				/>
-			</InputField>
+			</InputFieldDecorator>
 		);
 	}
 
@@ -120,7 +115,7 @@ class AddFoodScreen extends React.Component<Props, State> {
 		const { newFoodName } = this.state;
 
 		return (
-			<InputField
+			<InputFieldDecorator
 				style={styles.textInputContainer}
 				headerText={I18n.t("screen.addFood.foodNameHeader")}
 			>
@@ -132,7 +127,7 @@ class AddFoodScreen extends React.Component<Props, State> {
 					onChangeText={text => this.onChangeFoodName(text)}
 					value={newFoodName}
 				/>
-			</InputField>
+			</InputFieldDecorator>
 		);
 	}
 
