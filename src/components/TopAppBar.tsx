@@ -5,6 +5,7 @@ import { color } from "./style/color";
 import { textStyle } from "./style/font";
 import { shadow } from "./style/shadow";
 import { EdgeInsets } from "react-native-safe-area-context";
+import SafeAreaPureComponent from "../react/SafeAreaPureComponent";
 
 interface Props {
 	title: string;
@@ -12,7 +13,7 @@ interface Props {
 	bottomViews?: ReactNode;
 }
 
-class TopAppBar extends SafeAreaComponent<Props> {
+class TopAppBar extends SafeAreaPureComponent<Props> {
 	renderWithInsets(insets: EdgeInsets) {
 		const { title, buttons, bottomViews } = this.props;
 
