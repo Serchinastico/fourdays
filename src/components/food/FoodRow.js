@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
 		justifyContent: "space-between",
 		marginLeft: 16,
 		marginRight: 16,
-		marginBottom: 16
+		marginBottom: 24
 	}
 });
 
