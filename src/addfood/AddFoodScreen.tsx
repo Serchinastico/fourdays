@@ -45,7 +45,7 @@ class AddFoodScreen extends SafeAreaComponent<Props, State> {
 		this.state = {
 			newFoodGroupId: groups[0].id,
 			newFoodImage: undefined,
-			newFoodName: navigation.getParam("foodName", undefined),
+			newFoodName: navigation.getParam("foodName", undefined)
 		};
 	}
 
@@ -85,7 +85,7 @@ class AddFoodScreen extends SafeAreaComponent<Props, State> {
 
 		const pickerValues = R.map(
 			group => ({ label: group.name, value: group.id }),
-			groups,
+			groups
 		);
 
 		return (
@@ -176,33 +176,33 @@ class AddFoodScreen extends SafeAreaComponent<Props, State> {
 const styles = StyleSheet.create({
 	addFood: {
 		flex: 1,
-		marginBottom: 64,
+		marginBottom: 64
 	},
 	container: {
 		backgroundColor: color.white,
 		flex: 1,
-		paddingTop: 88 + 16,
+		paddingTop: 88 + 16
 	},
 	footer: {
 		bottom: 0,
 		left: 0,
 		position: "absolute",
-		right: 0,
+		right: 0
 	},
 	textInput: {
-		...textStyle.largeRegularBlack,
+		...textStyle.largeRegularBlack
 	},
 	textInputContainer: {
 		marginLeft: 16,
 		marginRight: 16,
-		marginTop: 16,
+		marginTop: 16
 	},
 	topBarContainer: {
 		left: 0,
 		position: "absolute",
 		right: 0,
-		top: 0,
-	},
+		top: 0
+	}
 });
 
 function mapStateToProps(state: any) {
@@ -211,5 +211,5 @@ function mapStateToProps(state: any) {
 
 export default connect(
 	mapStateToProps,
-	{ storeCustomFood },
+	{ storeCustomFood }
 )(AddFoodScreen);

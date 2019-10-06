@@ -7,7 +7,7 @@ import {
 	Text,
 	TouchableHighlight,
 	View,
-	ViewStyle,
+	ViewStyle
 } from "react-native";
 import { color } from "../../components/style/color";
 import { textStyle } from "../../components/style/font";
@@ -112,27 +112,27 @@ const styles = StyleSheet.create({
 		alignItems: "stretch",
 		backgroundColor: color.white,
 		flexDirection: "row",
-		height: 48,
+		height: 48
 	},
 	currentDayContainer: {
 		alignItems: "center",
 		flexDirection: "row",
-		justifyContent: "center",
+		justifyContent: "center"
 	},
 	currentDayIcon: {
-		marginTop: 1,
+		marginTop: 1
 	},
 	currentDayText: {
 		...textStyle.largeRegularNeutral,
 		color: color.black,
 		marginLeft: 8,
-		textAlign: "center",
+		textAlign: "center"
 	},
 	previousNextIconContainer: {
 		alignItems: "center",
 		justifyContent: "center",
-		width: 48,
-	},
+		width: 48
+	}
 });
 
 export default DaySelector;
