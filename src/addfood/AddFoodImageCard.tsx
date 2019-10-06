@@ -2,6 +2,7 @@ import React from "react";
 import {
 	Dimensions,
 	Image,
+	Keyboard,
 	StyleProp,
 	StyleSheet,
 	Text,
@@ -74,6 +75,11 @@ class AddFoodImageCard extends React.PureComponent<Props, State> {
 
 	private onImagePress() {
 		const { onImageSelect } = this.props;
+
+		// We dismiss the keyboard before navigating to any other screen to keep the accept
+		// button in a consistent state. We were experiencing the button to appear in the middle
+		// of the screen before this call because the keyboardDidHide callback was never called.
+		Keyboard.dismiss();
 
 		showImagePicker((response: any) => {
 			if (response) {
