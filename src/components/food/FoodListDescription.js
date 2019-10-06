@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, StyleSheet, View } from "react-native";
-import { style } from "../style/style";
+import { textStyle } from "../style/font";
 
 const styles = StyleSheet.create({
 	container: {
@@ -9,10 +9,10 @@ const styles = StyleSheet.create({
 		marginTop: 20
 	},
 	title: {
-		...style.largeMediumBlack
+		...textStyle.largeMediumBlack
 	},
 	subtitle: {
-		...style.largeRegularNeutral,
+		...textStyle.largeRegularNeutral,
 		marginTop: 8
 	}
 });

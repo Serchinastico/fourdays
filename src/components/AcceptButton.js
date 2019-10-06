@@ -11,7 +11,9 @@ import {
 import { SafeAreaConsumer } from "react-native-safe-area-context";
 import setTestId from "../testIds";
 import I18n from "../translations/i18n";
-import { color, style, shadow } from "./style/style";
+import { color } from "./style/color";
+import { textStyle } from "./style/font";
+import { shadow } from "./style/shadow";
 
 const sharedBackgroundStyle = {
 	flex: 1,
@@ -37,7 +39,7 @@ const styles = StyleSheet.create({
 		...sharedBackgroundStyle
 	},
 	text: {
-		...style.largeMediumBlack,
+		...textStyle.largeMediumBlack,
 		color: color.white,
 		textAlign: "center"
 	}

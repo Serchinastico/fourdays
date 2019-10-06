@@ -6,7 +6,7 @@ import {
 	TouchableHighlight,
 	View
 } from "react-native";
-import { style } from "../style/style";
+import { textStyle } from "../style/font";
 
 const styles = StyleSheet.create({
 	container: {
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 		marginVertical: 16
 	},
 	text: {
-		...style.largeMediumBlack
+		...textStyle.largeMediumBlack
 	},
 	icon: {
 		marginLeft: "auto"

@@ -3,10 +3,10 @@ import React from "react";
 import { FlatList, View, Text, Platform } from "react-native";
 import addItemToListIfPresentRemoveOtherwise from "../../common/collections";
 import fuzzySearch from "../../FuzzySearch";
+import { textStyle } from "../style/font";
 import FoodGroupHeader from "./FoodGroupHeader";
 import FoodRow from "./FoodRow";
 import FoodListDescription from "./FoodListDescription";
-import { style } from "../style/style";
 import I18n from "../../translations/i18n";
 
 const PADDING_ITEM = "Padding";
@@ -91,7 +91,7 @@ class FoodList extends React.PureComponent {
 			<View
 				style={{ flex: 1, height: 16, marginHorizontal: 16, marginBottom: 16 }}
 			>
-				<Text style={style.midRegularNeutral}>{text}</Text>
+				<Text style={textStyle.midRegularNeutral}>{text}</Text>
 			</View>
 		);
 	}

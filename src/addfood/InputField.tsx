@@ -1,7 +1,8 @@
 import React from "react";
 import { StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native";
 // @ts-ignore
-import { style, color } from "../components/style/style";
+import { color } from "../components/style/color";
+import { textStyle } from "../components/style/font";
 
 export interface Props {
 	headerText: string;
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
 		justifyContent: "center"
 	},
 	header: {
-		...style.midBoldBlack
+		...textStyle.midBoldBlack
 	}
 });
 

@@ -4,7 +4,7 @@ import { View, StyleSheet } from "react-native";
 import { Calendar } from "react-native-calendars";
 import Button from "react-native-button";
 import I18n from "../../translations/i18n";
-import { color } from "../../components/style/style";
+import { color } from "../../components/style/color";
 
 const styles = StyleSheet.create({
 	container: {
