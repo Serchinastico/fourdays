@@ -1,6 +1,6 @@
 import { Platform } from "react-native";
 
-const getPlatformTestId = id =>
+const getPlatformTestId = (id: string) =>
 	Platform.OS === "ios"
 		? { testID: id }
 		: { accessible: true, accessibilityLabel: id };
@@ -9,6 +9,6 @@ const getPlatformTestId = id =>
  * Adds a testID to the views on Android and iOS in their specific ways. On Android,
  * this will result in a ContentDescription on Debug builds (and no changes on live builds).
  */
-const setTestId = id => (__DEV__ ? getPlatformTestId(id) : null);
+const setTestId = (id: string) => (__DEV__ ? getPlatformTestId(id) : null);
 
 export default setTestId;
