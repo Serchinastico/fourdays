@@ -211,5 +211,5 @@ function mapStateToProps(state: any) {
 
 export default connect(
 	mapStateToProps,
-	{ storeCustomFood }
+	{ store: storeCustomFood }
 )(AddFoodScreen);

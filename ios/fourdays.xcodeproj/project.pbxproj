@@ -31,18 +31,17 @@
 		38ADADBDA6354D45BE8C0D2C /* AvenirNext-DemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 737351050FB74D08A7EA61A4 /* AvenirNext-DemiBold.ttf */; };
 		437905AAE6814F808F81E39B /* AvenirNext-UltraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DBF146529464D4ABD875E9D /* AvenirNext-UltraLightItalic.ttf */; };
 		490E3AD222B803DA009A2914 /* libRNHTMLtoPDF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4956306022ADAFE500D36006 /* libRNHTMLtoPDF.a */; };
-		49571CDD2347D92F00D684CD /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		49571D462347DC9700D684CD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 49571D482347DC9700D684CD /* InfoPlist.strings */; };
 		49571D4C2347DE8400D684CD /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49571D4B2347DE8400D684CD /* Info.plist */; };
-		49A7798922B062BA0058CD4E /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
-		49A779BE22B067F50058CD4E /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		49A779E422B067FB0058CD4E /* libRCTImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302C01ABCB91800DB3ED1 /* libRCTImage.a */; };
 		49A779E522B068010058CD4E /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		49A779E622B068070058CD4E /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		49A779E722B0680C0058CD4E /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		49A779E822B068130058CD4E /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
 		49A779E922B068190058CD4E /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
-		49A779EA22B0681F0058CD4E /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
+		49C630B0234FA7CC00C4C9C3 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
+		49C630D4234FAAF300C4C9C3 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		49C630D5234FAB1400C4C9C3 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
 		49CEB86322A456FE000F5EDC /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49CEB86222A456FE000F5EDC /* Social.framework */; };
 		49CEB86522A45706000F5EDC /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49CEB86422A45706000F5EDC /* MessageUI.framework */; };
 		525F41D19D624943A97EBA48 /* AvenirNext-DemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45BC1143C1D24396944C4EA2 /* AvenirNext-DemiBoldItalic.ttf */; };
@@ -411,16 +410,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				490E3AD222B803DA009A2914 /* libRNHTMLtoPDF.a in Frameworks */,
-				49A779EA22B0681F0058CD4E /* libRCTNetwork.a in Frameworks */,
 				49A779E922B068190058CD4E /* libRCTActionSheet.a in Frameworks */,
 				49A779E822B068130058CD4E /* libRCTGeolocation.a in Frameworks */,
 				49A779E722B0680C0058CD4E /* libRCTVibration.a in Frameworks */,
 				49A779E622B068070058CD4E /* libRCTSettings.a in Frameworks */,
 				49A779E522B068010058CD4E /* libRCTLinking.a in Frameworks */,
+				49C630D5234FAB1400C4C9C3 /* libRCTNetwork.a in Frameworks */,
+				49C630B0234FA7CC00C4C9C3 /* libRCTWebSocket.a in Frameworks */,
 				49A779E422B067FB0058CD4E /* libRCTImage.a in Frameworks */,
-				49571CDD2347D92F00D684CD /* libRCTAnimation.a in Frameworks */,
-				49A779BE22B067F50058CD4E /* libRCTText.a in Frameworks */,
-				49A7798922B062BA0058CD4E /* libRCTWebSocket.a in Frameworks */,
+				49C630D4234FAAF300C4C9C3 /* libRCTText.a in Frameworks */,
 				49CEB86522A45706000F5EDC /* MessageUI.framework in Frameworks */,
 				49CEB86322A456FE000F5EDC /* Social.framework in Frameworks */,
 				D3702261C7AD6BFA3D93C3CA /* libPods-fourdays.a in Frameworks */,
