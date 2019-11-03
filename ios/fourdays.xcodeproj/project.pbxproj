@@ -1394,7 +1394,7 @@
 			baseConfigurationReference = 987158AA496E71647435BB25 /* Pods-fourdays.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 36J7N348AD;
 				HEADER_SEARCH_PATHS = (
@@ -1421,7 +1421,7 @@
 			baseConfigurationReference = 4CD79E22B1EB8D5860D9CB06 /* Pods-fourdays.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = 36J7N348AD;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
