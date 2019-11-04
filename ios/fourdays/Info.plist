@@ -67,5 +67,13 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+  <key>NSPhotoLibraryUsageDescription</key>
+  <string>Four Days requires access to your photo library.</string>
+  <key>NSCameraUsageDescription</key>
+  <string>Four Days requires access to the camera.</string>
+  <key>NSLocationAlwaysUsageDescription</key>
+  <string>Four Days do not need this permission so you can safely deny it.</string>
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>Four Days do not need this permission so you can safely deny it.</string>
 </dict>
 </plist>
