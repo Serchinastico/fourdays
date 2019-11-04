@@ -1,0 +1,39 @@
+diff --git a/node_modules/@react-native-community/cli/build/commands/runIOS/findMatchingSimulator.js b/node_modules/@react-native-community/cli/build/commands/runIOS/findMatchingSimulator.js
+index 4f75b7a..30c95a4 100644
+--- a/node_modules/@react-native-community/cli/build/commands/runIOS/findMatchingSimulator.js
++++ b/node_modules/@react-native-community/cli/build/commands/runIOS/findMatchingSimulator.js
+@@ -65,20 +65,20 @@ function findMatchingSimulator(simulators, simulatorString) {
+     for (const i in device) {
+       const simulator = device[i]; // Skipping non-available simulator
+ 
+-      if (simulator.availability !== '(available)' && simulator.isAvailable !== 'YES') {
+-        continue;
+-      }
++      // if (simulator.availability !== '(available)' && simulator.isAvailable !== 'YES') {
++      //   continue;
++      // }
+ 
+       const booted = simulator.state === 'Booted';
+ 
+-      if (booted && simulatorName === null) {
+-        return {
+-          udid: simulator.udid,
+-          name: simulator.name,
+-          booted,
+-          version
+-        };
+-      }
++      // if (booted && simulatorName === null) {
++      //   return {
++      //     udid: simulator.udid,
++      //     name: simulator.name,
++      //     booted,
++      //     version
++      //   };
++      // }
+ 
+       if (simulator.name === simulatorName && !match) {
+         match = {
+diff --git a/node_modules/@react-native-community/cli/build/commands/server/external/xsel b/node_modules/@react-native-community/cli/build/commands/server/external/xsel
+old mode 100644
+new mode 100755
