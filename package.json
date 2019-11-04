@@ -2,8 +2,8 @@
 	"scripts": {
 		"start": "react-native start",
 		"android": "react-native run-android",
-		"ios": "react-native run-ios",
-		"postinstall": "rm -rf node_modules/react-native-html-to-pdf/example && jetify",
+		"ios": "react-native run-ios --scheme=\"fourdays [Debug]\" --simulator=\"iPhone 8\"",
+		"postinstall": "rm -rf node_modules/react-native-html-to-pdf/example && jetify && patch-package",
 		"lint": "tslint -c tslint.json -p tsconfig.json -t stylish 'src/**/*.{ts,tsx}' --fix",
 		"link": "react-native link"
 	},
@@ -57,6 +57,7 @@
 		"husky": "^3.0.7",
 		"jetifier": "^1.6.4",
 		"lint-staged": "^8.1.5",
+		"patch-package": "^6.2.0",
 		"prettier": "^1.16.4",
 		"react-native-typescript-transformer": "^1.2.13",
 		"tslint": "^5.20.0",
