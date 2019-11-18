@@ -39,10 +39,6 @@
 	padding-top: 50px;
 }
 
-.is-secondary-card {
-	margin-top: 50px;
-}
-
 .is-vbottom {
 	align-items: flex-end;
 }
@@ -101,7 +97,7 @@
 
 .fd-tracking {
 	margin-top: -270px;
-	padding-bottom: 300px;
+	padding-bottom: 60px;
 }
 
 .fd-tracking-content {
@@ -109,4 +105,30 @@
 
 .fd-tracking-text {
 	padding-top: 200px;
+}
+
+.section {
+	padding: 3rem 0.7rem;
+}
+
+.fd-navbar-item-img {
+	max-height: unset !important;
+}
+
+.fd-navbar-brand {
+	margin: 10px;
+}
+
+@media (max-width: 768px) {
+	.fd-navbar-brand {
+		justify-content: center;
+	}
+
+	.fd-navbar {
+		right: 20px;
+	}
+
+	.fd-intro {
+		padding-top: 200px;
+	}
 }
