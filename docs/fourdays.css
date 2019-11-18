@@ -1,15 +1,3 @@
-.hero-background {
-	background-image: url("images/deco-001.png");
-	background-position: top right;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-size: cover;
-}
-
-.is-horizontal-center {
-	justify-content: center;
-}
-
 .title {
 	font-family: "Lato", sans-serif;
 	font-size: 3.5rem;
@@ -57,4 +45,31 @@
 
 .is-vbottom {
 	align-items: flex-end;
+}
+
+.navbar,
+.is-transparent {
+	background-color: unset;
+}
+
+.fd-navbar {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
+
+.fd-intro {
+	background-image: url("images/deco-001.png");
+	background-position: top right;
+	background-size: contain;
+	background-repeat: no-repeat;
+	padding-top: 100px;
+}
+
+.fd-cards {
+	background-image: url("images/deco-002.png");
+	background-position: top;
+	background-size: cover;
+	background-repeat: no-repeat;
+	padding-top: 100px;
 }
