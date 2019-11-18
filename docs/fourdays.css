@@ -68,8 +68,40 @@
 
 .fd-cards {
 	background-image: url("images/deco-002.png");
-	background-position: top;
+	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
 	padding-top: 100px;
+}
+
+.fd-customize {
+	background-image: url("images/deco-003.png");
+	background-position: bottom;
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin-top: 50px;
+	padding-top: 100px;
+}
+
+.is-light {
+	color: white;
+}
+
+.fd-customize-text {
+	padding-top: 100px;
+}
+
+.fd-tracking {
+	background-image: url("images/deco-004.png");
+	background-position: top;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+.fd-tracking-content {
+	margin-top: 400px;
+}
+
+.fd-tracking-text {
+	padding-top: 150px;
 }
