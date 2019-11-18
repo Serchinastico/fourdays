@@ -91,17 +91,22 @@
 	padding-top: 100px;
 }
 
-.fd-tracking {
+.fd-watermelon {
 	background-image: url("images/deco-004.png");
 	background-position: top;
-	background-size: contain;
+	background-size: cover;
 	background-repeat: no-repeat;
+	height: 700px;
+}
+
+.fd-tracking {
+	margin-top: -270px;
+	padding-bottom: 300px;
 }
 
 .fd-tracking-content {
-	margin-top: 400px;
 }
 
 .fd-tracking-text {
-	padding-top: 150px;
+	padding-top: 200px;
 }
