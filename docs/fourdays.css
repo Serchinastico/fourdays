@@ -1,6 +1,6 @@
 .title {
 	font-family: "Lato", sans-serif;
-	font-size: 3.5rem;
+	font-size: 3.3rem;
 	font-weight: 800;
 	padding-bottom: 10px;
 }
@@ -10,37 +10,6 @@
 	font-size: 1.05rem;
 	font-weight: 400;
 	line-height: 26px;
-}
-
-.card {
-	border-radius: 16px;
-}
-
-.card-icon {
-	margin-top: 35px;
-}
-
-.card-title {
-	margin-top: 35px;
-	font-family: "Lato", sans-serif;
-	font-size: 1.5rem;
-	font-weight: 700;
-}
-
-.card-description {
-	margin-top: 16px;
-	font-family: "Lato", sans-serif;
-	font-size: 1rem;
-	font-weight: 400;
-	margin-bottom: 32px;
-}
-
-.is-main-card {
-	padding-top: 50px;
-}
-
-.is-vbottom {
-	align-items: flex-end;
 }
 
 .navbar,
@@ -62,49 +31,32 @@
 	padding-top: 100px;
 }
 
-.fd-cards {
-	background-image: url("images/deco-002.png");
-	background-position: center;
-	background-size: cover;
-	background-repeat: no-repeat;
-	padding-top: 100px;
+.fd-padded-column {
+	margin-top: 60px;
 }
 
-.fd-customize {
-	background-image: url("images/deco-003.png");
-	background-position: bottom;
-	background-size: cover;
-	background-repeat: no-repeat;
-	margin-top: 50px;
-	padding-top: 100px;
+.fd-footer-columns {
+	margin-top: -100px;
 }
 
-.is-light {
-	color: white;
+.fd-creators {
+	top: 45%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	margin: 0;
+	width: fit-content;
+	z-index: 1;
+	text-align: center;
 }
 
-.fd-customize-text {
-	padding-top: 100px;
+.fd-creators .fd-with-love {
+	font-family: "Lato", sans-serif;
+	font-size: 3.5rem;
 }
 
-.fd-watermelon {
-	background-image: url("images/deco-004.png");
-	background-position: top;
-	background-size: cover;
-	background-repeat: no-repeat;
-	height: 700px;
-}
-
-.fd-tracking {
-	margin-top: -270px;
-	padding-bottom: 60px;
-}
-
-.fd-tracking-content {
-}
-
-.fd-tracking-text {
-	padding-top: 200px;
+.fd-creators .fd-ali-and-serch {
+	font-family: "Lato", sans-serif;
+	font-size: 3.5rem;
 }
 
 .section {
@@ -119,6 +71,16 @@
 	margin: 10px;
 }
 
+.fd-footer {
+	background-color: #212121;
+	color: white;
+	padding: 3rem;
+}
+
+.fd-footer strong {
+	color: white;
+}
+
 @media (max-width: 768px) {
 	.fd-navbar-brand {
 		justify-content: center;
@@ -130,5 +92,19 @@
 
 	.fd-intro {
 		padding-top: 200px;
+		background-position-x: 250px;
+	}
+
+	.column {
+		margin: 20px;
+	}
+
+	.reverse-row-order-in-mobile {
+		flex-direction: column-reverse;
+		display: flex;
+	}
+
+	.fd-footer-columns {
+		display: flex;
 	}
 }
