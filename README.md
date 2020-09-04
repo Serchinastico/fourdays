@@ -2,7 +2,17 @@
 
 Code for the Four Days application
 
+## Building the project
+
+1. First run `yarn install`
+   1. If you find any error applying patches, just apply them manually
+
+## Building for Android
+
 ## Building for iOS
+
+1. Install [Cocoapods](https://cocoapods.org/).
+2. Run `pod install` from the `./ios` directory.
 
 React Native and iOS don't play well together.
 
@@ -19,5 +29,5 @@ Run `./configure && make && make install`
 
 References:
 
-* https://github.com/facebook/react-native/issues/22703
-* https://github.com/facebook/react-native/issues/23944
+- https://github.com/facebook/react-native/issues/22703
+- https://github.com/facebook/react-native/issues/23944
