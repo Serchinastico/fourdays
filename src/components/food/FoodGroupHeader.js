@@ -26,26 +26,8 @@ const styles = StyleSheet.create({
 });
 
 class FoodGroupHeader extends React.PureComponent {
-	static getOpenCloseImage(isOpen) {
-		if (isOpen) {
-			return (
-				<Image
-					style={styles.icon}
-					source={require("../../images/icon/ChevronUp.png")}
-				/>
-			);
-		} else {
-			return (
-				<Image
-					style={styles.icon}
-					source={require("../../images/icon/ChevronDown.png")}
-				/>
-			);
-		}
-	}
-
 	render() {
-		const { id, name, isOpen, onGroupSelected } = this.props;
+		const { id, name, onGroupSelected, icon } = this.props;
 
 		return (
 			<TouchableHighlight
@@ -54,7 +36,10 @@ class FoodGroupHeader extends React.PureComponent {
 			>
 				<View style={styles.container}>
 					<Text style={styles.text}>{name}</Text>
-					{FoodGroupHeader.getOpenCloseImage(isOpen)}
+					<Image
+                    style={styles.icon}
+                    source={icon}
+                />
 				</View>
 			</TouchableHighlight>
 		);

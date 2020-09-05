@@ -4,10 +4,11 @@ import { FlatList, View, Text, Platform } from "react-native";
 import addItemToListIfPresentRemoveOtherwise from "../../common/collections";
 import fuzzySearch from "../../FuzzySearch";
 import { textStyle } from "../style/font";
-import FoodGroupHeader from "./FoodGroupHeader";
 import FoodRow from "./FoodRow";
 import FoodListDescription from "./FoodListDescription";
 import I18n from "../../translations/i18n";
+import FoodExistingGroupHeader from "./FoodExistingGroupHeader";
+import FoodNewGroupHeader from "./FoodNewGroupHeader";
 
 const PADDING_ITEM = "Padding";
 const GROUP_ITEM = "Group";
@@ -15,6 +16,7 @@ const DESCRIPTION_ITEM = "Description";
 const HEADER_ITEM = "Header";
 const SUBHEADER_ITEM = "Subheader";
 const FOOD_ROW_ITEM = "Row";
+const NEW_GROUP_ITEM = "NewGroup"
 
 class FoodList extends React.PureComponent {
 	static createPaddingItem(height, keyPrefix) {
@@ -49,6 +51,10 @@ class FoodList extends React.PureComponent {
 				marginTop
 			}
 		};
+	}
+
+	static createNewGroup() {
+		return { type: NEW_GROUP_ITEM }
 	}
 
 	constructor(props) {
@@ -206,6 +212,8 @@ class FoodList extends React.PureComponent {
 						item.payload,
 						expandedGroupIds.includes(item.payload.id)
 					);
+				case NEW_GROUP_ITEM:
+					return [item]
 			}
 		}, items);
 	}
@@ -267,7 +275,7 @@ class FoodList extends React.PureComponent {
 	renderHeaderItem(payload) {
 		const { expandedGroupIds } = this.state;
 		return (
-			<FoodGroupHeader
+			<FoodExistingGroupHeader
 				id={payload.id}
 				isOpen={payload.hasFood && expandedGroupIds.includes(payload.id)}
 				name={payload.name}
@@ -287,10 +295,22 @@ class FoodList extends React.PureComponent {
 		);
 	}
 
+	renderNewGroupItem() {
+		return (
+			<FoodNewGroupHeader
+				id={"newgroup"}
+				name={I18n.t("screen.setup.newGroup")}
+				onGroupSelected={this.onGroupSelected}
+			/>
+		);
+	}
+
 	renderItem({ item }) {
 		switch (item.type) {
 			case PADDING_ITEM:
 				return <View style={{ height: item.payload.height }} />;
+			case NEW_GROUP_ITEM:
+				return this.renderNewGroupItem();
 			case DESCRIPTION_ITEM:
 				return FoodList.renderDescriptionItem(item.payload);
 			case HEADER_ITEM:

@@ -160,7 +160,8 @@
 			"title": "Configuración",
 			"description": {
 				"text": "Desmarca la comida que no puedes comer acorde a tus intolerancias y la dieta que estés siguiendo."
-			}
+			},
+			"newGroup": "Crear grupo"
 		},
 		"dailyTracker": {
 			"title": "Registro",

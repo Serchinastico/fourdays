@@ -127,6 +127,7 @@ class SetupScreen extends React.Component {
 				80
 			),
 			...groupItems,
+			FoodList.createNewGroup(),
 			FoodList.createPaddingItem(80, "bottomPadding")
 		];
 
