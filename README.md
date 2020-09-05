@@ -9,10 +9,25 @@ Code for the Four Days application
 
 ## Building for Android
 
+1. Just run `yarn android`.
+
+For release versions:
+
+1. Go to `android`.
+2. Run `./gradlew assembleRelease`.
+
 ## Building for iOS
 
 1. Install [Cocoapods](https://cocoapods.org/).
 2. Run `pod install` from the `./ios` directory.
+
+For release versions:
+
+1. Open the workspace with XCode.
+2. Connect a physical device.
+3. Change the scheme to Release.
+4. Go to Build > Archive
+5. Once it's done you will have the option to upload directly to the store.
 
 React Native and iOS don't play well together.
 

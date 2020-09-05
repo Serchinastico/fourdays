@@ -91,24 +91,8 @@ def enableSeparateBuildPerCPUArchitecture = false
  * Run Proguard to shrink the Java bytecode in release builds.*/
 def enableProguardInReleaseBuilds = true
 
-def getPassword(String currentUser, String keyChain) {
-  def stdout = new ByteArrayOutputStream()
-  def stderr = new ByteArrayOutputStream()
-  exec {
-    commandLine 'security', '-q', 'find-generic-password', '-a', currentUser, '-s', keyChain, '-w'
-    standardOutput = stdout
-    errorOutput = stderr
-    ignoreExitValue true
-  }
-  //noinspection GroovyAssignabilityCheck
-  stdout.toString().trim()
-}
-
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
-def keychainAccountForRelease = properties.getProperty('keychainAccountForRelease')
-def keychainNameForRelease = properties.getProperty('keychainNameForRelease')
-def releaseKeystorePassword = getPassword(keychainAccountForRelease, keychainNameForRelease)
 
 android {
   compileSdkVersion rootProject.ext.compileSdkVersion
@@ -118,8 +102,8 @@ android {
     applicationId "com.fourdays"
     minSdkVersion rootProject.ext.minSdkVersion
     targetSdkVersion rootProject.ext.targetSdkVersion
-    versionCode 15
-    versionName "1.0.14"
+    versionCode 16
+    versionName "1.0.15"
     ndk {
       abiFilters "armeabi-v7a", 'arm64-v8a', "x86", "x86_64"
     }
@@ -130,9 +114,9 @@ android {
     release {
       if (project.hasProperty('FOURDAYS_RELEASE_STORE_FILE')) {
         storeFile file(FOURDAYS_RELEASE_STORE_FILE)
-        storePassword releaseKeystorePassword
+        storePassword properties.getProperty('keystorePassword')
         keyAlias FOURDAYS_RELEASE_KEY_ALIAS
-        keyPassword releaseKeystorePassword
+        keyPassword properties.getProperty('keystorePassword')
       }
     }
   }
