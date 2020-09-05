@@ -1,6 +1,7 @@
 import { action, payload, union } from "ts-action";
 
 export interface CustomGroup {
+	id: string;
 	name: string;
 }
 

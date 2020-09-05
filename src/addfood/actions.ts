@@ -10,6 +10,7 @@ import {
 	storeCustomFoodFinish,
 	storeCustomFoodStart,
 } from "./types";
+import { createRandomId } from "../random";
 
 async function getStoredCustomFoodList(): Promise<[CustomFood]> {
 	const rawCustomFoodList = await AsyncStorage.getItem("custom_food_list");
@@ -54,11 +55,4 @@ export function storeCustomFood(
 
 		dispatch(storeCustomFoodFinish(foodItemPayload));
 	};
-}
-
-function createRandomId(): string {
-	return (
-		Math.random().toString(36).substring(2, 15) +
-		Math.random().toString(36).substring(2, 15)
-	);
 }

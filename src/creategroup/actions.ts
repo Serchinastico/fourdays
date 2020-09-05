@@ -9,6 +9,7 @@ import {
 	fetchCustomGroupListStart,
 	fetchCustomGroupListFinish,
 } from "./types";
+import { createRandomId } from "../random";
 
 async function getStoredCustomGroupList(): Promise<[CustomGroup]> {
 	const rawCustomGroupList = await AsyncStorage.getItem("custom_group_list");
@@ -22,7 +23,7 @@ async function storeCustomGroupList(newCustomGroupList: CustomGroup[]) {
 	);
 }
 
-export function fetchCustomGroup() {
+export function fetchCustomGroups() {
 	return async (dispatch: (action: typeof fetchCustomGroupActions) => void) => {
 		dispatch(fetchCustomGroupListStart());
 
@@ -37,7 +38,8 @@ export function storeCustomGroup(
 ) {
 	return async (dispatch: (action: typeof storeCustomGroupActions) => void) => {
 		const groupItemPayload: CustomGroup = {
-			name: groupName
+			name: groupName,
+			id: createRandomId()
 		};
 
 		dispatch(storeCustomGroupStart(groupItemPayload));

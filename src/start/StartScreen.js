@@ -2,6 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import { connect } from "react-redux";
 import { fetchCustomFood } from "../addfood/actions";
+import { fetchCustomGroups } from "../creategroup/actions";
 import fetchForbiddenFood from "./actions";
 
 const Status = {
@@ -12,11 +13,12 @@ const Status = {
 
 class StartScreen extends React.Component {
 	componentDidMount() {
-		const { status, fetchForbiddenFood, fetchCustomFood } = this.props;
+		const { status, fetchForbiddenFood, fetchCustomFood, fetchCustomGroups } = this.props;
 
 		if (!this.navigateToNextScreenIfFetchFinished(status)) {
 			fetchForbiddenFood();
 			fetchCustomFood();
+			fetchCustomGroups();
 		}
 	}
 
@@ -47,7 +49,7 @@ class StartScreen extends React.Component {
 function mapStateToProps(state) {
 	let status;
 
-	if (!state.setup.isCustomFoodLoaded) {
+	if (!state.setup.isCustomFoodLoaded || !state.setup.isCustomGroupsLoaded) {
 		status = Status.FETCHING;
 	} else if (
 		state.setup.forbiddenFoodIds !== undefined &&
@@ -65,5 +67,5 @@ function mapStateToProps(state) {
 
 export default connect(
 	mapStateToProps,
-	{ fetchForbiddenFood, fetchCustomFood }
+	{ fetchForbiddenFood, fetchCustomFood, fetchCustomGroups }
 )(StartScreen);

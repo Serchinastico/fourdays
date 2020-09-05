@@ -3,6 +3,9 @@ import {
 	storeCustomFoodStart
 } from "../addfood/types";
 import {
+	storeCustomGroupStart, fetchCustomGroupListFinish
+} from "../creategroup/types";
+import {
 	fetchForbiddenFoodError,
 	fetchForbiddenFoodFinish,
 	fetchForbiddenFoodStart
@@ -745,7 +748,8 @@ const initialSetupState = {
 		}
 	],
 	forbiddenFoodIds: undefined,
-	isCustomFoodLoaded: false
+	isCustomFoodLoaded: false,
+	isCustomGroupsLoaded: false,
 };
 
 const onStoreForbiddenFoodStart = (state, action) => {
@@ -776,6 +780,14 @@ const onFetchCustomFood = (state, action) => {
 	};
 };
 
+const onFetchCustomGroups = (state, action) => {
+	return {
+		...state,
+		groups: [...state.groups, ...action.payload],
+		isCustomGroupsLoaded: true
+	};
+};
+
 const onStoreCustomFood = (state, action) => {
 	const { id, name, groupId, image } = action.payload;
 
@@ -784,6 +796,15 @@ const onStoreCustomFood = (state, action) => {
 		foods: [...state.foods, { id, name, image, groupId }]
 	};
 };
+
+const onStoreCustomGroup = (state, action) => {
+	const { id, name } = action.payload;
+
+	return {
+		...state,
+		groups: [...state.groups, { id, name }]
+	}
+}
 
 const setupReducer = (state = initialSetupState, action) => {
 	switch (action.type) {
@@ -797,8 +818,12 @@ const setupReducer = (state = initialSetupState, action) => {
 			return onFetchForbiddenFoodError(state, action);
 		case fetchCustomFoodListFinish.type:
 			return onFetchCustomFood(state, action);
+		case fetchCustomGroupListFinish.type:
+			return onFetchCustomGroups(state, action);
 		case storeCustomFoodStart.type:
 			return onStoreCustomFood(state, action);
+		case storeCustomGroupStart.type:
+			return onStoreCustomGroup(state, action);
 		default:
 			return state;
 	}
