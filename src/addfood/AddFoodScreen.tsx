@@ -14,7 +14,7 @@ import SafeAreaComponent from "../react/SafeAreaComponent";
 import I18n from "../translations/i18n";
 import { storeCustomFood } from "./actions";
 import AddFoodImageCard from "./AddFoodImageCard";
-import InputFieldDecorator from "./InputFieldDecorator";
+import InputFieldDecorator from "../components/InputFieldDecorator";
 import { FoodImage } from "./types";
 
 export interface Props {

@@ -62,6 +62,7 @@ class FoodList extends React.PureComponent {
 		this.renderItem = this.renderItem.bind(this);
 		this.onGroupSelected = this.onGroupSelected.bind(this);
 		this.onFoodSelected = this.onFoodSelected.bind(this);
+		this.onNewGroupSelected = this.onNewGroupSelected.bind(this);
 		this.state = { expandedGroupIds: [] };
 	}
 
@@ -111,6 +112,11 @@ class FoodList extends React.PureComponent {
 				expandedGroupIds
 			)
 		});
+	}
+
+	onNewGroupSelected() {
+		const { onNewGroupSelected } = this.props;
+		onNewGroupSelected();
 	}
 
 	onFoodSelected(id) {
@@ -300,7 +306,7 @@ class FoodList extends React.PureComponent {
 			<FoodNewGroupHeader
 				id={"newgroup"}
 				name={I18n.t("screen.setup.newGroup")}
-				onGroupSelected={this.onGroupSelected}
+				onGroupSelected={this.onNewGroupSelected}
 			/>
 		);
 	}

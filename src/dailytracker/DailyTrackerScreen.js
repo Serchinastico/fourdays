@@ -286,6 +286,7 @@ class DailyTrackerScreen extends React.Component {
 								searchExpression={currentSearch}
 								selectedFoodIds={selectedFoodIds}
 								onFoodSelected={this.onFoodSelected}
+								onNewGroupSelected={() => {}}
 								looksAlwaysSelected
 								showSubgroupsWhenSearching
 								daysSinceConsumptionByFoodId={daysSinceConsumptionByFoodId}

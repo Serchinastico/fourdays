@@ -9,6 +9,7 @@ import {
 import { AppRegistry, YellowBox, StatusBar } from "react-native";
 // eslint-disable-next-line import/no-unresolved
 import AddFoodScreen from "./addfood/AddFoodScreen";
+import CreateGroupScreen from "./creategroup/CreateGroupScreen";
 import SetupScreen from "./setup/SetupScreen";
 import DailyTrackerScreen from "./dailytracker/DailyTrackerScreen";
 
@@ -18,7 +19,18 @@ import StartScreen from "./start/StartScreen";
 const AppNavigator = createSwitchNavigator(
 	{
 		Start: StartScreen,
-		Setup: SetupScreen,
+		Setup: createStackNavigator(
+			{
+				Setup: SetupScreen,
+				CreateGroup: CreateGroupScreen
+			},
+			{
+				mode: "modal",
+				defaultNavigationOptions: {
+					header: null
+				}
+			}
+		),
 		DailyTracker: createStackNavigator(
 			{
 				Tracker: DailyTrackerScreen,

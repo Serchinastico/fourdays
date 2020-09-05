@@ -189,6 +189,11 @@
 				"fromCamera": "From camera",
 				"fromGallery": "From gallery"
 			}
+		},
+		"createGroup": {
+			"title": "New group",
+			"groupNameHeader": "Name",
+			"groupNamePlaceholder": "e.g. Fats"
 		}
 	}
 }

@@ -38,6 +38,7 @@ class SetupScreen extends React.Component {
 		this.onAcceptPress = this.onAcceptPress.bind(this);
 		this.onClosePress = this.onClosePress.bind(this);
 		this.onFoodSelect = this.onFoodSelect.bind(this);
+		this.onNewGroupSelected = this.onNewGroupSelected.bind(this);
 		this.onSearchPress = this.onSearchPress.bind(this);
 		const { foods, forbiddenFoodIdsOnStart } = this.props;
 		this.state = {
@@ -73,6 +74,11 @@ class SetupScreen extends React.Component {
 			selectedFoodIds
 		);
 		this.setState({ selectedFoodIds: updatedSelectedFoodIds });
+	}
+
+	onNewGroupSelected() {
+		const { navigation } = this.props;
+		navigation.navigate("CreateGroup", { isModalNavigation: true });
 	}
 
 	onSearchChange(text) {
@@ -138,6 +144,7 @@ class SetupScreen extends React.Component {
 					selectedFoodIds={selectedFoodIds}
 					searchExpression={currentSearch}
 					onFoodSelected={this.onFoodSelect}
+					onNewGroupSelected={this.onNewGroupSelected}
 				/>
 			</View>
 		);

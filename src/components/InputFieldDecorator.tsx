@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native";
-import { color } from "../components/style/color";
-import { textStyle } from "../components/style/font";
+import { color } from "./style/color";
+import { textStyle } from "./style/font";
 
 export interface Props {
 	headerText: string;
