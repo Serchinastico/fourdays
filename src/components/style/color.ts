@@ -12,5 +12,5 @@ export const color = {
 	grass: "#95D163",
 	seafoamGreen: "#87E0A5",
 	transparent: "transparent",
-	white: "#FFF",
+	white: "#FFF"
 };

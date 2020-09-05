@@ -12,7 +12,7 @@ const TextSize = {
 const FontFamily = {
 	regular: "AvenirNext-Regular",
 	medium: "AvenirNext-Medium",
-	bold: "AvenirNext-Bold",
+	bold: "AvenirNext-Bold"
 };
 /* tslint:enable:object-literal-sort-keys */
 

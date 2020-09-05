@@ -77,6 +77,8 @@ class FoodItem extends React.PureComponent {
 	}
 
 	static renderThumbnail(thumbnail) {
+		if (!thumbnail) return null;
+
 		return (
 			<Image
 				style={styles.thumbnail}

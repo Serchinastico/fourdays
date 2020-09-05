@@ -3,15 +3,7 @@
 		"es6": true,
 		"amd": true
 	},
-	"extends": [
-		"airbnb",
-		"prettier",
-		"prettier/react",
-		"plugin:prettier/recommended",
-		"plugin:react/recommended",
-		"eslint:recommended",
-		"eslint-config-prettier"
-	],
+	"extends": ["airbnb", "prettier", "prettier/react", "plugin:prettier/recommended", "plugin:react/recommended", "eslint:recommended", "eslint-config-prettier"],
 	"globals": {
 		"Atomics": "readonly",
 		"SharedArrayBuffer": "readonly",

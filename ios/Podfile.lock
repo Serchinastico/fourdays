@@ -58,7 +58,7 @@ PODS:
     - React
   - RNI18n (2.0.15):
     - React
-  - RNLocalize (1.1.2):
+  - RNLocalize (1.4.1):
     - React
   - RNShare (1.1.3):
     - React
@@ -125,10 +125,10 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: 0c3ef98facf3fecf455b518d6f52e10fc964c523
   RNGestureHandler: aea90f0ad8e35fec23438db6fc3ad79be58bb734
   RNI18n: e2f7e76389fcc6e84f2c8733ea89b92502351fd8
-  RNLocalize: d6a0b7ed06d3c5fca79a55ed8e1337032fc33722
+  RNLocalize: 49634a6a605dcdeb319e9c42a5c2f1aec508694b
   RNShare: 4f206fa36e384e95a0cbf79f2a92490647e93127
   yoga: 92b2102c3d373d1a790db4ab761d2b0ffc634f64
 
-PODFILE CHECKSUM: d4a942ea7572e47a032ce4388fbf728f05dfb6ba
+PODFILE CHECKSUM: ced5c575e00b477a562f717125db130c764adab9
 
 COCOAPODS: 1.9.3

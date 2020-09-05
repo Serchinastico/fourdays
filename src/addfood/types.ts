@@ -22,7 +22,7 @@ export interface CustomFood {
 }
 
 export const fetchCustomFoodListStart = action(
-	"Fetch custom food list [start]",
+	"Fetch custom food list [start]"
 );
 export const fetchCustomFoodListFinish = action(
 	"Fetch custom food list [finish]",
