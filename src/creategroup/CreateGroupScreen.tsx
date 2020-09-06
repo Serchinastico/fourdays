@@ -12,6 +12,7 @@ import SafeAreaComponent from "../react/SafeAreaComponent";
 import I18n from "../translations/i18n";
 import { storeCustomGroup } from "./actions";
 import InputFieldDecorator from "../components/InputFieldDecorator";
+import DismissKeyboardView from "../components/DismissKeyboardView";
 
 export interface Props {
 	navigation: NavigationScreenProp<any, any>;
@@ -45,11 +46,11 @@ class CreateGroupScreen extends SafeAreaComponent<Props, State> {
 			newGroupName !== undefined;
 
 		return (
-			<View style={styles.container}>
+			<DismissKeyboardView style={styles.container}>
 				{this.renderTopBar()}
 				{this.renderGroupNameEditor()}
 				{this.renderAcceptButton(isAcceptButtonEnabled)}
-			</View>
+			</DismissKeyboardView>
 		);
 	}
 
