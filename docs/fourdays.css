@@ -1,110 +1,35 @@
-.title {
+body {
 	font-family: "Lato", sans-serif;
-	font-size: 3.3rem;
-	font-weight: 800;
-	padding-bottom: 10px;
 }
 
-.subtitle {
-	font-family: "Lato", sans-serif;
-	font-size: 1.05rem;
-	font-weight: 400;
-	line-height: 26px;
+footer {
+	height: 80px;
+	width: 100vw;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	background-color: #000;
+	color: #969696;
 }
 
-.navbar,
-.is-transparent {
-	background-color: unset;
+footer a {
+	font-weight: 700;
+	color: #fff;
 }
 
-.fd-navbar {
-	position: absolute;
-	top: 20px;
-	left: 20px;
+footer a:hover {
+	color: #ff3f77;
 }
 
-.fd-intro {
-	background-image: url("images/deco-001.png");
-	background-position: top right;
-	background-size: contain;
-	background-repeat: no-repeat;
-	padding-top: 100px;
-}
+footer .container {
+	max-width: unset;
 
-.fd-padded-column {
-	margin-top: 60px;
-}
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-end;
 
-.fd-footer-columns {
-	margin-top: -100px;
-}
-
-.fd-creators {
-	top: 45%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	margin: 0;
-	width: fit-content;
-	z-index: 1;
-	text-align: center;
-}
-
-.fd-creators .fd-with-love {
-	font-family: "Lato", sans-serif;
-	font-size: 3.5rem;
-}
-
-.fd-creators .fd-ali-and-serch {
-	font-family: "Lato", sans-serif;
-	font-size: 3.5rem;
-}
-
-.section {
-	padding: 3rem 0.7rem;
-}
-
-.fd-navbar-item-img {
-	max-height: unset !important;
-}
-
-.fd-navbar-brand {
-	margin: 10px;
-}
-
-.fd-footer {
-	background-color: #212121;
-	color: white;
-	padding: 3rem;
-}
-
-.fd-footer strong {
-	color: white;
-}
-
-@media (max-width: 768px) {
-	.fd-navbar-brand {
-		justify-content: center;
-	}
-
-	.fd-navbar {
-		right: 20px;
-	}
-
-	.fd-intro {
-		padding-top: 200px;
-		background-position-x: 250px;
-	}
-
-	.column {
-		margin: 20px;
-	}
-
-	.reverse-row-order-in-mobile {
-		flex-direction: column-reverse;
-		display: flex;
-	}
-
-	.fd-footer-columns {
-		display: flex;
-	}
+	margin: 0 32px;
 }
