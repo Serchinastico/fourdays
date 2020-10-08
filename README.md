@@ -46,3 +46,7 @@ References:
 
 - https://github.com/facebook/react-native/issues/22703
 - https://github.com/facebook/react-native/issues/23944
+
+## Webpage
+
+The webpage is plain HTML + [LESS](http://lesscss.org/#). To compile LESS to CSS just run `npm install less -g` and then run `lessc fourdays.less fourdays.css`.
