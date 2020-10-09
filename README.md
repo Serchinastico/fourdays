@@ -50,3 +50,5 @@ References:
 ## Webpage
 
 The webpage is plain HTML + [LESS](http://lesscss.org/#). To compile LESS to CSS just run `npm install less -g` and then run `lessc fourdays.less fourdays.css`.
+
+I'm using [Browser-sync](https://www.npmjs.com/package/browser-sync) to automatically reload the webpage on file changes.

@@ -20,7 +20,7 @@ header {
 	text-align: center;
 	line-height: 80%;
 	overflow: hidden;
-	
+
 	.title {
 		margin-top: 64px;
 		color: @white;
@@ -30,8 +30,6 @@ header {
 			letter-spacing: 0.2rem;
 		}
 	}
-
-
 
 	.circle {
 		z-index: -1;
@@ -66,7 +64,7 @@ header {
 		position: relative;
 		left: -100px;
 		border-radius: 100%;
-		
+
 		color: @white;
 		background-color: @crimson;
 		box-shadow: 0 2px 32px fade(@black, 20%);
@@ -83,10 +81,54 @@ header {
 		}
 	}
 
+	.description-mobile {
+		display: none;
+	}
+
 	.mobile {
 		margin-top: -200px;
 		margin-left: -80px;
 		width: 600px;
+	}
+
+	@media only screen and (max-width: 1150px) {
+		flex-direction: column;
+		align-items: center;
+
+		.circle {
+			position: unset;
+			width: 80vw;
+			height: 80vw;
+			padding: 16px;
+
+			.title {
+				text-align: center;
+			}
+
+			.description {
+				display: none;
+			}
+		}
+
+		.description-mobile {
+			display: block;
+			text-align: center;
+			margin: 32px;
+			font-size: 24px;
+			font-weight: 300;
+			color: fade(@black, 50%);
+		}
+
+		.mobile {
+			margin: 0px;
+			width: 90vw;
+		}
+	}
+
+	@media (min-width: 1336px) {
+		.circle {
+			text-align: center;
+		}
 	}
 }
 
