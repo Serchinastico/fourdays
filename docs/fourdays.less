@@ -7,6 +7,7 @@
 @white: #fff;
 @crimson: #ff3f77;
 @grass: #86b85c;
+@mustard: #f2b12a;
 
 body {
 	width: 100vw;
@@ -127,10 +128,14 @@ header {
 	@media only screen and (max-width: @mobile) {
 		flex-direction: column;
 		align-items: center;
-		margin: 0;
+		margin: 20px 0;
 
 		&.first {
 			margin: 0;
+		}
+
+		&.rtl {
+			flex-direction: column-reverse;
 		}
 
 		.circle {
@@ -148,7 +153,7 @@ header {
 			.title {
 				text-align: center;
 				width: 80%;
-				font-size: 15vw;
+				font-size: 12vw;
 			}
 
 			.description {
@@ -166,7 +171,8 @@ header {
 		}
 
 		.mobile,
-		.ingredients {
+		.ingredients,
+		.calendar {
 			margin: 0px;
 			width: 90vw;
 		}
@@ -178,6 +184,48 @@ header {
 			text-align: center;
 		}
 	}
+}
+
+.download {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	width: 100%;
+	margin-top: 120px;
+
+	p {
+		font-size: 60px;
+		font-weight: 700;
+		max-width: 500px;
+		text-align: center;
+	}
+
+	.buttons {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		max-width: 500px;
+		margin-top: 40px;
+
+		img {
+			max-width: 250px;
+		}
+
+		@media only screen and (max-width: @mobile) {
+			flex-direction: column;
+
+			.apple {
+				max-width: 280px;
+			}
+		}
+	}
+}
+
+.logo {
+	width: 100%;
+	margin-bottom: -2px;
+	margin-top: 60px;
 }
 
 footer {
@@ -225,6 +273,10 @@ footer {
 	background-color: @grass;
 }
 
+.mustard-bg {
+	background-color: @mustard;
+}
+
 .mobile {
 	max-width: 550px;
 	max-height: 859px;
@@ -238,4 +290,12 @@ footer {
 	width: 40%;
 	height: auto;
 	margin-right: 50px;
+}
+
+.calendar {
+	max-width: 482px;
+	max-height: 629px;
+	width: 40%;
+	height: auto;
+	align-self: center;
 }

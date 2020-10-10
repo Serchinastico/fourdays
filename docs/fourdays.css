@@ -95,10 +95,13 @@ header .circle {
   .section {
     flex-direction: column;
     align-items: center;
-    margin: 0;
+    margin: 20px 0;
   }
   .section.first {
     margin: 0;
+  }
+  .section.rtl {
+    flex-direction: column-reverse;
   }
   .section .circle {
     position: unset;
@@ -113,7 +116,7 @@ header .circle {
   .section .circle .title {
     text-align: center;
     width: 80%;
-    font-size: 15vw;
+    font-size: 12vw;
   }
   .section .circle .description {
     display: none;
@@ -127,7 +130,8 @@ header .circle {
     text-align: center;
   }
   .section .mobile,
-  .section .ingredients {
+  .section .ingredients,
+  .section .calendar {
     margin: 0px;
     width: 90vw;
   }
@@ -137,6 +141,42 @@ header .circle {
   .section .description {
     text-align: center;
   }
+}
+.download {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 120px;
+}
+.download p {
+  font-size: 60px;
+  font-weight: 700;
+  max-width: 500px;
+  text-align: center;
+}
+.download .buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  max-width: 500px;
+  margin-top: 40px;
+}
+.download .buttons img {
+  max-width: 250px;
+}
+@media only screen and (max-width: 768px) {
+  .download .buttons {
+    flex-direction: column;
+  }
+  .download .buttons .apple {
+    max-width: 280px;
+  }
+}
+.logo {
+  width: 100%;
+  margin-bottom: -2px;
+  margin-top: 60px;
 }
 footer {
   height: 80px;
@@ -174,6 +214,9 @@ footer .container {
 .grass-bg {
   background-color: #86b85c;
 }
+.mustard-bg {
+  background-color: #f2b12a;
+}
 .mobile {
   max-width: 550px;
   max-height: 859px;
@@ -186,4 +229,11 @@ footer .container {
   width: 40%;
   height: auto;
   margin-right: 50px;
+}
+.calendar {
+  max-width: 482px;
+  max-height: 629px;
+  width: 40%;
+  height: auto;
+  align-self: center;
 }
