@@ -1,11 +1,12 @@
 @mobile: 768px;
-@wide: 1125px;
+@wide: 1212px;
 
 @black: #000;
 @dark: #1a1a1a;
 @gray: #969696;
 @white: #fff;
 @crimson: #ff3f77;
+@grass: #86b85c;
 
 body {
 	width: 100vw;
@@ -49,7 +50,7 @@ header {
 	}
 
 	@media only screen and (max-width: @mobile) {
-		@size: 200vw;
+		@size: 160vw;
 
 		font-size: 30vw;
 		height: @size * 0.55;
@@ -67,7 +68,10 @@ header {
 	justify-content: center;
 	align-items: flex-end;
 	width: 100vw;
-	margin-top: -200px;
+
+	&.first {
+		margin-top: -200px;
+	}
 
 	.circle {
 		@size: 560px;
@@ -84,15 +88,23 @@ header {
 		height: @size;
 
 		position: relative;
-		left: -@left;
-		margin-right: -@left; // Compensates left position
 		margin-top: 50px;
-		right: 240px;
 		border-radius: 100%;
 
 		color: @white;
-		background-color: @crimson;
 		box-shadow: 0 2px 32px fade(@black, 20%);
+
+		&.left {
+			text-align: left;
+			left: -@left;
+			margin-right: -@left; // Compensates left position
+		}
+
+		&.right {
+			text-align: right;
+			right: -@left;
+			margin-left: -@left; // Compensates right position
+		}
 
 		.title {
 			width: 50%;
@@ -112,17 +124,14 @@ header {
 		display: none;
 	}
 
-	.mobile {
-		max-width: 550px;
-		max-height: 859px;
-		width: 50%;
-		height: auto;
-	}
-
 	@media only screen and (max-width: @mobile) {
 		flex-direction: column;
 		align-items: center;
 		margin: 0;
+
+		&.first {
+			margin: 0;
+		}
 
 		.circle {
 			position: unset;
@@ -130,11 +139,15 @@ header {
 
 			width: 90vw;
 			height: 90vw;
-			margin: 0;
+
+			&.left,
+			&.right {
+				margin: 0;
+			}
 
 			.title {
-				width: 80%;
 				text-align: center;
+				width: 80%;
 				font-size: 15vw;
 			}
 
@@ -145,21 +158,23 @@ header {
 
 		.description-mobile {
 			display: block;
-			text-align: center;
 			margin: 32px;
 			font-size: 24px;
 			font-weight: 300;
 			color: fade(@black, 50%);
+			text-align: center;
 		}
 
-		.mobile {
+		.mobile,
+		.ingredients {
 			margin: 0px;
 			width: 90vw;
 		}
 	}
 
 	@media (min-width: @wide) {
-		.circle {
+		.title,
+		.description {
 			text-align: center;
 		}
 	}
@@ -200,4 +215,27 @@ footer {
 			align-items: center;
 		}
 	}
+}
+
+.crimson-bg {
+	background-color: @crimson;
+}
+
+.grass-bg {
+	background-color: @grass;
+}
+
+.mobile {
+	max-width: 550px;
+	max-height: 859px;
+	width: 50%;
+	height: auto;
+}
+
+.ingredients {
+	max-width: 482px;
+	max-height: 826px;
+	width: 40%;
+	height: auto;
+	margin-right: 50px;
 }

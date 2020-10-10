@@ -35,11 +35,11 @@ header .circle {
 @media only screen and (max-width: 768px) {
   header {
     font-size: 30vw;
-    height: 110vw;
+    height: 88vw;
   }
   header .circle {
-    top: -100vw;
-    height: 200vw;
+    top: -80vw;
+    height: 160vw;
   }
 }
 .section {
@@ -48,6 +48,8 @@ header .circle {
   justify-content: center;
   align-items: flex-end;
   width: 100vw;
+}
+.section.first {
   margin-top: -200px;
 }
 .section .circle {
@@ -60,14 +62,20 @@ header .circle {
   min-width: 560px;
   height: 560px;
   position: relative;
-  left: -100px;
-  margin-right: -100px;
   margin-top: 50px;
-  right: 240px;
   border-radius: 100%;
   color: #fff;
-  background-color: #ff3f77;
   box-shadow: 0 2px 32px rgba(0, 0, 0, 0.2);
+}
+.section .circle.left {
+  text-align: left;
+  left: -100px;
+  margin-right: -100px;
+}
+.section .circle.right {
+  text-align: right;
+  right: -100px;
+  margin-left: -100px;
 }
 .section .circle .title {
   width: 50%;
@@ -83,16 +91,13 @@ header .circle {
 .section .description-mobile {
   display: none;
 }
-.section .mobile {
-  max-width: 550px;
-  max-height: 859px;
-  width: 50%;
-  height: auto;
-}
 @media only screen and (max-width: 768px) {
   .section {
     flex-direction: column;
     align-items: center;
+    margin: 0;
+  }
+  .section.first {
     margin: 0;
   }
   .section .circle {
@@ -100,11 +105,14 @@ header .circle {
     min-width: unset;
     width: 90vw;
     height: 90vw;
+  }
+  .section .circle.left,
+  .section .circle.right {
     margin: 0;
   }
   .section .circle .title {
-    width: 80%;
     text-align: center;
+    width: 80%;
     font-size: 15vw;
   }
   .section .circle .description {
@@ -112,19 +120,21 @@ header .circle {
   }
   .section .description-mobile {
     display: block;
-    text-align: center;
     margin: 32px;
     font-size: 24px;
     font-weight: 300;
     color: rgba(0, 0, 0, 0.5);
+    text-align: center;
   }
-  .section .mobile {
+  .section .mobile,
+  .section .ingredients {
     margin: 0px;
     width: 90vw;
   }
 }
-@media (min-width: 1125px) {
-  .section .circle {
+@media (min-width: 1212px) {
+  .section .title,
+  .section .description {
     text-align: center;
   }
 }
@@ -157,4 +167,23 @@ footer .container {
   footer .container {
     align-items: center;
   }
+}
+.crimson-bg {
+  background-color: #ff3f77;
+}
+.grass-bg {
+  background-color: #86b85c;
+}
+.mobile {
+  max-width: 550px;
+  max-height: 859px;
+  width: 50%;
+  height: auto;
+}
+.ingredients {
+  max-width: 482px;
+  max-height: 826px;
+  width: 40%;
+  height: auto;
+  margin-right: 50px;
 }
