@@ -151,7 +151,7 @@ header .circle {
 }
 .download p {
   font-size: 60px;
-  font-weight: 700;
+  font-weight: 900;
   max-width: 500px;
   text-align: center;
 }
@@ -166,6 +166,12 @@ header .circle {
   max-width: 250px;
 }
 @media only screen and (max-width: 768px) {
+  .download {
+    margin-top: 60px;
+  }
+  .download p {
+    font-size: 10vw;
+  }
   .download .buttons {
     flex-direction: column;
   }

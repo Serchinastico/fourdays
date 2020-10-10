@@ -196,7 +196,7 @@ header {
 
 	p {
 		font-size: 60px;
-		font-weight: 700;
+		font-weight: 900;
 		max-width: 500px;
 		text-align: center;
 	}
@@ -211,8 +211,16 @@ header {
 		img {
 			max-width: 250px;
 		}
+	}
 
-		@media only screen and (max-width: @mobile) {
+	@media only screen and (max-width: @mobile) {
+		margin-top: 60px;
+
+		p {
+			font-size: 10vw;
+		}
+
+		.buttons {
 			flex-direction: column;
 
 			.apple {
