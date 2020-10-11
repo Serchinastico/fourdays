@@ -292,18 +292,39 @@ footer {
 	height: auto;
 }
 
-.ingredients {
-	max-width: 482px;
-	max-height: 826px;
-	width: 40%;
-	height: auto;
-	margin-right: 50px;
-}
-
 .calendar {
 	max-width: 482px;
 	max-height: 629px;
 	width: 40%;
 	height: auto;
 	align-self: center;
+}
+
+.ingredients {
+	display: flex;
+	flex-direction: row;
+
+	max-width: 482px;
+	max-height: 826px;
+	width: 40%;
+	height: auto;
+
+	margin-top: 120px;
+	margin-bottom: -80px;
+	margin-right: 50px;
+
+	.ingredients-column {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+
+		&.mid {
+			position: relative;
+			top: -100px;
+		}
+	}
+
+	.food-card {
+		width: 100%;
+	}
 }
