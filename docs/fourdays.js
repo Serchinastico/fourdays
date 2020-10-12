@@ -1,5 +1,12 @@
+let didAnimateMobile = false;
 let didAnimateFoodCards = false;
 let didAnimateCalendar = false;
+
+function animateMobile() {
+	if (didAnimateMobile) return;
+
+	didAnimateMobile = true;
+}
 
 function animateFoodCards() {
 	if (didAnimateFoodCards) return;
@@ -110,6 +117,7 @@ function onElementVisible(selector, block) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+	onElementVisible(".mobile", animateMobile);
 	onElementVisible("#oat-card", animateFoodCards);
 	onElementVisible("#plum-card", animateCalendar);
 });
