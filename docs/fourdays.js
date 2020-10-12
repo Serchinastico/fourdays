@@ -1,4 +1,5 @@
 let didAnimateFoodCards = false;
+let didAnimateCalendar = false;
 
 function animateFoodCards() {
 	if (didAnimateFoodCards) return;
@@ -48,6 +49,53 @@ function animateFoodCards() {
 	appleTimeline.add({ targets: ["#apple-card"], ...fadeIn });
 }
 
+function animateCalendar() {
+	if (didAnimateCalendar) return;
+
+	didAnimateCalendar = true;
+
+	anime({
+		targets: ["#calendar01"],
+		opacity: [1, 0],
+		duration: 2000,
+		delay: 1000
+	});
+	anime({
+		targets: ["#calendar02"],
+		opacity: [0, 1],
+		duration: 2000,
+		delay: 1000
+	});
+
+	anime({
+		targets: [".calendar-food-border-out"],
+		opacity: [0, 1],
+		duration: 2000,
+		delay: 2000
+	});
+
+	anime({
+		targets: [".calendar-food-border-out"],
+		opacity: [1, 0],
+		duration: 2000,
+		delay: 2000
+	});
+
+	anime({
+		targets: ["#calendar-food-row01"],
+		opacity: [1, 0],
+		translateY: [0, 200],
+		delay: 1250
+	});
+
+	anime({
+		targets: ["#calendar-food-row02"],
+		opacity: 1,
+		translateY: [200, 0],
+		delay: 1600
+	});
+}
+
 function onElementVisible(selector, block) {
 	var observer = new IntersectionObserver(
 		function (entries) {
@@ -63,4 +111,5 @@ function onElementVisible(selector, block) {
 
 document.addEventListener("DOMContentLoaded", function () {
 	onElementVisible("#oat-card", animateFoodCards);
+	onElementVisible("#plum-card", animateCalendar);
 });

@@ -292,14 +292,6 @@ footer {
 	height: auto;
 }
 
-.calendar {
-	max-width: 482px;
-	max-height: 629px;
-	width: 40%;
-	height: auto;
-	align-self: center;
-}
-
 .ingredients {
 	display: flex;
 	flex-direction: row;
@@ -326,5 +318,48 @@ footer {
 
 	.food-card {
 		width: 100%;
+	}
+}
+
+.calendar-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	max-width: 482px;
+	width: 40%;
+
+	.calendar-food-rows {
+		display: flex;
+		flex-direction: row;
+		z-index: -100;
+
+		.calendar-food {
+			max-width: 152px;
+			max-height: 190px;
+		}
+
+		#calendar-food-row02 {
+			opacity: 0;
+		}
+	}
+
+	.calendar {
+		max-width: 420px;
+		max-height: 420px;
+	}
+
+	#calendar02 {
+		display: inline-block;
+		position: absolute;
+		opacity: 0;
+		z-index: 1;
+	}
+
+	#calendar-food-row02 {
+		display: inline-block;
+		position: absolute;
+		opacity: 0;
+		z-index: 1;
 	}
 }
