@@ -169,13 +169,6 @@ header {
 			color: fade(@black, 50%);
 			text-align: center;
 		}
-
-		.mobile,
-		.ingredients,
-		.calendar {
-			margin: 0px;
-			width: 90vw;
-		}
 	}
 
 	@media (min-width: @wide) {
@@ -290,34 +283,38 @@ footer {
 	max-height: 859px;
 	width: 50%;
 	height: auto;
+
+	@media only screen and (max-width: @mobile) {
+		width: 90vw;
+		margin: 0;
+	}
 }
 
 .ingredients {
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 
 	max-width: 482px;
 	max-height: 826px;
 	width: 40%;
 	height: auto;
 
-	margin-top: 120px;
-	margin-bottom: -80px;
 	margin-right: 50px;
 
 	.ingredients-column {
 		display: flex;
 		flex-direction: column;
 		flex: 1;
-
-		&.mid {
-			position: relative;
-			top: -100px;
-		}
 	}
 
 	.food-card {
 		width: 100%;
+	}
+
+	@media only screen and (max-width: @mobile) {
+		width: 90vw;
+		margin: 20px 0;
 	}
 }
 
@@ -332,7 +329,6 @@ footer {
 	.calendar-food-rows {
 		display: flex;
 		flex-direction: row;
-		z-index: -100;
 
 		.calendar-food {
 			max-width: 152px;
@@ -361,5 +357,13 @@ footer {
 		position: absolute;
 		opacity: 0;
 		z-index: 1;
+	}
+
+	@media only screen and (max-width: @mobile) {
+		width: 90vw;
+
+		.calendar-food {
+			width: 29vw;
+		}
 	}
 }

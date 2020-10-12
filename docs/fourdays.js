@@ -84,14 +84,14 @@ function animateCalendar() {
 	anime({
 		targets: ["#calendar-food-row01"],
 		opacity: [1, 0],
-		translateY: [0, 200],
+		translateY: [0, 100],
 		delay: 1250
 	});
 
 	anime({
 		targets: ["#calendar-food-row02"],
 		opacity: 1,
-		translateY: [200, 0],
+		translateY: [100, 0],
 		delay: 1600
 	});
 }
