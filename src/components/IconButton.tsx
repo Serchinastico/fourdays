@@ -4,10 +4,11 @@ import { color } from "./style/color";
 
 export enum Icon {
 	Search,
+	Add,
 	Back,
 	Clear,
 	Settings,
-	Share,
+	Share
 }
 
 export interface Props {
@@ -20,6 +21,8 @@ class IconButton extends React.PureComponent<Props> {
 		switch (icon) {
 			case Icon.Search:
 				return require("../images/icon/Search.png");
+			case Icon.Add:
+				return require("../images/icon/AddThin.png");
 			case Icon.Back:
 				return require("../images/icon/Back.png");
 			case Icon.Clear:
@@ -58,8 +61,8 @@ const styles = StyleSheet.create({
 	button: {
 		borderRadius: 24,
 		height: 48,
-		width: 48,
-	},
+		width: 48
+	}
 });
 
 export default IconButton;

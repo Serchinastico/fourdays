@@ -40,6 +40,7 @@ class SetupScreen extends React.Component {
 		this.onFoodSelect = this.onFoodSelect.bind(this);
 		this.onNewGroupSelected = this.onNewGroupSelected.bind(this);
 		this.onSearchPress = this.onSearchPress.bind(this);
+		this.onAddPress = this.onAddPress.bind(this);
 		const { foods, forbiddenFoodIdsOnStart } = this.props;
 		this.state = {
 			currentSearch: "",
@@ -89,6 +90,11 @@ class SetupScreen extends React.Component {
 		this.setState({ isSearchActive: true });
 	}
 
+	onAddPress() {
+		const { navigation } = this.props;
+		navigation.navigate("AddFood", { foodName: "" });
+	}
+
 	getChildrenFromGroup(group) {
 		const { foods } = this.props;
 
@@ -98,11 +104,7 @@ class SetupScreen extends React.Component {
 		);
 		const sortByName = R.sortBy(item => item.name);
 
-		return R.pipe(
-			filterByGroupId,
-			mapToFoodListItem,
-			sortByName
-		)(foods);
+		return R.pipe(filterByGroupId, mapToFoodListItem, sortByName)(foods);
 	}
 
 	close() {
@@ -158,11 +160,17 @@ class SetupScreen extends React.Component {
 			return (
 				<View style={{ flexDirection: "row" }}>
 					<IconButton icon={Icon.Search} onPress={this.onSearchPress} />
+					<IconButton icon={Icon.Add} onPress={this.onAddPress} />
 					<IconButton icon={Icon.Clear} onPress={this.onClosePress} />
 				</View>
 			);
 		} else {
-			return <IconButton icon={Icon.Search} onPress={this.onSearchPress} />;
+			return (
+				<View style={{ flexDirection: "row" }}>
+					<IconButton icon={Icon.Search} onPress={this.onSearchPress} />
+					<IconButton icon={Icon.Add} onPress={this.onAddPress} />
+				</View>
+			);
 		}
 	}
 
@@ -209,7 +217,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(
-	mapStateToProps,
-	{ storeForbiddenFood }
-)(SetupScreen);
+export default connect(mapStateToProps, { storeForbiddenFood })(SetupScreen);
