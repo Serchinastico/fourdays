@@ -19,7 +19,9 @@ class TopAppBar extends SafeAreaPureComponent<Props> {
 		return (
 			<View style={[styles.container, { paddingTop: insets.top }]}>
 				<View style={styles.topContainer}>
-					<Text style={styles.title}>{title}</Text>
+					<Text style={styles.title} adjustsFontSizeToFit allowFontScaling>
+						{title}
+					</Text>
 					<View style={styles.buttons}>{buttons || null}</View>
 				</View>
 				<View>{bottomViews || null}</View>
@@ -31,7 +33,7 @@ class TopAppBar extends SafeAreaPureComponent<Props> {
 const styles = StyleSheet.create({
 	buttons: {
 		marginRight: 8,
-		top: 6,
+		top: 6
 	},
 	container: {
 		backgroundColor: color.white,
@@ -39,19 +41,19 @@ const styles = StyleSheet.create({
 		position: "absolute",
 		right: 0,
 		top: 0,
-		...shadow.regular,
+		...shadow.regular
 	},
 	title: {
 		...textStyle.extraExtraLargeBoldNeutral,
 		flex: 1,
-		marginLeft: 16,
+		marginLeft: 16
 	},
 	topContainer: {
 		alignItems: "center",
 		flexDirection: "row",
 		paddingBottom: 8,
-		paddingTop: 16,
-	},
+		paddingTop: 16
+	}
 });
 
 export default TopAppBar;
