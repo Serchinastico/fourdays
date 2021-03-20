@@ -92,7 +92,7 @@ class SetupScreen extends React.Component {
 
 	onAddPress() {
 		const { navigation } = this.props;
-		navigation.navigate("AddFood", { foodName: "" });
+		navigation.navigate("AddFood", { foodName: "", isModalNavigation: true });
 	}
 
 	getChildrenFromGroup(group) {

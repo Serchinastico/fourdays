@@ -23,7 +23,8 @@ const AppNavigator = createSwitchNavigator(
 		Setup: createStackNavigator(
 			{
 				Setup: SetupScreen,
-				CreateGroup: CreateGroupScreen
+				CreateGroup: CreateGroupScreen,
+				AddFood: AddFoodScreen
 			},
 			{
 				mode: "modal",

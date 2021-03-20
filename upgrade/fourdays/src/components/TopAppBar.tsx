@@ -19,7 +19,12 @@ class TopAppBar extends SafeAreaPureComponent<Props> {
 		return (
 			<View style={[styles.container, { paddingTop: insets.top }]}>
 				<View style={styles.topContainer}>
-					<Text style={styles.title} adjustsFontSizeToFit allowFontScaling>
+					<Text
+						style={styles.title}
+						adjustsFontSizeToFit
+						allowFontScaling
+						numberOfLines={1}
+					>
 						{title}
 					</Text>
 					<View style={styles.buttons}>{buttons || null}</View>
@@ -46,7 +51,8 @@ const styles = StyleSheet.create({
 	title: {
 		...textStyle.extraExtraLargeBoldNeutral,
 		flex: 1,
-		marginLeft: 16
+		marginLeft: 16,
+		marginTop: 8
 	},
 	topContainer: {
 		alignItems: "center",

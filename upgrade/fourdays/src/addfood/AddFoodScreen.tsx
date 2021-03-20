@@ -129,7 +129,7 @@ class AddFoodScreen extends SafeAreaComponent<Props, State> {
 				<TextInput
 					ref={this.foodNameRef}
 					style={styles.textInput}
-					placeholder={I18n.t("screen.addFood.foodNamePlaceholder")}
+					placeholder={I18n.t("screen.addFood.foodNamePlaceholder.edit")}
 					placeholderTextColor={color.black50}
 					onChangeText={this.onFoodNameChange}
 					value={newFoodName}

@@ -1,3 +1,4 @@
+import I18n from "i18n-js";
 import React from "react";
 import {
 	Dimensions,
@@ -14,7 +15,6 @@ import {
 import { color } from "../components/style/color";
 import { textStyle } from "../components/style/font";
 import { shadow } from "../components/style/shadow";
-import { showImagePicker } from "./Camera";
 import { FoodImage } from "./types";
 
 export interface Props {
@@ -39,10 +39,14 @@ class AddFoodImageCard extends React.PureComponent<Props, {}> {
 	}
 
 	private static renderFoodName(name: string) {
+		const hasName = name.length > 0;
 		return (
 			<View style={styles.foodNameContainer}>
-				<Text numberOfLines={2} style={styles.foodName}>
-					{name}
+				<Text
+					numberOfLines={2}
+					style={hasName ? styles.foodName : styles.foodNamePlaceholder}
+				>
+					{hasName ? name : I18n.t("screen.addFood.foodNamePlaceholder.box")}
 				</Text>
 			</View>
 		);
@@ -119,6 +123,11 @@ const styles = StyleSheet.create({
 	},
 	foodName: {
 		...textStyle.extraLargeMediumBlack,
+		textAlign: "center"
+	},
+	foodNamePlaceholder: {
+		...textStyle.extraLargeMediumBlack,
+		opacity: 0.2,
 		textAlign: "center"
 	},
 	foodNameContainer: {
