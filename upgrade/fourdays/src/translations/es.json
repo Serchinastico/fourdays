@@ -1,0 +1,203 @@
+{
+	"appName": "Four Days",
+	"common": {
+		"search": {
+			"placeholder": "Buscar alimento"
+		},
+		"accept": {
+			"text": "Aceptar"
+		},
+		"error": { "message": "Oops! Something went wrong 🙈" }
+	},
+	"food": {
+		"group": {
+			"first": "Verduras y hortalizas",
+			"second": "Féculas e hidratos de carbono",
+			"third": "Proteínas",
+			"fourth": "Frutas",
+			"forbidden": "Comida prohibida",
+			"consumed": "Comida consumida"
+		},
+		"chard": "Acelgas",
+		"avocado": "Aguacate",
+		"garlic": "Ajo",
+		"artichoke": "Alcachofa",
+		"alfalfa": "Alfalfa",
+		"clams": "Almejas",
+		"celery": "Apio",
+		"blueberries": "Arándanos",
+		"rice": "Arroz",
+		"tuna": "Atún",
+		"oat": "Avena",
+		"cod": "Bacalao",
+		"sweetPotato": "Batata",
+		"cockles": "Berberechos",
+		"eggplant": "Berenjena",
+		"watercress": "Berro",
+		"anchovy": "Anchoas / Boquerones",
+		"broccoli": "Brocoli",
+		"zucchini": "Calabacín",
+		"pumpkin": "Calabaza",
+		"crab": "Cangrejo",
+		"prawn": "Gambas",
+		"onion": "Cebolla",
+		"thistle": "Cardo",
+		"springOnion": "Cebolleta",
+		"rye": "Centeno",
+		"pork": "Cerdo",
+		"cherry": "Cerezas",
+		"custardApple": "Chirimoya",
+		"mushroom": "Setas",
+		"carrot": "Zanahoria",
+		"cabbage": "Repollo",
+		"plum": "Ciruela",
+		"brusselsSprouts": "Coles de Bruselas",
+		"medlar": "Níspero",
+		"cauliflower": "Coliflor",
+		"rabbit": "Conejo",
+		"lamb": "Cordero",
+		"endive": "Endibia",
+		"belgianEndive": "Endibia belga",
+		"asparagus": "Espárragos",
+		"spinach": "Espinacas",
+		"raspberry": "Frambuesa",
+		"strawberry": "Fresa",
+		"lettuce": "Lechuga",
+		"tomato": "Tomate",
+		"grape": "Uva",
+		"trout": "Trucha",
+		"wheat": "Trigo",
+		"veal": "Ternera",
+		"sepia": "Sepia",
+		"semolina": "Sémola",
+		"sardines": "Sardinas",
+		"watermelon": "Sandía",
+		"salmon": "Salmon",
+		"turbot": "Rodaballo",
+		"radish": "Rábano",
+		"octopus": "Pulpo",
+		"leek": "Puerro",
+		"grapefruit": "Pomelo",
+		"banana": "Plátano",
+		"pepper": "Pimiento",
+		"whiting": "Pescadilla",
+		"chicken": "Pollo",
+		"parsley": "Perejil",
+		"pear": "Pera",
+		"cucumber": "Pepino",
+		"turkey": "Pavo",
+		"potato": "Patata",
+		"snapper": "Pargo",
+		"paraguayan": "Paraguaya",
+		"yam": "Ñame",
+		"oyster": "Ostras",
+		"orange": "Naranja",
+		"turnip": "Nabo",
+		"hake": "Merluza",
+		"peach": "Melocotón",
+		"cantaloupe": "Melón",
+		"apple": "Manzana",
+		"mango": "Mango",
+		"corn": "Maíz",
+		"beans": "Judías",
+		"lemon": "Limón",
+		"lime": "Lima",
+		"lobster": "Langosta",
+		"peas": "Guisantes",
+		"lentils": "Lentejas",
+		"sole": "Lenguado",
+		"greenBeans": "Judías verdes",
+		"whiteBeans": "Judías blancas",
+		"yellowBeans": "Judías amarillas",
+		"cranberryBeans": "Frijoles",
+		"kiwi": "Kiwi",
+		"wholemealBread": "Pan integral",
+		"soy": "Soja",
+		"spelledWheat": "Trigo de espelta",
+		"italianPasta": "Pasta italiana",
+		"bass": "Lubina",
+		"giltHeadSeabream": "Dorada",
+		"squid": "Calamar",
+		"egg": "Huevos",
+		"scallops": "Vieiras",
+		"cheese": "Queso",
+		"yogurt": "Yogur",
+		"pineapple": "Piña",
+		"apricot": "Albaricoque",
+		"papaya": "Papaya",
+		"chickpeas": "Garbanzos",
+		"açai": "Açai"
+	},
+	"report": {
+		"title": "Reporte mensual",
+		"sharingTitle": "Compartir mi reporte mensual",
+		"sharingMessage": "Este es mi reporte Four Days de %s",
+		"week": {
+			"monday": "Lunes",
+			"tuesday": "Martes",
+			"wednesday": "Miércoles",
+			"thursday": "Jueves",
+			"friday": "Viernes",
+			"saturday": "Sábado",
+			"sunday": "Domingo"
+		},
+		"month": {
+			"january": "Enero",
+			"february": "Febrero",
+			"march": "Marzo",
+			"april": "Abril",
+			"may": "Mayo",
+			"june": "Junio",
+			"july": "Julio",
+			"august": "Agosto",
+			"september": "Septiembre",
+			"october": "Octubre",
+			"november": "Noviembre",
+			"december": "Diciembre"
+		}
+	},
+	"screen": {
+		"setup": {
+			"title": "Configuración",
+			"description": {
+				"text": "Desmarca la comida que no puedes comer acorde a tus intolerancias y la dieta que estés siguiendo."
+			},
+			"newGroup": "Crear grupo"
+		},
+		"dailyTracker": {
+			"title": "Registro",
+			"description": {
+				"text": "Desde aquí puedes mantener un registro de lo que comes y lo que puedes comer."
+			},
+			"subgroup": {
+				"available": "Disponible",
+				"singular": "Disponible en %s día",
+				"plural": "Disponible en %s días"
+			},
+			"calendar": {
+				"ok": "OK",
+				"cancel": "CANCELAR"
+			}
+		},
+		"addFood": {
+			"title": "Añadir comida",
+			"groupNameHeader": "Grupo",
+			"foodNameHeader": "Nombre",
+			"foodNamePlaceholder": "e.g. Cacao en polvo",
+			"imagePicker": {
+				"title": "Seleccionar imagen",
+				"cancel": "Cancelar",
+				"fromCamera": "De la camera",
+				"fromGallery": "De la galería"
+			},
+			"error": {
+				"cameraUnavailable": "Your phone camera is not available"
+			}
+		},
+		"createGroup": {
+			"title": "Crear grupo",
+			"groupNameHeader": "Nombre",
+			"groupNamePlaceholder": "e.g. Fats"
+		}
+	}
+}
