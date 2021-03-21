@@ -7,7 +7,7 @@ export function showImagePicker(onImageSelect: (data: Base64Image) => void) {
 		cameraType: "back",
 		cancelButtonTitle: I18n.t("screen.addFood.imagePicker.cancel"),
 		chooseFromLibraryButtonTitle: I18n.t(
-			"screen.addFood.imagePicker.fromGallery",
+			"screen.addFood.imagePicker.fromGallery"
 		),
 		maxHeight: 500,
 		maxWidth: 500,
@@ -16,10 +16,10 @@ export function showImagePicker(onImageSelect: (data: Base64Image) => void) {
 		quality: 1.0,
 		storageOptions: {
 			path: "images",
-			skipBackup: true,
+			skipBackup: true
 		},
 		takePhotoButtonTitle: I18n.t("screen.addFood.imagePicker.fromCamera"),
-		title: I18n.t("screen.addFood.imagePicker.title"),
+		title: I18n.t("screen.addFood.imagePicker.title")
 	};
 
 	ImagePicker.showImagePicker(options as any, (response: any) => {
