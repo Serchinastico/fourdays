@@ -25,6 +25,7 @@ export function showImagePicker(
 	switch (source) {
 		case "CAMERA":
 			launchCamera(options, response => {
+				console.log(response);
 				if (response.base64) {
 					onImageSelect(response.base64);
 				}
