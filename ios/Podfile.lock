@@ -116,9 +116,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
-  DoubleConversion: bb338842f62ab1d708ceb63ec3d999f0f3d98ecd
+  DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   Folly: de497beb10f102453a1afa9edbf8cf8a251890de
-  glog: aefd1eb5dda2ab95ba0938556f34b98e2da3a60d
+  glog: 73c2498ac6884b13ede40eda8228cb1eee9d9d62
   React: 76e6aa2b87d05eb6cccb6926d72685c9a07df152
   react-native-image-picker: fd93361c666f397bdf72f9c6c23f13d2685b9173
   react-native-safe-area-context: e380a6f783ccaec848e2f3cc8eb205a62362950d
@@ -131,4 +131,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: ced5c575e00b477a562f717125db130c764adab9
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.1
