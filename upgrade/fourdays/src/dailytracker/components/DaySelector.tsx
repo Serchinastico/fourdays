@@ -47,13 +47,7 @@ class DaySelector extends React.PureComponent<Props> {
 					underlayColor={color.black05}
 					onPress={this.onCurrentDayPress}
 				>
-					<View style={styles.currentDayContainer}>
-						<Image
-							style={styles.currentDayIcon}
-							source={require("../../images/icon/Calendar.png")}
-						/>
-						{this.renderSelectedDay()}
-					</View>
+					{this.renderSelectedDay()}
 				</TouchableHighlight>
 				<TouchableHighlight
 					underlayColor={color.black05}
@@ -114,16 +108,11 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		height: 48
 	},
-	currentDayContainer: {
-		alignItems: "center",
-		flexDirection: "row",
-		justifyContent: "center"
-	},
 	currentDayIcon: {
 		marginTop: 1
 	},
 	currentDayText: {
-		...textStyle.largeRegularNeutral,
+		...textStyle.body2,
 		color: color.black,
 		marginLeft: 8,
 		textAlign: "center"

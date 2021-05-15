@@ -180,7 +180,7 @@
 			}
 		},
 		"addFood": {
-			"title": "Añadir comida",
+			"title": "Crear comida",
 			"groupNameHeader": "Grupo",
 			"foodNameHeader": "Nombre",
 			"foodNamePlaceholder": {
@@ -195,12 +195,14 @@
 			},
 			"error": {
 				"cameraUnavailable": "Your phone camera is not available"
-			}
+			},
+			"button": "Crear"
 		},
 		"createGroup": {
 			"title": "Crear grupo",
 			"groupNameHeader": "Nombre",
-			"groupNamePlaceholder": "e.g. Grasas"
+			"groupNamePlaceholder": "e.g. Grasas",
+			"button": "Crear"
 		}
 	}
 }

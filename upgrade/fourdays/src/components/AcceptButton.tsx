@@ -22,6 +22,7 @@ interface Props {
 	onPress: () => void;
 	isEnabled: boolean;
 	style?: StyleProp<ViewStyle>;
+	text?: string;
 }
 
 interface State {
@@ -52,7 +53,11 @@ class AcceptButton extends SafeAreaPureComponent<Props, State> {
 	}
 
 	public renderButtonContent() {
-		return <Text style={styles.text}>{I18n.t("common.accept.text")}</Text>;
+		const { text } = this.props;
+
+		return (
+			<Text style={styles.text}>{text ?? I18n.t("common.accept.text")}</Text>
+		);
 	}
 
 	public renderEnabledButton(

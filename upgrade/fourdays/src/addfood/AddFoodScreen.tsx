@@ -108,7 +108,11 @@ class AddFoodScreen extends SafeAreaComponent<Props, State> {
 				headerText={I18n.t("screen.addFood.groupNameHeader")}
 			>
 				<RNPickerSelect
-					style={styles.textInput}
+					style={{
+						...styles.textInput,
+						placeholder: { ...styles.textInput },
+						inputIOS: { ...styles.textInput }
+					}}
 					value={newFoodGroupId}
 					placeholder={{}}
 					onValueChange={this.onPickerValueChange}
@@ -150,7 +154,13 @@ class AddFoodScreen extends SafeAreaComponent<Props, State> {
 	}
 
 	private renderAcceptButton(isEnabled: boolean) {
-		return <AcceptButton onPress={this.onAcceptPress} isEnabled={isEnabled} />;
+		return (
+			<AcceptButton
+				onPress={this.onAcceptPress}
+				isEnabled={isEnabled}
+				text={I18n.t("screen.addFood.button")}
+			/>
+		);
 	}
 
 	private renderImageSourcePicker() {
@@ -297,7 +307,7 @@ const styles = StyleSheet.create({
 		right: 0
 	},
 	textInput: {
-		...textStyle.largeRegularBlack
+		...textStyle.body1
 	},
 	textInputContainer: {
 		marginLeft: 16,

@@ -107,10 +107,15 @@ export const textStyle = StyleSheet.create({
 		fontFamily: FontFamily.content.medium,
 		fontSize: TextSize.XL
 	},
-	body: {
+	body1: {
 		color: color.foreground[1],
 		fontFamily: FontFamily.content.regular,
 		fontSize: TextSize.XL
+	},
+	body2: {
+		color: color.foreground[1],
+		fontFamily: FontFamily.content.regular,
+		fontSize: TextSize.L
 	},
 	caption: {
 		color: color.foreground[2],

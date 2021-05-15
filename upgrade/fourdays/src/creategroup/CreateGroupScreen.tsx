@@ -87,7 +87,13 @@ class CreateGroupScreen extends SafeAreaComponent<Props, State> {
 	}
 
 	private renderAcceptButton(isEnabled: boolean) {
-		return <AcceptButton onPress={this.onAcceptPress} isEnabled={isEnabled} />;
+		return (
+			<AcceptButton
+				onPress={this.onAcceptPress}
+				isEnabled={isEnabled}
+				text={I18n.t("screen.createGroup.button")}
+			/>
+		);
 	}
 
 	private onClosePress() {
@@ -120,7 +126,7 @@ const styles = StyleSheet.create({
 	container: {
 		backgroundColor: color.cloud,
 		flex: 1,
-		paddingTop: 88 + 16
+		paddingTop: 88 + 48
 	},
 	footer: {
 		bottom: 0,
@@ -129,7 +135,7 @@ const styles = StyleSheet.create({
 		right: 0
 	},
 	textInput: {
-		...textStyle.largeRegularBlack
+		...textStyle.body1
 	},
 	textInputContainer: {
 		marginLeft: 16,

@@ -114,11 +114,11 @@ const styles = StyleSheet.create({
 		justifyContent: "center"
 	},
 	foodName: {
-		...textStyle.body,
+		...textStyle.body1,
 		textAlign: "center"
 	},
 	foodNamePlaceholder: {
-		...textStyle.body,
+		...textStyle.body1,
 		opacity: 0.3,
 		textAlign: "center"
 	},

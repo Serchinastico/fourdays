@@ -167,7 +167,7 @@
 		"dailyTracker": {
 			"title": "Tracker",
 			"description": {
-				"text": "Here you can configure the food you ate and the food you can eat."
+				"text": "Hello 👋!\nFrom this screen you can track what you eat and see what’s available for you."
 			},
 			"subgroup": {
 				"available": "Available",
@@ -180,7 +180,7 @@
 			}
 		},
 		"addFood": {
-			"title": "Add food",
+			"title": "Create food",
 			"groupNameHeader": "Group",
 			"foodNameHeader": "Name",
 			"foodNamePlaceholder": {
@@ -195,12 +195,14 @@
 			},
 			"error": {
 				"cameraUnavailable": "Your phone camera is not available"
-			}
+			},
+			"button": "Create"
 		},
 		"createGroup": {
 			"title": "New group",
 			"groupNameHeader": "Name",
-			"groupNamePlaceholder": "e.g. Fats"
+			"groupNamePlaceholder": "e.g. Fats",
+			"button": "Create"
 		}
 	}
 }
