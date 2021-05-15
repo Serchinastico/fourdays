@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
 		position: "absolute"
 	},
 	text: {
-		...textStyle.largeMediumBlack,
+		...textStyle.button,
 		color: color.white,
 		textAlign: "center"
 	}

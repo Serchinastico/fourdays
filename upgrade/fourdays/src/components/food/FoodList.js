@@ -16,7 +16,7 @@ const DESCRIPTION_ITEM = "Description";
 const HEADER_ITEM = "Header";
 const SUBHEADER_ITEM = "Subheader";
 const FOOD_ROW_ITEM = "Row";
-const NEW_GROUP_ITEM = "NewGroup"
+const NEW_GROUP_ITEM = "NewGroup";
 
 class FoodList extends React.PureComponent {
 	static createPaddingItem(height, keyPrefix) {
@@ -54,7 +54,7 @@ class FoodList extends React.PureComponent {
 	}
 
 	static createNewGroup() {
-		return { type: NEW_GROUP_ITEM }
+		return { type: NEW_GROUP_ITEM };
 	}
 
 	constructor(props) {
@@ -98,7 +98,7 @@ class FoodList extends React.PureComponent {
 			<View
 				style={{ flex: 1, height: 16, marginHorizontal: 16, marginBottom: 16 }}
 			>
-				<Text style={textStyle.midRegularNeutral}>{text}</Text>
+				<Text style={textStyle.caption}>{text}</Text>
 			</View>
 		);
 	}
@@ -139,10 +139,7 @@ class FoodList extends React.PureComponent {
 	}
 
 	mapFoodSubgroupsIntoRows(subgroups) {
-		const subgroupTuples = R.pipe(
-			R.toPairs,
-			R.reverse
-		)(subgroups);
+		const subgroupTuples = R.pipe(R.toPairs, R.reverse)(subgroups);
 		return R.chain(tuple => {
 			return [
 				{
@@ -219,7 +216,7 @@ class FoodList extends React.PureComponent {
 						expandedGroupIds.includes(item.payload.id)
 					);
 				case NEW_GROUP_ITEM:
-					return [item]
+					return [item];
 			}
 		}, items);
 	}

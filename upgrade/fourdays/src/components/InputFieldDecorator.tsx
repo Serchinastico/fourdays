@@ -32,19 +32,19 @@ class InputFieldDecorator extends React.PureComponent<Props> {
 const styles = StyleSheet.create({
 	bottomLine: {
 		backgroundColor: color.black20,
-		height: 0.5,
+		height: 0.5
 	},
 	childrenContainer: {
 		flex: 1,
-		justifyContent: "center",
+		justifyContent: "center"
 	},
 	container: {
 		flexDirection: "column",
-		height: 68,
+		height: 68
 	},
 	header: {
-		...textStyle.midBoldBlack,
-	},
+		...textStyle.h3
+	}
 });
 
 export default InputFieldDecorator;

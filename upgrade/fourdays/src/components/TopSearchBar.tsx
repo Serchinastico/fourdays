@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
 		paddingTop: 11
 	},
 	textInput: {
-		...textStyle.extraLargeRegularNeutral,
+		...textStyle.body1,
 		flex: 1,
 		marginBottom: -4,
 		textAlignVertical: "center"

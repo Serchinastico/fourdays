@@ -44,13 +44,14 @@ const styles = StyleSheet.create({
 		position: "absolute"
 	},
 	name: {
-		...textStyle.midMediumBlack,
+		...textStyle.body3,
 		alignSelf: "center",
 		textAlign: "center",
 		margin: 8
 	},
 	addFoodName: {
-		...textStyle.midMediumDorian,
+		...textStyle.body3,
+		opacity: 0.5,
 		alignSelf: "center",
 		textAlign: "center",
 		margin: 8
