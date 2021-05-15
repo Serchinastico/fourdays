@@ -110,7 +110,7 @@ class DaySelector extends React.PureComponent<Props> {
 const styles = StyleSheet.create({
 	container: {
 		alignItems: "stretch",
-		backgroundColor: color.white,
+		backgroundColor: color.cloud,
 		flexDirection: "row",
 		height: 48
 	},

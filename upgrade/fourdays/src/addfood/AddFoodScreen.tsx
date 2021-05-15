@@ -165,14 +165,14 @@ class AddFoodScreen extends SafeAreaComponent<Props, State> {
 				<View style={styles.imageSourcePickerContainer}>
 					<Button
 						style={styles.imageSourcePickerButton}
-						color={color.white}
+						color={color.cloud}
 						onPress={this.onPickImageFromCamera}
 					>
 						{I18n.t("screen.addFood.imagePicker.fromCamera")}
 					</Button>
 					<Button
 						style={styles.imageSourcePickerButton}
-						color={color.white}
+						color={color.cloud}
 						onPress={this.onPickImageFromGallery}
 					>
 						{I18n.t("screen.addFood.imagePicker.fromGallery")}
@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
 		marginBottom: 64
 	},
 	container: {
-		backgroundColor: color.white,
+		backgroundColor: color.cloud,
 		flex: 1,
 		paddingTop: 88 + 16
 	},
@@ -311,7 +311,7 @@ const styles = StyleSheet.create({
 		top: 0
 	},
 	imageSourcePickerContainer: {
-		backgroundColor: color.white
+		backgroundColor: color.cloud
 	},
 	imageSourcePickerButton: {
 		color: color.black,

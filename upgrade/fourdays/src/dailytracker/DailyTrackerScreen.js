@@ -4,7 +4,6 @@ import React from "react";
 import { View, StyleSheet, KeyboardAvoidingView, Platform } from "react-native";
 import { Dialog } from "react-native-popup-dialog/src";
 import { connect } from "react-redux";
-import { SafeAreaConsumer } from "react-native-safe-area-view";
 import FoodList from "../components/food/FoodList";
 import IconButton, { Icon } from "../components/IconButton";
 import TopAppBar from "../components/TopAppBar";
@@ -19,11 +18,12 @@ import {
 import DaySelector from "./components/DaySelector";
 import { color } from "../components/style/color";
 import DaySelectorCalendar from "./components/DaySelectorCalendar";
+import { SafeAreaInsetsContext } from "react-native-safe-area-context";
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: color.white
+		backgroundColor: color.cloud
 	},
 	searchBarContainer: {
 		flexDirection: "row",
@@ -273,7 +273,7 @@ class DailyTrackerScreen extends React.Component {
 			R.mergeAll
 		)(foods);
 		return (
-			<SafeAreaConsumer>
+			<SafeAreaInsetsContext.Consumer>
 				{insets => (
 					<KeyboardAvoidingView
 						style={{ flex: 1 }}
@@ -295,7 +295,7 @@ class DailyTrackerScreen extends React.Component {
 						</View>
 					</KeyboardAvoidingView>
 				)}
-			</SafeAreaConsumer>
+			</SafeAreaInsetsContext.Consumer>
 		);
 	}
 
@@ -389,7 +389,8 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(
-	mapStateToProps,
-	{ shareMonthlyReport, fetchForbiddenFoodForDay, storeConsumedFoodForDay }
-)(DailyTrackerScreen);
+export default connect(mapStateToProps, {
+	shareMonthlyReport,
+	fetchForbiddenFoodForDay,
+	storeConsumedFoodForDay
+})(DailyTrackerScreen);

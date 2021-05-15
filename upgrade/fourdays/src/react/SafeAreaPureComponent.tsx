@@ -1,5 +1,8 @@
 import React, { ReactNode } from "react";
-import { EdgeInsets, SafeAreaConsumer } from "react-native-safe-area-context";
+import {
+	EdgeInsets,
+	SafeAreaInsetsContext
+} from "react-native-safe-area-context";
 
 export default abstract class SafeAreaComponent<
 	Props = {},
@@ -9,9 +12,9 @@ export default abstract class SafeAreaComponent<
 
 	public render() {
 		return (
-			<SafeAreaConsumer>
-				{(insets) => this.renderWithInsets(insets!)}
-			</SafeAreaConsumer>
+			<SafeAreaInsetsContext.Consumer>
+				{insets => this.renderWithInsets(insets!)}
+			</SafeAreaInsetsContext.Consumer>
 		);
 	}
 }

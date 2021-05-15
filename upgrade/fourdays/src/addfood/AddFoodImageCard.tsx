@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
 	card: {
 		...shadow.strong,
 		alignItems: "center",
-		backgroundColor: color.white,
+		backgroundColor: color.cloud,
 		borderRadius: 4,
 		flexDirection: "column",
 		height: cardHeight,

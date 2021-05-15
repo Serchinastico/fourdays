@@ -108,13 +108,13 @@ class TopSearchBar extends SafeAreaPureComponent<Props, State> {
 
 const styles = StyleSheet.create({
 	container: {
-		backgroundColor: color.white,
+		backgroundColor: color.cloud,
 		left: 0,
 		padding: 8,
 		position: "absolute",
 		right: 0,
 		top: 0,
-		...shadow.regular,
+		...shadow.regular
 	},
 	innerContainer: {
 		alignItems: "center",
@@ -124,14 +124,14 @@ const styles = StyleSheet.create({
 			 In iOS with notch is still noticeable a different height but it looks
 			 good enough for now
 		 */
-		paddingTop: 11,
+		paddingTop: 11
 	},
 	textInput: {
 		...textStyle.extraLargeRegularNeutral,
 		flex: 1,
 		marginBottom: -4,
-		textAlignVertical: "center",
-	},
+		textAlignVertical: "center"
+	}
 });
 
 export default TopSearchBar;

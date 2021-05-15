@@ -8,10 +8,7 @@ const styles = StyleSheet.create({
 		marginRight: 16,
 		marginTop: 20
 	},
-	title: {
-		...textStyle.largeMediumBlack
-	},
-	subtitle: {
+	content: {
 		...textStyle.largeRegularNeutral,
 		marginTop: 8
 	}
@@ -22,7 +19,7 @@ class FoodListDescription extends React.PureComponent {
 		const { description } = this.props;
 		return (
 			<View style={styles.container}>
-				<Text style={styles.subtitle}>{description}</Text>
+				<Text style={styles.content}>{description}</Text>
 			</View>
 		);
 	}

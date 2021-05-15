@@ -42,8 +42,7 @@ class CreateGroupScreen extends SafeAreaComponent<Props, State> {
 	public renderWithInsets(_: EdgeInsets) {
 		const { newGroupName } = this.state;
 
-		const isAcceptButtonEnabled =
-			newGroupName !== undefined;
+		const isAcceptButtonEnabled = newGroupName !== undefined;
 
 		return (
 			<DismissKeyboardView style={styles.container}>
@@ -119,7 +118,7 @@ const styles = StyleSheet.create({
 		marginBottom: 64
 	},
 	container: {
-		backgroundColor: color.white,
+		backgroundColor: color.cloud,
 		flex: 1,
 		paddingTop: 88 + 16
 	},
@@ -149,7 +148,6 @@ function mapStateToProps(state: any) {
 	return { groups: state.setup.groups };
 }
 
-export default connect(
-	mapStateToProps,
-	{ store: storeCustomGroup }
-)(CreateGroupScreen);
+export default connect(mapStateToProps, { store: storeCustomGroup })(
+	CreateGroupScreen
+);

@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
 		top: 6
 	},
 	container: {
-		backgroundColor: color.white,
+		backgroundColor: color.cloud,
 		left: 0,
 		position: "absolute",
 		right: 0,

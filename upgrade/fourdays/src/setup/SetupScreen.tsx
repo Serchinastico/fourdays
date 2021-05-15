@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { SafeAreaConsumer } from "react-native-safe-area-context";
+import {
+	SafeAreaConsumer,
+	SafeAreaInsetsContext
+} from "react-native-safe-area-context";
 import { connect } from "react-redux";
 import * as R from "ramda";
 import addItemToListIfPresentRemoveOtherwise from "../common/collections";
@@ -16,7 +19,7 @@ import { color } from "../components/style/color";
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: color.white
+		backgroundColor: color.cloud
 	},
 	footer: {
 		position: "absolute",
@@ -111,7 +114,7 @@ const SetupScreen = ({
 		return R.sortBy((item: any) => item.name)(filteredFoods);
 	};
 
-	const renderFoodList = (insets: any) => {
+	const FoodListView = ({ insets }: any) => {
 		const groupItems = R.map(group => {
 			return FoodList.createGroupItem(
 				group.id,
@@ -164,7 +167,7 @@ const SetupScreen = ({
 		}
 	};
 
-	const renderTopBar = () => {
+	const TopBar = () => {
 		return isSearchActive ? (
 			<TopSearchBar
 				onBackPress={() => setIsSearchActive(false)}
@@ -178,18 +181,16 @@ const SetupScreen = ({
 		);
 	};
 
-	const renderWithInsets = (insets: any) => {
-		return (
-			<View style={styles.container}>
-				{renderFoodList(insets)}
-				{renderTopBar()}
-				<AcceptButton onPress={onAcceptPress} isEnabled />
-			</View>
-		);
-	};
-
 	return (
-		<SafeAreaConsumer>{insets => renderWithInsets(insets)}</SafeAreaConsumer>
+		<SafeAreaInsetsContext.Consumer>
+			{insets => (
+				<View style={styles.container}>
+					<FoodListView insets={insets} />
+					<TopBar />
+					<AcceptButton onPress={onAcceptPress} isEnabled />
+				</View>
+			)}
+		</SafeAreaInsetsContext.Consumer>
 	);
 };
 
