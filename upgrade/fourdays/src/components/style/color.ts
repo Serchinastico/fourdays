@@ -14,5 +14,12 @@ export const color = {
 	transparent: "transparent",
 	white: "#FFF",
 
-	cloud: "#FAFAFF"
+	cloud: "#FAFAFF",
+	foreground: {
+		1: "#2E2E2E",
+		2: "#1A1A1ABE"
+	},
+	shadow: {
+		1: "#AEAEC080"
+	}
 };

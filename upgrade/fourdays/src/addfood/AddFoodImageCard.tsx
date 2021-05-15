@@ -84,14 +84,6 @@ class AddFoodImageCard extends React.PureComponent<Props, {}> {
 		Keyboard.dismiss();
 
 		onClick();
-		// showImagePicker((response: any) => {
-		// 	if (response) {
-		// 		onImageSelect({
-		// 			data: {uri: `data:image/png;base64,${response}`},
-		// 			type: 'Base64',
-		// 		});
-		// 	}
-		// });
 	}
 }
 
@@ -122,12 +114,12 @@ const styles = StyleSheet.create({
 		justifyContent: "center"
 	},
 	foodName: {
-		...textStyle.extraLargeMediumBlack,
+		...textStyle.body,
 		textAlign: "center"
 	},
 	foodNamePlaceholder: {
-		...textStyle.extraLargeMediumBlack,
-		opacity: 0.2,
+		...textStyle.body,
+		opacity: 0.3,
 		textAlign: "center"
 	},
 	foodNameContainer: {

@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
 		...shadow.regular
 	},
 	title: {
-		...textStyle.extraExtraLargeBoldNeutral,
+		...textStyle.h1,
 		flex: 1,
 		marginLeft: 16,
 		marginTop: 8

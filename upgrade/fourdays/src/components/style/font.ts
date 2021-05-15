@@ -12,7 +12,14 @@ const TextSize = {
 const FontFamily = {
 	regular: "AvenirNext-Regular",
 	medium: "AvenirNext-Medium",
-	bold: "AvenirNext-Bold"
+	bold: "AvenirNext-Bold",
+
+	header: "SFPro-Black",
+	content: {
+		regular: "Gilroy-Regular",
+		regularItalic: "Gilroy-RegularItalic",
+		medium: "Gilroy-medium"
+	}
 };
 /* tslint:enable:object-literal-sort-keys */
 
@@ -88,5 +95,26 @@ export const textStyle = StyleSheet.create({
 		color: color.black,
 		fontFamily: FontFamily.bold,
 		fontSize: TextSize.XXL
+	},
+
+	h1: {
+		color: color.foreground[1],
+		fontFamily: FontFamily.header,
+		fontSize: TextSize.XXL
+	},
+	h2: {
+		color: color.foreground[1],
+		fontFamily: FontFamily.content.medium,
+		fontSize: TextSize.XL
+	},
+	body: {
+		color: color.foreground[1],
+		fontFamily: FontFamily.content.regular,
+		fontSize: TextSize.XL
+	},
+	caption: {
+		color: color.foreground[2],
+		fontFamily: FontFamily.content.regularItalic,
+		fontSize: TextSize.L
 	}
 });

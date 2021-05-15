@@ -7,29 +7,29 @@ export const shadow = StyleSheet.create({
 		shadowColor: color.grass,
 		shadowOffset: {
 			height: 0,
-			width: 0,
+			width: 0
 		},
 		shadowOpacity: 0.5,
-		shadowRadius: 8,
+		shadowRadius: 8
 	},
 	regular: {
 		elevation: 2,
 		shadowColor: color.black,
 		shadowOffset: {
 			height: 0,
-			width: 0,
+			width: 0
 		},
 		shadowOpacity: 0.2,
-		shadowRadius: 2,
+		shadowRadius: 2
 	},
 	strong: {
 		elevation: 16,
-		shadowColor: color.black,
+		shadowColor: color.shadow[1],
 		shadowOffset: {
 			height: 0,
-			width: 0,
+			width: 0
 		},
-		shadowOpacity: 0.2,
-		shadowRadius: 16,
-	},
+		shadowOpacity: 1,
+		shadowRadius: 16
+	}
 });

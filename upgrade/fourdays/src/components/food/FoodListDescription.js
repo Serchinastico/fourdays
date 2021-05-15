@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
 		marginTop: 20
 	},
 	content: {
-		...textStyle.largeRegularNeutral,
+		...textStyle.caption,
 		marginTop: 8
 	}
 });

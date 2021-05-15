@@ -18,7 +18,8 @@ const styles = StyleSheet.create({
 		marginVertical: 16
 	},
 	text: {
-		...textStyle.largeMediumBlack
+		...textStyle.h2,
+		marginRight: 48
 	},
 	icon: {
 		marginLeft: "auto"
@@ -35,11 +36,10 @@ class FoodGroupHeader extends React.PureComponent {
 				onPress={() => onGroupSelected(id)}
 			>
 				<View style={styles.container}>
-					<Text style={styles.text}>{name}</Text>
-					<Image
-                    style={styles.icon}
-                    source={icon}
-                />
+					<Text style={styles.text} numberOfLines={1} ellipsizeMode="middle">
+						{name}
+					</Text>
+					<Image style={styles.icon} source={icon} />
 				</View>
 			</TouchableHighlight>
 		);
