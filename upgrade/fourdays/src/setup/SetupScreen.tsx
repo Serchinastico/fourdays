@@ -1,20 +1,17 @@
-import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
-import {
-	SafeAreaConsumer,
-	SafeAreaInsetsContext
-} from "react-native-safe-area-context";
-import { connect } from "react-redux";
 import * as R from "ramda";
+import React, { useCallback, useState } from "react";
+import { StyleSheet, View } from "react-native";
+import { SafeAreaInsetsContext } from "react-native-safe-area-context";
+import { NavigationScreenProp } from "react-navigation";
+import { connect } from "react-redux";
+
 import addItemToListIfPresentRemoveOtherwise from "../common/collections";
 import AcceptButton from "../components/AcceptButton";
-import IconButton, { Icon } from "../components/IconButton";
-import FoodList from "../components/food/FoodList";
-import TopAppBar from "../components/TopAppBar";
-import TopSearchBar from "../components/TopSearchBar";
-import storeForbiddenFood from "./actions";
-import I18n from "../translations/i18n";
 import { color } from "../components/style/color";
+import storeForbiddenFood from "./actions";
+import { FoodListView } from "./components/FoodListView";
+import { TopAppBarButtons } from "./components/TopAppBarButtons";
+import { TopBar } from "./components/TopBar";
 
 const styles = StyleSheet.create({
 	container: {
@@ -39,7 +36,7 @@ interface SetupScreenProps {
 	groups: any[];
 	forbiddenFoodIdsOnStart: string[];
 	storeForbiddenFood: (foodIds: string[]) => void;
-	navigation: any;
+	navigation: NavigationScreenProp<{}>;
 }
 
 const SetupScreen = ({
@@ -59,7 +56,7 @@ const SetupScreen = ({
 	);
 
 	const close = () => {
-		const isModalNavigation = navigation.getParam("isModalNavigation") || false;
+		const isModalNavigation = navigation.getParam("isModalNavigation") ?? false;
 		if (isModalNavigation) {
 			navigation.pop();
 		} else {
@@ -77,116 +74,61 @@ const SetupScreen = ({
 		close();
 	};
 
-	const onClosePress = () => {
-		close();
-	};
+	const onClosePress = useCallback(() => close(), []);
 
-	const onFoodSelect = (foodId: string) => {
+	const onFoodSelect = useCallback((foodId: string) => {
 		const updatedSelectedFoodIds = addItemToListIfPresentRemoveOtherwise(
 			foodId,
 			selectedFoodIds
 		);
 		setSelectedFoodIds(updatedSelectedFoodIds);
-	};
+	}, []);
 
-	const onNewGroupSelected = () => {
-		navigation.navigate("CreateGroup", { isModalNavigation: true });
-	};
+	const onNewGroupSelected = useCallback(
+		() => navigation.navigate("CreateGroup", { isModalNavigation: true }),
+		[navigation]
+	);
 
-	const onSearchChange = (text: string) => {
-		setCurrentSearch(text);
-	};
+	const onSearchChange = useCallback((text: string) => setCurrentSearch(text), [
+		setCurrentSearch
+	]);
 
-	const onSearchPress = () => {
-		setIsSearchActive(true);
-	};
+	const onSearchPress = useCallback(() => setIsSearchActive(true), [
+		setIsSearchActive
+	]);
 
-	const onAddPress = () => {
-		navigation.navigate("AddFood", { foodName: "", isModalNavigation: true });
-	};
-
-	const getChildrenFromGroup = (group: any) => {
-		const filteredFoods = foods
-			.filter((food: any) => food.groupId === group.id)
-			.map((food: any) =>
-				FoodList.createItem(food.id, "Group food", food.name, food.image)
-			);
-		return R.sortBy((item: any) => item.name)(filteredFoods);
-	};
-
-	const FoodListView = ({ insets }: any) => {
-		const groupItems = R.map(group => {
-			return FoodList.createGroupItem(
-				group.id,
-				group.name,
-				getChildrenFromGroup(group)
-			);
-		}, groups);
-
-		const items = [
-			FoodList.createDescriptionItem(
-				I18n.t("screen.setup.description.text"),
-				80
-			),
-			...groupItems,
-			FoodList.createNewGroup(),
-			FoodList.createPaddingItem(80, "bottomPadding")
-		];
-
-		return (
-			<View style={{ flex: 1, marginTop: insets.top }}>
-				<FoodList
-					items={items}
-					selectedFoodIds={selectedFoodIds}
-					searchExpression={currentSearch}
-					onFoodSelected={onFoodSelect}
-					onNewGroupSelected={onNewGroupSelected}
-				/>
-			</View>
-		);
-	};
-
-	const renderTopAppBarButtons = () => {
-		const isModalNavigation = navigation.getParam("isModalNavigation") || false;
-
-		if (isModalNavigation) {
-			return (
-				<View style={{ flexDirection: "row" }}>
-					<IconButton icon={Icon.Search} onPress={onSearchPress} />
-					<IconButton icon={Icon.Add} onPress={onAddPress} />
-					<IconButton icon={Icon.Clear} onPress={onClosePress} />
-				</View>
-			);
-		} else {
-			return (
-				<View style={{ flexDirection: "row" }}>
-					<IconButton icon={Icon.Search} onPress={onSearchPress} />
-					<IconButton icon={Icon.Add} onPress={onAddPress} />
-				</View>
-			);
-		}
-	};
-
-	const TopBar = () => {
-		return isSearchActive ? (
-			<TopSearchBar
-				onBackPress={() => setIsSearchActive(false)}
-				onChangeText={onSearchChange}
-			/>
-		) : (
-			<TopAppBar
-				title={I18n.t("screen.setup.title")}
-				buttons={renderTopAppBarButtons()}
-			/>
-		);
-	};
+	const onAddPress = useCallback(
+		() =>
+			navigation.navigate("AddFood", { foodName: "", isModalNavigation: true }),
+		[navigation]
+	);
 
 	return (
 		<SafeAreaInsetsContext.Consumer>
 			{insets => (
 				<View style={styles.container}>
-					<FoodListView insets={insets} />
-					<TopBar />
+					<FoodListView
+						insets={insets}
+						foods={foods}
+						groups={groups}
+						selectedFoodIds={selectedFoodIds}
+						currentSearch={currentSearch}
+						onFoodSelect={onFoodSelect}
+						onNewGroupSelected={onNewGroupSelected}
+					/>
+					<TopBar
+						isSearchActive={isSearchActive}
+						onBackPress={() => setIsSearchActive(false)}
+						onChangeText={onSearchChange}
+						buttons={
+							<TopAppBarButtons
+								navigation={navigation}
+								onAddPress={onAddPress}
+								onClosePress={onClosePress}
+								onSearchPress={onSearchPress}
+							/>
+						}
+					/>
 					<AcceptButton onPress={onAcceptPress} isEnabled />
 				</View>
 			)}

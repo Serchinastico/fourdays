@@ -38,7 +38,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Granting access to your camera will allow you to take photos of your new food.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Granting access to your photo library will allow you to pick a picture for your new food.</string>
 	<key>UILaunchStoryboardName</key>
@@ -55,19 +55,6 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Avenir Next.ttc</string>
-		<string>AvenirNext-Bold.ttf</string>
-		<string>AvenirNext-BoldItalic.ttf</string>
-		<string>AvenirNext-DemiBold.ttf</string>
-		<string>AvenirNext-DemiBoldItalic.ttf</string>
-		<string>AvenirNext-Heavy.ttf</string>
-		<string>AvenirNext-HeavyItalic.ttf</string>
-		<string>AvenirNext-Italic.ttf</string>
-		<string>AvenirNext-Medium.ttf</string>
-		<string>AvenirNext-MediumItalic.ttf</string>
-		<string>AvenirNext-Regular.ttf</string>
-		<string>AvenirNext-UltraLight.ttf</string>
-		<string>AvenirNext-UltraLightItalic.ttf</string>
 		<string>Gilroy-Medium.ttf</string>
 		<string>Gilroy-Regular.ttf</string>
 		<string>Gilroy-RegularItalic.ttf</string>
