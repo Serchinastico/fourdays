@@ -3,8 +3,8 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider } from "react-redux";
 import {
 	createStackNavigator,
-	createSwitchNavigator,
-	createAppContainer
+	createAppContainer,
+	createBottomTabNavigator
 } from "react-navigation";
 import { AppRegistry, YellowBox, StatusBar } from "react-native";
 // eslint-disable-next-line import/no-unresolved
@@ -16,8 +16,9 @@ import DailyTrackerScreen from "./dailytracker/DailyTrackerScreen";
 import store from "./redux/redux";
 import StartScreen from "./start/StartScreen";
 import Toast from "react-native-toast-message";
+import { BottomNavigation } from "./components/BottomNavigation";
 
-const AppNavigator = createSwitchNavigator(
+const AppNavigator = createBottomTabNavigator(
 	{
 		Start: StartScreen,
 		Setup: createStackNavigator(
@@ -36,7 +37,6 @@ const AppNavigator = createSwitchNavigator(
 		DailyTracker: createStackNavigator(
 			{
 				Tracker: DailyTrackerScreen,
-				Setup: SetupScreen,
 				AddFood: AddFoodScreen
 			},
 			{
@@ -49,8 +49,8 @@ const AppNavigator = createSwitchNavigator(
 	},
 	{
 		defaultNavigationOptions: {
-			header: null
-		}
+			tabBarVisible: false,
+		},
 	}
 );
 

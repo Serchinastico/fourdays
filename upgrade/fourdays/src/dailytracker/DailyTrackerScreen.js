@@ -19,6 +19,7 @@ import DaySelector from "./components/DaySelector";
 import { color } from "../components/style/color";
 import DaySelectorCalendar from "./components/DaySelectorCalendar";
 import { SafeAreaInsetsContext } from "react-native-safe-area-context";
+import { BottomNavigation, Selection } from '../components/BottomNavigation';
 
 const styles = StyleSheet.create({
 	container: {
@@ -51,6 +52,7 @@ class DailyTrackerScreen extends React.Component {
 		this.onSharePress = this.onSharePress.bind(this);
 		this.showCalendar = this.showCalendar.bind(this);
 		this.hideCalendar = this.hideCalendar.bind(this);
+		this.onBottomNavigationSelect = this.onBottomNavigationSelect.bind(this);
 		this.state = {
 			isShowingCalendar: false,
 			isSearchActive: false,
@@ -364,12 +366,22 @@ class DailyTrackerScreen extends React.Component {
 		);
 	}
 
+	onBottomNavigationSelect(selection) {
+		const { navigation } = this.props;
+		switch (selection) {
+			case 'tracker': {/* We are already there */}
+			case 'setup': {navigation.navigate('Setup')}
+			case 'stats': {/* TODO */ }
+		}
+	}
+
 	render() {
 		return (
 			<View style={styles.container}>
 				{this.renderFoodList()}
 				{this.renderTopBar()}
 				{this.renderCalendar()}
+				<BottomNavigation onSelection={this.onBottomNavigationSelect} />
 			</View>
 		);
 	}

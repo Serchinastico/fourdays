@@ -1,34 +1,34 @@
-import * as R from "ramda";
-import React, { useCallback, useState } from "react";
-import { StyleSheet, View } from "react-native";
-import { SafeAreaInsetsContext } from "react-native-safe-area-context";
-import { NavigationScreenProp } from "react-navigation";
-import { connect } from "react-redux";
+import * as R from 'ramda';
+import React, { useCallback, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { SafeAreaInsetsContext } from 'react-native-safe-area-context';
+import { NavigationScreenProp } from 'react-navigation';
+import { connect } from 'react-redux';
 
-import addItemToListIfPresentRemoveOtherwise from "../common/collections";
-import AcceptButton from "../components/AcceptButton";
-import { color } from "../components/style/color";
-import storeForbiddenFood from "./actions";
-import { FoodListView } from "./components/FoodListView";
-import { TopAppBarButtons } from "./components/TopAppBarButtons";
-import { TopBar } from "./components/TopBar";
+import addItemToListIfPresentRemoveOtherwise from '../common/collections';
+import { BottomNavigation, Selection } from '../components/BottomNavigation';
+import { color } from '../components/style/color';
+import storeForbiddenFood from './actions';
+import { FoodListView } from './components/FoodListView';
+import { TopAppBarButtons } from './components/TopAppBarButtons';
+import { TopBar } from './components/TopBar';
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: color.cloud
+		backgroundColor: color.cloud,
 	},
 	footer: {
-		position: "absolute",
+		position: 'absolute',
 		bottom: 0,
 		left: 0,
-		right: 0
+		right: 0,
 	},
 	itemsContainer: {
 		padding: 16,
-		flexDirection: "row",
-		justifyContent: "space-between"
-	}
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+	},
 });
 
 interface SetupScreenProps {
@@ -44,30 +44,30 @@ const SetupScreen = ({
 	groups,
 	forbiddenFoodIdsOnStart,
 	storeForbiddenFood,
-	navigation
+	navigation,
 }: SetupScreenProps) => {
-	const [currentSearch, setCurrentSearch] = useState("");
+	const [currentSearch, setCurrentSearch] = useState('');
 	const [isSearchActive, setIsSearchActive] = useState(false);
 	const [selectedFoodIds, setSelectedFoodIds] = useState(
 		R.pipe(
 			R.map((f: any) => f.id),
-			R.filter((id: string) => !forbiddenFoodIdsOnStart.includes(id))
-		)(foods)
+			R.filter((id: string) => !forbiddenFoodIdsOnStart.includes(id)),
+		)(foods),
 	);
 
 	const close = () => {
-		const isModalNavigation = navigation.getParam("isModalNavigation") ?? false;
+		const isModalNavigation = navigation.getParam('isModalNavigation') ?? false;
 		if (isModalNavigation) {
 			navigation.pop();
 		} else {
-			navigation.navigate("DailyTracker");
+			navigation.navigate('DailyTracker');
 		}
 	};
 
 	const onAcceptPress = () => {
 		const forbiddenFoodIds = R.without(
 			selectedFoodIds,
-			R.map(f => f.id, foods)
+			R.map(f => f.id, foods),
 		);
 		storeForbiddenFood(forbiddenFoodIds);
 
@@ -79,29 +79,37 @@ const SetupScreen = ({
 	const onFoodSelect = useCallback((foodId: string) => {
 		const updatedSelectedFoodIds = addItemToListIfPresentRemoveOtherwise(
 			foodId,
-			selectedFoodIds
+			selectedFoodIds,
 		);
 		setSelectedFoodIds(updatedSelectedFoodIds);
 	}, []);
 
 	const onNewGroupSelected = useCallback(
-		() => navigation.navigate("CreateGroup", { isModalNavigation: true }),
-		[navigation]
+		() => navigation.navigate('CreateGroup', { isModalNavigation: true }),
+		[navigation],
 	);
 
 	const onSearchChange = useCallback((text: string) => setCurrentSearch(text), [
-		setCurrentSearch
+		setCurrentSearch,
 	]);
 
 	const onSearchPress = useCallback(() => setIsSearchActive(true), [
-		setIsSearchActive
+		setIsSearchActive,
 	]);
 
 	const onAddPress = useCallback(
 		() =>
-			navigation.navigate("AddFood", { foodName: "", isModalNavigation: true }),
-		[navigation]
+			navigation.navigate('AddFood', { foodName: '', isModalNavigation: true }),
+		[navigation],
 	);
+
+	const onBottomNavigationSelect = (selection: Selection) => {
+		switch (selection) {
+			case 'tracker': {navigation.navigate('DailyTracker')}
+			case 'setup': {/* We are already there */}
+			case 'stats': {/* TODO */ }
+		}
+	}
 
 	return (
 		<SafeAreaInsetsContext.Consumer>
@@ -129,7 +137,7 @@ const SetupScreen = ({
 							/>
 						}
 					/>
-					<AcceptButton onPress={onAcceptPress} isEnabled />
+					<BottomNavigation onSelection={onBottomNavigationSelect} />
 				</View>
 			)}
 		</SafeAreaInsetsContext.Consumer>
@@ -140,7 +148,7 @@ function mapStateToProps(state: any) {
 	return {
 		groups: state.setup.groups,
 		foods: state.setup.foods,
-		forbiddenFoodIdsOnStart: state.setup.forbiddenFoodIds || []
+		forbiddenFoodIdsOnStart: state.setup.forbiddenFoodIds || [],
 	};
 }
 

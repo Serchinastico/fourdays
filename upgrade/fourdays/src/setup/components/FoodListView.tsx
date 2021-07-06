@@ -1,8 +1,10 @@
 import * as R from "ramda";
 import React from "react";
 import { StyleSheet, View } from "react-native";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 
 import FoodList from "../../components/food/FoodList";
+import { color } from "../../components/style/color";
 import I18n from "../../translations/i18n";
 
 interface FoodListViewProps {

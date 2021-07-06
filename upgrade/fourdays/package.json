@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"android": "react-native run-android",
-		"ios": "react-native run-ios",
+		"ios": "react-native run-ios --simulator=\"iPhone 12 Pro Max\"",
 		"start": "react-native start",
 		"test": "jest",
 		"lint": "eslint . --ext .js,.jsx,.ts,.tsx",
@@ -35,7 +35,7 @@
 		"react-native-screens": "^2.18.1",
 		"react-native-share": "^5.1.4",
 		"react-native-toast-message": "^1.4.9",
-		"react-navigation": "^3.7.1",
+		"react-navigation": "^4.4.4",
 		"react-redux": "^6.0.1",
 		"redux": "^4.0.5",
 		"redux-thunk": "^2.3.0",

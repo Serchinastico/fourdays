@@ -1,6 +1,7 @@
-import React from "react";
-import { Image, StyleSheet, TouchableHighlight } from "react-native";
-import { color } from "./style/color";
+import React from 'react';
+import { Image, StyleSheet, TouchableHighlight } from 'react-native';
+
+import { color } from './style/color';
 
 export enum Icon {
 	Search,
@@ -8,7 +9,13 @@ export enum Icon {
 	Back,
 	Clear,
 	Settings,
-	Share
+	Share,
+	TrackerUnselected,
+	TrackerSelected,
+	SettingsSelected,
+	SettingsUnselected,
+	StatsSelected,
+	StatsUnselected,
 }
 
 export interface Props {
@@ -20,17 +27,29 @@ class IconButton extends React.PureComponent<Props> {
 	public static getImageForIcon(icon: Icon) {
 		switch (icon) {
 			case Icon.Search:
-				return require("../images/icon/Search.png");
+				return require('../images/icon/Search.png');
 			case Icon.Add:
-				return require("../images/icon/AddThin.png");
+				return require('../images/icon/AddThin.png');
 			case Icon.Back:
-				return require("../images/icon/Back.png");
+				return require('../images/icon/Back.png');
 			case Icon.Clear:
-				return require("../images/icon/Clear.png");
+				return require('../images/icon/Clear.png');
 			case Icon.Settings:
-				return require("../images/icon/Settings.png");
+				return require('../images/icon/Settings.png');
 			case Icon.Share:
-				return require("../images/icon/Share.png");
+				return require('../images/icon/Share.png');
+			case Icon.TrackerUnselected:
+				return require('../images/icon/HouseUnselected.png');
+			case Icon.TrackerSelected:
+				return require('../images/icon/HouseSelected.png');
+			case Icon.SettingsUnselected:
+				return require('../images/icon/SettingsUnselected.png');
+			case Icon.SettingsSelected:
+				return require('../images/icon/SettingsSelected.png');
+			case Icon.StatsUnselected:
+				return require('../images/icon/StatsUnselected.png');
+			case Icon.StatsSelected:
+				return require('../images/icon/StatsSelected.png');
 		}
 	}
 	constructor(props: Props) {
@@ -61,8 +80,8 @@ const styles = StyleSheet.create({
 	button: {
 		borderRadius: 24,
 		height: 48,
-		width: 48
-	}
+		width: 48,
+	},
 });
 
 export default IconButton;
