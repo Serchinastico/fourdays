@@ -1,11 +1,11 @@
-import * as R from "ramda";
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import * as R from 'ramda';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
-import FoodList from "../../components/food/FoodList";
-import { color } from "../../components/style/color";
-import I18n from "../../translations/i18n";
+import FoodList from '../../components/food/FoodList';
+import { color } from '../../components/style/color';
+import I18n from '../../translations/i18n';
 
 interface FoodListViewProps {
 	insets: any;
@@ -24,13 +24,13 @@ export const FoodListView = ({
 	selectedFoodIds,
 	currentSearch,
 	onFoodSelect,
-	onNewGroupSelected
+	onNewGroupSelected,
 }: FoodListViewProps) => {
 	const getChildrenFromGroup = (group: any) => {
 		const filteredFoods = foods
 			.filter(food => food.groupId === group.id)
 			.map(food =>
-				FoodList.createItem(food.id, "Group food", food.name, food.image)
+				FoodList.createItem(food.id, 'Group food', food.name, food.image),
 			);
 		return R.sortBy(item => item.name)(filteredFoods);
 	};
@@ -39,15 +39,15 @@ export const FoodListView = ({
 		return FoodList.createGroupItem(
 			group.id,
 			group.name,
-			getChildrenFromGroup(group)
+			getChildrenFromGroup(group),
 		);
 	}, groups);
 
 	const items = [
-		FoodList.createDescriptionItem(I18n.t("screen.setup.description.text"), 80),
+		FoodList.createDescriptionItem(I18n.t('screen.setup.description.text'), 80),
 		...groupItems,
 		FoodList.createNewGroup(),
-		FoodList.createPaddingItem(80, "bottomPadding")
+		FoodList.createPaddingItem(80, 'bottomPadding'),
 	];
 
 	return (

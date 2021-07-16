@@ -105,11 +105,17 @@ const SetupScreen = ({
 
 	const onBottomNavigationSelect = (selection: Selection) => {
 		switch (selection) {
-			case 'tracker': {navigation.navigate('DailyTracker')}
-			case 'setup': {/* We are already there */}
-			case 'stats': {/* TODO */ }
+			case 'tracker': {
+				navigation.navigate('DailyTracker');
+			}
+			case 'setup': {
+				/* We are already there */
+			}
+			case 'stats': {
+				/* TODO */
+			}
 		}
-	}
+	};
 
 	return (
 		<SafeAreaInsetsContext.Consumer>
@@ -130,14 +136,12 @@ const SetupScreen = ({
 						onChangeText={onSearchChange}
 						buttons={
 							<TopAppBarButtons
-								navigation={navigation}
 								onAddPress={onAddPress}
 								onClosePress={onClosePress}
 								onSearchPress={onSearchPress}
 							/>
 						}
 					/>
-					<BottomNavigation onSelection={onBottomNavigationSelect} />
 				</View>
 			)}
 		</SafeAreaInsetsContext.Consumer>

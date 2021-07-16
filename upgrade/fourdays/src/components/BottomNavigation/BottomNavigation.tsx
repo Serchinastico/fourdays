@@ -1,6 +1,7 @@
+import { NavigationHelpers } from '@react-navigation/native';
 import React from 'react';
 import { useState } from 'react';
-import {View,} from 'react-native';
+import { View } from 'react-native';
 
 import { Icon } from '../IconButton';
 import { styles } from './BottomNavigation.styles';
@@ -35,25 +36,42 @@ const StatsButton = (props: ButtonProps) => (
 	/>
 );
 
-export type Selection = 'tracker' | 'setup' | 'stats'
+export type Selection = 'tracker' | 'setup' | 'stats';
 
 interface BottomNavigationProps {
-	onSelection: (selection: Selection) => void
+	navigation: NavigationHelpers<any, any>;
 }
 
-export const BottomNavigation = ({onSelection}: BottomNavigationProps) => {
-	const [selection, setSelection] = useState<Selection>('tracker')
+export const BottomNavigation = ({ navigation }: BottomNavigationProps) => {
+	const [selection, setSelection] = useState<Selection>('tracker');
 
 	const handleOnPress = (selection: Selection) => {
-		setSelection(selection)
-		onSelection(selection)
-	}
+		setSelection(selection);
+
+		switch (selection) {
+			case 'setup':
+				navigation.navigate('Setup');
+				break;
+			case 'tracker':
+				navigation.navigate('DailyTracker');
+				break;
+		}
+	};
 
 	return (
 		<View style={styles.container}>
-			<TrackerButton isSelected={selection === 'tracker'} onPress={() => handleOnPress('tracker')} />
-			<SetupButton isSelected={selection === 'setup'} onPress={() => handleOnPress('setup')} />
-			<StatsButton isSelected={selection === 'stats'} onPress={() => handleOnPress('stats')} />
+			<TrackerButton
+				isSelected={selection === 'tracker'}
+				onPress={() => handleOnPress('tracker')}
+			/>
+			<SetupButton
+				isSelected={selection === 'setup'}
+				onPress={() => handleOnPress('setup')}
+			/>
+			<StatsButton
+				isSelected={selection === 'stats'}
+				onPress={() => handleOnPress('stats')}
+			/>
 		</View>
 	);
 };

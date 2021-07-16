@@ -381,7 +381,6 @@ class DailyTrackerScreen extends React.Component {
 				{this.renderFoodList()}
 				{this.renderTopBar()}
 				{this.renderCalendar()}
-				<BottomNavigation onSelection={this.onBottomNavigationSelect} />
 			</View>
 		);
 	}
