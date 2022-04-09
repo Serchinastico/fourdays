@@ -12,7 +12,7 @@
 		"fuse.js": "^6.4.1",
 		"lodash": "^4.17.20",
 		"metro-react-native-babel-transformer": "^0.53.1",
-		"moment": "^2.27.0",
+		"moment": "^2.29.2",
 		"prop-types": "^15.7.2",
 		"ramda": "^0.27.1",
 		"react": "^16.8.6",
